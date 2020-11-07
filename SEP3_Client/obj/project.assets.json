@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\学习资料\\VIA\\(DNP)\\C#\\DNP1\\SEP3_Client\\SEP3_Client.csproj",
+      "projectUniqueName": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
       "projectName": "SEP3_Client",
-      "projectPath": "D:\\学习资料\\VIA\\(DNP)\\C#\\DNP1\\SEP3_Client\\SEP3_Client.csproj",
+      "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
       "packagesPath": "C:\\Users\\Think\\.nuget\\packages\\",
-      "outputPath": "D:\\学习资料\\VIA\\(DNP)\\C#\\DNP1\\SEP3_Client\\obj\\",
+      "outputPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Think\\AppData\\Roaming\\NuGet\\NuGet.Config"
