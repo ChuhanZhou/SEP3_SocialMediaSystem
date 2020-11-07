@@ -24,28 +24,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/WeatherForecastService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Pages/Counter.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Pages/FetchData.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Pages/Index.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/App.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/App.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Counter.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Counter.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/FetchData.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/FetchData.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Index.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Pages/Index.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/MainLayout.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/MainLayout.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/NavMenu.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/NavMenu.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/SurveyPrompt.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/Shared/SurveyPrompt.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/_Imports.razor.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/RazorDeclaration/_Imports.razor.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/SEP3_Client.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/SEP3_Client.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.RazorComponent.input.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.RazorComponent.input.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,13 +115,14 @@
       <option name="presentableId" value="Default" />
       <updated>1604784268818</updated>
       <workItem from="1604784271677" duration="286000" />
+      <workItem from="1604784810089" duration="75000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -153,6 +134,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
