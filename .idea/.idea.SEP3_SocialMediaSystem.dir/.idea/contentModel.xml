@@ -15,7 +15,13 @@
           <e p="ClientModelManager.cs" t="Include" />
           <e p="IClientModel.cs" t="Include" />
         </e>
-        <e p="Model" t="Include" />
+        <e p="Model" t="Include">
+          <e p="User" t="Include">
+            <e p="Account.cs" t="Include" />
+            <e p="Friend.cs" t="Include" />
+            <e p="User.cs" t="Include" />
+          </e>
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

@@ -24,9 +24,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.RazorComponent.input.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.RazorComponent.input.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/Debug/netcoreapp3.1/SEP3_Client.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/obj/rider.project.restore.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/User/Account.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/User/Friend.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/User/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +47,10 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/User/User.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/User/Account.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/User/Friend.cs" />
       </list>
     </option>
   </component>
@@ -116,6 +123,7 @@
       <updated>1604784268818</updated>
       <workItem from="1604784271677" duration="286000" />
       <workItem from="1604784810089" duration="75000" />
+      <workItem from="1604854408915" duration="518000" />
     </task>
     <servers />
   </component>
