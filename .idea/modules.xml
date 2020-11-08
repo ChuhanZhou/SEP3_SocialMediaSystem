@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SEP3_Database/SEP3_Database.iml" filepath="$PROJECT_DIR$/SEP3_Database/SEP3_Database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SEP3_SocialMediaSystem.iml" filepath="$PROJECT_DIR$/.idea/SEP3_SocialMediaSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SEP3_UserSystem/SEP3_UserSystem.iml" filepath="$PROJECT_DIR$/SEP3_UserSystem/SEP3_UserSystem.iml" />
+    </modules>
+  </component>
+</project>
