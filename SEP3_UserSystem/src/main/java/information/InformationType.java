@@ -1,5 +1,5 @@
 package information;
 
 public enum InformationType {
-    USER
+    ACCOUNT,FRIEND
 }

@@ -24,7 +24,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/AccountPackage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/FriendPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/InformationPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/InformationPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/InformationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/InformationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/information/UserPackage.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +50,6 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Model/User/Account.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/User/Friend.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/UserList/FriendSettingList.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/FriendSetting.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
@@ -57,6 +61,7 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserStatae.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserState.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" />
       </list>
     </option>
   </component>
@@ -135,7 +140,7 @@
       <workItem from="1604937847328" duration="1747000" />
       <workItem from="1604946915752" duration="4481000" />
       <workItem from="1604953488901" duration="1648000" />
-      <workItem from="1604955221655" duration="1654000" />
+      <workItem from="1604955221655" duration="2684000" />
     </task>
     <servers />
   </component>
