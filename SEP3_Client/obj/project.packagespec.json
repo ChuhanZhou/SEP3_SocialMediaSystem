@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\魏佳\\Desktop\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
+    "projectUniqueName": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
     "projectName": "SEP3_Client",
-    "projectPath": "C:\\Users\\魏佳\\Desktop\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
-    "outputPath": "C:\\Users\\魏佳\\Desktop\\SEP3_SocialMediaSystem\\SEP3_Client\\obj\\",
+    "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
+    "outputPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\obj\\",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.1"
@@ -43,7 +43,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
     }
   }
 }
