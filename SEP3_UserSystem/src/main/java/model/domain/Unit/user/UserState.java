@@ -1,23 +1,23 @@
 package model.domain.unit.user;
 
 public class UserState {
-    private boolean IsOnline;
+    private boolean Online;
     private String State;
 
     public UserState()
     {
-        IsOnline = false;
+        Online = false;
     }
 
     public void login()
     {
-        IsOnline = true;
+        Online = true;
         State = "online";
     }
 
     public void logoff()
     {
-        IsOnline = false;
+        Online = false;
     }
 
     public void setState(String state) {
@@ -25,7 +25,7 @@ public class UserState {
     }
 
     public String getState() {
-        if (IsOnline)
+        if (Online)
         {
             return "[" + State + "]";
         }
@@ -36,6 +36,6 @@ public class UserState {
     }
 
     public boolean isOnline() {
-        return IsOnline;
+        return Online;
     }
 }

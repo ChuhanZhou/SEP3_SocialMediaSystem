@@ -31,6 +31,7 @@
               <e p="FriendSetting.cs" t="Include" />
               <e p="User.cs" t="Include" />
               <e p="UserInformation.cs" t="Include" />
+              <e p="UserState.cs" t="Include" />
             </e>
           </e>
         </e>
