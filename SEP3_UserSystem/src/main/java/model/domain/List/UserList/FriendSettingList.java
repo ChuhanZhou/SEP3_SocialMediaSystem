@@ -1,15 +1,15 @@
-package model.domain.List;
+package model.domain.List.UserList;
 
-import model.domain.User.FriendSetting;
+import model.domain.Unit.User.FriendSetting;
 
 import java.util.ArrayList;
 
 public class FriendSettingList {
-    private ArrayList<FriendSetting> FriendSettingList;
+    private ArrayList<FriendSetting> FriendSettings;
 
     public FriendSettingList()
     {
-        FriendSettingList = new ArrayList<>();
+        FriendSettings = new ArrayList<>();
     }
 
     public String addNewFriendSetting(FriendSetting newFriend)
@@ -20,18 +20,18 @@ public class FriendSettingList {
         }
         else
         {
-            FriendSettingList.add(newFriend);
+            FriendSettings.add(newFriend);
             return null;
         }
     }
 
     public FriendSetting getFriendSettingById(String id)
     {
-        for (int x=0;x<FriendSettingList.size();x++)
+        for (int x = 0; x< FriendSettings.size(); x++)
         {
-            if (FriendSettingList.get(x).getId().equals(id))
+            if (FriendSettings.get(x).getId().equals(id))
             {
-                return FriendSettingList.get(x).copy();
+                return FriendSettings.get(x).copy();
             }
         }
         return null;
@@ -39,12 +39,12 @@ public class FriendSettingList {
 
     public String updateFriendSetting(FriendSetting newFriendSetting)
     {
-        for (int x=0;x<FriendSettingList.size();x++)
+        for (int x = 0; x< FriendSettings.size(); x++)
         {
-            if (FriendSettingList.get(x).getId().equals(newFriendSetting.getId()))
+            if (FriendSettings.get(x).getId().equals(newFriendSetting.getId()))
             {
-                FriendSettingList.get(x).setNote(newFriendSetting.getNote());
-                FriendSettingList.get(x).setDisablePost(newFriendSetting.isDisablePost());
+                FriendSettings.get(x).setNote(newFriendSetting.getNote());
+                FriendSettings.get(x).setDisablePost(newFriendSetting.isDisablePost());
                 return null;
             }
         }
@@ -53,11 +53,11 @@ public class FriendSettingList {
 
     public void removeFriendSettingById(String id)
     {
-        for (int x=0;x<FriendSettingList.size();x++)
+        for (int x = 0; x< FriendSettings.size(); x++)
         {
-            if (FriendSettingList.get(x).getId().equals(id))
+            if (FriendSettings.get(x).getId().equals(id))
             {
-                FriendSettingList.remove(x);
+                FriendSettings.remove(x);
                 break;
             }
         }
@@ -66,9 +66,9 @@ public class FriendSettingList {
     public FriendSettingList copy()
     {
         FriendSettingList copy = new FriendSettingList();
-        for (int x=0;x<FriendSettingList.size();x++)
+        for (int x = 0; x< FriendSettings.size(); x++)
         {
-            copy.addNewFriendSetting(FriendSettingList.get(x).copy());
+            copy.addNewFriendSetting(FriendSettings.get(x).copy());
         }
         return copy;
     }

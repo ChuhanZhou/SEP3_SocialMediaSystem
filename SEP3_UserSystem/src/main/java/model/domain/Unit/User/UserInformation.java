@@ -1,4 +1,4 @@
-package model.domain.User;
+package model.domain.Unit.User;
 
 import java.util.Date;
 
@@ -32,7 +32,4 @@ public abstract class UserInformation extends User{
         UserName = userName;
         Birthday = birthday;
     }
-
-    @Override
-    public abstract UserInformation copy();
 }

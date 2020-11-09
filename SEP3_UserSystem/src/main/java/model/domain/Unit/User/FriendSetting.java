@@ -1,4 +1,4 @@
-package model.domain.User;
+package model.domain.Unit.User;
 
 public class FriendSetting extends User {
     private String Note;
@@ -37,7 +37,6 @@ public class FriendSetting extends User {
         DisablePost = friendSetting.isDisablePost();
     }
 
-    @Override
     public FriendSetting copy() {
         return new FriendSetting(getId(),DisablePost,Note);
     }
