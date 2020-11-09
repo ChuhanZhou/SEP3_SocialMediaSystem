@@ -1,4 +1,4 @@
-package information;
+package mediator.information;
 
 import model.domain.list.userList.AccountList;
 import model.domain.unit.user.Account;
@@ -6,7 +6,7 @@ import model.domain.unit.user.Account;
 public class AccountPackage extends InformationPackage
 {
     private AccountList SendList;
-    
+
     public AccountPackage(AccountList accountList,String keyword)
     {
         super(InformationType.ACCOUNT,keyword);

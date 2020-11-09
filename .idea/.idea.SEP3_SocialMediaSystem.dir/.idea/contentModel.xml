@@ -15,7 +15,15 @@
           <e p="ClientModelManager.cs" t="Include" />
           <e p="IClientModel.cs" t="Include" />
         </e>
-        <e p="Mediator" t="Include" />
+        <e p="Mediator" t="Include">
+          <e p="Information" t="Include">
+            <e p="AccountPackage.cs" t="Include" />
+            <e p="FriendPackage.cs" t="Include" />
+            <e p="InformationPackage.cs" t="Include" />
+            <e p="InformationType.cs" t="Include" />
+          </e>
+          <e p="UserSystemClient.cs" t="Include" />
+        </e>
         <e p="Model" t="Include">
           <e p="List" t="Include">
             <e p="UserList" t="Include">

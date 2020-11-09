@@ -1,4 +1,4 @@
-package information;
+package mediator.information;
 
 import model.domain.list.userList.FriendList;
 import model.domain.unit.user.Friend;
