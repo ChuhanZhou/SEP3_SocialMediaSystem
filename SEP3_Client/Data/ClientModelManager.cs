@@ -1,6 +1,6 @@
 ﻿namespace SEP3_Client.Data
 {
-    public class ClientModelManager
+    public class ClientModelManager : IClientModel
     {
         
     }

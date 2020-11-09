@@ -50,7 +50,7 @@ namespace SEP3_Client.Model.Unit.User
         
         public Account Copy() 
         {
-            return new Account(GetId(),GetUserName(),GetBirthday(),Password,FriendSettingList.copy());
+            return new Account(GetId(),GetUserName(),GetBirthday(),Password,FriendSettingList.Copy());
         }
     }
 }

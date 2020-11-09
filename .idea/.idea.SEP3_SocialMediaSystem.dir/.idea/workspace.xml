@@ -24,25 +24,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/FriendSetting.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserInformation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/UserState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/User/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/User/Friend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/User/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/AccountList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/AccountList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/FriendList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/FriendList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/FriendSettingList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/FriendSettingList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/Friend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/FriendSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/FriendSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/UserInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/User/UserInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/UserList/AccountList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/AccountList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/UserList/FriendList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/UserList/FriendSettingList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendSettingList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/User/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/User/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Friend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/User/FriendSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/FriendSetting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/User/UserInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/UserInformation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +54,7 @@
       <list>
         <option value="$PROJECT_DIR$/SEP3_Client/Startup.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModel.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModelManager.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/User/User.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/User/Account.cs" />
@@ -67,12 +62,14 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/UserList/FriendSettingList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/FriendSetting.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserInformation.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserInformation.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
       </list>
     </option>
   </component>
@@ -150,6 +147,8 @@
       <workItem from="1604879529945" duration="5000" />
       <workItem from="1604937847328" duration="1747000" />
       <workItem from="1604946915752" duration="4481000" />
+      <workItem from="1604953488901" duration="1648000" />
+      <workItem from="1604955221655" duration="1218000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-package model.domain.Unit.User;
+package model.domain.unit.user;
 
 public class FriendSetting extends User {
     private String Note;

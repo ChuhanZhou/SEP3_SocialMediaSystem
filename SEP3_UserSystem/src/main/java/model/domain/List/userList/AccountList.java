@@ -1,6 +1,6 @@
-package model.domain.List.UserList;
+package model.domain.list.userList;
 
-import model.domain.Unit.User.Account;
+import model.domain.unit.user.Account;
 
 import java.util.ArrayList;
 

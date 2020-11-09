@@ -1,6 +1,6 @@
-package model.domain.List.UserList;
+package model.domain.list.userList;
 
-import model.domain.Unit.User.Friend;
+import model.domain.unit.user.Friend;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
-package model.domain.Unit.User;
-import model.domain.List.UserList.FriendSettingList;
+package model.domain.unit.user;
+import model.domain.list.userList.FriendSettingList;
 
 import java.util.Date;
 
@@ -35,7 +35,7 @@ public class Account extends UserInformation {
         return FriendSettingList;
     }
 
-    public void setFriendSettingList(model.domain.List.UserList.FriendSettingList friendSettingList) {
+    public void setFriendSettingList(FriendSettingList friendSettingList) {
         FriendSettingList = friendSettingList;
     }
 

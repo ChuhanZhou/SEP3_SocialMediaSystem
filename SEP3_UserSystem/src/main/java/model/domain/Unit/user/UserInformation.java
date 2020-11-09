@@ -1,4 +1,4 @@
-package model.domain.Unit.User;
+package model.domain.unit.user;
 
 import java.util.Date;
 

@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Mediator" />
       <Folder Include="Model\List" />
       <Folder Include="Model\Unit" />
     </ItemGroup>

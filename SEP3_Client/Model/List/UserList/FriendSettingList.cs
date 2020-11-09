@@ -37,6 +37,16 @@ namespace SEP3_Client.Model.List.UserList
 
             return null;
         }
+        
+        public List<FriendSetting> GetFriendSettingList()
+        {
+            var copy = new List<FriendSetting>();
+            foreach (var friendSetting in FriendSettings)
+            {
+                copy.Add(friendSetting.Copy());
+            }
+            return copy;
+        }
 
         public string UpdateFriendSetting(FriendSetting newFriendSetting)
         {
