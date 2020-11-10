@@ -1,4 +1,7 @@
 package model;
 
-public interface UserSystemModel {
+import utility.NamedPropertyChangeSubject;
+
+public interface UserSystemModel extends NamedPropertyChangeSubject
+{
 }
