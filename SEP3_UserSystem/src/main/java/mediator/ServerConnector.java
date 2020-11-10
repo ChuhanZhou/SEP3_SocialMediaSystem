@@ -19,7 +19,7 @@ public class ServerConnector implements Runnable
 
     public void start() throws IOException
     {
-        System.out.println("Starting server...");
+        System.out.println("Starting UserSystem server...");
         welcomeSocket = new ServerSocket(PORT);
 
         while (true)

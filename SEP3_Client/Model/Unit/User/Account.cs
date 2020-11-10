@@ -12,6 +12,12 @@ namespace SEP3_Client.Model.Unit.User
             Password = password;
             FriendSettingList = new FriendSettingList();
         }
+        
+        private Account(string id, string userName, DateTime birthday, string password, FriendSettingList friendSettingList) : this(id, userName, password)
+        {
+            SetBirthday(birthday);
+            FriendSettingList = friendSettingList;
+        }
 
         public bool CheckPassword(string password)
         {
@@ -21,12 +27,6 @@ namespace SEP3_Client.Model.Unit.User
         public bool CheckPassword(Account otherAccount)
         {
             return otherAccount.GetId().Equals(GetId())&&otherAccount.CheckPassword(Password);
-        }
-        
-        private Account(string id, string userName, DateTime birthday, string password, FriendSettingList friendSettingList) : this(id, userName, password)
-        {
-            SetBirthday(birthday);
-            FriendSettingList = friendSettingList;
         }
 
         public string ChangePassWord(string oldPassword,string newPassword) 

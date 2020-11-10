@@ -22,6 +22,18 @@ namespace SEP3_Client.Model.List.UserList
             Accounts.Add(newAccount);
             return null;
         }
+        
+        public Account GetAccountByIndex(int index)
+        {
+            if (index>=0&&index<Accounts.Count)
+            {
+                return Accounts[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public Account GetAccountById(string id)
         {
@@ -29,7 +41,7 @@ namespace SEP3_Client.Model.List.UserList
             {
                 if (account.GetId().Equals(id))
                 {
-                    return account.Copy();
+                    return account;
                 }
             }
             return null;
@@ -73,19 +85,7 @@ namespace SEP3_Client.Model.List.UserList
                 }
             }
         }
-        
-        public Account GetAccountByIndex(int index)
-        {
-            if (index>=0&&index<Accounts.Count)
-            {
-                return Accounts[index];
-            }
-            else 
-            {
-                return null;
-            }
-        }
-        
+
         public AccountList Copy()
         {
             AccountList copy = new AccountList();

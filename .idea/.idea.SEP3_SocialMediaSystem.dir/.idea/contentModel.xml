@@ -25,6 +25,7 @@
             <e p="LoginOrRegisterPackage.cs" t="Include" />
           </e>
           <e p="UserSystemClient.cs" t="Include" />
+          <e p="UserSystemClientModel.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="FunctionType.cs" t="Include" />

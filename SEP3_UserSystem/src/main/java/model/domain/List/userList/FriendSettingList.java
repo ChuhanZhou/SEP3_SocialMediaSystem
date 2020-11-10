@@ -25,16 +25,33 @@ public class FriendSettingList {
         }
     }
 
+    public int getSize()
+    {
+        return FriendSettings.size();
+    }
+
     public FriendSetting getFriendSettingById(String id)
     {
         for (int x = 0; x< FriendSettings.size(); x++)
         {
             if (FriendSettings.get(x).getId().equals(id))
             {
-                return FriendSettings.get(x).copy();
+                return FriendSettings.get(x);
             }
         }
         return null;
+    }
+
+    public FriendSetting getFriendSettingByIndex(int index)
+    {
+        if (index>=0&&index<FriendSettings.size())
+        {
+            return FriendSettings.get(index);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public String updateFriendSetting(FriendSetting newFriendSetting)

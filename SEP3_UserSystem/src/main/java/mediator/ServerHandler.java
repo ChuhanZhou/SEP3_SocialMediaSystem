@@ -5,6 +5,7 @@ import mediator.information.*;
 import model.UserSystemModel;
 import model.domain.list.userList.AccountList;
 import model.domain.unit.user.Account;
+import model.domain.unit.user.Friend;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -40,7 +41,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         }
         connect = true;
         login = false;
-        this.userSystemModel.addListener("",this);
+        this.userSystemModel.addListener("updateAccount",this);
     }
 
     public void close()
@@ -85,7 +86,6 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         String receive = userSystemModel.login(id,password);
         if (receive==null)
         {
-            login = true;
             afterLogin(userSystemModel.getAccountByIdAndPassword(id, password));
         }
         else
@@ -109,6 +109,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             InformationPackage informationPackage;
             sendInformationPackage(new AccountPackage(account,"update"));
             sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
+            login = true;
             while (login)
             {
                 receive = in.readLine();
@@ -200,6 +201,10 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     if (account.getId().equals(id))
                     {
                         sendInformationPackage(new AccountPackage(account,"update"));
+                    }
+                    else if (userSystemModel.getAccountById(id).getFriendSettingList().getFriendSettingById(account.getId())!=null)
+                    {
+                        sendInformationPackage(new FriendPackage(new Friend(account),"update"));
                     }
                     break;
             }

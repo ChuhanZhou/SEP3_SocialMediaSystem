@@ -1,6 +1,6 @@
 ﻿namespace SEP3_Client.Mediator
 {
-    public class UserSystemClient
+    public class UserSystemClient : UserSystemClientModel
     {
         
     }

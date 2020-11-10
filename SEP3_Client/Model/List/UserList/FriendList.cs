@@ -29,7 +29,7 @@ namespace SEP3_Client.Model.List.UserList
             {
                 if (friend.GetId().Equals(id))
                 {
-                    return friend.Copy();
+                    return friend;
                 }
             }
 

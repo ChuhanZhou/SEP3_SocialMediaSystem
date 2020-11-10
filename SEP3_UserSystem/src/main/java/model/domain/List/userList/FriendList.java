@@ -1,5 +1,6 @@
 package model.domain.list.userList;
 
+import model.domain.unit.user.Account;
 import model.domain.unit.user.Friend;
 
 import java.util.ArrayList;
@@ -22,13 +23,30 @@ public class FriendList {
         return null;
     }
 
+    public int getSize()
+    {
+        return Friends.size();
+    }
+
+    public Friend getFriendByIndex(int index)
+    {
+        if (index>=0&&index<Friends.size())
+        {
+            return Friends.get(index);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public Friend getFriendById(String id)
     {
         for (int x = 0; x< Friends.size(); x++)
         {
             if (Friends.get(x).getId().equals(id))
             {
-                return Friends.get(x).copy();
+                return Friends.get(x);
             }
         }
         return null;

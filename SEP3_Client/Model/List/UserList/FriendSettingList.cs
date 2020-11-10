@@ -31,7 +31,7 @@ namespace SEP3_Client.Model.List.UserList
             {
                 if (friendSetting.GetId().Equals(id))
                 {
-                    return friendSetting.Copy();
+                    return friendSetting;
                 }
             }
 

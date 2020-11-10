@@ -22,6 +22,11 @@ public class AccountList {
         return null;
     }
 
+    public int getSize()
+    {
+        return Accounts.size();
+    }
+
     public Account getAccountByIndex(int index)
     {
         if (index>=0&&index<Accounts.size())
@@ -40,7 +45,7 @@ public class AccountList {
         {
             if (Accounts.get(x).getId().equals(id))
             {
-                return Accounts.get(x).copy();
+                return Accounts.get(x);
             }
         }
         return null;

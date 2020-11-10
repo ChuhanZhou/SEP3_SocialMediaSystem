@@ -2,7 +2,9 @@ package model;
 
 import model.domain.list.userList.AccountList;
 import model.domain.list.userList.FriendList;
+import model.domain.list.userList.FriendSettingList;
 import model.domain.unit.user.Account;
+import model.domain.unit.user.Friend;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -44,42 +46,85 @@ public class UserSystemModelManager implements UserSystemModel
 
     @Override
     public String login(String id, String password) {
-        return null;
+        Account targetAccount = accountList.getAccountById(id);
+        if (targetAccount!=null)
+        {
+            if (targetAccount.checkPassword(password))
+            {
+                if (!targetAccount.getUserState().isOnline())
+                {
+                    targetAccount.getUserState().login();
+                    property.firePropertyChange("updateAccount",null,targetAccount);
+                    return null;
+                }
+                else
+                {
+                    return "This account is online.";
+                }
+            }
+        }
+        return "Wrong Id or Password.";
     }
 
     @Override
     public void logoff(String id) {
-
+        Account targetAccount = accountList.getAccountById(id);
+        targetAccount.getUserState().logoff();
+        property.firePropertyChange("updateAccount",null,targetAccount);
     }
 
     @Override
     public Account getAccountById(String id) {
-        return null;
+        return accountList.getAccountById(id).copy();
     }
 
     @Override
     public Account getAccountByIdAndPassword(String id, String password) {
+        Account targetAccount = accountList.getAccountById(id);
+        if (targetAccount!=null)
+        {
+            if (targetAccount.checkPassword(password))
+            {
+                return targetAccount.copy();
+            }
+        }
         return null;
     }
 
     @Override
     public boolean hasId(String id) {
-        return false;
+        return accountList.getAccountById(id)!=null;
     }
 
     @Override
-    public String changePassword(String id, String oldPassword, String newPassword) {
-        return null;
+    public String changePassword(String id, String oldPassword, String newPassword)
+    {
+        return accountList.changePassword(id, oldPassword, newPassword);
     }
 
     @Override
     public String changePassword(Account oldAccount, Account newAccount) {
-        return null;
+        if (hasId(oldAccount.getId()))
+        {
+            return accountList.getAccountById(oldAccount.getId()).changePassWord(oldAccount, newAccount);
+        }
+        else
+        {
+            return "Can't find the Account [" + oldAccount.getId() + "]";
+        }
     }
 
     @Override
     public String updateBasicInformation(Account oldAccount, Account newAccount) {
-        return null;
+        if (hasId(oldAccount.getId()))
+        {
+            accountList.getAccountById(oldAccount.getId()).update(newAccount.getUserName(),newAccount.getBirthday());
+            return null;
+        }
+        else
+        {
+            return "Can't find the Account [" + oldAccount.getId() + "]";
+        }
     }
 
     @Override
@@ -89,7 +134,14 @@ public class UserSystemModelManager implements UserSystemModel
 
     @Override
     public FriendList getFriendListByAccount(Account account) {
-        return null;
+        FriendList friendList = new FriendList();
+        Account targetAccount = accountList.getAccountById(account.getId());
+        FriendSettingList friendSettingList = targetAccount.getFriendSettingList();
+        for (int x=0;x<friendSettingList.getSize();x++)
+        {
+            friendList.addNewFriend(new Friend(accountList.getAccountById(friendSettingList.getFriendSettingByIndex(x).getId())));
+        }
+        return friendList;
     }
 
     @Override
