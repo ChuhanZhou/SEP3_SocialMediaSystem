@@ -7,8 +7,6 @@ namespace SEP3_Client.Data
 {
     public interface IClientModel
     {
-        
-        List<FunctionType> GetFunctions();
         bool HasFunction(FunctionType functionType);
         string Login(string id, string password);
         void Logoff();

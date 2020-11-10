@@ -20,11 +20,6 @@ namespace SEP3_Client.Data
             userSystemClient = new UserSystemClient();
         }
         
-        public List<FunctionType> GetFunctions()
-        {
-            return new List<FunctionType>(FunctionTypes);
-        }
-
         public bool HasFunction(FunctionType functionType)
         {
             foreach (var type in FunctionTypes)
@@ -40,8 +35,13 @@ namespace SEP3_Client.Data
 
         public string Login(string id, string password)
         {
-            userSystemClient.Connect(this);
-            return userSystemClient.SendLoginOrRegisterPackage("login",id,password);
+            if (userSystemClient.Connect(this))
+            {
+                FunctionTypes.Add(FunctionType.UserSystem);
+                return userSystemClient.SendLoginOrRegisterPackage("login",id,password);
+            }
+            FunctionTypes.Remove(FunctionType.UserSystem);
+            return "Can't connect UserSystem.";
         }
 
         public void Logoff()
@@ -51,8 +51,13 @@ namespace SEP3_Client.Data
 
         public string Register(string userName, string password)
         {
-            userSystemClient.Connect(this);
-            return userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
+            if (userSystemClient.Connect(this))
+            {
+                FunctionTypes.Add(FunctionType.UserSystem);
+                return userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
+            }
+            FunctionTypes.Remove(FunctionType.UserSystem);
+            return "Can't connect UserSystem.";
         }
 
         public Account GetAccount()
