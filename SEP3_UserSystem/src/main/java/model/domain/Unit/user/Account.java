@@ -3,7 +3,7 @@ import model.domain.list.userList.FriendSettingList;
 
 import java.util.Date;
 
-public class Account extends UserInformation {
+public class Account extends BasicInformation {
     private String Password;
     private FriendSettingList FriendSettingList;
 

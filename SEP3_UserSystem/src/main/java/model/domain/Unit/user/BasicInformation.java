@@ -2,11 +2,11 @@ package model.domain.unit.user;
 
 import java.util.Date;
 
-public abstract class UserInformation extends User{
+public abstract class BasicInformation extends User{
     private String UserName;
     private Date Birthday;
 
-    public UserInformation(String id,String userName)
+    public BasicInformation(String id, String userName)
     {
         super(id);
         UserName = userName;

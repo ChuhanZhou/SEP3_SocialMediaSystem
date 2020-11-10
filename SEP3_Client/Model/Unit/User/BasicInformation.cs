@@ -2,12 +2,12 @@
 
 namespace SEP3_Client.Model.Unit.User
 {
-    public abstract class UserInformation : User
+    public abstract class BasicInformation : User
     {
         public string UserName { get; set; }
         public DateTime Birthday { get; set; }
         
-        public UserInformation(string id,string userName) : base(id)
+        public BasicInformation(string id,string userName) : base(id)
         {
             UserName = userName;
         }

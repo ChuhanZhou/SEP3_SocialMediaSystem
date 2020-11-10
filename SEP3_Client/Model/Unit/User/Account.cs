@@ -3,7 +3,7 @@ using SEP3_Client.Model.List.UserList;
 
 namespace SEP3_Client.Model.Unit.User
 {
-    public class Account : UserInformation
+    public class Account : BasicInformation
     {
         public string Password { get; set; }
         public FriendSettingList FriendSettingList { get; set; }

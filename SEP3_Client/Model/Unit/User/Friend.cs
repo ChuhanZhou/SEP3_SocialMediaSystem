@@ -2,7 +2,7 @@
 
 namespace SEP3_Client.Model.Unit.User
 {
-    public class Friend : UserInformation
+    public class Friend : BasicInformation
     {
         public Friend(Account account) : base(account.GetId(),account.GetUserName())
         {

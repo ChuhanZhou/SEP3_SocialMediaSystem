@@ -2,7 +2,7 @@ package model.domain.unit.user;
 
 import java.util.Date;
 
-public class Friend extends UserInformation {
+public class Friend extends BasicInformation {
 
     public Friend(Account account) {
         super(account.getId(), account.getUserName());
