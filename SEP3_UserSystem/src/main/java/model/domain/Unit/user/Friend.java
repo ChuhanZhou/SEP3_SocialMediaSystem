@@ -9,7 +9,7 @@ public class Friend extends BasicInformation {
         setBirthday(account.getBirthday());
     }
 
-    public Friend(String id, String userName, Date birthday) {
+    public Friend(String id, String userName, Birthday birthday) {
         super(id, userName);
         setBirthday(birthday);
     }

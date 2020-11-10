@@ -9,7 +9,7 @@ namespace SEP3_Client.Model.Unit.User
             SetBirthday(account.GetBirthday());
         }
 
-        public Friend(string id, string userName, DateTime birthday) : base(id, userName)
+        public Friend(string id, string userName, Birthday birthday) : base(id, userName)
         {
             SetBirthday(birthday);
         }

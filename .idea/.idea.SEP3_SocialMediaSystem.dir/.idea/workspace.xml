@@ -24,19 +24,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModelForUserSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Birthday.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Birthday.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/AccountList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/AccountList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerConnector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/AccountList.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/AccountList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/BasicInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/BasicInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Friend.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +48,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SEP3_Client/Startup.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/SEP3_Client.csproj" />
@@ -67,14 +62,11 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationPackage.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/ErrorPackage.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/FunctionType.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/LoginOrRegisterPackage.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/UserSystemClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClientModel.cs" />
@@ -82,8 +74,8 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModelForUserSystem.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClient.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Program.cs" />
@@ -97,6 +89,30 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Program.cs" />
 >>>>>>> 3611d8836c9e41325364d7d96382f088fb18fd15
+>>>>>>> Stashed changes
+=======
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Program.cs" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/SEP3_Client/Startup.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Birthday.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
+=======
+=======
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/SEP3_Client/Pages/FriendList.razor" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Shared/NavMenu.razor" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Pages/Login.razor" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Pages/Profile.razor" />
+=======
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Program.cs" />
+>>>>>>> 3611d8836c9e41325364d7d96382f088fb18fd15
+>>>>>>> Stashed changes
+>>>>>>> b3fc2aab0e284bb926a04fbea1c10d68df595b9e
 >>>>>>> Stashed changes
       </list>
     </option>
@@ -193,10 +209,17 @@
       <workItem from="1605032233765" duration="3909000" />
       <workItem from="1605038369090" duration="3206000" />
       <workItem from="1605041785980" duration="2061000" />
+<<<<<<< HEAD
+      <workItem from="1605044146242" duration="2090000" />
+=======
       <workItem from="1605044146242" duration="711000" />
 <<<<<<< Updated upstream
 =======
 >>>>>>> 3611d8836c9e41325364d7d96382f088fb18fd15
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
+=======
+>>>>>>> b3fc2aab0e284bb926a04fbea1c10d68df595b9e
 >>>>>>> Stashed changes
     </task>
     <servers />
@@ -225,6 +248,12 @@
 <<<<<<< Updated upstream
 =======
 <<<<<<< HEAD
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom" timestamp="1605044994486">
+=======
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
     <state x="249" y="137" key="Rider.ProjectTemplateDialog.Size" timestamp="1605039349856">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -232,21 +261,22 @@
 =======
 >>>>>>> Stashed changes
     <state width="725" height="207" key="GridCell.Tab.0.bottom" timestamp="1605044819231">
+>>>>>>> b3fc2aab0e284bb926a04fbea1c10d68df595b9e
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="725" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
-    <state width="725" height="207" key="GridCell.Tab.0.center" timestamp="1605044819231">
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605044994486" />
+    <state width="1493" height="207" key="GridCell.Tab.0.center" timestamp="1605044994486">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="725" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
-    <state width="725" height="207" key="GridCell.Tab.0.left" timestamp="1605044819231">
+    <state width="1493" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605044994486" />
+    <state width="1493" height="207" key="GridCell.Tab.0.left" timestamp="1605044994486">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="725" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
-    <state width="725" height="207" key="GridCell.Tab.0.right" timestamp="1605044819231">
+    <state width="1493" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605044994486" />
+    <state width="1493" height="207" key="GridCell.Tab.0.right" timestamp="1605044994486">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="725" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
+    <state width="1493" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605044994486" />
     <state x="523" y="111" key="RiderGenerateDialog" timestamp="1605040990111">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

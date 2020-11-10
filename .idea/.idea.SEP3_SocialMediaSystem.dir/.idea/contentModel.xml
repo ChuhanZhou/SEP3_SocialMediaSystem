@@ -41,6 +41,7 @@
             <e p="User" t="Include">
               <e p="Account.cs" t="Include" />
               <e p="BasicInformation.cs" t="Include" />
+              <e p="Birthday.cs" t="Include" />
               <e p="Friend.cs" t="Include" />
               <e p="FriendSetting.cs" t="Include" />
               <e p="User.cs" t="Include" />

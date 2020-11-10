@@ -13,7 +13,7 @@ public class Account extends BasicInformation {
         FriendSettingList = new FriendSettingList();
     }
 
-    private Account(String id, String userName, Date birthday, String password, FriendSettingList friendSettingList) {
+    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList) {
         this(id, userName, password);
         setBirthday(birthday);
         FriendSettingList = friendSettingList;

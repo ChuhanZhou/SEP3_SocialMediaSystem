@@ -4,7 +4,7 @@ import java.util.Date;
 
 public abstract class BasicInformation extends User{
     private String UserName;
-    private Date Birthday;
+    private Birthday Birthday;
 
     public BasicInformation(String id, String userName)
     {
@@ -20,15 +20,15 @@ public abstract class BasicInformation extends User{
         UserName = userName;
     }
 
-    public Date getBirthday() {
+    public Birthday getBirthday() {
         return Birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Birthday birthday) {
         Birthday = birthday;
     }
 
-    public void update(String userName,Date birthday) {
+    public void update(String userName,Birthday birthday) {
         UserName = userName;
         Birthday = birthday;
     }

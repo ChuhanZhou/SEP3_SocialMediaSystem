@@ -5,7 +5,7 @@ namespace SEP3_Client.Model.Unit.User
     public abstract class BasicInformation : User
     {
         public string UserName { get; set; }
-        public DateTime Birthday { get; set; }
+        public Birthday Birthday { get; set; }
         
         public BasicInformation(string id,string userName) : base(id)
         {
@@ -22,17 +22,17 @@ namespace SEP3_Client.Model.Unit.User
             UserName = userName;
         }
 
-        public DateTime GetBirthday() 
+        public Birthday GetBirthday() 
         {
             return Birthday;
         }
 
-        public void SetBirthday(DateTime birthday) 
+        public void SetBirthday(Birthday birthday) 
         {
             Birthday = birthday;
         }
 
-        public void Update(string userName,DateTime birthday) 
+        public void Update(string userName,Birthday birthday) 
         {
             UserName = userName;
             Birthday = birthday;

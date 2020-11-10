@@ -13,7 +13,7 @@ namespace SEP3_Client.Model.Unit.User
             FriendSettingList = new FriendSettingList();
         }
         
-        private Account(string id, string userName, DateTime birthday, string password, FriendSettingList friendSettingList) : this(id, userName, password)
+        private Account(string id, string userName, Birthday birthday, string password, FriendSettingList friendSettingList) : this(id, userName, password)
         {
             SetBirthday(birthday);
             FriendSettingList = friendSettingList;
