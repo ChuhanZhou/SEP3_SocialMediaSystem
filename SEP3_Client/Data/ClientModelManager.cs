@@ -1,14 +1,112 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using SEP3_Client.Mediator;
 using SEP3_Client.Model;
+using SEP3_Client.Model.List.UserList;
+using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Data
 {
-    public class ClientModelManager : IClientModel
+    public class ClientModelManager : IClientModel,IClientModelForUserSystem
     {
         private List<FunctionType> FunctionTypes;
+        private Account account;
+        private FriendList friendList;
+        private IUserSystemClient userSystemClient;
         public ClientModelManager()
         {
             FunctionTypes = new List<FunctionType>();
+            userSystemClient = new UserSystemClient();
+        }
+        
+        public List<FunctionType> GetFunctions()
+        {
+            return new List<FunctionType>(FunctionTypes);
+        }
+
+        public bool HasFunction(FunctionType functionType)
+        {
+            foreach (var type in FunctionTypes)
+            {
+                if (type==functionType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public string Login(string id, string password)
+        {
+            userSystemClient.Connect(this);
+            return userSystemClient.SendLoginOrRegisterPackage("login",id,password);
+        }
+
+        public void Logoff()
+        {
+            userSystemClient.SendAccountPackage(account, "logoff");
+        }
+
+        public string Register(string userName, string password)
+        {
+            userSystemClient.Connect(this);
+            return userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
+        }
+
+        public Account GetAccount()
+        {
+            return account.Copy();
+        }
+
+        public string ChangePassword(string oldPassword, string newPassword)
+        {
+            Account oldAccount = new Account(account.GetId(), account.GetUserName(), oldPassword);
+            Account newAccount = new Account(account.GetId(), account.GetUserName(), newPassword);
+            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "changePassword");
+        }
+
+        public string UpdateBasicInformation(Account account)
+        {
+            Account oldAccount = this.account;
+            Account newAccount = account;
+            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
+        }
+
+        public string AddNewFriend(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public FriendSettingList GetFriendSettingList()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string UpdateFriendSetting(FriendSetting newFriendSetting)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveFriend(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Friend GetFriendById(string id)
+        {
+            return friendList.GetFriendById(id).Copy();
+        }
+
+        public void UpdateAccount(Account account)
+        {
+            this.account = account;
+        }
+
+        public void UpdateFriendList(FriendList friendList)
+        {
+            this.friendList = friendList;
         }
     }
 }

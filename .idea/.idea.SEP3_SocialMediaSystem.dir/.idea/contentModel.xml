@@ -14,6 +14,7 @@
         <e p="Data" t="Include">
           <e p="ClientModelManager.cs" t="Include" />
           <e p="IClientModel.cs" t="Include" />
+          <e p="IClientModelForUserSystem.cs" t="Include" />
         </e>
         <e p="Mediator" t="Include">
           <e p="Information" t="Include">
@@ -24,8 +25,8 @@
             <e p="InformationType.cs" t="Include" />
             <e p="LoginOrRegisterPackage.cs" t="Include" />
           </e>
+          <e p="IUserSystemClient.cs" t="Include" />
           <e p="UserSystemClient.cs" t="Include" />
-          <e p="UserSystemClientModel.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="FunctionType.cs" t="Include" />

@@ -7,6 +7,7 @@ namespace SEP3_Client.Data
 {
     public interface IClientModel
     {
+        
         List<FunctionType> GetFunctions();
         bool HasFunction(FunctionType functionType);
         string Login(string id, string password);
@@ -14,7 +15,7 @@ namespace SEP3_Client.Data
         string Register(string userName, string password);
         Account GetAccount();
         string ChangePassword(string oldPassword, string newPassword);
-        string UpdateUserInformation(Account account);
+        string UpdateBasicInformation(Account account);
         string AddNewFriend(string id);
         FriendSettingList GetFriendSettingList();
         string UpdateFriendSetting(FriendSetting newFriendSetting);

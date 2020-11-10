@@ -26,6 +26,7 @@ public class ServerConnector implements Runnable
         {
             System.out.println("Wait for a client...");
             Socket socket = welcomeSocket.accept();
+            System.out.println("Connect to a client...");
             ServerHandler server = new ServerHandler(userSystemModel,socket);
             Thread thread = new Thread(server);
             thread.setDaemon(true);

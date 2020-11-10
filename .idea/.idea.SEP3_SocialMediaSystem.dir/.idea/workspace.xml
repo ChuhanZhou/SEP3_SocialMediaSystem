@@ -24,29 +24,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClientModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModelForUserSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClient.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/com/example/SEP3_UserSystem/Sep3UserSystemApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/com/example/SEP3_UserSystem/Sep3UserSystemApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModelManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/AccountList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/AccountList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendSettingList.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/List/userList/FriendSettingList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/com/example/SEP3_UserSystem/Sep3UserSystemApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/com/example/SEP3_UserSystem/Sep3UserSystemApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerConnector.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerConnector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/mediator/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/UserSystemModelManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/UserSystemModelManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/AccountList.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/AccountList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/FriendList.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/FriendList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/FriendSettingList.class" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/target/classes/model/domain/list/userList/FriendSettingList.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +45,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AD61CA47-F8B7-4CC6-93A0-BA44CC73B5C7/3A2/EventSource.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -77,17 +70,22 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/FunctionType.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/LoginOrRegisterPackage.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/FriendSettingList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/UserSystemClientModel.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClientModel.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClientModel.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/test.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModelForUserSystem.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/IUserSystemClient.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Program.cs" />
       </list>
     </option>
   </component>
@@ -100,7 +98,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager" selected=".NET Project.SEP3_Client">
+  <component name="RunManager" selected=".NET Launch Settings Profile.SEP3_Client">
     <configuration name="SEP3_Client" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -170,7 +168,11 @@
       <workItem from="1604967511955" duration="910000" />
       <workItem from="1604994590537" duration="59000" />
       <workItem from="1604998194062" duration="2043000" />
-      <workItem from="1605001645810" duration="6115000" />
+      <workItem from="1605001645810" duration="7846000" />
+      <workItem from="1605032233765" duration="3909000" />
+      <workItem from="1605038369090" duration="3206000" />
+      <workItem from="1605041785980" duration="2061000" />
+      <workItem from="1605044146242" duration="711000" />
     </task>
     <servers />
   </component>
@@ -193,5 +195,31 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="725" height="207" key="GridCell.Tab.0.bottom" timestamp="1605044819231">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="725" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
+    <state width="725" height="207" key="GridCell.Tab.0.center" timestamp="1605044819231">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="725" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
+    <state width="725" height="207" key="GridCell.Tab.0.left" timestamp="1605044819231">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="725" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
+    <state width="725" height="207" key="GridCell.Tab.0.right" timestamp="1605044819231">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="725" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605044819231" />
+    <state x="523" y="111" key="RiderGenerateDialog" timestamp="1605040990111">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="523" y="111" key="RiderGenerateDialog/0.0.1536.824@0.0.1536.824" timestamp="1605040990111" />
+    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog" timestamp="1605037060826">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1605037060826" />
   </component>
 </project>

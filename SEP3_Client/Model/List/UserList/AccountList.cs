@@ -23,6 +23,12 @@ namespace SEP3_Client.Model.List.UserList
             return null;
         }
         
+        public string AddOldAndNewAccount(Account oldAccount,Account newAccount)
+        {
+            Accounts = new List<Account> {oldAccount, newAccount};
+            return null;
+        }
+        
         public Account GetAccountByIndex(int index)
         {
             if (index>=0&&index<Accounts.Count)

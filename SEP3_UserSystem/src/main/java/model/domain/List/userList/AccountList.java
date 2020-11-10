@@ -22,6 +22,14 @@ public class AccountList {
         return null;
     }
 
+    public String addOldAndNewAccount(Account oldAccount,Account newAccount)
+    {
+        Accounts = new ArrayList<>();
+        Accounts.add(oldAccount);
+        Accounts.add(newAccount);
+        return null;
+    }
+
     public int getSize()
     {
         return Accounts.size();
