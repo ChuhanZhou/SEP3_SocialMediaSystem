@@ -10,6 +10,7 @@ public interface UserSystemModel extends NamedPropertyChangeSubject
     String login(String id,String password);
     void logoff(String id);
     Account getAccountByIdAndPassword(String id,String password);
+    boolean hasId(String id);
     String changePassword(String id,String oldPassword,String newPassword);
     String updateUserInformation(Account account);
     String addNewFriend();

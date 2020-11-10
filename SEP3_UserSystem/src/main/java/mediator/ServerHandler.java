@@ -1,10 +1,7 @@
 package mediator;
 
 import com.google.gson.Gson;
-import mediator.information.AccountPackage;
-import mediator.information.ErrorPackage;
-import mediator.information.InformationPackage;
-import mediator.information.InformationType;
+import mediator.information.*;
 import model.UserSystemModel;
 import model.domain.unit.user.Account;
 
@@ -82,40 +79,34 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         out.println(send);
     }
 
-    private void login() throws IOException {
-        String receive;
-        receive = in.readLine();
-        InformationPackage informationPackage = gson.fromJson(receive,InformationPackage.class);
-        if (informationPackage.getInformationType() == InformationType.ACCOUNT && informationPackage.getKeyword().equals("login"))
+    private void login(LoginOrRegisterPackage receivePackage)
+    {
+        String receive = userSystemModel.login(receivePackage.getId(),receivePackage.getPassword());
+        if (receive==null)
         {
-            AccountPackage accountPackage = gson.fromJson(receive,AccountPackage.class);
-            Account receiveAccount = accountPackage.getSendList().getAccountByIndex(0);
-            Account searchAccount = bookingModel.getUser(receiveUser.getAccountInformation().getEmail());
-            if (searchAccount!=null)
-            {
-                if (searchUser.getAccountInformation().securityCheck(receiveUser.getAccountInformation()))
-                {
-                    sendErrorPackage();
-                    afterLogin(searchUser);
-                }
-                else
-                {
-                    sendErrorPackage("Wrong Password!");
-                }
-            }
-            else
-            {
-                sendErrorPackage("Wrong Id!");
-            }
+            afterLogin(userSystemModel.getAccountByIdAndPassword(receivePackage.getId(),receivePackage.getPassword()));
         }
         else
         {
-            sendErrorPackage("Wrong Package or Keyword!");
+            sendErrorPackage(receive);
         }
     }
 
-    private void register()
+    private void register(LoginOrRegisterPackage receivePackage)
     {
+        if (!userSystemModel.hasId(receivePackage.getId()))
+        {
+            userSystemModel.addNewAccount(new Account());
+        }
+        else
+        {
+            sendErrorPackage("This id is used.");
+        }
+    }
+
+    private void afterLogin(Account account)
+    {
+        id = account.getId();
 
     }
 
@@ -127,15 +118,17 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             while (connect)
             {
                 receive = in.readLine();
-                if (receive!=null)
+                InformationPackage informationPackage = gson.fromJson(receive,InformationPackage.class);
+                if (informationPackage.getInformationType()==InformationType.LOGIN)
                 {
-                    switch (receive)
+                    LoginOrRegisterPackage receivePackage = gson.fromJson(receive,LoginOrRegisterPackage.class);
+                    switch (receivePackage.getKeyword())
                     {
                         case "login":
-                            login();
+                            login(receivePackage);
                             break;
                         case "register":
-                            register();
+                            register(receivePackage);
                             break;
                         default:
                             sendErrorPackage("Wrong keyword!");

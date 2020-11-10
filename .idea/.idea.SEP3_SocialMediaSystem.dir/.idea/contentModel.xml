@@ -26,6 +26,7 @@
           <e p="UserSystemClient.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
+          <e p="FunctionType.cs" t="Include" />
           <e p="List" t="Include">
             <e p="UserList" t="Include">
               <e p="AccountList.cs" t="Include" />

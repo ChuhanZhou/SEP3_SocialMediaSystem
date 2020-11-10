@@ -19,6 +19,11 @@ public class Account extends BasicInformation {
         FriendSettingList = friendSettingList;
     }
 
+    public boolean checkPassword(String password)
+    {
+        return Password.equals(password);
+    }
+
     public String changePassWord(String oldPassword,String newPassword) {
         if (Password.equals(oldPassword))
         {

@@ -1,10 +1,14 @@
-﻿using SEP3_Client.Model.List.UserList;
+﻿using System.Collections.Generic;
+using SEP3_Client.Model;
+using SEP3_Client.Model.List.UserList;
 using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Data
 {
     public interface IClientModel
     {
+        List<FunctionType> GetFunctions();
+        bool HasFunction(FunctionType functionType);
         string Login(string id, string password);
         void Logoff();
         string Register(string userName, string password);
