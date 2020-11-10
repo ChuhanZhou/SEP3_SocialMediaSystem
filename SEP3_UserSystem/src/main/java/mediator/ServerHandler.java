@@ -1,9 +1,12 @@
 package mediator;
 
 import com.google.gson.Gson;
+import mediator.information.AccountPackage;
 import mediator.information.ErrorPackage;
 import mediator.information.InformationPackage;
+import mediator.information.InformationType;
 import model.UserSystemModel;
+import model.domain.unit.user.Account;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -79,9 +82,36 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         out.println(send);
     }
 
-    private void login()
-    {
-
+    private void login() throws IOException {
+        String receive;
+        receive = in.readLine();
+        InformationPackage informationPackage = gson.fromJson(receive,InformationPackage.class);
+        if (informationPackage.getInformationType() == InformationType.ACCOUNT && informationPackage.getKeyword().equals("login"))
+        {
+            AccountPackage accountPackage = gson.fromJson(receive,AccountPackage.class);
+            Account receiveAccount = accountPackage.getSendList().getAccountByIndex(0);
+            Account searchAccount = bookingModel.getUser(receiveUser.getAccountInformation().getEmail());
+            if (searchAccount!=null)
+            {
+                if (searchUser.getAccountInformation().securityCheck(receiveUser.getAccountInformation()))
+                {
+                    sendErrorPackage();
+                    afterLogin(searchUser);
+                }
+                else
+                {
+                    sendErrorPackage("Wrong Password!");
+                }
+            }
+            else
+            {
+                sendErrorPackage("Wrong Id!");
+            }
+        }
+        else
+        {
+            sendErrorPackage("Wrong Package or Keyword!");
+        }
     }
 
     private void register()

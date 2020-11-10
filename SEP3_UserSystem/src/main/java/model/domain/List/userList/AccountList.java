@@ -22,6 +22,18 @@ public class AccountList {
         return null;
     }
 
+    public Account getAccountByIndex(int index)
+    {
+        if (index>=0&&index<Accounts.size())
+        {
+            return Accounts.get(index);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public Account getAccountById(String id)
     {
         for (int x = 0; x< Accounts.size(); x++)

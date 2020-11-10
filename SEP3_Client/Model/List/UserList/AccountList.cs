@@ -74,6 +74,18 @@ namespace SEP3_Client.Model.List.UserList
             }
         }
         
+        public Account GetAccountByIndex(int index)
+        {
+            if (index>=0&&index<Accounts.Count)
+            {
+                return Accounts[index];
+            }
+            else 
+            {
+                return null;
+            }
+        }
+        
         public AccountList Copy()
         {
             AccountList copy = new AccountList();

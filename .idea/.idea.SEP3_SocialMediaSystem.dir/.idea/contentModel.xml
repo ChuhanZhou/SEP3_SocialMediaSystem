@@ -18,6 +18,7 @@
         <e p="Mediator" t="Include">
           <e p="Information" t="Include">
             <e p="AccountPackage.cs" t="Include" />
+            <e p="ErrorPackage.cs" t="Include" />
             <e p="FriendPackage.cs" t="Include" />
             <e p="InformationPackage.cs" t="Include" />
             <e p="InformationType.cs" t="Include" />

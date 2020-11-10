@@ -1,15 +1,15 @@
 package mediator.information;
 
 public class ErrorPackage extends InformationPackage{
-    private boolean IsError;
+    private boolean Error;
 
-    public ErrorPackage(String error,boolean isError)
+    public ErrorPackage(String errorMessage,boolean error)
     {
-        super(InformationType.ERROR,error);
-        IsError = isError;
+        super(InformationType.ERROR,errorMessage);
+        Error = error;
     }
 
     public boolean isError() {
-        return IsError;
+        return Error;
     }
 }
