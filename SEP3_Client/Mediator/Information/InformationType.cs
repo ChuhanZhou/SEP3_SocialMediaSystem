@@ -2,6 +2,6 @@
 {
     public enum InformationType
     {
-        ACCOUNT,FRIEND,ERROR
+        LOGIN,ACCOUNT,FRIEND,ERROR
     }
 }

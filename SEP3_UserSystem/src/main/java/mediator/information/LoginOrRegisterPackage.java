@@ -5,10 +5,20 @@ public class LoginOrRegisterPackage extends InformationPackage{
     private String Password;
     private String Name;
 
-    public LoginOrRegisterPackage(String keyword,String id,String password)
+    public LoginOrRegisterPackage(String keyword,String idOrName,String password)
     {
         super(InformationType.LOGIN,keyword);
-        Id = id;
+        switch (keyword)
+        {
+            case "login":
+                Id = idOrName;
+                break;
+            case "register":
+                Name = idOrName;
+                break;
+            default:
+                break;
+        }
         Password = password;
     }
 
@@ -18,5 +28,9 @@ public class LoginOrRegisterPackage extends InformationPackage{
 
     public String getPassword() {
         return Password;
+    }
+
+    public String getName() {
+        return Name;
     }
 }

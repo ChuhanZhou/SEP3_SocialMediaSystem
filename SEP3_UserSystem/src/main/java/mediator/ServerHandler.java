@@ -3,6 +3,7 @@ package mediator;
 import com.google.gson.Gson;
 import mediator.information.*;
 import model.UserSystemModel;
+import model.domain.list.userList.AccountList;
 import model.domain.unit.user.Account;
 
 import java.beans.PropertyChangeEvent;
@@ -79,12 +80,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         out.println(send);
     }
 
-    private void login(LoginOrRegisterPackage receivePackage)
+    private void login(String id,String password)
     {
-        String receive = userSystemModel.login(receivePackage.getId(),receivePackage.getPassword());
+        String receive = userSystemModel.login(id,password);
         if (receive==null)
         {
-            afterLogin(userSystemModel.getAccountByIdAndPassword(receivePackage.getId(),receivePackage.getPassword()));
+            login = true;
+            afterLogin(userSystemModel.getAccountByIdAndPassword(id, password));
         }
         else
         {
@@ -94,19 +96,61 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
 
     private void register(LoginOrRegisterPackage receivePackage)
     {
-        if (!userSystemModel.hasId(receivePackage.getId()))
-        {
-            userSystemModel.addNewAccount(new Account());
-        }
-        else
-        {
-            sendErrorPackage("This id is used.");
-        }
+        Account newAccount = userSystemModel.addNewAccount(receivePackage.getName(),receivePackage.getPassword());
+        login(newAccount.getId(),receivePackage.getPassword());
     }
 
     private void afterLogin(Account account)
     {
-        id = account.getId();
+        try
+        {
+            id = account.getId();
+            String receive;
+            InformationPackage informationPackage;
+            sendInformationPackage(new AccountPackage(account,"update"));
+            sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
+            while (login)
+            {
+                receive = in.readLine();
+                informationPackage = gson.fromJson(receive,InformationPackage.class);
+                if (informationPackage==null)
+                {
+                    break;
+                }
+                switch (informationPackage.getInformationType())
+                {
+                    case LOGIN:
+                        break;
+                    case ACCOUNT:
+                        AccountPackage accountPackage = gson.fromJson(receive,AccountPackage.class);
+                        Account oldAccount = accountPackage.getSendList().getAccountByIndex(0);
+                        Account newAccount = accountPackage.getSendList().getAccountByIndex(1);
+                        switch (accountPackage.getKeyword())
+                        {
+                            case "changePassword":
+                                sendErrorPackage(userSystemModel.changePassword(oldAccount,newAccount));
+                                break;
+                            case "updateBasicInformation":
+                                sendErrorPackage(userSystemModel.updateBasicInformation(oldAccount,newAccount));
+                                break;
+                            case "logoff":
+                                userSystemModel.logoff(oldAccount.getId());
+                                break;
+                        }
+                        break;
+                    case FRIEND:
+                        break;
+                    case ERROR:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            userSystemModel.logoff(id);
+        }
 
     }
 
@@ -125,7 +169,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     switch (receivePackage.getKeyword())
                     {
                         case "login":
-                            login(receivePackage);
+                            login(receivePackage.getId(),receivePackage.getPassword());
                             break;
                         case "register":
                             register(receivePackage);
@@ -140,7 +184,6 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         catch (IOException e)
         {
             close();
-            //e.printStackTrace();
             connect = false;
             login = false;
         }
@@ -152,7 +195,12 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         {
             switch (evt.getPropertyName())
             {
-                case "":
+                case "updateAccount":
+                    Account account = (Account) evt.getNewValue();
+                    if (account.getId().equals(id))
+                    {
+                        sendInformationPackage(new AccountPackage(account,"update"));
+                    }
                     break;
             }
         }

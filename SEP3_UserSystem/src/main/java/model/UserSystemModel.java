@@ -6,14 +6,16 @@ import utility.NamedPropertyChangeSubject;
 
 public interface UserSystemModel extends NamedPropertyChangeSubject
 {
-    String addNewAccount(Account newAccount);
+    Account addNewAccount(String name,String password);
     String login(String id,String password);
     void logoff(String id);
+    Account getAccountById(String id);
     Account getAccountByIdAndPassword(String id,String password);
     boolean hasId(String id);
     String changePassword(String id,String oldPassword,String newPassword);
-    String updateUserInformation(Account account);
+    String changePassword(Account oldAccount,Account newAccount);
+    String updateBasicInformation(Account oldAccount,Account newAccount);
     String addNewFriend();
-    FriendList getFriendListByIdAndPassword(String id,String password);
-    void removeFriend(String id, String password,String friendId);
+    FriendList getFriendListByAccount(Account account);
+    void removeFriend(Account account,String friendId);
 }

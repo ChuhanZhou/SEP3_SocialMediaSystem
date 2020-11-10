@@ -24,6 +24,11 @@ public class Account extends BasicInformation {
         return Password.equals(password);
     }
 
+    public boolean checkPassword(Account otherAccount)
+    {
+        return otherAccount.getId().equals(getId())&&otherAccount.checkPassword(Password);
+    }
+
     public String changePassWord(String oldPassword,String newPassword) {
         if (Password.equals(oldPassword))
         {
@@ -33,6 +38,17 @@ public class Account extends BasicInformation {
         else
         {
             return "Wrong password.";
+        }
+    }
+
+    public String changePassWord(Account oldAccount,Account newAccount) {
+        if (getId().equals(newAccount.getId())&&checkPassword(oldAccount))
+        {
+            return changePassWord(oldAccount.Password,newAccount.Password);
+        }
+        else
+        {
+            return "Illegal change.";
         }
     }
 

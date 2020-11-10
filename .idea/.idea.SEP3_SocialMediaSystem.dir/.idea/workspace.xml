@@ -24,14 +24,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc95bc9-bd4a-48b2-bf44-9a06ed9f1517" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SEP3_Client/Model/FunctionType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/information/LoginOrRegisterPackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/Information/LoginOrRegisterPackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP3_SocialMediaSystem.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/information/InformationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/information/InformationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/information/LoginOrRegisterPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/mediator/information/LoginOrRegisterPackage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/domain/Unit/user/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3_UserSystem/src/main/java/model/UserSystemModelManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,16 +61,17 @@
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/UserState.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/User.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/UserSystemClient.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationPackage.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/List/UserList/AccountList.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/ErrorPackage.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/BasicInformation.cs" />
-        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Friend.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Model/FunctionType.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/ClientModelManager.cs" />
         <option value="$PROJECT_DIR$/SEP3_Client/Data/IClientModel.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/InformationType.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Mediator/Information/LoginOrRegisterPackage.cs" />
+        <option value="$PROJECT_DIR$/SEP3_Client/Model/Unit/User/Account.cs" />
       </list>
     </option>
   </component>
@@ -151,7 +153,8 @@
       <workItem from="1604955221655" duration="3008000" />
       <workItem from="1604967511955" duration="910000" />
       <workItem from="1604994590537" duration="59000" />
-      <workItem from="1604998194062" duration="1080000" />
+      <workItem from="1604998194062" duration="2043000" />
+      <workItem from="1605001645810" duration="2661000" />
     </task>
     <servers />
   </component>

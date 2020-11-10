@@ -13,6 +13,16 @@ namespace SEP3_Client.Model.Unit.User
             FriendSettingList = new FriendSettingList();
         }
 
+        public bool CheckPassword(string password)
+        {
+            return Password.Equals(password);
+        }
+
+        public bool CheckPassword(Account otherAccount)
+        {
+            return otherAccount.GetId().Equals(GetId())&&otherAccount.CheckPassword(Password);
+        }
+        
         private Account(string id, string userName, DateTime birthday, string password, FriendSettingList friendSettingList) : this(id, userName, password)
         {
             SetBirthday(birthday);
@@ -29,6 +39,17 @@ namespace SEP3_Client.Model.Unit.User
             else
             {
                 return "Wrong password.";
+            }
+        }
+        
+        public string ChangePassWord(Account oldAccount,Account newAccount) {
+            if (GetId().Equals(newAccount.GetId())&&CheckPassword(oldAccount))
+            {
+                return ChangePassWord(oldAccount.Password,newAccount.Password);
+            }
+            else 
+            {
+                return "Illegal change.";
             }
         }
 
