@@ -1,15 +1,61 @@
 ﻿@page "/Profile"
-<h3>Profile</h3>
-<div style="background-color: #b9bbbe">
-    <div class="rounded-circle">
-        <span class="oi oi-person" style="text-align: center"></span>
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 300px;
+         height: 350px;
+         margin: auto;
+         ">
+        <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b" >Profile</h1>
+        <div style="background: #b9bbbe">
+            <span class="oi oi-person" style="float: inherit;width:50px;height: 50px;color: white;
+                                           font-size: xx-large;line-height:50px;text-align: center"></span><br/>
+            <label >@username</label>
+        </div>
+        <div>
+            <span class="oi oi-sun" style="float: left">Account : @account</span><br/>
+            <label class="oi oi-calendar" style="float: left">Birth of date: @day / @month </label><br/>
+        </div>
+        <div>
+            <button class="btn btn-outline-dark" style="width:auto;border-radius: 5px" type="submit" @onclick="clickEDIT">EDIT</button>
+        </div>
+        <div style="background-color: red; margin: 40px auto;width: 300px;height: 50px">
+            <span class="oi oi-account-logout" style="float: left; width:50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+            <button class="btn" style="float: left;background-color: red;width:250px;height: 50px;" type="submit" @onclick="performLogOut">Log out</button>
+        </div>
     </div>
-    username
 </div>
-<div>
-    <span class="oi oi-sun" style="float: left">accountNo</span>
-    
-</div>
+
 @code {
+    private string username;
+    private string account;
+    private string password;
+    private int month;
+    private int day;
+
+    protected override async Task OnInitializedAsync()
+    {
+        account = ClientModel.GetAccount().GetId();
+        username = ClientModel.GetAccount().GetUserName();
+        password = ClientModel.GetAccount().Password;
+        month = ClientModel.GetAccount().Birthday.GetMonth();
+        day = ClientModel.GetAccount().Birthday.GetDay();
+    }
     
+    private void performLogOut()
+    {
+        ClientModel.Logoff();
+        MainLayout.Logout();
+        NavigationManager.NavigateTo("/");
+        username = null;
+    }
+
+    private void clickEDIT()
+    {
+        NavigationManager.NavigateTo("/EditProfile");
+    }
+
 }

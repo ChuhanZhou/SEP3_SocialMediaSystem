@@ -59,6 +59,7 @@
         </e>
         <e p="Pages" t="Include">
           <e p="_Host.cshtml" t="Include" />
+          <e p="EditProfile.razor" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="FriendList.razor" t="Include" />
           <e p="Login.razor" t="Include" />

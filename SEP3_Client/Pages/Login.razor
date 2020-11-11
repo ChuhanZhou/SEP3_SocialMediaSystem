@@ -1,10 +1,10 @@
-﻿@page "/Login"
+﻿@page "/"
 @using SEP3_Client.Data
 @using SEP3_Client.Model
 @inject IClientModel ClientModel
 @inject NavigationManager NavigationManager
 
-<div style="float: left;width: 100%;height: auto">
+ <div style="float: left;width: 100%;height: auto">
         <button class="btn-primary" style="float: right;position: relative;width:auto;right:15%;height: 40px;border-radius: 5px" @onclick="ChangeState">@otherTitle</button>
     </div>
     <div style="float: left;width: 100%;height: auto">
@@ -84,7 +84,6 @@
             }
         </div>
     </div>
-}
 
 
 @code {
@@ -95,36 +94,51 @@
     private string title;
     private string otherTitle;
     private string username;
-    
+
     protected override async Task OnInitializedAsync()
     {
-        title = "Login";
-        otherTitle = "Register";
-        confirmPassword = null;
-        error = null;
-        acccount = null;
-        password = null;
+        if (MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("/Profile");
+        }
+        else
+        {
+            title = "Login";
+                    otherTitle = "Register";
+                    confirmPassword = null;
+                    error = null;
+                    acccount = null;
+                    password = null;
+                    
+        }
+        
     }
 
 
     private void PerformLogin()
     {
-        if (!string.IsNullOrWhiteSpace(acccount)&&!string.IsNullOrEmpty(acccount))
+        error = ClientModel.Login(acccount, password);
+        if (error == null)
         {
-            if (!string.IsNullOrWhiteSpace(password) && !string.IsNullOrEmpty(password))
-            {
-                NavigationManager.NavigateTo("/Profile");
-            }
-            else
-            {
-                error = "Please write a password";
-            }
-
+            MainLayout.Login();
+            NavigationManager.NavigateTo("/Profile");
         }
-        else
-        {
-            error = "Please write the account";
-        }
+    //if (!string.IsNullOrWhiteSpace(acccount)&&!string.IsNullOrEmpty(acccount))
+    //{
+    //    if (!string.IsNullOrWhiteSpace(password) && !string.IsNullOrEmpty(password))
+    //    {
+    //        NavigationManager.NavigateTo("/Profile");
+    //    }
+    //    else
+    //    {
+    //        error = "Please write a password";
+    //    }
+    //
+    //}
+    //else
+    //{
+    //    error = "Please write the account";
+    //}
     }
     
     private void ChangeState()
@@ -148,30 +162,35 @@
 
     private void Register()
     {
-        if (!string.IsNullOrWhiteSpace(username)&&!string.IsNullOrEmpty(username))
+        error = ClientModel.Register(username, password);
+        if (error == null)
         {
-            if (!string.IsNullOrWhiteSpace(password) && !string.IsNullOrEmpty(password))
-            {
-                if (confirmPassword == password)
-                {
-                    NavigationManager.NavigateTo("/Profile");
-                }
-                else
-                {
-                    error = "The confirmed password must be the same as the password";
-                }
-            }
-            else
-            {
-                error = "Please write a password";
-            }
+            MainLayout.Login();
+            NavigationManager.NavigateTo("/Profile");
         }
-        else 
-        {
-            error = "Please write a username";
-        }
+        //if (!string.IsNullOrWhiteSpace(username)&&!string.IsNullOrEmpty(username))
+        //{
+        //    if (!string.IsNullOrWhiteSpace(password) && !string.IsNullOrEmpty(password))
+        //    {
+        //        if (confirmPassword == password)
+        //        {
+        //            NavigationManager.NavigateTo("/Profile");
+        //        }
+        //        else
+        //        {
+        //            error = "The confirmed password must be the same as the password";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        error = "Please write a password";
+        //    }
+        //}
+        //else 
+        //{
+        //    error = "Please write a username";
+        //}
        
     }
-    
     
 }

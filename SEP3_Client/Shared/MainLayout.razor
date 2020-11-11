@@ -1,8 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu/>
-</div>
+@if (show)
+{
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+}
+
 
 <div class="main">
     <div class="top-row px-4">
@@ -13,3 +17,23 @@
         @Body
     </div>
 </div>
+
+@code
+{
+    private static bool show = false;
+    
+    public static void Login()
+    {
+        show = true;
+    }
+    
+    public static void Logout()
+    {
+        show = false;
+    }
+    
+    public static bool IsLogin()
+    {
+        return show;
+    }
+}
