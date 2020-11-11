@@ -22,7 +22,7 @@ public class UserSystemModelManager implements UserSystemModel
         property = new PropertyChangeSupport(this);
         accountList = new AccountList();
         cloudDatabaseModel = new CloudDatabaseModelManager();
-        accountList = cloudDatabaseModel.getAllAccount();
+        //accountList = cloudDatabaseModel.getAllAccount();
     }
 
     private String getRandomId()

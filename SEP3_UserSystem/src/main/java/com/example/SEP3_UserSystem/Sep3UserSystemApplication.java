@@ -1,8 +1,11 @@
 package com.example.SEP3_UserSystem;
 
 import com.example.SEP3_UserSystem.mediator.ServerConnector;
+import com.example.SEP3_UserSystem.mediator.information.LoginOrRegisterPackage;
 import com.example.SEP3_UserSystem.model.UserSystemModel;
 import com.example.SEP3_UserSystem.model.UserSystemModelManager;
+import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
+import com.google.gson.Gson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

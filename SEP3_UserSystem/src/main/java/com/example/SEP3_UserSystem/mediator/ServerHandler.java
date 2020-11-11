@@ -5,7 +5,6 @@ import com.example.SEP3_UserSystem.model.UserSystemModel;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Friend;
 import com.google.gson.Gson;
-import mediator.information.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -78,6 +77,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
     private void sendInformationPackage(InformationPackage informationPackage)
     {
         String send = gson.toJson(informationPackage);
+        System.out.println("Send:"+send);
         out.println(send);
     }
 
@@ -113,6 +113,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             while (login)
             {
                 receive = in.readLine();
+                System.out.println("Receive:"+receive);
                 informationPackage = gson.fromJson(receive,InformationPackage.class);
                 if (informationPackage==null)
                 {
@@ -163,7 +164,9 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             while (connect)
             {
                 receive = in.readLine();
+                System.out.println("Receive:"+receive);
                 InformationPackage informationPackage = gson.fromJson(receive,InformationPackage.class);
+                System.out.println(informationPackage.getInformationType());
                 if (informationPackage.getInformationType()==InformationType.LOGIN)
                 {
                     LoginOrRegisterPackage receivePackage = gson.fromJson(receive,LoginOrRegisterPackage.class);
@@ -179,6 +182,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                             sendErrorPackage("Wrong keyword!");
                             break;
                     }
+                    break;
                 }
             }
         }

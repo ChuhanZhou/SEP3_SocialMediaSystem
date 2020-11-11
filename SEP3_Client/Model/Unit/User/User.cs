@@ -10,6 +10,11 @@
             Id = id;
             UserState = new UserState();
         }
+
+        public User()
+        {
+            
+        }
         
         public string GetId()
         {

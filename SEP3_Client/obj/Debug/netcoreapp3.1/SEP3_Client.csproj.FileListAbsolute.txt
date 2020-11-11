@@ -94,3 +94,11 @@ C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem
 C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\SEP3_Client.pdb
 C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\SEP3_Client.genruntimeconfig.cache
 C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\SEP3_Client.csproj.CopyComplete
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\EditProfile.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\FriendList.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Login.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Profile.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\EditProfile.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\FriendList.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Login.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Profile.razor.g.cs

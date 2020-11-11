@@ -11,6 +11,11 @@ namespace SEP3_Client.Model.Unit.User
         {
             UserName = userName;
         }
+
+        public BasicInformation()
+        {
+            
+        }
         
         public string GetUserName() 
         {

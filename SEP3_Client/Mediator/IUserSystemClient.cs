@@ -10,6 +10,6 @@ namespace SEP3_Client.Mediator
         string SendLoginOrRegisterPackage(string keyword, string idOrName, string password);
         string SendAccountPackage(Account account,string keyword);
         string SendAccountPackage(Account oldAccount,Account newAccount,string keyword);
-        void Start(string keyword, Account account);
+        void Start();
     }
 }

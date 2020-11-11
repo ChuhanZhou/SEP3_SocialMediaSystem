@@ -18,6 +18,11 @@ namespace SEP3_Client.Mediator.Information
             SendList.AddNewAccount(account);
         }
 
+        public AccountPackage()
+        {
+            
+        }
+
         public AccountList GetSendList() {
             return SendList;
         }

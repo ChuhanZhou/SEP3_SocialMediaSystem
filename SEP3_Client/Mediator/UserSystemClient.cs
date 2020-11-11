@@ -16,7 +16,7 @@ namespace SEP3_Client.Mediator
     public class UserSystemClient : IUserSystemClient
     {
         private IClientModelForUserSystem clientModel;
-        private static readonly int PORT = 8888;
+        private static readonly int PORT = 1111;
         private static readonly string HOST = "localhost";
         private int port;
         private string host;
@@ -51,6 +51,7 @@ namespace SEP3_Client.Mediator
                 running = true;
                 login = false;
                 this.clientModel = clientModel;
+                new Thread(Start).Start();
                 return true;
             }
             catch (IOException e)
@@ -70,15 +71,17 @@ namespace SEP3_Client.Mediator
 
         private void Send(string information)
         {
-            byte[] dataToServer = Encoding.ASCII.GetBytes(information);
+            byte[] dataToServer = Encoding.ASCII.GetBytes(information+"\r");
+            Console.WriteLine("Send:"+information);
             stream.Write(dataToServer, 0, dataToServer.Length);
         }
         
         private string GetReceive()
         {
-            byte[] dataFromServer = new byte[1024000];
+            byte[] dataFromServer = new byte[102400];
             int bytesRead = stream.Read(dataFromServer, 0, dataFromServer.Length);
             string receive = Encoding.ASCII.GetString(dataFromServer, 0, bytesRead);
+            Console.WriteLine("Receive:"+receive);
             return receive;
         }
         
@@ -141,7 +144,7 @@ namespace SEP3_Client.Mediator
             return receiveMessage;
         }
 
-        public void Start(string keyword, Account account)
+        public void Start()
         {
             running = true;
             while (running)

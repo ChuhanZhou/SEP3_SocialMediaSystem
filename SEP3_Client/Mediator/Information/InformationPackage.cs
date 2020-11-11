@@ -1,6 +1,6 @@
 ﻿namespace SEP3_Client.Mediator.Information
 {
-    public abstract class InformationPackage
+    public class InformationPackage
     {
         public InformationType informationType { get; set; }
         public string Keyword { get; set; }
@@ -9,6 +9,10 @@
         {
             this.informationType = informationType;
             Keyword = keyword;
+        }
+
+        public InformationPackage()
+        {
         }
 
         public InformationType GetInformationType()

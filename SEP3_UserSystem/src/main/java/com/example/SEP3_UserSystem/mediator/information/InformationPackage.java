@@ -1,6 +1,6 @@
 package com.example.SEP3_UserSystem.mediator.information;
 
-public abstract class InformationPackage {
+public class InformationPackage {
     private InformationType informationType;
     private String Keyword;
 
