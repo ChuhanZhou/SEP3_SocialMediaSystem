@@ -1,5 +1,7 @@
 package model;
 
+import database.CloudDatabaseModel;
+import database.CloudDatabaseModelManager;
 import model.domain.list.userList.AccountList;
 import model.domain.list.userList.FriendList;
 import model.domain.list.userList.FriendSettingList;
@@ -13,11 +15,14 @@ public class UserSystemModelManager implements UserSystemModel
 {
     private AccountList accountList;
     private PropertyChangeSupport property;
+    private CloudDatabaseModel cloudDatabaseModel;
 
     public UserSystemModelManager()
     {
         property = new PropertyChangeSupport(this);
         accountList = new AccountList();
+        cloudDatabaseModel = new CloudDatabaseModelManager();
+        accountList = cloudDatabaseModel.getAllAccount();
     }
 
     private String getRandomId()
@@ -41,6 +46,7 @@ public class UserSystemModelManager implements UserSystemModel
         }
         Account newAccount = new Account(newId,name,password);
         accountList.addNewAccount(newAccount);
+        cloudDatabaseModel.addAccount(newAccount);
         return newAccount;
     }
 
@@ -99,14 +105,24 @@ public class UserSystemModelManager implements UserSystemModel
     @Override
     public String changePassword(String id, String oldPassword, String newPassword)
     {
-        return accountList.changePassword(id, oldPassword, newPassword);
+        String result = accountList.changePassword(id, oldPassword, newPassword);
+        if (result==null)
+        {
+            cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+        }
+        return result;
     }
 
     @Override
     public String changePassword(Account oldAccount, Account newAccount) {
         if (hasId(oldAccount.getId()))
         {
-            return accountList.getAccountById(oldAccount.getId()).changePassWord(oldAccount, newAccount);
+            String result = accountList.getAccountById(oldAccount.getId()).changePassWord(oldAccount, newAccount);
+            if (result==null)
+            {
+                cloudDatabaseModel.updateUser(accountList.getAccountById(oldAccount.getId()));
+            }
+            return result;
         }
         else
         {
@@ -119,6 +135,7 @@ public class UserSystemModelManager implements UserSystemModel
         if (hasId(oldAccount.getId()))
         {
             accountList.getAccountById(oldAccount.getId()).update(newAccount.getUserName(),newAccount.getBirthday());
+            cloudDatabaseModel.updateUser(accountList.getAccountById(oldAccount.getId()));
             return null;
         }
         else

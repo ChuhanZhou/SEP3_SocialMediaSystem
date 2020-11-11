@@ -1,4 +1,5 @@
-﻿using SEP3_Client.Model.List.UserList;
+﻿using SEP3_Client.Model;
+using SEP3_Client.Model.List.UserList;
 using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Data
