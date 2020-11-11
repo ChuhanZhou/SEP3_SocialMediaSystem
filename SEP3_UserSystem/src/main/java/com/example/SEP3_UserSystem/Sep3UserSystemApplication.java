@@ -1,8 +1,8 @@
 package com.example.SEP3_UserSystem;
 
-import mediator.ServerConnector;
-import model.UserSystemModel;
-import model.UserSystemModelManager;
+import com.example.SEP3_UserSystem.mediator.ServerConnector;
+import com.example.SEP3_UserSystem.model.UserSystemModel;
+import com.example.SEP3_UserSystem.model.UserSystemModelManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
