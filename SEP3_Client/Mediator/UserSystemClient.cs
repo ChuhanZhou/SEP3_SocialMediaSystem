@@ -123,6 +123,7 @@ namespace SEP3_Client.Mediator
             while (!isReceive)
             {
             }
+            sending = false;
             return receiveMessage;
         }
         

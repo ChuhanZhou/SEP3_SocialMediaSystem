@@ -72,10 +72,19 @@
 
     protected override async Task OnInitializedAsync()
     {
-        username = ClientModel.GetAccount().GetUserName();
-        password = ClientModel.GetAccount().Password;
-        month = ClientModel.GetAccount().Birthday.GetMonth();
-        day = ClientModel.GetAccount().Birthday.GetDay();
+        Account account = ClientModel.GetAccount().Copy();
+        username = account.GetUserName();
+        password = account.Password;
+        if (account.Birthday==null)
+        {
+            month = 0;
+            day = 0;
+        }
+        else
+        {
+            month = account.Birthday.GetMonth();
+            day = account.Birthday.GetDay();
+        }
         change = false;
     }
 

@@ -133,10 +133,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                                 sendErrorPackage(userSystemModel.changePassword(oldAccount,newAccount));
                                 break;
                             case "updateBasicInformation":
+                                System.out.println(1);
                                 sendErrorPackage(userSystemModel.updateBasicInformation(oldAccount,newAccount));
+                                System.out.println(5);
                                 break;
                             case "logoff":
                                 userSystemModel.logoff(oldAccount.getId());
+                                sendErrorPackage();
                                 break;
                         }
                         break;
@@ -145,6 +148,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     case ERROR:
                         break;
                     default:
+                        sendErrorPackage("Wrong package.");
                         break;
                 }
             }
@@ -166,7 +170,6 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                 receive = in.readLine();
                 System.out.println("Receive:"+receive);
                 InformationPackage informationPackage = gson.fromJson(receive,InformationPackage.class);
-                System.out.println(informationPackage.getInformationType());
                 if (informationPackage.getInformationType()==InformationType.LOGIN)
                 {
                     LoginOrRegisterPackage receivePackage = gson.fromJson(receive,LoginOrRegisterPackage.class);

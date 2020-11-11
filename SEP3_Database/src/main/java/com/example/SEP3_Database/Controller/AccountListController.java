@@ -16,13 +16,13 @@ public class AccountListController {
     {
         databaseModel = DatabaseModelManager.getModelManager();
         gson = new Gson();
-        System.out.println(12312);
     }
 
-    @PostMapping
-    public void addAccount(@RequestBody Account newAccount)
+    @RequestMapping(method = RequestMethod.POST)
+    public void addAccount(@RequestBody String newAccount)
     {
-        databaseModel.addAccount(newAccount);
+        System.out.println("Post");
+        databaseModel.addAccount(gson.fromJson(newAccount,Account.class));
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -31,15 +31,15 @@ public class AccountListController {
         return gson.toJson(databaseModel.getAllAccount());
     }
 
-    @PatchMapping
-    public void updateUser(@RequestBody Account newAccount)
+    @RequestMapping(method = RequestMethod.PATCH)
+    public void updateUser(@RequestBody String newAccount)
     {
-        databaseModel.updateUser(newAccount);
+        databaseModel.updateUser(gson.fromJson(newAccount,Account.class));
     }
 
-    @DeleteMapping
-    public void removeAccount(@RequestBody Account account)
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void removeAccount(@RequestBody String account)
     {
-        databaseModel.removeAccount(account);
+        databaseModel.removeAccount(gson.fromJson(account,Account.class));
     }
 }
