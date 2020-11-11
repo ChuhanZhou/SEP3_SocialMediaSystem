@@ -1,5 +1,6 @@
 ﻿@page "/EditProfile"
 @using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 
@@ -85,7 +86,9 @@
 
     private void update()
     {
-        ClientModel.UpdateBasicInformation(ClientModel.GetAccount());
+        Account newAccount = ClientModel.GetAccount().Copy();
+        newAccount.Update(username,new Birthday(day,month));
+        ClientModel.UpdateBasicInformation(newAccount);
         ClientModel.ChangePassword(ClientModel.GetAccount().Password, password);
         NavigationManager.NavigateTo("/Profile");
     }
