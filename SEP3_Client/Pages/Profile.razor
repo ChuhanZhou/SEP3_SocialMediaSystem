@@ -41,8 +41,16 @@
         Account account = ClientModel.GetAccount().Copy();
         accountId = account.GetId();
         username = account.GetUserName();
-        month = account.Birthday.GetMonth();
-        day = account.Birthday.GetDay();
+        if (account.Birthday==null)
+        {
+            month = 0;
+            day = 0;
+        }
+        else
+        {
+            month = account.Birthday.GetMonth();
+             day = account.Birthday.GetDay();
+        }
     }
     
     private void performLogOut()
