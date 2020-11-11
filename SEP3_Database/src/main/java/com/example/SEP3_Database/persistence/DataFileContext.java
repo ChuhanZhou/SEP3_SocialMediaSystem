@@ -10,18 +10,19 @@ import java.util.Scanner;
 
 public class DataFileContext {
     private static Gson gson = new Gson();
+    private static String address = "SEP3_SocialMediaSystem/SEP3_Database/src/main/java/com/example/SEP3_Database/";
 
     public static AccountList readAccountListData()
     {
         try
         {
-            File file = new File("AccountList.json");
-            if (file.exists())
+            File file = new File(address + "AccountList.json");
+            if (!file.exists())
             {
                 updateAccountListData(new AccountList());
             }
             Scanner input = new Scanner(file);
-            String json = input.toString();
+            String json = input.nextLine();
             System.out.println(json);
             AccountList accountList = gson.fromJson(json,AccountList.class);
             return accountList;
@@ -38,7 +39,7 @@ public class DataFileContext {
         try
         {
             String json = gson.toJson(accountList);
-            File file = new File("AccountList.json");
+            File file = new File(address + "AccountList.json");
             PrintWriter out = new PrintWriter(file);
             out.print(json);
             out.close();

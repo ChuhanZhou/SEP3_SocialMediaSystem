@@ -4,10 +4,11 @@ import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
 
 public class CloudDatabaseModelManager implements CloudDatabaseModel {
+    private String url = "http://localhost:8080/api/account";
 
     public CloudDatabaseModelManager()
     {
-
+        
     }
 
     @Override

@@ -26,10 +26,8 @@ public class AccountListController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
     public String getAllAccount()
     {
-        System.out.println("Get");
         return gson.toJson(databaseModel.getAllAccount());
     }
 
