@@ -64,7 +64,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
 
     private void sendErrorPackage(String error)
     {
-        if (error.isEmpty())
+        if (error==null)
         {
             sendErrorPackage();
         }
@@ -133,9 +133,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                                 sendErrorPackage(userSystemModel.changePassword(oldAccount,newAccount));
                                 break;
                             case "updateBasicInformation":
-                                System.out.println(1);
                                 sendErrorPackage(userSystemModel.updateBasicInformation(oldAccount,newAccount));
-                                System.out.println(5);
                                 break;
                             case "logoff":
                                 userSystemModel.logoff(oldAccount.getId());
