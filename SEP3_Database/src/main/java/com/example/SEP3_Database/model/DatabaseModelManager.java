@@ -6,6 +6,7 @@ import com.example.SEP3_Database.model.domain.unit.user.Account;
 
 public class DatabaseModelManager implements DatabaseModel{
     private static DatabaseModelManager modelManager;
+    private boolean databaseOnline;
 
     public static DatabaseModel getModelManager()
     {
@@ -18,7 +19,12 @@ public class DatabaseModelManager implements DatabaseModel{
 
     public DatabaseModelManager()
     {
-
+        databaseOnline = false;
+        //判断能否连接数据库
+        if (false)
+        {
+            databaseOnline = true;
+        }
     }
 
     @Override
@@ -26,6 +32,10 @@ public class DatabaseModelManager implements DatabaseModel{
         AccountList accountList = DataFileContext.readAccountListData();
         if (accountList!=null)
         {
+            if (databaseOnline)
+            {
+                //数据库方法：添加数据
+            }
             accountList.addNewAccount(newAccount);
             DataFileContext.updateAccountListData(accountList);
         }
@@ -33,7 +43,15 @@ public class DatabaseModelManager implements DatabaseModel{
 
     @Override
     public AccountList getAllAccount() {
-        return DataFileContext.readAccountListData();
+        if (databaseOnline)
+        {
+            //数据库方法：返回数据
+        }
+        else
+        {
+            return DataFileContext.readAccountListData();
+        }
+        return null;
     }
 
     @Override
@@ -41,6 +59,10 @@ public class DatabaseModelManager implements DatabaseModel{
         AccountList accountList = DataFileContext.readAccountListData();
         if (accountList!=null)
         {
+            if (databaseOnline)
+            {
+                //数据库方法：更新数据
+            }
             accountList.updateAccount(newAccount);
             DataFileContext.updateAccountListData(accountList);
         }
@@ -51,6 +73,10 @@ public class DatabaseModelManager implements DatabaseModel{
         AccountList accountList = DataFileContext.readAccountListData();
         if (accountList!=null)
         {
+            if (databaseOnline)
+            {
+                //数据库方法：删除数据
+            }
             accountList.removeAccountById(account.getId());
             DataFileContext.updateAccountListData(accountList);
         }
