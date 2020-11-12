@@ -23,7 +23,6 @@ public class DataFileContext {
             }
             Scanner input = new Scanner(file);
             String json = input.nextLine();
-            System.out.println(json);
             AccountList accountList = gson.fromJson(json,AccountList.class);
             return accountList;
         }

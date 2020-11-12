@@ -16,7 +16,7 @@ namespace SEP3_Client.Mediator
     public class UserSystemClient : IUserSystemClient
     {
         private IClientModelForUserSystem clientModel;
-        private static readonly int PORT = 2222;
+        private static readonly int PORT = 2030;
         private static readonly string HOST = "localhost";
         private int port;
         private string host;

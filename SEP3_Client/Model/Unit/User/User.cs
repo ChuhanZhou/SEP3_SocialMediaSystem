@@ -25,5 +25,10 @@
         {
             return UserState;
         }
+
+        public void SetUserState(UserState userState)
+        {
+            UserState = userState;
+        }
     }
 }

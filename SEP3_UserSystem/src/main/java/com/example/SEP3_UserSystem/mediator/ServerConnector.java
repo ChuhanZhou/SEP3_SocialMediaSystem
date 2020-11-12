@@ -9,7 +9,7 @@ import java.net.Socket;
 public class ServerConnector implements Runnable
 {
     private UserSystemModel userSystemModel;
-    private int PORT = 2222;
+    private int PORT = 2030;
     private ServerSocket welcomeSocket;
 
     public ServerConnector(UserSystemModel userSystemModel)

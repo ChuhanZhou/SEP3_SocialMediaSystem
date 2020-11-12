@@ -39,5 +39,14 @@
         public bool IsOnline() {
             return Online;
         }
+
+        public UserState Copy()
+        {
+            return new UserState
+            {
+                Online = Online,
+                State = State
+            };
+        }
     }
 }

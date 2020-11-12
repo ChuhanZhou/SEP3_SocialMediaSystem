@@ -19,10 +19,12 @@ public class AccountListController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addAccount(@RequestBody String newAccount)
+    public String addAccount(@RequestBody String newAccount)
     {
-        System.out.println("Post");
-        databaseModel.addAccount(gson.fromJson(newAccount,Account.class));
+        System.out.println("Post:" + newAccount);
+        Account account = gson.fromJson(newAccount,Account.class);
+        databaseModel.addAccount(account);
+        return newAccount;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -32,14 +34,19 @@ public class AccountListController {
     }
 
     @RequestMapping(method = RequestMethod.PATCH)
-    public void updateUser(@RequestBody String newAccount)
+    public String updateUser(@RequestBody String newAccount)
     {
-        databaseModel.updateUser(gson.fromJson(newAccount,Account.class));
+        System.out.println("Patch:" + newAccount);
+        Account account = gson.fromJson(newAccount,Account.class);
+        databaseModel.updateUser(account);
+        return newAccount;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void removeAccount(@RequestBody String account)
     {
-        databaseModel.removeAccount(gson.fromJson(account,Account.class));
+        System.out.println("Delete:" + account);
+        Account removeAccount = gson.fromJson(account,Account.class);
+        databaseModel.removeAccount(removeAccount);
     }
 }

@@ -136,9 +136,11 @@ public class UserSystemModelManager implements UserSystemModel
         if (hasId(oldAccount.getId()))
         {
             System.out.println(3);
+
             accountList.getAccountById(oldAccount.getId()).update(newAccount.getUserName(),newAccount.getBirthday());
+
             System.out.println(5);
-            property.firePropertyChange("updateAccount",null,accountList.getAccountById(oldAccount.getId()));
+            //property.firePropertyChange("updateAccount",null,accountList.getAccountById(oldAccount.getId()));
             cloudDatabaseModel.updateUser(accountList.getAccountById(oldAccount.getId()));
             System.out.println(7);
             return null;

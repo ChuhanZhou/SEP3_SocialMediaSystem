@@ -11,9 +11,10 @@ public class Account extends BasicInformation {
         FriendSettingList = new FriendSettingList();
     }
 
-    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList) {
+    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList,UserState userState) {
         this(id, userName, password);
         setBirthday(birthday);
+        setUserState(userState);
         FriendSettingList = friendSettingList;
     }
 
@@ -65,6 +66,6 @@ public class Account extends BasicInformation {
     }
 
     public Account copy() {
-        return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy());
+        return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy(),getUserState().copy());
     }
 }
