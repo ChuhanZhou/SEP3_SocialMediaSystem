@@ -80,7 +80,7 @@ namespace SEP3_Client.Model.List.UserList
             FriendSettingList copy = new FriendSettingList();
             foreach (var friendSetting in FriendSettings)
             {
-                copy.AddNewFriendSetting(friendSetting.Copy());
+                copy.FriendSettings.Add(friendSetting.Copy());
             }
             return copy;
         }

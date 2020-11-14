@@ -80,7 +80,7 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
         {
             url = new URL(urlAddress);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("PATCH");
+            connection.setRequestMethod("PUT");
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestProperty("connection", "keep-alive");
@@ -88,7 +88,7 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             connection.connect();
             out = new OutputStreamWriter(connection.getOutputStream(),"UTF-8");
             out.write(gson.toJson(newAccount));
-            System.out.println("Patch Send: "+gson.toJson(newAccount));
+            System.out.println("Put Send: "+gson.toJson(newAccount));
             out.flush();
             out.close();
             in = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
@@ -96,7 +96,7 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             System.out.println("API Part Receive: "+receive);
             in.close();
             connection.disconnect();
-            System.out.println("Patch end");
+            System.out.println("Put end");
         }
         catch (IOException e)
         {

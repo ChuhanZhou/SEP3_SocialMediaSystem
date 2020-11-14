@@ -101,7 +101,7 @@ public class AccountList {
         AccountList copy = new AccountList();
         for (int x = 0; x< Accounts.size(); x++)
         {
-            copy.addNewAccount(Accounts.get(x).copy());
+            copy.Accounts.add(Accounts.get(x).copy());
         }
         return copy;
     }

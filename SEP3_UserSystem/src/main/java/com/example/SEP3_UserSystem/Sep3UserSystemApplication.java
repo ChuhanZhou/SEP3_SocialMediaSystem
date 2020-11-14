@@ -1,11 +1,9 @@
 package com.example.SEP3_UserSystem;
 
 import com.example.SEP3_UserSystem.mediator.ServerConnector;
-import com.example.SEP3_UserSystem.mediator.information.LoginOrRegisterPackage;
 import com.example.SEP3_UserSystem.model.UserSystemModel;
 import com.example.SEP3_UserSystem.model.UserSystemModelManager;
-import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
-import com.google.gson.Gson;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,6 +17,8 @@ public class Sep3UserSystemApplication {
 		Thread thread = new Thread(server,"[UserSystemServer]");
 		thread.setDaemon(true);
 		thread.start();
+		FriendSetting friendSetting = new FriendSetting("1","2",false);
+		System.out.println(friendSetting.getState());
 	}
 
 }

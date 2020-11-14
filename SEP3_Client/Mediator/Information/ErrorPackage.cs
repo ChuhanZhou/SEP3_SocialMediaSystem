@@ -9,10 +9,7 @@
             Error = error;
         }
 
-        public ErrorPackage()
-        {
-            
-        }
+        public ErrorPackage() {}
 
         public bool IsError() {
             return Error;

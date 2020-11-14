@@ -81,7 +81,7 @@ public class FriendList {
         FriendList copy = new FriendList();
         for (int x = 0; x< Friends.size(); x++)
         {
-            copy.addNewFriend(Friends.get(x).copy());
+            copy.Friends.add(Friends.get(x).copy());
         }
         return copy;
     }

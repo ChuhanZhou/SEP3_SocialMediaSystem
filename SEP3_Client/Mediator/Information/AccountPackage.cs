@@ -1,4 +1,6 @@
-﻿using SEP3_Client.Model.List.UserList;
+﻿using System;
+using System.Text.Json;
+using SEP3_Client.Model.List.UserList;
 using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Mediator.Information
@@ -18,10 +20,7 @@ namespace SEP3_Client.Mediator.Information
             SendList.AddNewAccount(account);
         }
 
-        public AccountPackage()
-        {
-            
-        }
+        public AccountPackage() {}
 
         public AccountList GetSendList() {
             return SendList;

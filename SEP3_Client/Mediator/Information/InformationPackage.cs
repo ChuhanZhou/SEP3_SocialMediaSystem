@@ -11,9 +11,7 @@
             Keyword = keyword;
         }
 
-        public InformationPackage()
-        {
-        }
+        public InformationPackage() {}
 
         public InformationType GetInformationType()
         {

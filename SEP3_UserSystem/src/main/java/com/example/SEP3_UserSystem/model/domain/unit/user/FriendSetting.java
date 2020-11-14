@@ -3,17 +3,20 @@ package com.example.SEP3_UserSystem.model.domain.unit.user;
 public class FriendSetting extends User {
     private String Note;
     private boolean DisablePost;
+    private FriendSettingState State;
 
-    public FriendSetting(String id,boolean disablePost)
+    public FriendSetting(String id,String note,boolean disablePost)
     {
         super(id);
+        Note = note;
         DisablePost = disablePost;
+        State = FriendSettingState.UNCONFIRMED;
     }
 
-    private FriendSetting(String id,boolean disablePost,String note)
+    private FriendSetting(String id,String note,boolean disablePost,FriendSettingState state)
     {
-        this(id,disablePost);
-        Note = note;
+        this(id,note,disablePost);
+        State = state;
     }
 
     public String getNote() {
@@ -24,6 +27,10 @@ public class FriendSetting extends User {
         return DisablePost;
     }
 
+    public FriendSettingState getState() {
+        return State;
+    }
+
     public void setNote(String note) {
         Note = note;
     }
@@ -32,12 +39,26 @@ public class FriendSetting extends User {
         DisablePost = disablePost;
     }
 
+    public void setState(boolean agree) {
+        if (State == FriendSettingState.UNCONFIRMED)
+        {
+            if (agree)
+            {
+                State = FriendSettingState.AGREE;
+            }
+            else
+            {
+                State = FriendSettingState.DISAGREE;
+            }
+        }
+    }
+
     public void update(FriendSetting friendSetting) {
         Note = friendSetting.getNote();
         DisablePost = friendSetting.isDisablePost();
     }
 
     public FriendSetting copy() {
-        return new FriendSetting(getId(),DisablePost,Note);
+        return new FriendSetting(getId(),Note,DisablePost, State);
     }
 }

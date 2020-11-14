@@ -18,10 +18,7 @@ namespace SEP3_Client.Mediator.Information
             SendList.AddNewFriend(friend);
         }
 
-        public FriendPackage()
-        {
-            
-        }
+        public FriendPackage() {}
         
         public FriendList GetSendList() {
             return SendList;

@@ -70,6 +70,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         }
         else
         {
+            System.out.println("Error:"+error);
             sendInformationPackage(new ErrorPackage(error,true));
         }
     }
@@ -107,7 +108,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             id = account.getId();
             String receive;
             InformationPackage informationPackage;
-            sendInformationPackage(new AccountPackage(account,"update"));
+            sendInformationPackage(new AccountPackage(account.toClient(),"update"));
             sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
             login = true;
             while (login)
@@ -127,6 +128,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         AccountPackage accountPackage = gson.fromJson(receive,AccountPackage.class);
                         Account oldAccount = accountPackage.getSendList().getAccountByIndex(0);
                         Account newAccount = accountPackage.getSendList().getAccountByIndex(1);
+                        System.out.println("ACCOUNT:"+accountPackage.getKeyword());
                         switch (accountPackage.getKeyword())
                         {
                             case "changePassword":
@@ -134,12 +136,12 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                                 break;
                             case "updateBasicInformation":
                                 String error = userSystemModel.updateBasicInformation(oldAccount,newAccount);
-                                System.out.println(error);
                                 sendErrorPackage(error);
                                 break;
                             case "logoff":
                                 userSystemModel.logoff(oldAccount.getId());
                                 sendErrorPackage();
+                                login = false;
                                 break;
                         }
                         break;
@@ -155,9 +157,10 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             userSystemModel.logoff(id);
         }
-
+        System.out.println("Connection with User[" + id + "] is disconnected.");
     }
 
     @Override
@@ -191,6 +194,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         }
         catch (IOException e)
         {
+            e.printStackTrace();
             close();
             connect = false;
             login = false;
@@ -207,7 +211,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     Account account = (Account) evt.getNewValue();
                     if (account.getId().equals(id))
                     {
-                        sendInformationPackage(new AccountPackage(account,"update"));
+                        sendInformationPackage(new AccountPackage(account.toClient(),"update"));
                     }
                     else if (userSystemModel.getAccountById(id).getFriendSettingList().getFriendSettingById(account.getId())!=null)
                     {
