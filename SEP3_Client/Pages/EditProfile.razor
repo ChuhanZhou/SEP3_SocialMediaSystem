@@ -93,12 +93,12 @@
         31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     }.ToList();
 
-    private void update()
+    private async Task update()
     {
         Account newAccount = ClientModel.GetAccount().Copy();
         newAccount.Update(username,new Birthday(day,month));
-        ClientModel.UpdateBasicInformation(newAccount);
-        ClientModel.ChangePassword(ClientModel.GetAccount().Password, password);
+        await ClientModel.UpdateBasicInformation(newAccount);
+        await ClientModel.ChangePassword(ClientModel.GetAccount().Password, password);
         NavigationManager.NavigateTo("/Profile");
     }
 

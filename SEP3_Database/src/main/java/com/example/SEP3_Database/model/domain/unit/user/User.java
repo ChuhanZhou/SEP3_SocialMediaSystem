@@ -19,4 +19,8 @@ public abstract class User
     public UserState getUserState() {
         return UserState;
     }
+
+    public void setUserState(UserState userState) {
+        UserState = userState;
+    }
 }

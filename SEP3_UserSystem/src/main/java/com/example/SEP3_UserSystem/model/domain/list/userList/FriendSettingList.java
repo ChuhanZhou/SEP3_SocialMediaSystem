@@ -85,7 +85,7 @@ public class FriendSettingList {
         FriendSettingList copy = new FriendSettingList();
         for (int x = 0; x< FriendSettings.size(); x++)
         {
-            copy.addNewFriendSetting(FriendSettings.get(x).copy());
+            copy.FriendSettings.add(FriendSettings.get(x).copy());
         }
         return copy;
     }

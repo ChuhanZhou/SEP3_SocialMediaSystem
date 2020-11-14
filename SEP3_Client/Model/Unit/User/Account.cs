@@ -55,7 +55,7 @@ namespace SEP3_Client.Model.Unit.User
             }
             else 
             {
-                return "Illegal change.";
+                return "Wrong change.";
             }
         }
 

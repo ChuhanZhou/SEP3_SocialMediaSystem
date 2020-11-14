@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Threading.Tasks;
 using SEP3_Client.Mediator;
 using SEP3_Client.Model;
 using SEP3_Client.Model.List.UserList;
@@ -65,18 +66,19 @@ namespace SEP3_Client.Data
             return account.Copy();
         }
 
-        public string ChangePassword(string oldPassword, string newPassword)
+        public async Task<string> ChangePassword(string oldPassword, string newPassword)
         {
             Account oldAccount = new Account(account.GetId(), account.GetUserName(), oldPassword);
             Account newAccount = new Account(account.GetId(), account.GetUserName(), newPassword);
-            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "changePassword");
+            return await userSystemClient.SendAccountPackage(oldAccount,newAccount, "changePassword");
         }
 
-        public string UpdateBasicInformation(Account account)
+        public async Task<string> UpdateBasicInformation(Account account)
         {
             Account oldAccount = this.account;
             Account newAccount = account;
-            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
+            
+            return await userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
         }
 
         public string AddNewFriend(string id)

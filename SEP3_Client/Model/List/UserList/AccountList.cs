@@ -23,10 +23,9 @@ namespace SEP3_Client.Model.List.UserList
             return null;
         }
         
-        public string AddOldAndNewAccount(Account oldAccount,Account newAccount)
+        public void AddOldAndNewAccount(Account oldAccount,Account newAccount)
         {
             Accounts = new List<Account> {oldAccount, newAccount};
-            return null;
         }
         
         public Account GetAccountByIndex(int index)
@@ -97,7 +96,7 @@ namespace SEP3_Client.Model.List.UserList
             AccountList copy = new AccountList();
             foreach (var account in Accounts)
             {
-                copy.AddNewAccount(account.Copy());
+                copy.Accounts.Add(account.Copy());
             }
             return copy;
         }

@@ -9,6 +9,12 @@ public class UserState {
         Online = false;
     }
 
+    private UserState(boolean online,String state)
+    {
+        Online = online;
+        State = state;
+    }
+
     public void login()
     {
         Online = true;
@@ -37,5 +43,10 @@ public class UserState {
 
     public boolean isOnline() {
         return Online;
+    }
+
+    public UserState copy()
+    {
+        return new UserState(Online,State);
     }
 }

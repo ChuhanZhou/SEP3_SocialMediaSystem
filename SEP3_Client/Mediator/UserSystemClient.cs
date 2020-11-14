@@ -110,10 +110,11 @@ namespace SEP3_Client.Mediator
             return "Get wrong package.";
         }
 
-        public string SendAccountPackage(Account account, string keyword)
+        public async Task<string> SendAccountPackage(Account account, string keyword)
         {
             while (sending)
             {
+                Thread.Sleep(100);
             }
             sending = true;
             isReceive = false;
@@ -122,15 +123,17 @@ namespace SEP3_Client.Mediator
             Send(send);
             while (!isReceive)
             {
+                Thread.Sleep(100);
             }
             sending = false;
             return receiveMessage;
         }
         
-        public string SendAccountPackage(Account oldAccount, Account newAccount, string keyword)
+        public async Task<string> SendAccountPackage(Account oldAccount, Account newAccount, string keyword)
         {
             while (sending)
             {
+                Thread.Sleep(100);
             }
             sending = true;
             isReceive = false;
@@ -141,7 +144,9 @@ namespace SEP3_Client.Mediator
             Send(send);
             while (!isReceive)
             {
+                Thread.Sleep(100);
             }
+            sending = false;
             return receiveMessage;
         }
 

@@ -66,7 +66,7 @@ namespace SEP3_Client.Model.List.UserList
             FriendList copy = new FriendList();
             foreach (var friend in Friends)
             {
-                copy.AddNewFriend(friend.Copy());
+                copy.Friends.Add(friend.Copy());
             }
             return copy;
         }

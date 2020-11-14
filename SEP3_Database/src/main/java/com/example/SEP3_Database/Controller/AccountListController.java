@@ -33,10 +33,10 @@ public class AccountListController {
         return gson.toJson(databaseModel.getAllAccount());
     }
 
-    @RequestMapping(method = RequestMethod.PATCH)
+    @RequestMapping(method = RequestMethod.PUT)
     public String updateUser(@RequestBody String newAccount)
     {
-        System.out.println("Patch:" + newAccount);
+        System.out.println("Put:" + newAccount);
         Account account = gson.fromJson(newAccount,Account.class);
         databaseModel.updateUser(account);
         return newAccount;

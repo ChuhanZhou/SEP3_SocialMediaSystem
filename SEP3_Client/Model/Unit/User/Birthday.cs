@@ -11,6 +11,8 @@
             Day = day;
         }
 
+        public Birthday() {}
+
         public int GetDay() {
             return Day;
         }

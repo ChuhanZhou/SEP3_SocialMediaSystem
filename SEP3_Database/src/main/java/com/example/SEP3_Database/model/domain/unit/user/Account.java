@@ -3,7 +3,7 @@ import com.example.SEP3_Database.model.domain.list.userList.FriendSettingList;
 
 public class Account extends BasicInformation {
     private String Password;
-    private com.example.SEP3_Database.model.domain.list.userList.FriendSettingList FriendSettingList;
+    private FriendSettingList FriendSettingList;
 
     public Account(String id, String userName,String password) {
         super(id, userName);
@@ -11,9 +11,10 @@ public class Account extends BasicInformation {
         FriendSettingList = new FriendSettingList();
     }
 
-    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList) {
+    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList,UserState userState) {
         this(id, userName, password);
         setBirthday(birthday);
+        setUserState(userState);
         FriendSettingList = friendSettingList;
     }
 
@@ -46,6 +47,17 @@ public class Account extends BasicInformation {
         }
         else
         {
+            return "Wrong change.";
+        }
+    }
+
+    public String changePassWord(Account newAccount) {
+        if (getId().equals(newAccount.getId()))
+        {
+            return Password = newAccount.Password;
+        }
+        else
+        {
             return "Illegal change.";
         }
     }
@@ -65,6 +77,6 @@ public class Account extends BasicInformation {
     }
 
     public Account copy() {
-        return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy());
+        return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy(),getUserState().copy());
     }
 }
