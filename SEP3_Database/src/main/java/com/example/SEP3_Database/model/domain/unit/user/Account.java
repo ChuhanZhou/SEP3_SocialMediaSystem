@@ -20,7 +20,14 @@ public class Account extends BasicInformation {
 
     public boolean checkPassword(String password)
     {
-        return Password.equals(password);
+        if (password==null)
+        {
+            return false;
+        }
+        else
+        {
+            return Password.equals(password);
+        }
     }
 
     public boolean checkPassword(Account otherAccount)
@@ -51,17 +58,6 @@ public class Account extends BasicInformation {
         }
     }
 
-    public String changePassWord(Account newAccount) {
-        if (getId().equals(newAccount.getId()))
-        {
-            return Password = newAccount.Password;
-        }
-        else
-        {
-            return "Illegal change.";
-        }
-    }
-
     public FriendSettingList getFriendSettingList() {
         return FriendSettingList;
     }
@@ -78,5 +74,9 @@ public class Account extends BasicInformation {
 
     public Account copy() {
         return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy(),getUserState().copy());
+    }
+
+    public Account toClient() {
+        return new Account(getId(),getUserName(),getBirthday(),"",FriendSettingList.copy(),getUserState().copy());
     }
 }
