@@ -93,7 +93,7 @@ namespace SEP3_Client.Data
 
         public FriendSettingList GetFriendSettingList()
         {
-            throw new System.NotImplementedException();
+            return account.FriendSettingList.Copy();
         }
 
         public string UpdateFriendSetting(FriendSetting newFriendSetting)

@@ -9,13 +9,27 @@
         public FriendSetting(string id,string note,bool disablePost) : base(id)
         {
             DisablePost = disablePost;
-            Note = note;
+            if (string.IsNullOrEmpty(note))
+            {
+                Note = "";
+            }
+            else
+            {
+                Note = note;
+            }
             State = FriendSettingState.UNCONFIRMED;
         }
 
         private FriendSetting(string id,string note,bool disablePost,FriendSettingState state) : this(id,note,disablePost)
         {
             State = state;
+        }
+        
+        public FriendSetting(string id) : base(id)
+        {
+            DisablePost = false;
+            Note = null;
+            State = FriendSettingState.UNCONFIRMED;
         }
 
         public string GetNote() 
@@ -56,6 +70,23 @@
             }
         }
 
+        public bool NeedAgree()
+        {
+            if (State==FriendSettingState.UNCONFIRMED&&Note==null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Delete()
+        {
+            State = FriendSettingState.DELETE;
+        }
+        
         public void Update(FriendSetting friendSetting) 
         {
             Note = friendSetting.GetNote();

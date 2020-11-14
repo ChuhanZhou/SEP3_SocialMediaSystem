@@ -37,8 +37,8 @@ public class Jdbc
         }
         catch (Exception e)
         {
+            //e.printStackTrace();
             System.out.println(e+"_____________________");
         }
-
     }
 }

@@ -149,6 +149,14 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         break;
                     case ERROR:
                         break;
+                    case SEARCH:
+                        SearchPackage searchPackage = gson.fromJson(receive,SearchPackage.class);
+                        
+                        break;
+                    case SETTING:
+                        FriendSettingPackage friendSettingPackage = gson.fromJson(receive,FriendSettingPackage.class);
+
+                        break;
                     default:
                         sendErrorPackage("Wrong package.");
                         break;

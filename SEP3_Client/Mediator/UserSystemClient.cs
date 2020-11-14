@@ -150,6 +150,11 @@ namespace SEP3_Client.Mediator
             return receiveMessage;
         }
 
+        public Task<string> SendFriendSettingPackage(FriendSetting friendSetting, string keyword)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Start()
         {
             running = true;
