@@ -81,9 +81,14 @@ namespace SEP3_Client.Data
             return await userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
         }
 
-        public string AddNewFriend(string id)
+        public Task<bool> SearchId(string id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public async Task<string> AddNewFriend(FriendSetting newFriendSetting)
+        {
+            return await userSystemClient.SendFriendSettingPackage(newFriendSetting,"addNewFriend");
         }
 
         public FriendSettingList GetFriendSettingList()

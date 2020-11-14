@@ -11,6 +11,7 @@ namespace SEP3_Client.Mediator
         string SendLoginOrRegisterPackage(string keyword, string idOrName, string password);
         Task<string> SendAccountPackage(Account account,string keyword);
         Task<string> SendAccountPackage(Account oldAccount,Account newAccount,string keyword);
+        Task<string> SendFriendSettingPackage(FriendSetting friendSetting,string keyword);
         void Start();
     }
 }

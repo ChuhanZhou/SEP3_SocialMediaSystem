@@ -21,9 +21,11 @@
             <e p="AccountPackage.cs" t="Include" />
             <e p="ErrorPackage.cs" t="Include" />
             <e p="FriendPackage.cs" t="Include" />
+            <e p="FriendSettingPackage.cs" t="Include" />
             <e p="InformationPackage.cs" t="Include" />
             <e p="InformationType.cs" t="Include" />
             <e p="LoginOrRegisterPackage.cs" t="Include" />
+            <e p="SearchPackage.cs" t="Include" />
           </e>
           <e p="IUserSystemClient.cs" t="Include" />
           <e p="UserSystemClient.cs" t="Include" />

@@ -15,7 +15,8 @@ namespace SEP3_Client.Data
         Account GetAccount();
         Task<string> ChangePassword(string oldPassword, string newPassword);
         Task<string> UpdateBasicInformation(Account account);
-        string AddNewFriend(string id);
+        Task<bool> SearchId(string id);
+        Task<string> AddNewFriend(FriendSetting newFriendSetting);
         FriendSettingList GetFriendSettingList();
         string UpdateFriendSetting(FriendSetting newFriendSetting);
         void RemoveFriend(string id);
