@@ -1,6 +1,7 @@
 package com.example.SEP3_UserSystem.model.domain.list.userList;
 
 import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSettingState;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,29 @@ public class FriendSettingList {
         {
             return null;
         }
+    }
+
+    public FriendSettingList getFriendSettingListByState(FriendSettingState state)
+    {
+        FriendSettingList searchList = new FriendSettingList();
+        for (int x=0;x<FriendSettings.size();x++)
+        {
+            if (FriendSettings.get(x).getState().equals(state))
+            {
+                searchList.FriendSettings.add(FriendSettings.get(x));
+            }
+        }
+        return searchList;
+    }
+
+    public ArrayList<FriendSetting> getFriendSettingList()
+    {
+        ArrayList<FriendSetting> copy = new ArrayList();
+        for (int x=0;x<FriendSettings.size();x++)
+        {
+            copy.add(FriendSettings.get(x).copy());
+        }
+        return copy;
     }
 
     public String updateFriendSetting(FriendSetting newFriendSetting)

@@ -8,7 +8,14 @@ public class FriendSetting extends User {
     public FriendSetting(String id,String note,boolean disablePost)
     {
         super(id);
-        Note = note;
+        if (note==null)
+        {
+            Note = "";
+        }
+        else
+        {
+            Note = note;
+        }
         DisablePost = disablePost;
         State = FriendSettingState.UNCONFIRMED;
     }
@@ -17,6 +24,14 @@ public class FriendSetting extends User {
     {
         this(id,note,disablePost);
         State = state;
+    }
+
+    public FriendSetting(String id)
+    {
+        super(id);
+        Note = null;
+        DisablePost = false;
+        State = FriendSettingState.UNCONFIRMED;
     }
 
     public String getNote() {
@@ -51,6 +66,23 @@ public class FriendSetting extends User {
                 State = FriendSettingState.DISAGREE;
             }
         }
+    }
+
+    public Boolean needAgree()
+    {
+        if (State==FriendSettingState.UNCONFIRMED&&Note==null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void delete()
+    {
+        State = FriendSettingState.DELETE;
     }
 
     public void update(FriendSetting friendSetting) {
