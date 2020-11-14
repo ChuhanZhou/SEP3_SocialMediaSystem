@@ -4,15 +4,18 @@
     {
         public string Note { get; set; }
         public bool DisablePost { get; set; }
+        public FriendSettingState State { get; set; }
         
-        public FriendSetting(string id,bool disablePost) : base(id)
+        public FriendSetting(string id,string note,bool disablePost) : base(id)
         {
             DisablePost = disablePost;
+            Note = note;
+            State = FriendSettingState.UNCONFIRMED;
         }
 
-        private FriendSetting(string id,bool disablePost,string note) : this(id, disablePost)
+        private FriendSetting(string id,string note,bool disablePost,FriendSettingState state) : this(id,note,disablePost)
         {
-            Note = note;
+            State = state;
         }
 
         public string GetNote() 
@@ -24,6 +27,10 @@
         {
             return DisablePost;
         }
+        
+        public FriendSettingState GetState() {
+            return State;
+        }
 
         public void SetNote(string note) 
         {
@@ -34,6 +41,20 @@
         {
             DisablePost = disablePost;
         }
+        
+        public void SetState(bool agree) {
+            if (State == FriendSettingState.UNCONFIRMED)
+            {
+                if (agree)
+                {
+                    State = FriendSettingState.AGREE;
+                }
+                else
+                {
+                    State = FriendSettingState.DISAGREE;
+                }
+            }
+        }
 
         public void Update(FriendSetting friendSetting) 
         {
@@ -43,7 +64,7 @@
         
         public FriendSetting Copy() 
         {
-            return new FriendSetting(Id,DisablePost,Note);
+            return new FriendSetting(Id,Note,DisablePost,State);
         }
     }
 }

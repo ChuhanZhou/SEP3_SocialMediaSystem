@@ -1,6 +1,6 @@
 ﻿namespace SEP3_Client.Model.Unit.User
 {
-    public abstract class User
+    public abstract class  User
     {
         public string Id { get; set; }
         public UserState UserState { get; set; }

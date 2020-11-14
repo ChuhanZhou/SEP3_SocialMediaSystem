@@ -56,7 +56,7 @@ namespace SEP3_Client.Mediator
             }
             catch (IOException e)
             {
-                //bookingModel.updateError(e.getMessage());
+                Console.WriteLine(e);
                 return false;
             }
         }
@@ -173,6 +173,8 @@ namespace SEP3_Client.Mediator
                             var errorPackage = JsonSerializer.Deserialize<ErrorPackage>(receive);
                             receiveMessage = errorPackage.GetKeyword();
                             isReceive = true;
+                            break;
+                        case InformationType.LOGIN:
                             break;
                     }
                 }
