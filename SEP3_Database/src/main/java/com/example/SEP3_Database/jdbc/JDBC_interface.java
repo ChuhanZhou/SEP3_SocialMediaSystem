@@ -1,5 +1,7 @@
 package com.example.SEP3_Database.jdbc;
 
+import java.sql.SQLException;
+
 public interface JDBC_interface {
     public void init();
     public void GetAllUserData();
@@ -17,11 +19,13 @@ public interface JDBC_interface {
 class interfacetest
         {
 
-            public static void main(String[] args) {
+            public static void main(String[] args) throws SQLException {
                 Jdbc jdbc = new Jdbc();
                 jdbc.init();
                 jdbc.GetAllUserData();
-                jdbc.DeleteDatabase();
+                jdbc.CreateDataBase();
+                jdbc.setExecuteSQL("insert into UserTable (UserId,UserName,UserPassword,BirthdayMonth,BirthdayDate) values (1,\"UserDemo\",\"1234\",8,11);");
+               // jdbc.DeleteDatabase();
                 jdbc.GetAllUserData();
              //   jdbc.generateD(jdbc.getUserD());
              //   jdbc.generateM(jdbc.getUserM());

@@ -64,7 +64,7 @@ public class DatabaseModelManager implements DatabaseModel{
                 //数据库方法：更新数据
             }
             accountList.updateAccount(newAccount);
-            accountList.changePassword(newAccount);
+           // accountList.changePassword(newAccount);
             DataFileContext.updateAccountListData(accountList);
         }
     }

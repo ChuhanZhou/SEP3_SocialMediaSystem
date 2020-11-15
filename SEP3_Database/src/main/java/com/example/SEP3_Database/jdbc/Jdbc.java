@@ -36,7 +36,7 @@ public class Jdbc implements JDBC_interface
             System.out.println(">>Link To SQL: " + dbUrl + " <<<");
             System.out.println(">>User And Password: " + Username + "///" + Password + " <<<");
             stmt = conn.createStatement();
-            System.out.println(">>System Achieved. Database all good<<");
+            System.out.println(">>System Activated. Database all good<<");
         }
         catch (Exception e)
         {
@@ -48,47 +48,70 @@ public class Jdbc implements JDBC_interface
         System.out.println(">>>DeleteDatabase Begin<<<");
         System.out.println("Do you want to delete your database? (Y?N)");
         String a = scanner.nextLine();
-        //Stop at here 1:18
-        try
+        if(a.equals("Y"))
         {
-            executeSQL = "Drop Table UserTable";
-            stmt.executeUpdate(executeSQL);
-            executeSQL = "Drop Table UserSettingTable";
-            stmt.executeUpdate(executeSQL);
+            try
+            {
+                executeSQL = "Drop Table UserTable";
+                stmt.executeUpdate(executeSQL);
+                executeSQL = "Drop Table UserSettingTable";
+                stmt.executeUpdate(executeSQL);
+                System.out.println(">>>DataBase delete successful<<<");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        else {
+            System.out.println("You have exited the delete function");
         }
     }
+
+
+
     public void CreateDataBase()
     {
-        try {
-            executeSQL = "CREATE TABLE `UserSettingTable` (\n" +
-                    "  `UserID` varchar(45) NOT NULL,\n" +
-                    "  `UserNote` varchar(45) DEFAULT NULL,\n" +
-                    "  `DisablePost` tinyint(1) NOT NULL DEFAULT '0',\n" +
-                    "  `UserStatus` varchar(15) NOT NULL,\n" +
-                    "  PRIMARY KEY (`UserID`),\n" +
-                    "  UNIQUE KEY `UserID_UNIQUE` (`UserID`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
-            stmt.executeUpdate(executeSQL);
-            executeSQL = "CREATE TABLE `UserTable` (\n" +
-                    "  `UserId` int(11) NOT NULL,\n" +
-                    "  `UserName` varchar(100) NOT NULL,\n" +
-                    "  `UserPassword` varchar(100) NOT NULL,\n" +
-                    "  `BirthdayMonth` int(11) DEFAULT NULL,\n" +
-                    "  `BirthdayDate` int(11) DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (`UserId`),\n" +
-                    "  UNIQUE KEY `UserId_UNIQUE` (`UserId`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
-            stmt.executeUpdate(executeSQL);
+        System.out.println(">>>Database Creation Begins<<<");
+        System.out.println("Do you want to Create the database? (Y?N)");
+        String a = scanner.nextLine();
+        if(a.equals("Y")) {
+            try {
+                executeSQL = "CREATE TABLE `UserSettingTable` (\n" +
+                        "  `UserID` varchar(45) NOT NULL,\n" +
+                        "  `UserNote` varchar(45) DEFAULT NULL,\n" +
+                        "  `DisablePost` tinyint(1) NOT NULL DEFAULT '0',\n" +
+                        "  `UserStatus` varchar(15) NOT NULL,\n" +
+                        "  PRIMARY KEY (`UserID`),\n" +
+                        "  UNIQUE KEY `UserID_UNIQUE` (`UserID`)\n" +
+                        ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("T1: UserSettingTable");
+                executeSQL = "CREATE TABLE `UserTable` (\n" +
+                        "  `UserId` int(11) NOT NULL,\n" +
+                        "  `UserName` varchar(100) NOT NULL,\n" +
+                        "  `UserPassword` varchar(100) NOT NULL,\n" +
+                        "  `BirthdayMonth` int(11) DEFAULT NULL,\n" +
+                        "  `BirthdayDate` int(11) DEFAULT NULL,\n" +
+                        "  PRIMARY KEY (`UserId`),\n" +
+                        "  UNIQUE KEY `UserId_UNIQUE` (`UserId`)\n" +
+                        ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("T2: UserTable");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        else System.out.println("You have exited the creation function");
     }
+    //自定义
+
+    public void setExecuteSQL(String executeSQL) throws SQLException {
+        this.executeSQL = executeSQL;
+        stmt.executeUpdate(executeSQL);
+    }
+
+
     public void GetAllUserData(){
         //GetAllUserInfoIn upper String
         try
