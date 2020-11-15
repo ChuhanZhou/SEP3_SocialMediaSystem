@@ -82,6 +82,18 @@
             }
         }
 
+        public bool ToAgree()
+        {
+            if (State==FriendSettingState.AGREE||State==FriendSettingState.DISAGREE)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         public void Delete()
         {
             State = FriendSettingState.DELETE;
@@ -91,6 +103,7 @@
         {
             Note = friendSetting.GetNote();
             DisablePost = friendSetting.IsDisablePost();
+            State = friendSetting.GetState();
         }
         
         public FriendSetting Copy() 

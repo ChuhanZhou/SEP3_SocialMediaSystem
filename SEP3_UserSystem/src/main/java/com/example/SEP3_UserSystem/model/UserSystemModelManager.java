@@ -7,6 +7,8 @@ import com.example.SEP3_UserSystem.database.CloudDatabaseModelManager;
 import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.list.userList.FriendList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Friend;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSettingState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -146,7 +148,49 @@ public class UserSystemModelManager implements UserSystemModel
     }
 
     @Override
-    public String addNewFriend() {
+    public String addNewFriend(String id,FriendSetting friendSetting) {
+        String friendId = friendSetting.getId();
+        Account account = accountList.getAccountById(id);
+        if (friendSetting.needAgree())
+        {
+            if (hasId(friendId))
+            {
+                account.getFriendSettingList().addNewFriendSetting(friendSetting);
+                property.firePropertyChange("updateFriendSetting",null,account);
+                accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
+                property.firePropertyChange("updateFriendSetting",null,accountList.getAccountById(friendId));
+                return null;
+            }
+            else
+            {
+                return "Wrong Id";
+            }
+        }
+        else if (friendSetting.toConfirmed())
+        {
+            if (hasId(friendId))
+            {
+                account.getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(friendId).update(friendSetting);
+                property.firePropertyChange("updateFriendSetting",null,account);
+                if (friendSetting.getState()==FriendSettingState.AGREE)
+                {
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(id).setState(true);
+                }
+                else
+                {
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(id).setState(false);
+                }
+                property.firePropertyChange("updateFriendSetting",null,accountList.getAccountById(friendId));
+            }
+            else
+            {
+                return "Wrong Id";
+            }
+        }
+        else
+        {
+            return "Wrong state.";
+        }
         return null;
     }
 

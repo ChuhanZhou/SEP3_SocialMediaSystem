@@ -80,6 +80,18 @@ public class FriendSetting extends User {
         }
     }
 
+    public Boolean toConfirmed()
+    {
+        if (State==FriendSettingState.AGREE||State==FriendSettingState.DISAGREE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void delete()
     {
         State = FriendSettingState.DELETE;
@@ -88,6 +100,7 @@ public class FriendSetting extends User {
     public void update(FriendSetting friendSetting) {
         Note = friendSetting.getNote();
         DisablePost = friendSetting.isDisablePost();
+        State = friendSetting.getState();
     }
 
     public FriendSetting copy() {

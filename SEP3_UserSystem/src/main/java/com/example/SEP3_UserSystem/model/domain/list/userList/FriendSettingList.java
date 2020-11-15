@@ -15,7 +15,7 @@ public class FriendSettingList {
 
     public String addNewFriendSetting(FriendSetting newFriend)
     {
-        if (getFriendSettingById(newFriend.getId())!=null)
+        if (getFriendSettingListByState(FriendSettingState.AGREE).getFriendSettingById(newFriend.getId())!=null)
         {
             return "Friend: " + newFriend.getNote() + "[" + newFriend.getId() + "] is not a new friend.";
         }

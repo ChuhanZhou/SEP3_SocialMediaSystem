@@ -41,6 +41,8 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         connect = true;
         login = false;
         this.userSystemModel.addListener("updateAccount",this);
+        this.userSystemModel.addListener("updateFriendSetting",this);
+
     }
 
     public void close()
@@ -151,11 +153,25 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         break;
                     case SEARCH:
                         SearchPackage searchPackage = gson.fromJson(receive,SearchPackage.class);
-                        
+                        switch (searchPackage.getKeyword())
+                        {
+                            case "hasUser":
+                                sendErrorPackage(String.valueOf(userSystemModel.hasId(searchPackage.getId())));
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     case SETTING:
                         FriendSettingPackage friendSettingPackage = gson.fromJson(receive,FriendSettingPackage.class);
+                        switch (friendSettingPackage.getKeyword())
+                        {
+                            case "addNewFriend":
 
+                                break;
+                            case "":
+                                break;
+                        }
                         break;
                     default:
                         sendErrorPackage("Wrong package.");
@@ -224,6 +240,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     else if (userSystemModel.getAccountById(id).getFriendSettingList().getFriendSettingById(account.getId())!=null)
                     {
                         sendInformationPackage(new FriendPackage(new Friend(account),"update"));
+                    }
+                    break;
+                case "updateFriendSetting":
+                    account = (Account) evt.getNewValue();
+                    if (account.getId().equals(id))
+                    {
+                        sendInformationPackage(new AccountPackage(account.toClient(),"update"));
                     }
                     break;
             }

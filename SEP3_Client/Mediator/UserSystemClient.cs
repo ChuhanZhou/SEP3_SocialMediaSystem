@@ -155,6 +155,25 @@ namespace SEP3_Client.Mediator
             throw new NotImplementedException();
         }
 
+        public async Task<bool> SendSearchPackage(string id, string keyword)
+        {
+            while (sending)
+            {
+                Thread.Sleep(100);
+            }
+            sending = true;
+            isReceive = false;
+            SearchPackage sendPackage = new SearchPackage(id,keyword);
+            string send = JsonSerializer.Serialize(sendPackage);
+            Send(send);
+            while (!isReceive)
+            {
+                Thread.Sleep(100);
+            }
+            sending = false;
+            return bool.Parse(receiveMessage);
+        }
+
         public void Start()
         {
             running = true;
