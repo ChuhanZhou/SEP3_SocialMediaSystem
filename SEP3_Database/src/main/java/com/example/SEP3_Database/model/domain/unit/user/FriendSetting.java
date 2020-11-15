@@ -3,7 +3,7 @@ package com.example.SEP3_Database.model.domain.unit.user;
 public class FriendSetting extends User {
     private String Note;
     private boolean DisablePost;
-    private FriendSettingState State;
+    private FriendSettingStatus Status;
 
     public FriendSetting(String id,String note,boolean disablePost)
     {
@@ -17,13 +17,13 @@ public class FriendSetting extends User {
             Note = note;
         }
         DisablePost = disablePost;
-        State = FriendSettingState.UNCONFIRMED;
+        Status = FriendSettingStatus.UNCONFIRMED;
     }
 
-    private FriendSetting(String id,String note,boolean disablePost,FriendSettingState state)
+    private FriendSetting(String id, String note, boolean disablePost, FriendSettingStatus status)
     {
         this(id,note,disablePost);
-        State = state;
+        Status = status;
     }
 
     public FriendSetting(String id)
@@ -31,7 +31,7 @@ public class FriendSetting extends User {
         super(id);
         Note = null;
         DisablePost = false;
-        State = FriendSettingState.UNCONFIRMED;
+        Status = FriendSettingStatus.UNCONFIRMED;
     }
 
     public String getNote() {
@@ -42,8 +42,8 @@ public class FriendSetting extends User {
         return DisablePost;
     }
 
-    public FriendSettingState getState() {
-        return State;
+    public FriendSettingStatus getStatus() {
+        return Status;
     }
 
     public void setNote(String note) {
@@ -54,23 +54,23 @@ public class FriendSetting extends User {
         DisablePost = disablePost;
     }
 
-    public void setState(boolean agree) {
-        if (State == FriendSettingState.UNCONFIRMED)
+    public void setStatus(boolean agree) {
+        if (Status == FriendSettingStatus.UNCONFIRMED)
         {
             if (agree)
             {
-                State = FriendSettingState.AGREE;
+                Status = FriendSettingStatus.AGREE;
             }
             else
             {
-                State = FriendSettingState.DISAGREE;
+                Status = FriendSettingStatus.DISAGREE;
             }
         }
     }
 
     public Boolean needAgree()
     {
-        if (State==FriendSettingState.UNCONFIRMED&&Note==null)
+        if (Status== FriendSettingStatus.UNCONFIRMED&&Note==null)
         {
             return true;
         }
@@ -80,9 +80,9 @@ public class FriendSetting extends User {
         }
     }
 
-    public Boolean toAgree()
+    public Boolean isConfirmed()
     {
-        if (State==FriendSettingState.AGREE||State==FriendSettingState.DISAGREE)
+        if (Status== FriendSettingStatus.AGREE||Status== FriendSettingStatus.DISAGREE)
         {
             return true;
         }
@@ -94,16 +94,16 @@ public class FriendSetting extends User {
 
     public void delete()
     {
-        State = FriendSettingState.DELETE;
+        Status = FriendSettingStatus.DELETE;
     }
 
     public void update(FriendSetting friendSetting) {
         Note = friendSetting.getNote();
         DisablePost = friendSetting.isDisablePost();
-        State = friendSetting.getState();
+        Status = friendSetting.getStatus();
     }
 
     public FriendSetting copy() {
-        return new FriendSetting(getId(),Note,DisablePost, State);
+        return new FriendSetting(getId(),Note,DisablePost, Status);
     }
 }

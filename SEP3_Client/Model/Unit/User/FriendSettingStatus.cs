@@ -3,7 +3,7 @@
 namespace SEP3_Client.Model.Unit.User
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum FriendSettingState
+    public enum FriendSettingStatus
     {
         AGREE,DISAGREE,UNCONFIRMED,DELETE
     }

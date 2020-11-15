@@ -96,14 +96,18 @@ namespace SEP3_Client.Data
             return account.FriendSettingList.Copy();
         }
 
-        public string UpdateFriendSetting(FriendSetting newFriendSetting)
+        public async Task<string> UpdateFriendSetting(FriendSetting newFriendSetting)
         {
-            throw new System.NotImplementedException();
+            
+            return await userSystemClient.SendFriendSettingPackage(newFriendSetting,"updateFriend");
         }
 
-        public void RemoveFriend(string id)
+        public async Task RemoveFriend(string id)
         {
-            throw new System.NotImplementedException();
+            FriendSetting newFriendSetting = account.GetFriendSettingList()
+                .GetFriendSettingListByStatus(FriendSettingStatus.AGREE).GetFriendSettingById(id).Copy();
+            newFriendSetting.Delete();
+            await userSystemClient.SendFriendSettingPackage(newFriendSetting,"removeFriend");
         }
 
         public Friend GetFriendById(string id)

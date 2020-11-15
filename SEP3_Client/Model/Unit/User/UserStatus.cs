@@ -1,11 +1,11 @@
 ﻿namespace SEP3_Client.Model.Unit.User
 {
-    public class UserState
+    public class UserStatus
     {
         public bool Online { get; set; }
-        public string State { get; set; }
+        public string Status { get; set; }
         
-        public UserState()
+        public UserStatus()
         {
             Online = false;
         }
@@ -13,7 +13,7 @@
         public void Login()
         {
             Online = true;
-            State = "online";
+            Status = "online";
         }
 
         public void Logoff()
@@ -21,14 +21,14 @@
             Online = false;
         }
 
-        public void SetState(string state) {
-            State = state;
+        public void SetStatus(string status) {
+            Status = status;
         }
 
-        public string GetState() {
+        public string GetStatus() {
             if (Online)
             {
-                return "[" + State + "]";
+                return "[" + Status + "]";
             }
             else
             {
@@ -40,12 +40,12 @@
             return Online;
         }
 
-        public UserState Copy()
+        public UserStatus Copy()
         {
-            return new UserState
+            return new UserStatus
             {
                 Online = Online,
-                State = State
+                Status = Status
             };
         }
     }

@@ -167,9 +167,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         switch (friendSettingPackage.getKeyword())
                         {
                             case "addNewFriend":
-
+                                userSystemModel.addNewFriend(id,friendSettingPackage.getFriendSettingList().getFriendSettingByIndex(0))
                                 break;
-                            case "":
+                            case "updateFriend":
+                                userSystemModel.
+                                break;
+                            case "removeFriend":
+
                                 break;
                         }
                         break;
@@ -247,6 +251,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     if (account.getId().equals(id))
                     {
                         sendInformationPackage(new AccountPackage(account.toClient(),"update"));
+                        sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
                     }
                     break;
             }

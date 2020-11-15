@@ -1,7 +1,7 @@
 package com.example.SEP3_Database.model.domain.list.userList;
 
 import com.example.SEP3_Database.model.domain.unit.user.FriendSetting;
-import com.example.SEP3_Database.model.domain.unit.user.FriendSettingState;
+import com.example.SEP3_Database.model.domain.unit.user.FriendSettingStatus;
 
 import java.util.ArrayList;
 
@@ -55,12 +55,12 @@ public class FriendSettingList {
         }
     }
 
-    public FriendSettingList getFriendSettingListByState(FriendSettingState state)
+    public FriendSettingList getFriendSettingListByStatus(FriendSettingStatus status)
     {
         FriendSettingList searchList = new FriendSettingList();
         for (int x=0;x<FriendSettings.size();x++)
         {
-            if (FriendSettings.get(x).getState().equals(state))
+            if (FriendSettings.get(x).getStatus().equals(status))
             {
                 searchList.FriendSettings.add(FriendSettings.get(x));
             }

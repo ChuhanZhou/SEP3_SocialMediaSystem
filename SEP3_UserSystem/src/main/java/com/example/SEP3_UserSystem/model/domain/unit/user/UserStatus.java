@@ -1,24 +1,24 @@
 package com.example.SEP3_UserSystem.model.domain.unit.user;
 
-public class UserState {
+public class UserStatus {
     private boolean Online;
-    private String State;
+    private String Status;
 
-    public UserState()
+    public UserStatus()
     {
         Online = false;
     }
 
-    private UserState(boolean online,String state)
+    private UserStatus(boolean online, String status)
     {
         Online = online;
-        State = state;
+        Status = status;
     }
 
     public void login()
     {
         Online = true;
-        State = "online";
+        Status = "online";
     }
 
     public void logoff()
@@ -26,14 +26,14 @@ public class UserState {
         Online = false;
     }
 
-    public void setState(String state) {
-        State = state;
+    public void setStatus(String status) {
+        Status = status;
     }
 
-    public String getState() {
+    public String getStatus() {
         if (Online)
         {
-            return "[" + State + "]";
+            return "[" + Status + "]";
         }
         else
         {
@@ -45,8 +45,8 @@ public class UserState {
         return Online;
     }
 
-    public UserState copy()
+    public UserStatus copy()
     {
-        return new UserState(Online,State);
+        return new UserStatus(Online,Status);
     }
 }

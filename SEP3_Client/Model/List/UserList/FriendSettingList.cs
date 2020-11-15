@@ -38,12 +38,12 @@ namespace SEP3_Client.Model.List.UserList
             return null;
         }
         
-        public FriendSettingList GetFriendSettingListByState(FriendSettingState state)
+        public FriendSettingList GetFriendSettingListByStatus(FriendSettingStatus status)
         {
             FriendSettingList searchList = new FriendSettingList();
             foreach (var friendSetting in FriendSettings)
             {
-                if (friendSetting.GetState().Equals(state))
+                if (friendSetting.GetStatus().Equals(status))
                 {
                     searchList.FriendSettings.Add(friendSetting);
                 }

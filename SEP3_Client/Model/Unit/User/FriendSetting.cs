@@ -4,7 +4,7 @@
     {
         public string Note { get; set; }
         public bool DisablePost { get; set; }
-        public FriendSettingState State { get; set; }
+        public FriendSettingStatus Status { get; set; }
         
         public FriendSetting(string id,string note,bool disablePost) : base(id)
         {
@@ -17,19 +17,19 @@
             {
                 Note = note;
             }
-            State = FriendSettingState.UNCONFIRMED;
+            Status = FriendSettingStatus.UNCONFIRMED;
         }
 
-        private FriendSetting(string id,string note,bool disablePost,FriendSettingState state) : this(id,note,disablePost)
+        private FriendSetting(string id,string note,bool disablePost,FriendSettingStatus status) : this(id,note,disablePost)
         {
-            State = state;
+            Status = status;
         }
         
         public FriendSetting(string id) : base(id)
         {
             DisablePost = false;
             Note = null;
-            State = FriendSettingState.UNCONFIRMED;
+            Status = FriendSettingStatus.UNCONFIRMED;
         }
 
         public string GetNote() 
@@ -42,8 +42,8 @@
             return DisablePost;
         }
         
-        public FriendSettingState GetState() {
-            return State;
+        public FriendSettingStatus GetStatus() {
+            return Status;
         }
 
         public void SetNote(string note) 
@@ -56,23 +56,23 @@
             DisablePost = disablePost;
         }
         
-        public void SetState(bool agree) {
-            if (State == FriendSettingState.UNCONFIRMED)
+        public void SetStatus(bool agree) {
+            if (Status == FriendSettingStatus.UNCONFIRMED)
             {
                 if (agree)
                 {
-                    State = FriendSettingState.AGREE;
+                    Status = FriendSettingStatus.AGREE;
                 }
                 else
                 {
-                    State = FriendSettingState.DISAGREE;
+                    Status = FriendSettingStatus.DISAGREE;
                 }
             }
         }
 
         public bool NeedAgree()
         {
-            if (State==FriendSettingState.UNCONFIRMED&&Note==null)
+            if (Status==FriendSettingStatus.UNCONFIRMED&&Note==null)
             {
                 return true;
             }
@@ -82,9 +82,9 @@
             }
         }
 
-        public bool ToAgree()
+        public bool IsConfirmed()
         {
-            if (State==FriendSettingState.AGREE||State==FriendSettingState.DISAGREE)
+            if (Status==FriendSettingStatus.AGREE||Status==FriendSettingStatus.DISAGREE)
             {
                 return true;
             }
@@ -96,19 +96,19 @@
         
         public void Delete()
         {
-            State = FriendSettingState.DELETE;
+            Status = FriendSettingStatus.DELETE;
         }
         
         public void Update(FriendSetting friendSetting) 
         {
             Note = friendSetting.GetNote();
             DisablePost = friendSetting.IsDisablePost();
-            State = friendSetting.GetState();
+            Status = friendSetting.GetStatus();
         }
         
         public FriendSetting Copy() 
         {
-            return new FriendSetting(Id,Note,DisablePost,State);
+            return new FriendSetting(Id,Note,DisablePost,Status);
         }
     }
 }

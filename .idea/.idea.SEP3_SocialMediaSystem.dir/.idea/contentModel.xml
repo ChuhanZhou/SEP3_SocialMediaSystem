@@ -46,9 +46,9 @@
               <e p="Birthday.cs" t="Include" />
               <e p="Friend.cs" t="Include" />
               <e p="FriendSetting.cs" t="Include" />
-              <e p="FriendSettingState.cs" t="Include" />
+              <e p="FriendSettingStatus.cs" t="Include" />
               <e p="User.cs" t="Include" />
-              <e p="UserState.cs" t="Include" />
+              <e p="UserStatus.cs" t="Include" />
             </e>
           </e>
         </e>

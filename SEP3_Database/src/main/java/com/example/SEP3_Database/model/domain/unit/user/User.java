@@ -3,12 +3,12 @@ package com.example.SEP3_Database.model.domain.unit.user;
 public abstract class User
 {
     private String Id;
-    private UserState UserState;
+    private UserStatus UserStatus;
 
     public User(String id)
     {
         Id = id;
-        UserState = new UserState();
+        UserStatus = new UserStatus();
     }
 
     public String getId()
@@ -16,11 +16,11 @@ public abstract class User
         return Id;
     }
 
-    public UserState getUserState() {
-        return UserState;
+    public UserStatus getUserStatus() {
+        return UserStatus;
     }
 
-    public void setUserState(UserState userState) {
-        UserState = userState;
+    public void setUserStatus(UserStatus userStatus) {
+        UserStatus = userStatus;
     }
 }

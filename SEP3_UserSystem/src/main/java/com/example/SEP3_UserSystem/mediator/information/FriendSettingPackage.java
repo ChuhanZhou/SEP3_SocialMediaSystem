@@ -18,4 +18,8 @@ public class FriendSettingPackage extends InformationPackage{
         FriendSettingList = new FriendSettingList();
         FriendSettingList.addNewFriendSetting(friendSetting);
     }
+
+    public com.example.SEP3_UserSystem.model.domain.list.userList.FriendSettingList getFriendSettingList() {
+        return FriendSettingList;
+    }
 }

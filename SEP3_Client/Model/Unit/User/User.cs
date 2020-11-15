@@ -3,12 +3,12 @@
     public abstract class  User
     {
         public string Id { get; set; }
-        public UserState UserState { get; set; }
+        public UserStatus UserStatus { get; set; }
 
         public User(string id)
         {
             Id = id;
-            UserState = new UserState();
+            UserStatus = new UserStatus();
         }
 
         public User()
@@ -21,14 +21,14 @@
             return Id;
         }
         
-        public UserState GetUserState() 
+        public UserStatus GetUserStatus() 
         {
-            return UserState;
+            return UserStatus;
         }
 
-        public void SetUserState(UserState userState)
+        public void SetUserStatus(UserStatus userStatus)
         {
-            UserState = userState;
+            UserStatus = userStatus;
         }
     }
 }

@@ -18,8 +18,8 @@ namespace SEP3_Client.Data
         Task<bool> SearchId(string id);
         Task<string> AddNewFriend(FriendSetting newFriendSetting);
         FriendSettingList GetFriendSettingList();
-        string UpdateFriendSetting(FriendSetting newFriendSetting);
-        void RemoveFriend(string id);
+        Task<string> UpdateFriendSetting(FriendSetting newFriendSetting);
+        Task RemoveFriend(string id);
         Friend GetFriendById(string id);
     }
 }

@@ -16,6 +16,7 @@ public interface UserSystemModel extends NamedPropertyChangeSubject
     String changePassword(String id,String oldPassword,String newPassword);
     String changePassword(Account oldAccount,Account newAccount);
     String updateBasicInformation(Account oldAccount,Account newAccount);
+    String updateFriendSetting(FriendSetting newFriendSetting);
     String addNewFriend(String id,FriendSetting friendSetting);
     FriendList getFriendListByAccount(Account account);
     void removeFriend(Account account,String friendId);

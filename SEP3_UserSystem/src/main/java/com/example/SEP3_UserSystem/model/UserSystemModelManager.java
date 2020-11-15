@@ -8,7 +8,7 @@ import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.list.userList.FriendList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Friend;
 import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
-import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSettingState;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSettingStatus;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -59,9 +59,9 @@ public class UserSystemModelManager implements UserSystemModel
         {
             if (targetAccount.checkPassword(password))
             {
-                if (!targetAccount.getUserState().isOnline())
+                if (!targetAccount.getUserStatus().isOnline())
                 {
-                    targetAccount.getUserState().login();
+                    targetAccount.getUserStatus().login();
                     property.firePropertyChange("updateAccount",null,targetAccount);
                     return null;
                 }
@@ -77,7 +77,7 @@ public class UserSystemModelManager implements UserSystemModel
     @Override
     public void logoff(String id) {
         Account targetAccount = accountList.getAccountById(id);
-        targetAccount.getUserState().logoff();
+        targetAccount.getUserStatus().logoff();
         property.firePropertyChange("updateAccount",null,targetAccount);
     }
 
@@ -148,6 +148,18 @@ public class UserSystemModelManager implements UserSystemModel
     }
 
     @Override
+    public String updateFriendSetting(FriendSetting newFriendSetting) {
+        if (newFriendSetting.isConfirmed())
+        {
+
+        }
+        else
+        {
+            return "Wrong status.";
+        }
+    }
+
+    @Override
     public String addNewFriend(String id,FriendSetting friendSetting) {
         String friendId = friendSetting.getId();
         Account account = accountList.getAccountById(id);
@@ -166,19 +178,19 @@ public class UserSystemModelManager implements UserSystemModel
                 return "Wrong Id";
             }
         }
-        else if (friendSetting.toConfirmed())
+        else if (friendSetting.isConfirmed())
         {
             if (hasId(friendId))
             {
-                account.getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(friendId).update(friendSetting);
+                account.getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(friendId).update(friendSetting);
                 property.firePropertyChange("updateFriendSetting",null,account);
-                if (friendSetting.getState()==FriendSettingState.AGREE)
+                if (friendSetting.getStatus()== FriendSettingStatus.AGREE)
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(id).setState(true);
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(true);
                 }
                 else
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByState(FriendSettingState.UNCONFIRMED).getFriendSettingById(id).setState(false);
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(false);
                 }
                 property.firePropertyChange("updateFriendSetting",null,accountList.getAccountById(friendId));
             }
@@ -189,7 +201,7 @@ public class UserSystemModelManager implements UserSystemModel
         }
         else
         {
-            return "Wrong state.";
+            return "Wrong status.";
         }
         return null;
     }
