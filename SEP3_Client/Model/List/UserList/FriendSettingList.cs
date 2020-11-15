@@ -65,11 +65,14 @@ namespace SEP3_Client.Model.List.UserList
         {
             foreach (var friendSetting in FriendSettings)
             {
-                if (friendSetting.GetId().Equals(newFriendSetting.GetId()))
+                if (friendSetting.GetStatus()==FriendSettingStatus.AGREE)
                 {
-                    friendSetting.SetNote(newFriendSetting.GetNote());
-                    friendSetting.SetDisablePost(newFriendSetting.IsDisablePost());
-                    return null;
+                    if (friendSetting.GetId().Equals(newFriendSetting.GetId()))
+                    {
+                        friendSetting.SetNote(newFriendSetting.GetNote());
+                        friendSetting.SetDisablePost(newFriendSetting.IsDisablePost());
+                        return null;
+                    }
                 }
             }
 

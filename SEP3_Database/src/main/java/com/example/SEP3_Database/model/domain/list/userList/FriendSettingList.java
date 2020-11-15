@@ -82,11 +82,14 @@ public class FriendSettingList {
     {
         for (int x = 0; x< FriendSettings.size(); x++)
         {
-            if (FriendSettings.get(x).getId().equals(newFriendSetting.getId()))
+            if (FriendSettings.get(x).getStatus()==FriendSettingStatus.AGREE)
             {
-                FriendSettings.get(x).setNote(newFriendSetting.getNote());
-                FriendSettings.get(x).setDisablePost(newFriendSetting.isDisablePost());
-                return null;
+                if (FriendSettings.get(x).getId().equals(newFriendSetting.getId()))
+                {
+                    FriendSettings.get(x).setNote(newFriendSetting.getNote());
+                    FriendSettings.get(x).setDisablePost(newFriendSetting.isDisablePost());
+                    return null;
+                }
             }
         }
         return "Can't find the friend: " + newFriendSetting.getNote() + "[" + newFriendSetting.getId() + "]";

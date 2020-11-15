@@ -2,6 +2,7 @@ package com.example.SEP3_UserSystem.database;
 
 import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
+import com.example.SEP3_UserSystem.model.domain.unit.user.UserStatus;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -24,6 +25,8 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
     public void addAccount(Account newAccount) {
         try
         {
+            newAccount = newAccount.copy();
+            newAccount.getUserStatus().logoff();
             url = new URL(urlAddress);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -78,6 +81,8 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
     public void updateUser(Account newAccount) {
         try
         {
+            newAccount = newAccount.copy();
+            newAccount.getUserStatus().logoff();
             url = new URL(urlAddress);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");

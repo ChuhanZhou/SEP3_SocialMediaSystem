@@ -148,10 +148,13 @@ public class UserSystemModelManager implements UserSystemModel
     }
 
     @Override
-    public String updateFriendSetting(FriendSetting newFriendSetting) {
-        if (newFriendSetting.isConfirmed())
+    public String updateFriendSetting(String id,FriendSetting newFriendSetting) {
+        if (newFriendSetting.getStatus()==FriendSettingStatus.AGREE)
         {
-
+            String result = accountList.getAccountById(id).getFriendSettingList().updateFriendSetting(newFriendSetting);
+            property.firePropertyChange("updateFriendSetting",null,id);
+            cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+            return result;
         }
         else
         {
@@ -168,9 +171,11 @@ public class UserSystemModelManager implements UserSystemModel
             if (hasId(friendId))
             {
                 account.getFriendSettingList().addNewFriendSetting(friendSetting);
-                property.firePropertyChange("updateFriendSetting",null,account);
+                property.firePropertyChange("updateFriendSetting",null,id);
+                cloudDatabaseModel.updateUser(accountList.getAccountById(id));
                 accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
-                property.firePropertyChange("updateFriendSetting",null,accountList.getAccountById(friendId));
+                property.firePropertyChange("updateFriendSetting",null,friendId);
+                cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
                 return null;
             }
             else
@@ -183,7 +188,8 @@ public class UserSystemModelManager implements UserSystemModel
             if (hasId(friendId))
             {
                 account.getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(friendId).update(friendSetting);
-                property.firePropertyChange("updateFriendSetting",null,account);
+                property.firePropertyChange("updateFriendSetting",null,id);
+                cloudDatabaseModel.updateUser(accountList.getAccountById(id));
                 if (friendSetting.getStatus()== FriendSettingStatus.AGREE)
                 {
                     accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(true);
@@ -192,7 +198,8 @@ public class UserSystemModelManager implements UserSystemModel
                 {
                     accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(false);
                 }
-                property.firePropertyChange("updateFriendSetting",null,accountList.getAccountById(friendId));
+                property.firePropertyChange("updateFriendSetting",null,friendId);
+                cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
             }
             else
             {
@@ -219,8 +226,13 @@ public class UserSystemModelManager implements UserSystemModel
     }
 
     @Override
-    public void removeFriend(Account account, String friendId) {
-
+    public void removeFriend(String id, String friendId) {
+        accountList.getAccountById(id).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.AGREE).getFriendSettingById(friendId).delete();
+        property.firePropertyChange("updateFriendSetting",null,id);
+        cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+        accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.AGREE).getFriendSettingById(id).delete();
+        property.firePropertyChange("updateFriendSetting",null,friendId);
+        cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
     }
 
 

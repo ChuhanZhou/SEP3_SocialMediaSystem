@@ -2,8 +2,10 @@ package com.example.SEP3_UserSystem.mediator;
 
 import com.example.SEP3_UserSystem.mediator.information.*;
 import com.example.SEP3_UserSystem.model.UserSystemModel;
+import com.example.SEP3_UserSystem.model.domain.list.userList.FriendSettingList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Friend;
+import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
 import com.google.gson.Gson;
 
 import java.beans.PropertyChangeEvent;
@@ -164,16 +166,18 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         break;
                     case SETTING:
                         FriendSettingPackage friendSettingPackage = gson.fromJson(receive,FriendSettingPackage.class);
+                        FriendSetting friendSetting = friendSettingPackage.getFriendSettingList().getFriendSettingByIndex(0);
                         switch (friendSettingPackage.getKeyword())
                         {
                             case "addNewFriend":
-                                userSystemModel.addNewFriend(id,friendSettingPackage.getFriendSettingList().getFriendSettingByIndex(0))
+                                sendErrorPackage(userSystemModel.addNewFriend(id,friendSetting));
                                 break;
                             case "updateFriend":
-                                userSystemModel.
+                                sendErrorPackage(userSystemModel.updateFriendSetting(id,friendSetting));
                                 break;
                             case "removeFriend":
-
+                                userSystemModel.removeFriend(id,friendSetting.getId());
+                                sendErrorPackage();
                                 break;
                         }
                         break;
@@ -247,7 +251,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     }
                     break;
                 case "updateFriendSetting":
-                    account = (Account) evt.getNewValue();
+                    account = userSystemModel.getAccountById(String.valueOf(evt.getNewValue()));
                     if (account.getId().equals(id))
                     {
                         sendInformationPackage(new AccountPackage(account.toClient(),"update"));
