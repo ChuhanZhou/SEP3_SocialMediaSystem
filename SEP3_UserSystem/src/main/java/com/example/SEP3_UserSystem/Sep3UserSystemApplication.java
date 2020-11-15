@@ -17,8 +17,6 @@ public class Sep3UserSystemApplication {
 		Thread thread = new Thread(server,"[UserSystemServer]");
 		thread.setDaemon(true);
 		thread.start();
-		FriendSetting friendSetting = new FriendSetting("1","2",false);
-		System.out.println(friendSetting.getState());
 	}
 
 }
