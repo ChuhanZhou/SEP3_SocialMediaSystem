@@ -72,5 +72,4 @@ public abstract class BasicInformation extends User{
         Hometown = basicInformation.Hometown;
         PhoneNumber = basicInformation.PhoneNumber;
     }
-
 }
