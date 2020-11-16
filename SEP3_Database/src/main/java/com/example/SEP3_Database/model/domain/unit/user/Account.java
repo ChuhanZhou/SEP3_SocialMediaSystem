@@ -58,6 +58,14 @@ public class Account extends BasicInformation {
         }
     }
 
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
     public FriendSettingList getFriendSettingList() {
         return FriendSettingList;
     }

@@ -16,6 +16,10 @@ public abstract class User
         return Id;
     }
 
+    public void setId(String id) {
+        Id = id;
+    }
+
     public UserStatus getUserStatus() {
         return UserStatus;
     }
