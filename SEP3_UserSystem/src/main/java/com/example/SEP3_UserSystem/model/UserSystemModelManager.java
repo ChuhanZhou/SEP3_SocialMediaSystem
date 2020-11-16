@@ -146,68 +146,83 @@ public class UserSystemModelManager implements UserSystemModel
 
     @Override
     public String updateFriendSetting(String id,FriendSetting newFriendSetting) {
-        if (newFriendSetting.getStatus()==FriendSettingStatus.AGREE)
+        if (!id.equals(newFriendSetting.getId()))
         {
-            String result = accountList.getAccountById(id).getFriendSettingList().updateFriendSetting(newFriendSetting);
-            property.firePropertyChange("updateFriendSetting",null,id);
-            cloudDatabaseModel.updateUser(accountList.getAccountById(id));
-            return result;
+            if (newFriendSetting.getStatus()==FriendSettingStatus.AGREE)
+            {
+                String result = accountList.getAccountById(id).getFriendSettingList().updateFriendSetting(newFriendSetting);
+                property.firePropertyChange("updateFriendSetting",null,id);
+                cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+                return result;
+            }
+            else
+            {
+                return "Wrong status.";
+            }
         }
         else
         {
-            return "Wrong status.";
+            return "You can't write your own Id";
         }
     }
 
     @Override
     public String addNewFriend(String id,FriendSetting friendSetting) {
-        String friendId = friendSetting.getId();
-        Account account = accountList.getAccountById(id);
-        if (friendSetting.needAgree())
+        if (!id.equals(friendSetting.getId()))
         {
-            if (hasId(friendId))
+            String friendId = friendSetting.getId();
+            Account account = accountList.getAccountById(id);
+            if (friendSetting.needAgree())
             {
-                account.getFriendSettingList().addNewFriendSetting(friendSetting);
-                property.firePropertyChange("updateFriendSetting",null,id);
-                cloudDatabaseModel.updateUser(accountList.getAccountById(id));
-                accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
-                property.firePropertyChange("updateFriendSetting",null,friendId);
-                cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
-                return null;
-            }
-            else
-            {
-                return "Wrong Id";
-            }
-        }
-        else if (friendSetting.isConfirmed())
-        {
-            if (hasId(friendId))
-            {
-                account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).update(friendSetting);
-                property.firePropertyChange("updateFriendSetting",null,id);
-                cloudDatabaseModel.updateUser(accountList.getAccountById(id));
-                if (friendSetting.getStatus()== FriendSettingStatus.AGREE)
+                if (hasId(friendId))
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(true);
+                    account.getFriendSettingList().addNewFriendSetting(friendSetting);
+                    property.firePropertyChange("updateFriendSetting",null,id);
+                    cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+                    accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
+                    property.firePropertyChange("updateFriendSetting",null,friendId);
+                    cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
+                    return null;
                 }
                 else
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(false);
+                    return "Wrong Id";
                 }
-                property.firePropertyChange("updateFriendSetting",null,friendId);
-                cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
+            }
+            else if (friendSetting.isConfirmed())
+            {
+                if (hasId(friendId))
+                {
+                    account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).update(friendSetting);
+                    property.firePropertyChange("updateFriendSetting",null,id);
+                    cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+                    if (friendSetting.getStatus()== FriendSettingStatus.AGREE)
+                    {
+                        accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(true);
+                    }
+                    else
+                    {
+                        accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(false);
+                    }
+                    property.firePropertyChange("updateFriendSetting",null,friendId);
+                    cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
+                    return null;
+                }
+                else
+                {
+                    return "Wrong Id";
+                }
             }
             else
             {
-                return "Wrong Id";
+                return "Wrong status.";
             }
         }
         else
         {
-            return "Wrong status.";
+            return "You can't write your own Id";
         }
-        return null;
+
     }
 
     @Override
