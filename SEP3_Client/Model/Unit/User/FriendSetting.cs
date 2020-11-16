@@ -81,6 +81,18 @@
                 return false;
             }
         }
+        
+        public bool WaitAgree()
+        {
+            if (Status==FriendSettingStatus.UNCONFIRMED&&Note!=null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool IsConfirmed()
         {

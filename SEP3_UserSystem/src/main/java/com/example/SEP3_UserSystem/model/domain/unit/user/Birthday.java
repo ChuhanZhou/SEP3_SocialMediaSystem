@@ -10,6 +10,17 @@ public class Birthday {
         Day = day;
     }
 
+    public Birthday()
+    {
+        Month = 0;
+        Day = 0;
+    }
+
+    public boolean isSet()
+    {
+        return Month!=0&&Day!=0;
+    }
+
     public int getDay() {
         return Day;
     }

@@ -17,7 +17,10 @@ public class Account extends BasicInformation {
         setUserStatus(userStatus);
         FriendSettingList = friendSettingList;
     }
-
+    public String getPasswordForDataBase()
+    {
+        return Password;
+    }
     public boolean checkPassword(String password)
     {
         if (password==null)
@@ -68,7 +71,7 @@ public class Account extends BasicInformation {
 
     public void update(Account account)
     {
-        update(account.getUserName(),account.getBirthday());
+        update(account.getUserName(),account.getBirthday(),account.getGender(),account.getHometown(),account.getPhoneNumber());
         FriendSettingList = account.getFriendSettingList();
     }
 
@@ -79,4 +82,5 @@ public class Account extends BasicInformation {
     public Account toClient() {
         return new Account(getId(),getUserName(),getBirthday(),"",FriendSettingList.copy(),getUserStatus().copy());
     }
+
 }

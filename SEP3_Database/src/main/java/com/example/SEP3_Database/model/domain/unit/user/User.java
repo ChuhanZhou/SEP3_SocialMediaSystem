@@ -15,7 +15,10 @@ public abstract class User
     {
         return Id;
     }
-
+    public void DatabaseSetId(String id)
+    {
+        this.Id = id;
+    }
     public UserStatus getUserStatus() {
         return UserStatus;
     }

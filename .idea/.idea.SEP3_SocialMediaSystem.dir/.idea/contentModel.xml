@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Think\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Think\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem" t="IncludeFlat">
+    <e p="C:\Users\魏佳\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\魏佳\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3_Client" t="IncludeRecursive">
         <e p="_Imports.razor" t="Include" />
@@ -56,17 +56,23 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
               <e p="SEP3_Client.AssemblyInfo.cs" t="Include" />
-              <e p="SEP3_Client.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
         <e p="Pages" t="Include">
           <e p="_Host.cshtml" t="Include" />
+          <e p="Chat.razor" t="Include" />
           <e p="EditProfile.razor" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="FriendList.razor" t="Include" />
+          <e p="FriendProfile.razor" t="Include" />
+          <e p="FriendRequest.razor" t="Include" />
+          <e p="Group.razor" t="Include" />
           <e p="Login.razor" t="Include" />
+          <e p="Moment.razor" t="Include" />
           <e p="Profile.razor" t="Include" />
+          <e p="Request.razor" t="Include" />
+          <e p="Setting.razor" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -105,6 +111,8 @@
             <e p="site.css" t="Include" />
           </e>
           <e p="favicon.ico" t="Include" />
+          <e p="people_multiple_76px_1116527_easyicon.net.png" t="Include" />
+          <e p="user.PNG" t="Include" />
         </e>
       </e>
     </e>

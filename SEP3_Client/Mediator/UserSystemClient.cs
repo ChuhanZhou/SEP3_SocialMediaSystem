@@ -150,9 +150,23 @@ namespace SEP3_Client.Mediator
             return receiveMessage;
         }
 
-        public Task<string> SendFriendSettingPackage(FriendSetting friendSetting, string keyword)
+        public async Task<string> SendFriendSettingPackage(FriendSetting friendSetting, string keyword)
         {
-            throw new NotImplementedException();
+            while (sending)
+            {
+                Thread.Sleep(100);
+            }
+            sending = true;
+            isReceive = false;
+            FriendSettingPackage sendPackage = new FriendSettingPackage(friendSetting,keyword);
+            string send = JsonSerializer.Serialize(sendPackage);
+            Send(send);
+            while (!isReceive)
+            {
+                Thread.Sleep(100);
+            }
+            sending = false;
+            return receiveMessage;
         }
 
         public async Task<bool> SendSearchPackage(string id, string keyword)

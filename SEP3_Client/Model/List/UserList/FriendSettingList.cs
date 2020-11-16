@@ -14,7 +14,7 @@ namespace SEP3_Client.Model.List.UserList
         
         public string AddNewFriendSetting(FriendSetting newFriend)
         {
-            if (GetFriendSettingById(newFriend.GetId())!=null)
+            if (GetFriendSettingFromAgreeById(newFriend.GetId())!=null)
             {
                 return "Friend: " + newFriend.GetNote() + "[" + newFriend.GetId() + "] is not a new friend.";
             }
@@ -25,17 +25,43 @@ namespace SEP3_Client.Model.List.UserList
             }
         }
 
-        public FriendSetting GetFriendSettingById(string id)
+        public FriendSetting GetFriendSettingFromAgreeById(string id)
         {
-            foreach (var friendSetting in FriendSettings)
+            FriendSettingList agreeList = GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+            foreach (var friendSetting in agreeList.FriendSettings)
             {
                 if (friendSetting.GetId().Equals(id))
                 {
                     return friendSetting;
                 }
             }
-
             return null;
+        }
+        
+        public FriendSetting GetFriendSettingFromUnconfirmedById(string id)
+        {
+            FriendSettingList agreeList = GetFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED);
+            foreach (var friendSetting in agreeList.FriendSettings)
+            {
+                if (friendSetting.GetId().Equals(id))
+                {
+                    return friendSetting;
+                }
+            }
+            return null;
+        }
+        
+        public FriendSettingList GetFriendSettingListById(string id)
+        {
+            FriendSettingList friendSettingList = new FriendSettingList();
+            foreach (var friendSetting in FriendSettings)
+            {
+                if (friendSetting.GetId().Equals(id))
+                {
+                    friendSettingList.FriendSettings.Add(friendSetting);
+                }
+            }
+            return friendSettingList;
         }
         
         public FriendSettingList GetFriendSettingListByStatus(FriendSettingStatus status)
@@ -65,11 +91,14 @@ namespace SEP3_Client.Model.List.UserList
         {
             foreach (var friendSetting in FriendSettings)
             {
-                if (friendSetting.GetId().Equals(newFriendSetting.GetId()))
+                if (friendSetting.GetStatus()==FriendSettingStatus.AGREE)
                 {
-                    friendSetting.SetNote(newFriendSetting.GetNote());
-                    friendSetting.SetDisablePost(newFriendSetting.IsDisablePost());
-                    return null;
+                    if (friendSetting.GetId().Equals(newFriendSetting.GetId()))
+                    {
+                        friendSetting.SetNote(newFriendSetting.GetNote());
+                        friendSetting.SetDisablePost(newFriendSetting.IsDisablePost());
+                        return null;
+                    }
                 }
             }
 
