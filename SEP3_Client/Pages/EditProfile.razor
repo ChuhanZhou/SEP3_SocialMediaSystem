@@ -69,10 +69,11 @@
     private int month;
     private int day;
     private bool change;
+    public static EditProfile editProfile;
 
     protected override async Task OnInitializedAsync()
     {
-        Account account = ClientModel.GetAccount().Copy();
+        Account account = ClientModel.GetAccount();
         username = account.GetUserName();
         password = account.Password;
         if (account.Birthday==null)
@@ -86,6 +87,15 @@
             day = account.Birthday.GetDay();
         }
         change = false;
+    }
+
+    public static EditProfile ChangePage()
+    {
+        if (editProfile==null)
+        {
+            editProfile = new EditProfile();
+        }
+        return editProfile;
     }
 
     private List<int> num = new[]

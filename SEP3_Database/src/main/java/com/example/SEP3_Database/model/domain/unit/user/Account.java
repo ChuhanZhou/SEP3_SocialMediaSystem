@@ -17,7 +17,10 @@ public class Account extends BasicInformation {
         setUserStatus(userStatus);
         FriendSettingList = friendSettingList;
     }
-
+    public String getPasswordForDataBase()
+    {
+        return Password;
+    }
     public boolean checkPassword(String password)
     {
         if (password==null)
@@ -87,4 +90,5 @@ public class Account extends BasicInformation {
     public Account toClient() {
         return new Account(getId(),getUserName(),getBirthday(),"",FriendSettingList.copy(),getUserStatus().copy());
     }
+
 }

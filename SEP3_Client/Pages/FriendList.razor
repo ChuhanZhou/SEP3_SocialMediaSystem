@@ -1,6 +1,123 @@
 ﻿@page "/FriendList"
-<h3>FriendList</h3>
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Friend List</h1>
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 400px;
+         margin: auto;
+         ">
+        <div style="text-align: left; width: 220px; height: 40px;">
+            <span class="oi oi-people" style="background-color: #86cfda;color: white;width: 40px;height: 40px;
+                  float: left;font-size: x-large;line-height:40px;text-align: center "></span>
+            <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+                                                   font-size: 25px;" @onclick="addGroup">Group Chat</button>
+        </div>
+        <br/>
+        <div style="text-align: left; width: 220px; height: 40px;">
+             <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
+             float: left;font-size: x-large;line-height:40px;text-align: center "></span>
+             <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+             font-size: 25px;" @onclick="addFriend">Friend request</button>
+         </div>
+        <br/>
+        <p>
+            <span class="oi oi-magnifying-glass"></span>
+            <input type="text" placeholder="AccountID" style="width:200px" @id/>
+            <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" @onclick="search"></button>
+        </p>
+        @if (friendsToshow == null)
+        {
+            <p>
+                <em>Loading</em>
+            </p>
+        }
+        else
+        {
+            if (!friendsToshow.GetFriendSettingList().Any())
+            {
+                <p>
+                    <em>No friends in the list...</em>
+                </p>
+            }
+            else
+            {
+                <table class="table">
+                    <tbody>
+                    @foreach (var friend in friendsToshow.GetFriendSettingList())
+                    {
+                        <tr>
+                            <td>
+                                <img src="user.PNG" width="40px" height="40px">
+                                @if (string.IsNullOrEmpty(getNote(friend.Id)))
+                                {
+                                    @getUserName(friend.Id)
+                                }
+                                else
+                                {
+                                    @getNote(friend.Id)
+                                }
+                            </td>
+                            <td>
+                                <button>
+                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="seeFriendProfile()"/>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+
+        }
+    </div>
+</div>
 
 @code {
+    private FriendSettingList friendsToshow;
+    private FriendSettingList allFriends;
+    private string id;
+    private string nickName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        friendsToshow = allFriends;
+    }
+
+    private string getUserName(string id)
+    {
+        return nickName=ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private string getNote(string id)
+    {
+        return nickName=ClientModel.GetFriendById("").GetUserName();
+    }
+
+    private void search()
+    {
+        friendsToshow = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE).GetFriendSettingById(id);
+    }
+
+    private void addFriend()
+    {
+        NavigationManager.NavigateTo("/FriendRequest");
+    }
+
+    private void addGroup()
+    {
+        NavigationManager.NavigateTo("/Group");
+    }
     
+    
+
+    private void seeFriendProfile()
+    {
+        NavigationManager.NavigateTo("/FriendProfile");
+    }
 }

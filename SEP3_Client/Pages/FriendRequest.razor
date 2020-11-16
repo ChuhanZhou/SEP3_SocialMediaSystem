@@ -1,0 +1,127 @@
+﻿@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
+@page "/FriendRequest"
+@inject IClientModel ClientModel
+@inject NavigationManager NavigationManager
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+           Back
+        </button>
+        <p>
+            <span class="oi oi-magnifying-glass"></span>
+            <input type="text" placeholder="Account" style="width:400px"/>
+            <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" 
+                    @onclick="sendRequest"></button>
+        </p>
+         <div style="color: red">
+             @error
+         </div>
+                
+         @if (friendRequests == null)
+          {
+              <p>
+                  <em>Loading</em>
+              </p>
+          }
+          else
+          {
+              if (!friendRequests.GetFriendSettingList().Any())
+              {
+                  <p>
+                      <em>No friend request in the list...</em>
+                  </p>
+              }
+              else
+              {
+                  <table class="table">
+                      <tbody>
+                      @foreach (var request in friendRequests.GetFriendSettingList())
+                      {
+                          <tr>
+                              <td>
+                                  <img src="user.PNG" width="40px" height="40px">
+                                  @request.GetId()
+                              </td>
+                              <td>
+                                  @if (request.NeedAgree())
+                                  {
+                                      @if (click.Equals(false))
+                                      {
+                                          <button @onclick="@(()=>changeStatusTo(request.Id,true))">Confirm</button>
+                                          <button @onclick="@(()=>changeStatusTo(request.Id,false))">Delete</button>
+                                      }
+                                      else
+                                      {
+                                          @showStatus(request.Id)
+                                      }
+                                  }
+                                  else
+                                  {
+                                      @showStatus(request.GetId())
+                                  }
+
+                              </td>
+                          </tr>
+                      }
+                      </tbody>
+                  </table>
+              }
+         
+          }
+    </div>
+</div>
+
+@code {
+    private FriendSettingList friendRequests;
+    public static FriendRequest friendRequest;
+    private string error;
+    private string status;
+    private bool click;
+
+    protected override async Task OnInitializedAsync()
+    {
+        friendRequests =  ClientModel.GetFriendSettingList();
+        click = false;
+    }
+
+    public static FriendRequest GetPage()
+    {
+        if (friendRequest==null)
+        {
+            friendRequest = new FriendRequest();
+        }
+        return friendRequest;
+    }
+
+    private void sendRequest()
+    {
+        NavigationManager.NavigateTo("/Request");
+    }
+
+    private string showStatus(string id)
+    {
+        return status = friendRequests.GetFriendSettingById(id).GetStatus().ToString();
+    }
+
+    private void changeStatusTo(string id, bool tOrF)
+    {
+        click = true;
+        FriendSetting a = new FriendSetting(id);
+        a.SetStatus(tOrF);
+        ClientModel.UpdateFriendSetting(a);
+    }
+
+    private void back()
+    {
+        
+        NavigationManager.NavigateTo("/FriendList");
+    }
+    
+    
+}
