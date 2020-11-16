@@ -1,0 +1,60 @@
+﻿@page "/Request"
+@using SEP3_Client.Data
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+            Back
+        </button>
+        <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Friend Request</h1>
+        <div style="border: 2px solid black; border-radius: 8px;width: 500px;padding: 10px;height: auto;
+        text-align: center;margin: auto">
+            <div style="font-size: 30px;text-align: left">
+                <img src="user.PNG" width="50px" height="50px">@account
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: left">
+                Remark name: <input type="text" @nickname/>
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: left">
+                Root of viewing own posts: 
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=root>
+                    <option>True</option>
+                    <option>False</option></select>
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: right; height: 30px">
+                <button class="btn btn-outline-dark" style="float: right; width:auto;height: auto;border-radius: 15px; color: #007bff;" 
+                        type="submit" @onclick="clickSend">Send</button>
+            </div>
+            </div>
+    </div>
+</div>
+
+@code {
+    private string account;
+    private string username;
+    private string nickname;
+    private string root;
+
+    protected override async Task OnInitializedAsync()
+    {
+        root = "true";
+    }
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendRequest");
+    }
+
+    private void clickSend()
+    {
+        NavigationManager.NavigateTo("/FriendRequest");
+    }
+}
