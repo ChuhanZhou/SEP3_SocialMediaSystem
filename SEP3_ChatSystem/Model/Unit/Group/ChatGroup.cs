@@ -2,20 +2,20 @@
 
 namespace SEP3_ChatSystem.Model.Unit.Group
 {
-    public class Group
+    public class ChatGroup
     {
         public string GroupId { get; set; }
         public string CreatorId { get; set; }
         public List<string> AccountIdList { get; set; }
 
-        public Group(string groupId, string creatorId)
+        public ChatGroup(string groupId, string creatorId)
         {
             GroupId = groupId;
             CreatorId = creatorId;
             AccountIdList = new List<string> {creatorId};
         }
         
-        public Group() {}
+        public ChatGroup() {}
 
         public string AddAccountId(string id)
         {
@@ -47,9 +47,9 @@ namespace SEP3_ChatSystem.Model.Unit.Group
             AccountIdList.Remove(id);
         }
 
-        public Group Copy()
+        public ChatGroup Copy()
         {
-            return new Group
+            return new ChatGroup
             {
                 GroupId = GroupId,
                 CreatorId = CreatorId,

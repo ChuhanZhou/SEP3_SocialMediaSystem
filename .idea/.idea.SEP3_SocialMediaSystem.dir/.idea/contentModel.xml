@@ -15,6 +15,9 @@
         <e p="Mediator" t="Include" />
         <e p="Model" t="Include">
           <e p="List" t="Include">
+            <e p="Group" t="Include">
+              <e p="ChatGroupList.cs" t="Include" />
+            </e>
             <e p="Message" t="Include">
               <e p="GroupMessageList.cs" t="Include" />
               <e p="PrivateMessageList.cs" t="Include" />
@@ -22,7 +25,7 @@
           </e>
           <e p="Unit" t="Include">
             <e p="Group" t="Include">
-              <e p="Group.cs" t="Include" />
+              <e p="ChatGroup.cs" t="Include" />
             </e>
             <e p="Message" t="Include">
               <e p="GroupMessage.cs" t="Include" />
