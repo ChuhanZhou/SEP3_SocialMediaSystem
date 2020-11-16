@@ -8,7 +8,7 @@ namespace SEP3_Client.Model.Unit.User
         public Birthday Birthday { get; set; }
         public char Gender { get; set; }
         public string Hometown { get; set; }
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
         public BasicInformation(string id,string userName) : base(id)
         {
@@ -19,7 +19,7 @@ namespace SEP3_Client.Model.Unit.User
             PhoneNumber = -1;
         }
 
-        public BasicInformation(string id,string userName, Birthday birthday, char gender, string homeTown, int phoneNumber) :
+        public BasicInformation(string id,string userName, Birthday birthday, char gender, string homeTown, long phoneNumber) :
             base(id)
         {
             UserName = userName;
@@ -74,17 +74,17 @@ namespace SEP3_Client.Model.Unit.User
             Hometown = homeTown;
         }
 
-        public int GetPhoneNumber() 
+        public long GetPhoneNumber() 
         {
             return PhoneNumber;
         }
 
-        public void SetPhoneNumber(int phoneNumber) 
+        public void SetPhoneNumber(long phoneNumber) 
         {
             PhoneNumber = phoneNumber;
         }
 
-        public void Update(string userName,Birthday birthday,char gender,string homeTown,int phoneNumber) 
+        public void Update(string userName,Birthday birthday,char gender,string homeTown,long phoneNumber) 
         {
             UserName = userName;
             Birthday = birthday;

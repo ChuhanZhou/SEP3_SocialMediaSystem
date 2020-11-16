@@ -18,7 +18,7 @@ namespace SEP3_Client.Model.Unit.User
             
         }
         
-        private Account(string id, string userName, Birthday birthday, char gender, string homeTown, int phoneNumber, string password, FriendSettingList friendSettingList,UserStatus userStatus) : this(id, userName, password)
+        private Account(string id, string userName, Birthday birthday, char gender, string homeTown, long phoneNumber, string password, FriendSettingList friendSettingList,UserStatus userStatus) : this(id, userName, password)
         {
             SetBirthday(birthday);
             SetGender(gender);
