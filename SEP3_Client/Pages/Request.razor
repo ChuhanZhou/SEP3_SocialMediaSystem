@@ -1,5 +1,6 @@
 ﻿@page "/Request"
 @using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
@@ -15,7 +16,7 @@
         <div style="border: 2px solid black; border-radius: 8px;width: 500px;padding: 10px;height: auto;
         text-align: center;margin: auto">
             <div style="font-size: 30px;text-align: left">
-                <img src="user.PNG" width="50px" height="50px">@account
+                <img src="user.PNG" width="50px" height="50px">@accountID
             </div>
             <br/>
             <div style="font-size: 20px;text-align: left">
@@ -24,9 +25,13 @@
             <br/>
             <div style="font-size: 20px;text-align: left">
                 Root of viewing own posts: 
-                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=root>
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="root">
                     <option>True</option>
                     <option>False</option></select>
+            </div>
+            <br/>
+            <div style="color: red">
+                @error
             </div>
             <br/>
             <div style="font-size: 20px;text-align: right; height: 30px">
@@ -38,16 +43,18 @@
 </div>
 
 @code {
-    private string account;
-    private string username;
+    private string accountID;
     private string nickname;
-    private string root;
+    private bool root;
+    private string error;
 
     protected override async Task OnInitializedAsync()
     {
-        root = "true";
+        root = true;
+        accountID = FriendRequest.friendRequest.requestID;
+        error = null;
     }
-
+  
     private void back()
     {
         NavigationManager.NavigateTo("/FriendRequest");
@@ -55,6 +62,16 @@
 
     private void clickSend()
     {
-        NavigationManager.NavigateTo("/FriendRequest");
+        if (ClientModel.GetAccount().GetId()!=accountID&&ClientModel.GetFriendById(accountID)==null)
+        {
+            FriendSetting friendSetting = new FriendSetting(accountID,nickname,root);
+            ClientModel.AddNewFriend(friendSetting);
+            NavigationManager.NavigateTo("/FriendRequest");
+        }
+        else
+        {
+            error = "You already have this friend...";
+        }
+        
     }
 }
