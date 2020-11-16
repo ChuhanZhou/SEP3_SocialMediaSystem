@@ -1,14 +1,11 @@
 package com.example.SEP3_UserSystem.model;
 
 import com.example.SEP3_UserSystem.model.domain.list.userList.FriendSettingList;
-import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
+import com.example.SEP3_UserSystem.model.domain.unit.user.*;
 import com.example.SEP3_UserSystem.database.CloudDatabaseModel;
 import com.example.SEP3_UserSystem.database.CloudDatabaseModelManager;
 import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.list.userList.FriendList;
-import com.example.SEP3_UserSystem.model.domain.unit.user.Friend;
-import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSetting;
-import com.example.SEP3_UserSystem.model.domain.unit.user.FriendSettingStatus;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -136,7 +133,7 @@ public class UserSystemModelManager implements UserSystemModel
     public String updateBasicInformation(Account oldAccount, Account newAccount) {
         if (hasId(oldAccount.getId()))
         {
-            accountList.getAccountById(oldAccount.getId()).update(newAccount.getUserName(),newAccount.getBirthday());
+            accountList.getAccountById(oldAccount.getId()).update(((BasicInformation) newAccount));
             property.firePropertyChange("updateAccount",null,accountList.getAccountById(oldAccount.getId()));
             cloudDatabaseModel.updateUser(accountList.getAccountById(oldAccount.getId()));
             return null;

@@ -5,7 +5,7 @@ public abstract class BasicInformation extends User{
     private Birthday Birthday;
     private char Gender;
     private String Hometown;
-    private int PhoneNumber;
+    private long PhoneNumber;
 
     public BasicInformation(String id, String userName)
     {
@@ -49,7 +49,7 @@ public abstract class BasicInformation extends User{
         Hometown = hometown;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return PhoneNumber;
     }
 
@@ -57,11 +57,19 @@ public abstract class BasicInformation extends User{
         PhoneNumber = phoneNumber;
     }
 
-    public void update(String userName, Birthday birthday, char gender, String homeTown, int phoneNumber) {
+    public void update(String userName, Birthday birthday, char gender, String homeTown, long phoneNumber) {
         UserName = userName;
         Birthday = birthday;
         Gender = gender;
         Hometown = homeTown;
         PhoneNumber = phoneNumber;
+    }
+
+    public void update(BasicInformation basicInformation) {
+        UserName = basicInformation.UserName;
+        Birthday = basicInformation.Birthday;
+        Gender = basicInformation.Gender;
+        Hometown = basicInformation.Hometown;
+        PhoneNumber = basicInformation.PhoneNumber;
     }
 }

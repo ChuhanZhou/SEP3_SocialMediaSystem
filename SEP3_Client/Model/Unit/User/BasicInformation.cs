@@ -92,5 +92,13 @@ namespace SEP3_Client.Model.Unit.User
             Hometown = homeTown;
             PhoneNumber = phoneNumber;
         }
+        
+        public void Update(BasicInformation basicInformation) {
+            UserName = basicInformation.UserName;
+            Birthday = basicInformation.Birthday;
+            Gender = basicInformation.Gender;
+            Hometown = basicInformation.Hometown;
+            PhoneNumber = basicInformation.PhoneNumber;
+        }
     }
 }
