@@ -16,7 +16,7 @@ namespace SEP3_Client.Model.Unit.User
 
         public void Update(Friend friend) 
         {
-            Update(friend.GetUserName(),friend.GetBirthday());
+            Update(friend.GetUserName(),friend.GetBirthday(),friend.Gender,friend.Hometown,friend.PhoneNumber);
         }
         
         public Friend Copy() 

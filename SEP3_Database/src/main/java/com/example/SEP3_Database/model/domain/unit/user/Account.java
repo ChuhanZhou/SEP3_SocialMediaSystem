@@ -68,7 +68,7 @@ public class Account extends BasicInformation {
 
     public void update(Account account)
     {
-        update(account.getUserName(),account.getBirthday());
+        update(account.getUserName(),account.getBirthday(),account.getGender(),account.getHometown(),account.getPhoneNumber());
         FriendSettingList = account.getFriendSettingList();
     }
 

@@ -6,11 +6,27 @@ namespace SEP3_Client.Model.Unit.User
     {
         public string UserName { get; set; }
         public Birthday Birthday { get; set; }
-        
+        public char Gender { get; set; }
+        public string Hometown { get; set; }
+        public int PhoneNumber { get; set; }
+
         public BasicInformation(string id,string userName) : base(id)
         {
             UserName = userName;
             Birthday = new Birthday();
+            Gender = ' ';
+            Hometown = "";
+            PhoneNumber = -1;
+        }
+
+        public BasicInformation(string id,string userName, Birthday birthday, char gender, string homeTown, int phoneNumber) :
+            base(id)
+        {
+            UserName = userName;
+            Birthday = birthday;
+            Gender = gender;
+            Hometown = homeTown;
+            PhoneNumber = phoneNumber;
         }
 
         public BasicInformation()
@@ -37,11 +53,44 @@ namespace SEP3_Client.Model.Unit.User
         {
             Birthday = birthday;
         }
+        
+        public char GetGender() 
+        {
+            return Gender;
+        }
 
-        public void Update(string userName,Birthday birthday) 
+        public void SetGender(char gender) 
+        {
+            Gender = gender;
+        }
+        
+        public string GetHomeTown() 
+        {
+            return Hometown;
+        }
+
+        public void SetHomeTown(string homeTown) 
+        {
+            Hometown = homeTown;
+        }
+
+        public int GetPhoneNumber() 
+        {
+            return PhoneNumber;
+        }
+
+        public void SetPhoneNumber(int phoneNumber) 
+        {
+            PhoneNumber = phoneNumber;
+        }
+
+        public void Update(string userName,Birthday birthday,char gender,string homeTown,int phoneNumber) 
         {
             UserName = userName;
             Birthday = birthday;
+            Gender = gender;
+            Hometown = homeTown;
+            PhoneNumber = phoneNumber;
         }
     }
 }

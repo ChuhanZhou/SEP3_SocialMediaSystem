@@ -187,16 +187,16 @@ public class UserSystemModelManager implements UserSystemModel
         {
             if (hasId(friendId))
             {
-                account.getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(friendId).update(friendSetting);
+                account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).update(friendSetting);
                 property.firePropertyChange("updateFriendSetting",null,id);
                 cloudDatabaseModel.updateUser(accountList.getAccountById(id));
                 if (friendSetting.getStatus()== FriendSettingStatus.AGREE)
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(true);
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(true);
                 }
                 else
                 {
-                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED).getFriendSettingById(id).setStatus(false);
+                    accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromUnconfirmedById(id).setStatus(false);
                 }
                 property.firePropertyChange("updateFriendSetting",null,friendId);
                 cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
@@ -227,10 +227,10 @@ public class UserSystemModelManager implements UserSystemModel
 
     @Override
     public void removeFriend(String id, String friendId) {
-        accountList.getAccountById(id).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.AGREE).getFriendSettingById(friendId).delete();
+        accountList.getAccountById(id).getFriendSettingList().getFriendSettingFromAgreeById(friendId).delete();
         property.firePropertyChange("updateFriendSetting",null,id);
         cloudDatabaseModel.updateUser(accountList.getAccountById(id));
-        accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.AGREE).getFriendSettingById(id).delete();
+        accountList.getAccountById(friendId).getFriendSettingList().getFriendSettingFromAgreeById(id).delete();
         property.firePropertyChange("updateFriendSetting",null,friendId);
         cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
     }

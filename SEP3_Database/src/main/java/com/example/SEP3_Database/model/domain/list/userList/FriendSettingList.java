@@ -15,7 +15,7 @@ public class FriendSettingList {
 
     public String addNewFriendSetting(FriendSetting newFriend)
     {
-        if (getFriendSettingById(newFriend.getId())!=null)
+        if (getFriendSettingFromAgreeById(newFriend.getId())!=null)
         {
             return "Friend: " + newFriend.getNote() + "[" + newFriend.getId() + "] is not a new friend.";
         }
@@ -31,16 +31,43 @@ public class FriendSettingList {
         return FriendSettings.size();
     }
 
-    public FriendSetting getFriendSettingById(String id)
+    public FriendSetting getFriendSettingFromAgreeById(String id)
     {
-        for (int x = 0; x< FriendSettings.size(); x++)
+        FriendSettingList agreeList = getFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        for (int x=0;x<agreeList.getSize();x++)
         {
-            if (FriendSettings.get(x).getId().equals(id))
+            if (agreeList.getFriendSettingByIndex(x).getId().equals(id))
             {
-                return FriendSettings.get(x);
+                return agreeList.getFriendSettingByIndex(x);
             }
         }
         return null;
+    }
+
+    public FriendSetting getFriendSettingFromUnconfirmedById(String id)
+    {
+        FriendSettingList agreeList = getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED);
+        for (int x=0;x<agreeList.getSize();x++)
+        {
+            if (agreeList.getFriendSettingByIndex(x).getId().equals(id))
+            {
+                return agreeList.getFriendSettingByIndex(x);
+            }
+        }
+        return null;
+    }
+
+    public FriendSettingList getFriendSettingListById(String id)
+    {
+        FriendSettingList friendSettingList = new FriendSettingList();
+        for (int x=0;x<FriendSettings.size();x++)
+        {
+            if (FriendSettings.get(x).getId().equals(id))
+            {
+                friendSettingList.FriendSettings.add(FriendSettings.get(x));
+            }
+        }
+        return friendSettingList;
     }
 
     public FriendSetting getFriendSettingByIndex(int index)

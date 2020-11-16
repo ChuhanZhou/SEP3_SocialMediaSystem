@@ -18,10 +18,13 @@ namespace SEP3_Client.Model.Unit.User
             
         }
         
-        private Account(string id, string userName, Birthday birthday, string password, FriendSettingList friendSettingList,UserStatus userStatus) : this(id, userName, password)
+        private Account(string id, string userName, Birthday birthday, char gender, string homeTown, int phoneNumber, string password, FriendSettingList friendSettingList,UserStatus userStatus) : this(id, userName, password)
         {
             SetBirthday(birthday);
-            SetUserStatus(UserStatus);
+            SetGender(gender);
+            SetHomeTown(homeTown);
+            SetPhoneNumber(phoneNumber);
+            SetUserStatus(userStatus);
             FriendSettingList = friendSettingList;
         }
 
@@ -71,13 +74,13 @@ namespace SEP3_Client.Model.Unit.User
 
         public void Update(Account account)
         {
-            Update(account.GetUserName(),account.GetBirthday());
+            Update(account.UserName,account.Birthday,account.Gender,account.Hometown,account.PhoneNumber);
             FriendSettingList = account.GetFriendSettingList();
         }
         
         public Account Copy() 
         {
-            return new Account(GetId(),GetUserName(),GetBirthday(),Password,FriendSettingList.Copy(),UserStatus.Copy());
+            return new Account(GetId(),GetUserName(),GetBirthday(),Gender,Hometown,PhoneNumber,Password,FriendSettingList.Copy(),UserStatus.Copy());
         }
     }
 }
