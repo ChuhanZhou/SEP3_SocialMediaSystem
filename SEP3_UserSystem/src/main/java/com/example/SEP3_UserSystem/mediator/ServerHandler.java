@@ -245,7 +245,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     {
                         sendInformationPackage(new AccountPackage(account.toClient(),"update"));
                     }
-                    else if (userSystemModel.getAccountById(id).getFriendSettingList().getFriendSettingById(account.getId())!=null)
+                    else if (userSystemModel.getAccountById(id).getFriendSettingList().getFriendSettingFromAgreeById(account.getId())!=null)
                     {
                         sendInformationPackage(new FriendPackage(new Friend(account),"update"));
                     }

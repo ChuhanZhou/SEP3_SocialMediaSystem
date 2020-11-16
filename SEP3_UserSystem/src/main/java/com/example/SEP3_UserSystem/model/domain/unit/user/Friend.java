@@ -13,7 +13,7 @@ public class Friend extends BasicInformation {
     }
 
     public void update(Friend friend) {
-        update(friend.getUserName(),friend.getBirthday());
+        update(friend.getUserName(),friend.getBirthday(),friend.getGender(),friend.getHometown(),friend.getPhoneNumber());
     }
 
     public Friend copy() {

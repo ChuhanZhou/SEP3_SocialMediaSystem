@@ -106,8 +106,7 @@ namespace SEP3_Client.Data
 
         public async Task RemoveFriend(string id)
         {
-            FriendSetting newFriendSetting = account.GetFriendSettingList()
-                .GetFriendSettingListByStatus(FriendSettingStatus.AGREE).GetFriendSettingById(id).Copy();
+            FriendSetting newFriendSetting = account.GetFriendSettingList().GetFriendSettingFromAgreeById(id).Copy();
             newFriendSetting.Delete();
             await userSystemClient.SendFriendSettingPackage(newFriendSetting,"removeFriend");
         }

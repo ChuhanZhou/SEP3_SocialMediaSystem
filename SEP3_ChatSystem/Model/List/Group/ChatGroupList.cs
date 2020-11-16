@@ -14,15 +14,27 @@ namespace SEP3_ChatSystem.Model.List.Group
 
         public string AddNewGroup(ChatGroup newGroup)
         {
-            if (expr)
+            if (!HasGroupId(newGroup.GroupId))
             {
-                
+                GroupList.Add(newGroup);
+                return null;
+            }
+            else
+            {
+                return "This is not a new group";
             }
         }
 
-        public bool HasId(string id)
+        public bool HasGroupId(string id)
         {
-            
+            foreach (var group in GroupList)
+            {
+                if (group.GroupId==id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
