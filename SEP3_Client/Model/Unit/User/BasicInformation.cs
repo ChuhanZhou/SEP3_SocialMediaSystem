@@ -10,6 +10,7 @@ namespace SEP3_Client.Model.Unit.User
         public BasicInformation(string id,string userName) : base(id)
         {
             UserName = userName;
+            Birthday = new Birthday();
         }
 
         public BasicInformation()

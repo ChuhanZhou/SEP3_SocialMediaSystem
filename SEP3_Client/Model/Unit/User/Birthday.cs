@@ -11,8 +11,16 @@
             Day = day;
         }
 
-        public Birthday() {}
+        public Birthday()
+        {
+            Month = 0;
+            Day = 0;
+        }
 
+        public bool IsSet()
+        {
+            return Month!=0&&Day!=0;
+        }
         public int GetDay() {
             return Day;
         }

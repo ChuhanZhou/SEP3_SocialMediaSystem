@@ -48,6 +48,8 @@ namespace SEP3_Client.Data
         public void Logoff()
         {
             userSystemClient.SendAccountPackage(account, "logoff");
+            userSystemClient.Disconnect();
+            FunctionTypes.Remove(FunctionType.UserSystem);
         }
 
         public string Register(string userName, string password)

@@ -8,6 +8,7 @@ public abstract class BasicInformation extends User{
     {
         super(id);
         UserName = userName;
+        Birthday = new Birthday();
     }
 
     public String getUserName() {
