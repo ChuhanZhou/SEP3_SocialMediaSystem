@@ -14,6 +14,12 @@
         <e p="Data" t="Include" />
         <e p="Mediator" t="Include" />
         <e p="Model" t="Include">
+          <e p="List" t="Include">
+            <e p="Message" t="Include">
+              <e p="GroupMessageList.cs" t="Include" />
+              <e p="PrivateMessageList.cs" t="Include" />
+            </e>
+          </e>
           <e p="Unit" t="Include">
             <e p="Group" t="Include">
               <e p="Group.cs" t="Include" />

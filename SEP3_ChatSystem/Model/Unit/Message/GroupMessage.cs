@@ -9,5 +9,19 @@
         {
             GroupId = groupId;
         }
+        
+        public GroupMessage() {}
+        
+        public GroupMessage Copy()
+        {
+            return new GroupMessage
+            {
+                MessageInfo = MessageInfo,
+                MessageType = MessageType,
+                SenderId = SenderId,
+                Time = Time,
+                GroupId = GroupId
+            };
+        }
     }
 }

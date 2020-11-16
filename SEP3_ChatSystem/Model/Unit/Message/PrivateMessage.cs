@@ -9,5 +9,19 @@
         {
             ReceiverId = receiverId;
         }
+        
+        public PrivateMessage() {}
+
+        public PrivateMessage Copy()
+        {
+            return new PrivateMessage
+            {
+                MessageInfo = MessageInfo,
+                MessageType = MessageType,
+                SenderId = SenderId,
+                Time = Time,
+                ReceiverId = ReceiverId
+            };
+        }
     }
 }
