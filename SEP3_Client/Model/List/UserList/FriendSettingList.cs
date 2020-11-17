@@ -14,15 +14,20 @@ namespace SEP3_Client.Model.List.UserList
         
         public string AddNewFriendSetting(FriendSetting newFriend)
         {
-            if (GetFriendSettingFromAgreeById(newFriend.GetId())!=null)
+            if (newFriend!=null)
             {
-                return "Friend: " + newFriend.GetNote() + "[" + newFriend.GetId() + "] is not a new friend.";
+                if (GetFriendSettingFromAgreeById(newFriend.GetId())!=null)
+                {
+                    return "Friend: " + newFriend.GetNote() + "[" + newFriend.GetId() + "] is not a new friend.";
+                }
+                else
+                {
+                    FriendSettings.Add(newFriend);
+                    return null;
+                }
             }
-            else
-            {
-                FriendSettings.Add(newFriend);
-                return null;
-            }
+
+            return "Input null.";
         }
 
         public FriendSetting GetFriendSettingFromAgreeById(string id)
