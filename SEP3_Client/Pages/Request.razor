@@ -43,7 +43,7 @@
 </div>
 
 @code {
-    private string accountID;
+    public static string accountID;
     private string nickname;
     private bool root;
     private string error;
@@ -51,7 +51,6 @@
     protected override async Task OnInitializedAsync()
     {
         root = false;
-        accountID = FriendRequest.GetPage().requestID;
         error = null;
     }
   

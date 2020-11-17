@@ -132,3 +132,5 @@ C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\ne
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Moment.razor.g.cs
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Request.razor.g.cs
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Setting.razor.g.cs
+C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\FriendSettings.razor.g.cs
+C:\Users\魏佳\Desktop\Software Engineering\小组\SEP3X\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\FriendSettings.razor.g.cs

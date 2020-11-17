@@ -110,9 +110,9 @@
     private int NeedAgreeNum()
     {
         int n = 0;
-        for (int i = 0; i < FriendRequest.GetPage().friendRequests.GetFriendSettingList().Count; i++)
+        for (int i = 0; i < ClientModel.GetFriendSettingList().FriendSettings.Count; i++)
         {
-            if (FriendRequest.GetPage().friendRequests.FriendSettings[i].NeedAgree())
+            if (ClientModel.GetFriendSettingList().FriendSettings[i].NeedAgree())
             {
                 n++;
             }

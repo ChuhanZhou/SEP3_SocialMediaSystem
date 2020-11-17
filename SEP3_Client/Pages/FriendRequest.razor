@@ -91,6 +91,13 @@
         click = false;
     }
 
+    //private FriendRequest()
+    //{
+    //    OnInitializedAsync();
+    //    Console.WriteLine("aaaaa"+ClientModel);
+    //    
+    //}
+
     public static FriendRequest GetPage()
     {
         if (friendRequest==null)
@@ -104,6 +111,7 @@
     {
         if (await ClientModel.SearchId(requestID))
         {
+            Request.accountID = requestID;
             NavigationManager.NavigateTo("/Request");
         }
         error = "No user exists in the system...";
