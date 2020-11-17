@@ -13,6 +13,8 @@ namespace SEP3_Client.Model.Unit.User
         {
             SetBirthday(birthday);
         }
+        
+        public Friend() {}
 
         public void Update(Friend friend) 
         {

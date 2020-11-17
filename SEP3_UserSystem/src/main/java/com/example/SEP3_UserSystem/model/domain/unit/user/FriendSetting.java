@@ -17,7 +17,7 @@ public class FriendSetting extends User {
             Note = note;
         }
         DisablePost = disablePost;
-        Status = FriendSettingStatus.UNCONFIRMED;
+        Status = FriendSettingStatus.WAITAGREE;
     }
 
     private FriendSetting(String id, String note, boolean disablePost, FriendSettingStatus status)
@@ -31,7 +31,12 @@ public class FriendSetting extends User {
         super(id);
         Note = null;
         DisablePost = false;
-        Status = FriendSettingStatus.UNCONFIRMED;
+        Status = FriendSettingStatus.NEEDAGREE;
+    }
+
+    public boolean unconfirmed()
+    {
+        return Status==FriendSettingStatus.WAITAGREE||Status==FriendSettingStatus.NEEDAGREE;
     }
 
     public String getNote() {
@@ -55,7 +60,7 @@ public class FriendSetting extends User {
     }
 
     public void setStatus(boolean agree) {
-        if (Status == FriendSettingStatus.UNCONFIRMED)
+        if (unconfirmed())
         {
             if (agree)
             {
@@ -70,26 +75,12 @@ public class FriendSetting extends User {
 
     public Boolean needAgree()
     {
-        if (Status== FriendSettingStatus.UNCONFIRMED&&Note==null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Status== FriendSettingStatus.NEEDAGREE;
     }
 
     public boolean waitAgree()
     {
-        if (Status==FriendSettingStatus.UNCONFIRMED&&Note!=null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Status== FriendSettingStatus.WAITAGREE;
     }
 
     public Boolean isConfirmed()

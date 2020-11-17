@@ -31,6 +31,8 @@
             Note = null;
             Status = FriendSettingStatus.UNCONFIRMED;
         }
+        
+        public FriendSetting(){}
 
         public string GetNote() 
         {
