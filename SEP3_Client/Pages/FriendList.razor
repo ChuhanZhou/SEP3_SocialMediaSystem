@@ -29,6 +29,7 @@
             <span class="oi oi-magnifying-glass"></span>
             <input type="text" placeholder="AccountID" style="width:200px" @id/>
             <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" @onclick="search"></button>
+            <button class="oi oi-x" style="background-color: #6f42c1; height: 26px" @onclick="showAll"></button>
         </p>
         @if (friendsToshow == null)
         {
@@ -64,7 +65,7 @@
                             </td>
                             <td>
                                 <button>
-                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="seeFriendProfile"/>
+                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="(() => seeFriendProfile(friend)"/>
                                 </button>
                             </td>
                         </tr>
@@ -83,6 +84,7 @@
     private string id;
     private string nickName;
 
+
     protected override async Task OnInitializedAsync()
     {
         allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
@@ -96,7 +98,7 @@
 
     private string getNote(string id)
     {
-        return nickName=ClientModel.GetFriendById("").GetUserName();
+        return nickName=ClientModel.GetFriendById(id).GetUserName();
     }
 
     private void search()
@@ -117,8 +119,15 @@
     
     
 
-    private void seeFriendProfile()
+    private void seeFriendProfile(FriendSetting friendSetting)
     {
+        FriendProfile.friendSetting = friendSetting;
         NavigationManager.NavigateTo("/FriendProfile");
+    }
+    
+    private void showAll()
+    {
+        friendsToshow = allFriends;
+        id = null;
     }
 }

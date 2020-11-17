@@ -1,5 +1,8 @@
-﻿﻿@page "/FriendProfile"
+﻿@page "/FriendProfile"
+@using SEP3_Client.Model.Unit.User
+@using SEP3_Client.Data
 @inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
     <div style="text-align: center;
          width: 800px;
@@ -7,29 +10,38 @@
          margin: auto;
          ">
         <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
-           Back
+            Back
         </button>
+        <div >
+            <button class="oi oi-cog" style="float: right;width: auto;height: auto;display: inline-block;" @onclick="Setting">
+            </button>
+        </div>
         <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Profile</h1>
         
         <div style="background: #b9bbbe">
             <span class="oi oi-person" style="float: inherit;width:600px;height: 50px;color: white;
                                            font-size: xx-large;line-height:50px;text-align: center"></span><br/>
-            <label style="font-size: 25px">@username</label>
+            <label style="font-size: 25px">@friendSetting.GetNote()</label>
         </div>
         <div style="height: 8px"></div>
         <div style="float: left; width: 800px;height: auto;">
+            <div>
+                <button class="oi oi-chat" style="border: 2px solid black;border-radius: 8px; background-color: #8fd19e; width: 100px;
+                padding: 10px;height: auto;text-align: center;margin: auto; font-size: 20px;float: right">
+                    Chat
+                </button>
+            </div>
             <div style="border: 2px solid black;
                       border-radius: 8px;width: 500px;padding: 10px;height: auto;text-align: center;margin: auto">
                 <div style="font-size: 25px;text-align: left">
                     Basic Information
                 </div>
                 <div style="font-size: 20px;">
-                    <span class="oi oi-sun" style="float: left">Account : @account</span><br/>
-                    <div class="oi oi-calendar" style="float: left">Birth of date: @day / @month </div><br/>
-                    <div class="oi oi-star" style="float: left;">Gender:  @gender </div><br/>
-                    <div class="oi oi-home" style="float: left">Hometown : @hometown</div><br/>
-                    <div class="oi oi-book" style="float: left">School : @school</div><br/>
-                    <div class="oi oi-phone" style="float: left">TelNo. : @telNo</div><br/>
+                    <span class="oi oi-sun" style="float: left">Account : @friendSetting.GetId()</span><br/>
+                    <div class="oi oi-calendar" style="float: left">Birth of date: @friend.GetBirthday().GetDay() / @friend.GetBirthday().GetMonth() </div><br/>
+                    <div class="oi oi-star" style="float: left;">Gender: @friend.GetGender() </div><br/>
+                    <div class="oi oi-home" style="float: left">Hometown : @friend.GetHomeTown()</div><br/>
+                    <div class="oi oi-phone" style="float: left">TelNo. : @friend.GetPhoneNumber()</div><br/>
                 </div>
             </div>
             <div style="height: 8px"></div>
@@ -37,48 +49,30 @@
                          border-radius: 8px;width: 500px;padding: 10px;height: auto;text-align: center;margin: auto">
                 <div style="font-size: 25px;text-align: left">
                     Posts
-                    <button class="btn btn-outline-dark" style="float: right; width:auto;border-radius: 20px" type="submit" >View</button>
                 </div>
-            </div>
-            <div style="height: 8px"></div>
-            <div>
-                <button style="border: 2px solid black;border-radius: 8px; background-color: #8fd19e; width: 100px;
-                padding: 10px;height: auto;text-align: center;margin: auto; font-size: 20px">
-                    Remark
-                </button>
-                <button style="width: 100px;visibility: hidden" ></button>
-                <button style="border: 2px solid black;border-radius: 8px;background-color: #dc3545; width: 100px;
-                padding: 10px;height: auto;text-align: center;margin: auto; font-size: 20px">
-                    Delete
-                </button>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-    private string username = "we";
-    private string account="123456";
-    private int month;
-    private int day;
-    private char gender;
-    private string hometown;
-    private string school;
-    private long telNo;
+    private Friend friend;
+    public static FriendSetting friendSetting;
 
     protected override async Task OnInitializedAsync()
     {
-        gender = 'M';
-        month = 0;
-        day = 0;
-        hometown = "No hometown to show";
-        school = "No school to show";
-        telNo = 0;
+        friend = ClientModel.GetFriendById(friendSetting.GetId());
     }
 
     private void back()
     {
         NavigationManager.NavigateTo("/FriendList");
+    }
+    
+    private void Setting()
+    {
+        FriendSettings.FriendSetting = friendSetting;
+        NavigationManager.NavigateTo("/FriendSetting");
     }
     
     

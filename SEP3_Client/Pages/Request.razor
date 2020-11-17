@@ -20,14 +20,14 @@
             </div>
             <br/>
             <div style="font-size: 20px;text-align: left">
-                Remark name: <input type="text" @nickname/>
+                Alias: <input type="text" @nickname/>
             </div>
             <br/>
             <div style="font-size: 20px;text-align: left">
-                Root of viewing own posts: 
+                Hide my posts: 
                 <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="root">
-                    <option>True</option>
-                    <option>False</option></select>
+                    <option>False</option>
+                    <option>True</option></select>
             </div>
             <br/>
             <div style="color: red">
@@ -50,7 +50,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        root = true;
+        root = false;
         accountID = FriendRequest.friendRequest.requestID;
         error = null;
     }
