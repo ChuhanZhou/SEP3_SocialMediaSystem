@@ -53,7 +53,7 @@ public abstract class BasicInformation extends User{
         return PhoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         PhoneNumber = phoneNumber;
     }
 
