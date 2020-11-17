@@ -15,23 +15,12 @@
         <span class="oi oi-person" style="float: left;width:50px;height:40px;color: #fd7e14;font-size: xx-large;line-height:50px;text-align: center"></span>
         <input type="text" placeholder="Username" style="float: left;width:250px;height: 40px" @bind="username"/>
     </div>
-    <div style="margin: 40px auto;width: 300px;height: 40px">
-        <span class="oi oi-key" style="float: left;width:50px;height:40px;color: #fd7e14;font-size: xx-large;line-height:50px;text-align: center"></span>
-        @if (change.Equals(true))
-        {
-            <input type="password" style="float: left;width:220px;height: 40px" @bind="password"/>
-        }
-        @if (change.Equals(false))
-        {
-            <input type="password" disabled style="float: left;width:220px;height: 40px" @bind="password"/>
-        }
-        
-        <button class="oi oi-pencil" style="float: right;width:20px;height:30px;color: #495057;font-size: xx-large;line-height:50px;text-align: center" @onclick="clickPen"></button>
-     </div>
-    <div style="float: left">
-        <div>
-            Birth of date: Month :
-            <select class="form-control selectpicker" style="width: 150px" @bind=month>
+     <div  style="float: left;margin: 20px auto; height: auto;width: 300px">
+        <span class="oi oi-calendar" style="float: left;width:300px;height: 30px">Birth of date: </span>
+        <div style="float: left">
+            <label style="visibility: hidden">m</label>
+            Month :
+            <select class="form-control selectpicker" style="width: auto; display: inline-block" @bind=month>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -57,10 +46,11 @@
         </div>
          <div style="float: left;margin: 20px auto;">
              <span class="oi oi-star" style="float: left;width:300px;height: 30px">Gender:
-                 <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=gender>
+                 <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="gender">
                      <option>M</option>
                      <option>F</option></select></span>
          </div><br/>
+    <div style="height: 6px"></div>
          <div style="float: left; margin: 20px auto;width: 300px;height: 30px">
              <span class="oi oi-home" style="float: left;width:300px;height: 30px">Hometown : </span>
              <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown">
@@ -79,7 +69,6 @@
 
 @code {
     private string username;
-    private string password;
     private int month;
     private int day;
     private bool change;
@@ -92,7 +81,6 @@
     {
         Account account = ClientModel.GetAccount();
         username = account.GetUserName();
-        password = account.Password;
         if (account.Birthday==null)
         {
             month = 0;
@@ -142,7 +130,6 @@
         Account newAccount = ClientModel.GetAccount().Copy();
         newAccount.Update(username,new Birthday(day,month),gender,hometown,telNo);
         await ClientModel.UpdateBasicInformation(newAccount);
-        await ClientModel.ChangePassword(ClientModel.GetAccount().Password, password);
         NavigationManager.NavigateTo("/Profile");
     }
 
