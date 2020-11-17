@@ -20,7 +20,7 @@
             </div>
             <br/>
             <div style="font-size: 20px;text-align: left">
-                Alias: <input type="text" @nickname/>
+                Alias: <input type="text" @bind="nickname"/>
             </div>
             <br/>
             <div style="font-size: 20px;text-align: left">
@@ -45,12 +45,12 @@
 @code {
     public static string accountID;
     private string nickname;
-    private bool root;
+    private string root;
     private string error;
 
     protected override async Task OnInitializedAsync()
     {
-        root = false;
+        root = "false";
         error = null;
     }
   
@@ -63,7 +63,7 @@
     {
         if (ClientModel.GetAccount().GetId()!=accountID&&ClientModel.GetFriendById(accountID)==null)
         {
-            FriendSetting friendSetting = new FriendSetting(accountID,nickname,root);
+            FriendSetting friendSetting = new FriendSetting(accountID,nickname,Convert.ToBoolean(root));
             ClientModel.AddNewFriend(friendSetting);
             NavigationManager.NavigateTo("/FriendRequest");
         }
