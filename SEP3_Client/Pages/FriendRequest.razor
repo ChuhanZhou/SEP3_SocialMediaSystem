@@ -54,7 +54,7 @@
                                       @if (click.Equals(false))
                                       {
                                           <button @onclick="@(()=>changeStatusTo(request.Id,true))">Confirm</button>
-                                          <button @onclick="@(()=>changeStatusTo(request.Id,false))">Delete</button>
+                                          <button @onclick="@(()=>changeStatusTo(request.Id,false))">Refuse</button>
                                       }
                                       else
                                       {
@@ -91,13 +91,6 @@
         click = false;
     }
 
-    //private FriendRequest()
-    //{
-    //    OnInitializedAsync();
-    //    Console.WriteLine("aaaaa"+ClientModel);
-    //    
-    //}
-
     public static FriendRequest GetPage()
     {
         if (friendRequest==null)
@@ -112,6 +105,7 @@
         if (await ClientModel.SearchId(requestID))
         {
             Request.accountID = requestID;
+            Request.toAgree = false;
             NavigationManager.NavigateTo("/Request");
         }
         error = "No user exists in the system...";
@@ -120,9 +114,18 @@
     private void changeStatusTo(string id, bool tOrF)
     {
         click = true;
-        FriendSetting a = new FriendSetting(id);
-        a.SetStatus(tOrF);
-        ClientModel.UpdateFriendSetting(a);
+        if (tOrF)
+        {
+            Request.accountID = id;
+            Request.toAgree = true;
+            NavigationManager.NavigateTo("/Request");
+        }
+        else
+        {
+            FriendSetting a = new FriendSetting(id);
+            a.SetStatus(tOrF);
+            ClientModel.AddNewFriend(a);
+        }
     }
 
     private void back()

@@ -47,6 +47,7 @@
     private string nickname;
     private string root;
     private string error;
+    public static bool toAgree;
 
     protected override async Task OnInitializedAsync()
     {
@@ -61,9 +62,13 @@
 
     private void clickSend()
     {
-        if (ClientModel.GetAccount().GetId()!=accountID&&ClientModel.GetFriendById(accountID)==null)
+        if (ClientModel.GetAccount().GetId() != accountID && ClientModel.GetFriendById(accountID) == null)
         {
-            FriendSetting friendSetting = new FriendSetting(accountID,nickname,Convert.ToBoolean(root));
+            FriendSetting friendSetting = new FriendSetting(accountID, nickname, Convert.ToBoolean(root));
+            if (toAgree)
+            {
+                friendSetting.SetStatus(true);
+            }
             ClientModel.AddNewFriend(friendSetting);
             NavigationManager.NavigateTo("/FriendRequest");
         }
@@ -71,6 +76,7 @@
         {
             error = "You already have this friend...";
         }
-        
+
     }
+
 }
