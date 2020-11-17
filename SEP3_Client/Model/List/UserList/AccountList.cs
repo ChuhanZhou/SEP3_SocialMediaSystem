@@ -15,12 +15,16 @@ namespace SEP3_Client.Model.List.UserList
 
         public string AddNewAccount(Account newAccount)
         {
-            if (GetAccountById(newAccount.GetId())!=null)
+            if (newAccount!=null)
             {
-                return "Account [" + newAccount.GetId() + "] is not a new account.";
+                if (GetAccountById(newAccount.GetId())!=null)
+                {
+                    return "Account [" + newAccount.GetId() + "] is not a new account.";
+                }
+                Accounts.Add(newAccount);
+                return null;
             }
-            Accounts.Add(newAccount);
-            return null;
+            return "Input null.";
         }
         
         public void AddOldAndNewAccount(Account oldAccount,Account newAccount)
