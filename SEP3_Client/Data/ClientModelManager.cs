@@ -113,7 +113,12 @@ namespace SEP3_Client.Data
 
         public Friend GetFriendById(string id)
         {
-            return friendList.GetFriendById(id).Copy();
+            Friend friend = friendList.GetFriendById(id);
+            if (friend!=null)
+            {
+                return friendList.GetFriendById(id).Copy();
+            }
+            return null;
         }
 
         public void UpdateAccount(Account account)
