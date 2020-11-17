@@ -9,15 +9,8 @@
         public FriendSetting(string id,string note,bool disablePost) : base(id)
         {
             DisablePost = disablePost;
-            if (string.IsNullOrEmpty(note))
-            {
-                Note = "";
-            }
-            else
-            {
-                Note = note;
-            }
-            Status = FriendSettingStatus.UNCONFIRMED;
+            Note = note;
+            Status = FriendSettingStatus.NEEDAGREE;
         }
 
         private FriendSetting(string id,string note,bool disablePost,FriendSettingStatus status) : this(id,note,disablePost)
@@ -29,10 +22,15 @@
         {
             DisablePost = false;
             Note = null;
-            Status = FriendSettingStatus.UNCONFIRMED;
+            Status = FriendSettingStatus.WAITAGREE;
         }
         
         public FriendSetting(){}
+        
+        public bool Unconfirmed()
+        {
+            return Status==FriendSettingStatus.WAITAGREE||Status==FriendSettingStatus.NEEDAGREE;
+        }
 
         public string GetNote() 
         {
@@ -59,7 +57,7 @@
         }
         
         public void SetStatus(bool agree) {
-            if (Status == FriendSettingStatus.UNCONFIRMED)
+            if (Unconfirmed())
             {
                 if (agree)
                 {
@@ -74,38 +72,17 @@
 
         public bool NeedAgree()
         {
-            if (Status==FriendSettingStatus.UNCONFIRMED&&Note==null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Status== FriendSettingStatus.NEEDAGREE;
         }
         
         public bool WaitAgree()
         {
-            if (Status==FriendSettingStatus.UNCONFIRMED&&Note!=null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Status== FriendSettingStatus.WAITAGREE;
         }
 
         public bool IsConfirmed()
         {
-            if (Status==FriendSettingStatus.AGREE||Status==FriendSettingStatus.DISAGREE)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Status == FriendSettingStatus.AGREE || Status == FriendSettingStatus.DISAGREE;
         }
         
         public void Delete()

@@ -8,14 +8,7 @@ public class FriendSetting extends User {
     public FriendSetting(String id,String note,boolean disablePost)
     {
         super(id);
-        if (note==null)
-        {
-            Note = "";
-        }
-        else
-        {
-            Note = note;
-        }
+        Note = note;
         DisablePost = disablePost;
         Status = FriendSettingStatus.WAITAGREE;
     }
@@ -85,14 +78,7 @@ public class FriendSetting extends User {
 
     public Boolean isConfirmed()
     {
-        if (Status== FriendSettingStatus.AGREE||Status== FriendSettingStatus.DISAGREE)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Status== FriendSettingStatus.AGREE||Status== FriendSettingStatus.DISAGREE;
     }
 
     public void delete()
