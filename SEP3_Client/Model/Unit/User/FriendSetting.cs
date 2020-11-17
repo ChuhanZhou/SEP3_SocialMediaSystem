@@ -10,7 +10,7 @@
         {
             DisablePost = disablePost;
             Note = note;
-            Status = FriendSettingStatus.NEEDAGREE;
+            Status = FriendSettingStatus.WAITAGREE;
         }
 
         private FriendSetting(string id,string note,bool disablePost,FriendSettingStatus status) : this(id,note,disablePost)
@@ -22,7 +22,7 @@
         {
             DisablePost = false;
             Note = null;
-            Status = FriendSettingStatus.WAITAGREE;
+            Status = FriendSettingStatus.NEEDAGREE;
         }
         
         public FriendSetting(){}

@@ -42,13 +42,39 @@ namespace SEP3_Client.Model.List.UserList
             }
             return null;
         }
-        
+
         public FriendSetting GetFriendSettingFromUnconfirmedById(string id)
         {
-            FriendSettingList agreeList = GetFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED);
-            foreach (var friendSetting in agreeList.FriendSettings)
+            foreach (var friendSetting in FriendSettings)
             {
-                if (friendSetting.GetId().Equals(id))
+                if (friendSetting.NeedAgree()||friendSetting.WaitAgree())
+                {
+                    if (friendSetting.GetId().Equals(id))
+                    {
+                        return friendSetting;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public FriendSetting GetFriendSettingFromNeedAgreeById(string id)
+        {
+            foreach (var friendSetting in FriendSettings)
+            {
+                if (friendSetting.NeedAgree()&&friendSetting.GetId().Equals(id))
+                {
+                    return friendSetting;
+                }
+            }
+            return null;
+        }
+
+        public FriendSetting GetFriendSettingFromWaitAgreeById(string id)
+        {
+            foreach (var friendSetting in FriendSettings)
+            {
+                if (friendSetting.WaitAgree()&&friendSetting.GetId().Equals(id))
                 {
                     return friendSetting;
                 }

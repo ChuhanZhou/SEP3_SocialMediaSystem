@@ -174,6 +174,7 @@ public class UserSystemModelManager implements UserSystemModel
             Account account = accountList.getAccountById(id);
             if (friendSetting.waitAgree())
             {
+                //System.out.println(222222);
                 if (hasId(friendId))
                 {
                     account.getFriendSettingList().addNewFriendSetting(friendSetting);
@@ -191,9 +192,12 @@ public class UserSystemModelManager implements UserSystemModel
             }
             else if (friendSetting.isConfirmed())
             {
+                //System.out.println(3232323);
                 if (hasId(friendId))
                 {
+                    //System.out.println(11111111);
                     account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).update(friendSetting);
+                    System.out.println(account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).getStatus());
                     property.firePropertyChange("updateFriendSetting",null,id);
                     cloudDatabaseModel.updateUser(accountList.getAccountById(id));
                     if (friendSetting.getStatus()== FriendSettingStatus.AGREE)

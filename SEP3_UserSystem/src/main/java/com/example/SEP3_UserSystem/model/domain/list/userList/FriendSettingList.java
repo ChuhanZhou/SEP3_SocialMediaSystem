@@ -46,7 +46,40 @@ public class FriendSettingList {
 
     public FriendSetting getFriendSettingFromUnconfirmedById(String id)
     {
-        FriendSettingList agreeList = getFriendSettingListByStatus(FriendSettingStatus.UNCONFIRMED);
+        FriendSettingList searchList = new FriendSettingList();
+        for (int x=0;x<FriendSettings.size();x++)
+        {
+            if (FriendSettings.get(x).needAgree()||FriendSettings.get(x).waitAgree())
+            {
+                searchList.FriendSettings.add(FriendSettings.get(x));
+            }
+        }
+        for (int x=0;x<searchList.getSize();x++)
+        {
+            if (searchList.getFriendSettingByIndex(x).getId().equals(id))
+            {
+                return searchList.getFriendSettingByIndex(x);
+            }
+        }
+        return null;
+    }
+
+    public FriendSetting getFriendSettingFromNeedAgreeById(String id)
+    {
+        FriendSettingList agreeList = getFriendSettingListByStatus(FriendSettingStatus.NEEDAGREE);
+        for (int x=0;x<agreeList.getSize();x++)
+        {
+            if (agreeList.getFriendSettingByIndex(x).getId().equals(id))
+            {
+                return agreeList.getFriendSettingByIndex(x);
+            }
+        }
+        return null;
+    }
+
+    public FriendSetting getFriendSettingFromWaitAgreeById(String id)
+    {
+        FriendSettingList agreeList = getFriendSettingListByStatus(FriendSettingStatus.WAITAGREE);
         for (int x=0;x<agreeList.getSize();x++)
         {
             if (agreeList.getFriendSettingByIndex(x).getId().equals(id))

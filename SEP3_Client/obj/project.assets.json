@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\魏佳\\.nuget\\packages\\": {}
+    "C:\\Users\\Think\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\魏佳\\IdeaProjects\\Java3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
+      "projectUniqueName": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
       "projectName": "SEP3_Client",
-      "projectPath": "C:\\Users\\魏佳\\IdeaProjects\\Java3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
-      "packagesPath": "C:\\Users\\魏佳\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\魏佳\\IdeaProjects\\Java3\\SEP3_SocialMediaSystem\\SEP3_Client\\obj\\",
+      "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\SEP3_Client.csproj",
+      "packagesPath": "C:\\Users\\Think\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\魏佳\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Think\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
