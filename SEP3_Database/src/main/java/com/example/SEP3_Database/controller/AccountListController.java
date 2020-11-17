@@ -1,4 +1,4 @@
-package com.example.SEP3_Database.Controller;
+package com.example.SEP3_Database.controller;
 
 import com.example.SEP3_Database.model.DatabaseModel;
 import com.example.SEP3_Database.model.DatabaseModelManager;
