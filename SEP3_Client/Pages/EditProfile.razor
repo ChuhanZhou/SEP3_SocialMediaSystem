@@ -47,14 +47,28 @@
             </select>
         </div>
         <div>
-        Day :
-        <select class="form-control selectpicker" style="width: 150px" @bind="day">
-            @for (int i = 0; i < GetDays(month); i++)
-            {
-                <option>@(i+1)</option>
-            }
-        </select>
+            Day :
+            <select class="form-control selectpicker" style="width: 150px" @bind="day">
+                @for (int i = 0; i < GetDays(month); i++)
+                {
+                    <option>@(i+1)</option>
+                }
+            </select>
         </div>
+         <div style="float: left;margin: 20px auto;">
+             <span class="oi oi-star" style="float: left;width:300px;height: 30px">Gender:
+                 <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=gender>
+                     <option>M</option>
+                     <option>F</option></select></span>
+         </div><br/>
+         <div style="float: left; margin: 20px auto;width: 300px;height: 30px">
+             <span class="oi oi-home" style="float: left;width:300px;height: 30px">Hometown : </span>
+             <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown">
+         </div><br/>
+        <div  style="float: left; margin: 20px auto;width: 300px;height: 30px">
+             <span class="oi oi-phone" style="float: left;width:300px;height: 30px">TelNo. :</span>
+             <input type="number" style="float: left;width:300px;height: 30px" @bind="telNo">
+         </div><br/>
     </div>
     <div>
         <button class="btn btn-light" style="width: 100%;height: 100%;background-color: #9fcdff" @onclick="update">SAVE</button>
@@ -70,6 +84,9 @@
     private int day;
     private bool change;
     public static EditProfile editProfile;
+    private char gender;
+    private string hometown;
+    private long telNo;
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,6 +104,23 @@
             day = account.Birthday.GetDay();
         }
         change = false;
+        gender = 'M';
+        if (account.GetHomeTown()==null)
+        {
+            hometown = "No hometown to show";
+        }
+        else
+        {
+            hometown = account.GetHomeTown();
+        }
+        if (account.GetPhoneNumber()==0)
+        {
+            telNo = 0;
+        }
+        else
+        {
+            telNo = account.GetPhoneNumber();
+        }
     }
 
     public static EditProfile ChangePage()
@@ -106,7 +140,7 @@
     private async Task update()
     {
         Account newAccount = ClientModel.GetAccount().Copy();
-        newAccount.Update(username,new Birthday(day,month));
+        newAccount.Update(username,new Birthday(day,month),gender,hometown,telNo);
         await ClientModel.UpdateBasicInformation(newAccount);
         await ClientModel.ChangePassword(ClientModel.GetAccount().Password, password);
         NavigationManager.NavigateTo("/Profile");

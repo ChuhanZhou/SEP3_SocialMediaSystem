@@ -38,6 +38,9 @@
                     {
                         <div class="oi oi-calendar" style="float: left">Birth of date: @day / @month </div><br/>
                     }
+                    <div class="oi oi-star" style="float: left;">Gender:  @gender </div><br/>
+                                        <div class="oi oi-home" style="float: left">Hometown : @hometown</div><br/>
+                    <div class="oi oi-phone" style="float: left">TelNo. : @telNo</div><br/>
                     
                 </div>
             </div>
@@ -59,6 +62,9 @@
     private string password;
     private int month;
     private int day;
+    private char gender;
+    private string hometown;
+    private long telNo;
 
     protected override async Task OnInitializedAsync()
     {
@@ -75,6 +81,25 @@
             month = account.Birthday.GetMonth();
              day = account.Birthday.GetDay();
         }
+        gender = 'M';
+        if (account.GetHomeTown()==null)
+        {
+            hometown = "No hometown to show";
+        }
+        else
+        {
+            hometown = account.GetHomeTown();
+        }
+        if (account.GetPhoneNumber()==0)
+        {
+            telNo = 0;
+        }
+        else
+        {
+            telNo = account.GetPhoneNumber();
+        }
+        
+        
     }
     
     private void clickEDIT()
