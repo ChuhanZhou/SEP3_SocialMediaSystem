@@ -51,7 +51,7 @@
     protected override async Task OnInitializedAsync()
     {
         root = false;
-        accountID = FriendRequest.friendRequest.requestID;
+        accountID = FriendRequest.GetPage().requestID;
         error = null;
     }
   
