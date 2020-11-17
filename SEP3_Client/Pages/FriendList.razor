@@ -21,8 +21,14 @@
         <div style="text-align: left; width: 220px; height: 40px;">
              <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
              float: left;font-size: x-large;line-height:40px;text-align: center "></span>
-             <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+            <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
              font-size: 25px;" @onclick="addFriend">Friend request</button>
+            <div style="width: 30px; height: 40px;float: left;">
+            @if (show)
+            {
+                <div style="float:left;background-color: red;color: white;font-size:23px;height: 30px;width: 30px;display: inline-block; border-radius: 30px;text-align:center">@NeedAgreeNum()</div>
+            }
+            </div>
          </div>
         <br/>
         <p>
@@ -83,12 +89,36 @@
     private FriendSettingList allFriends;
     private string id;
     private string nickName;
+    private bool show;
 
 
     protected override async Task OnInitializedAsync()
     {
         allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
         friendsToshow = allFriends;
+        if (NeedAgreeNum()>0)
+        {
+            show = true;
+        }
+        else
+        {
+            show = false;
+        }
+        
+    }
+
+    private int NeedAgreeNum()
+    {
+        int n = 0;
+        for (int i = 0; i < FriendRequest.friendRequest.friendRequests.GetFriendSettingList().Count; i++)
+        {
+            if (FriendRequest.friendRequest.friendRequests.FriendSettings[i].NeedAgree())
+            {
+                n++;
+            }
+        }
+        return n;
+
     }
 
     private string getUserName(string id)

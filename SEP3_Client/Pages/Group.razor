@@ -2,8 +2,23 @@
 @using SEP3_Client.Data
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
-<h3>Group</h3>
-
+<div style="float: left; width: 100%;height: auto;">
+<div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button>
+    <h3>Group</h3>
+</div>
+</div>
 @code {
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendList");
+    }
     
 }
