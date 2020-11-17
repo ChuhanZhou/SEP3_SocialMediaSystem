@@ -233,7 +233,7 @@ public class UserSystemModelManager implements UserSystemModel
     public FriendList getFriendListByAccount(Account account) {
         FriendList friendList = new FriendList();
         Account targetAccount = accountList.getAccountById(account.getId());
-        FriendSettingList friendSettingList = targetAccount.getFriendSettingList();
+        FriendSettingList friendSettingList = targetAccount.getFriendSettingList().getFriendSettingListByStatus(FriendSettingStatus.AGREE);
         for (int x=0;x<friendSettingList.getSize();x++)
         {
             friendList.addNewFriend(new Friend(accountList.getAccountById(friendSettingList.getFriendSettingByIndex(x).getId())));
