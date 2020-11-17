@@ -80,6 +80,18 @@ public class FriendSetting extends User {
         }
     }
 
+    public boolean waitAgree()
+    {
+        if (Status==FriendSettingStatus.UNCONFIRMED&&Note!=null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public Boolean isConfirmed()
     {
         if (Status== FriendSettingStatus.AGREE||Status== FriendSettingStatus.DISAGREE)

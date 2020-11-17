@@ -172,7 +172,7 @@ public class UserSystemModelManager implements UserSystemModel
         {
             String friendId = friendSetting.getId();
             Account account = accountList.getAccountById(id);
-            if (friendSetting.needAgree())
+            if (friendSetting.waitAgree())
             {
                 if (hasId(friendId))
                 {
