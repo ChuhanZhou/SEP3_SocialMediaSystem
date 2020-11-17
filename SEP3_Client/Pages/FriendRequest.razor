@@ -15,7 +15,7 @@
         </button>
         <p>
             <span class="oi oi-magnifying-glass"></span>
-            <input type="text" placeholder="Account" style="width:400px"/>
+            <input type="text" placeholder="Account" style="width:400px" @requestID/>
             <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" 
                     @onclick="sendRequest"></button>
         </p>
@@ -58,12 +58,12 @@
                                       }
                                       else
                                       {
-                                          @showStatus(request.Id)
+                                          @request.Status
                                       }
                                   }
                                   else
                                   {
-                                      @showStatus(request.GetId())
+                                      @request.Status
                                   }
 
                               </td>
@@ -80,13 +80,14 @@
 @code {
     private FriendSettingList friendRequests;
     public static FriendRequest friendRequest;
+    public string requestID;
     private string error;
     private string status;
     private bool click;
 
     protected override async Task OnInitializedAsync()
     {
-        friendRequests =  ClientModel.GetFriendSettingList();
+        friendRequests = ClientModel.GetFriendSettingList();
         click = false;
     }
 
@@ -99,14 +100,13 @@
         return friendRequest;
     }
 
-    private void sendRequest()
+    private async Task sendRequest()
     {
-        NavigationManager.NavigateTo("/Request");
-    }
-
-    private string showStatus(string id)
-    {
-        return status = friendRequests.GetFriendSettingById(id).GetStatus().ToString();
+        if (await ClientModel.SearchId(requestID))
+        {
+            NavigationManager.NavigateTo("/Request");
+        }
+        error = "No user exists in the system...";
     }
 
     private void changeStatusTo(string id, bool tOrF)
@@ -119,7 +119,6 @@
 
     private void back()
     {
-        
         NavigationManager.NavigateTo("/FriendList");
     }
     

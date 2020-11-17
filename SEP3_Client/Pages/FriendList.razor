@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <button>
-                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="seeFriendProfile()"/>
+                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="seeFriendProfile"/>
                                 </button>
                             </td>
                         </tr>
@@ -101,7 +101,8 @@
 
     private void search()
     {
-        friendsToshow = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE).GetFriendSettingById(id);
+        friendsToshow = new FriendSettingList();
+        friendsToshow.AddNewFriendSetting(ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id));
     }
 
     private void addFriend()
