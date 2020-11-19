@@ -49,7 +49,6 @@ namespace SEP3_Client.Mediator.UserSystemClient
                 login = false;
                 this.clientModel = clientModel;
                 this.clientModel.SystemOnLine(FunctionType.UserSystem);
-                new Thread(Start).Start();
                 return true;
             }
             catch (Exception e)
@@ -107,6 +106,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
                 {
                     case InformationType.ERROR:
                         ErrorPackage errorPackage = JsonSerializer.Deserialize<ErrorPackage>(receive);
+                        //clientModel.SystemOffLine(FunctionType.UserSystem);
                         return errorPackage.GetKeyword();
                     case InformationType.ACCOUNT:
                         AccountPackage accountPackage = JsonSerializer.Deserialize<AccountPackage>(receive);
@@ -115,13 +115,14 @@ namespace SEP3_Client.Mediator.UserSystemClient
                         FriendPackage friendPackage = JsonSerializer.Deserialize<FriendPackage>(receive);
                         clientModel.UpdateFriendList(friendPackage.SendList);
                         login = true;
+                        new Thread(Start).Start();
                         return null;
                 }
                 return "Get wrong package.";
             }
             else
             {
-                return "User System offline.";
+                return "User System offline, please logoff.";
             }
         }
 
@@ -147,7 +148,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
             else
             {
-                return "User System offline.";
+                return "User System offline, please logoff.";
             }
         }
         
@@ -175,7 +176,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
             else
             {
-                return "User System offline.";
+                return "User System offline, please logoff.";
             }
         }
 
@@ -201,7 +202,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
             else
             {
-                return "User System offline.";
+                return "User System offline, please logoff.";
             }
         }
 

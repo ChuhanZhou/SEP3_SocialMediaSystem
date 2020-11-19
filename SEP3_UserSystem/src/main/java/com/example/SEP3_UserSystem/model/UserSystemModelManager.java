@@ -275,6 +275,10 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
         {
             databaseOnline = true;
             System.out.println("Reconnect to Database System successfully.");
+            for (int x=0;x<accountList.getSize();x++)
+            {
+                property.firePropertyChange("updateAccount",null,accountList.getAccountByIndex(x));
+            }
         }
     }
 
@@ -305,7 +309,7 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
                     }
                 }
                 System.out.println("Try reconnecting...");
-                cloudDatabaseModel.getAllAccount();
+                accountList = cloudDatabaseModel.getAllAccount();
             }
         }).start();
     }
