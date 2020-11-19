@@ -74,6 +74,13 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
     }
 
     @Override
+    public void reLogin(String id) {
+        Account targetAccount = accountList.getAccountById(id);
+        targetAccount.getUserStatus().login();
+        property.firePropertyChange("updateAccount",null,targetAccount);
+    }
+
+    @Override
     public void logoff(String id) {
         Account targetAccount = accountList.getAccountById(id);
         targetAccount.getUserStatus().logoff();
@@ -277,7 +284,7 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
             System.out.println("Reconnect to Database System successfully.");
             for (int x=0;x<accountList.getSize();x++)
             {
-                property.firePropertyChange("updateAccount",null,accountList.getAccountByIndex(x));
+                property.firePropertyChange("databaseOnline",null,"");
             }
         }
     }
