@@ -2,7 +2,7 @@
 using SEP3_Client.Data;
 using SEP3_Client.Model.Unit.User;
 
-namespace SEP3_Client.Mediator
+namespace SEP3_Client.Mediator.UserSystemClient
 {
     public interface IUserSystemClient
     {

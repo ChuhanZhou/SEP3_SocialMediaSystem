@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\魏佳\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\魏佳\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
-    <e p="C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem" t="IncludeFlat">
+    <e p="C:\Users\Think\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Think\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3_ChatSystem" t="IncludeRecursive">
         <e p="_Imports.razor" t="Include" />
@@ -108,8 +108,10 @@
             <e p="LoginOrRegisterPackage.cs" t="Include" />
             <e p="SearchPackage.cs" t="Include" />
           </e>
-          <e p="IUserSystemClient.cs" t="Include" />
-          <e p="UserSystemClient.cs" t="Include" />
+          <e p="UserSystemClient" t="Include">
+            <e p="IUserSystemClient.cs" t="Include" />
+            <e p="UserSystemClient.cs" t="Include" />
+          </e>
         </e>
         <e p="Model" t="Include">
           <e p="FunctionType.cs" t="Include" />

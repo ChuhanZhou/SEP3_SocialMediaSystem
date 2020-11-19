@@ -20,4 +20,5 @@ public interface UserSystemModel extends NamedPropertyChangeSubject
     String addNewFriend(String id,FriendSetting friendSetting);
     FriendList getFriendListByAccount(Account account);
     void removeFriend(String id,String friendId);
+    boolean databaseSystemIsOnline();
 }

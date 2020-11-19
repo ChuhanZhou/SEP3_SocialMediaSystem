@@ -81,7 +81,15 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
 
     private void sendInformationPackage(InformationPackage informationPackage)
     {
-        String send = gson.toJson(informationPackage);
+        String send = "";
+        if (userSystemModel.databaseSystemIsOnline())
+        {
+            send = gson.toJson(informationPackage);
+        }
+        else
+        {
+            send = gson.toJson(new ErrorPackage("Database System offline.",true));
+        }
         System.out.println("Send:"+send);
         out.println(send);
     }

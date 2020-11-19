@@ -1,8 +1,9 @@
 package com.example.SEP3_UserSystem.database;
 
+import com.example.SEP3_UserSystem.model.UserSystemModelForDatabaseSystem;
+import com.example.SEP3_UserSystem.model.UserSystemModelManager;
 import com.example.SEP3_UserSystem.model.domain.list.userList.AccountList;
 import com.example.SEP3_UserSystem.model.domain.unit.user.Account;
-import com.example.SEP3_UserSystem.model.domain.unit.user.UserStatus;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -15,10 +16,12 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
     private OutputStreamWriter out;
     private BufferedReader in;
     private Gson gson;
+    private UserSystemModelForDatabaseSystem userSystemModel;
 
-    public CloudDatabaseModelManager()
+    public CloudDatabaseModelManager(UserSystemModelManager userSystemModel)
     {
         gson = new Gson();
+        this.userSystemModel = userSystemModel;
     }
 
     @Override
@@ -46,10 +49,13 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             in.close();
             connection.disconnect();
             System.out.println("Post end");
+            userSystemModel.databaseSystemOnline();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Database System offline.");
+            userSystemModel.databaseSystemOffline();
+            //e.printStackTrace();
         }
     }
 
@@ -68,13 +74,16 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             connection.disconnect();
             System.out.println("Get Receive:"+receive);
             AccountList accountList = gson.fromJson(receive,AccountList.class);
+            userSystemModel.databaseSystemOnline();
             return accountList;
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Database System offline.");
+            userSystemModel.databaseSystemOffline();
+            //e.printStackTrace();
         }
-        return null;
+        return new AccountList();
     }
 
     @Override
@@ -102,10 +111,13 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             in.close();
             connection.disconnect();
             System.out.println("Put end");
+            userSystemModel.databaseSystemOnline();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Database System offline.");
+            userSystemModel.databaseSystemOffline();
+            //e.printStackTrace();
         }
     }
 
@@ -132,10 +144,13 @@ public class CloudDatabaseModelManager implements CloudDatabaseModel {
             in.close();
             connection.disconnect();
             System.out.println("Delete end");
+            userSystemModel.databaseSystemOnline();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Database System offline.");
+            userSystemModel.databaseSystemOffline();
+            //e.printStackTrace();
         }
     }
 }

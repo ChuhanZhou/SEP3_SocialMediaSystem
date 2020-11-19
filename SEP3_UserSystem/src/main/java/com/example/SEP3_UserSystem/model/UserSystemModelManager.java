@@ -10,17 +10,19 @@ import com.example.SEP3_UserSystem.model.domain.list.userList.FriendList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class UserSystemModelManager implements UserSystemModel
+public class UserSystemModelManager implements UserSystemModel,UserSystemModelForDatabaseSystem
 {
     private AccountList accountList;
     private PropertyChangeSupport property;
     private CloudDatabaseModel cloudDatabaseModel;
+    private boolean databaseOnline;
 
     public UserSystemModelManager()
     {
         property = new PropertyChangeSupport(this);
         accountList = new AccountList();
-        cloudDatabaseModel = new CloudDatabaseModelManager();
+        cloudDatabaseModel = new CloudDatabaseModelManager(this);
+        databaseOnline = true;
         accountList = cloudDatabaseModel.getAllAccount();
     }
 
@@ -251,6 +253,11 @@ public class UserSystemModelManager implements UserSystemModel
         cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
     }
 
+    @Override
+    public boolean databaseSystemIsOnline() {
+        return databaseOnline;
+    }
+
 
     @Override
     public void addListener(String propertyName, PropertyChangeListener listener) {
@@ -260,5 +267,46 @@ public class UserSystemModelManager implements UserSystemModel
     @Override
     public void removeListener(String propertyName, PropertyChangeListener listener) {
         property.removePropertyChangeListener(propertyName, listener);
+    }
+
+    @Override
+    public void databaseSystemOnline() {
+        if (!databaseOnline)
+        {
+            databaseOnline = true;
+            System.out.println("Reconnect to Database System successfully.");
+        }
+    }
+
+    @Override
+    public void databaseSystemOffline() {
+        if (databaseOnline)
+        {
+            databaseOnline = false;
+            tryToConnectWithDatabaseSystem();
+        }
+    }
+
+    private void tryToConnectWithDatabaseSystem()
+    {
+        new Thread(()->{
+            while (!databaseOnline)
+            {
+                for (int x=10;x>0;x--)
+                {
+                    System.out.println("Try to reconnect with Database System in " + x + "s.");
+                    try
+                    {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("Try reconnecting...");
+                cloudDatabaseModel.getAllAccount();
+            }
+        }).start();
     }
 }

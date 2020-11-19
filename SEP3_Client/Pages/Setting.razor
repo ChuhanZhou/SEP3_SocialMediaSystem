@@ -135,6 +135,7 @@
 
     private void Logout()
     {
+        ClientModel.Logoff();
         MainLayout.Logout();
         NavigationManager.NavigateTo("");
     }
