@@ -12,7 +12,10 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Data" t="Include" />
+        <e p="Data" t="Include">
+          <e p="ChatModelManager.cs" t="Include" />
+          <e p="IChatModel.cs" t="Include" />
+        </e>
         <e p="Mediator" t="Include" />
         <e p="Model" t="Include">
           <e p="List" t="Include">
@@ -99,6 +102,10 @@
           <e p="IClientModelForUserSystem.cs" t="Include" />
         </e>
         <e p="Mediator" t="Include">
+          <e p="ChatSystemClient" t="Include">
+            <e p="ChatSystemClient.cs" t="Include" />
+            <e p="IChatSystemClient.cs" t="Include" />
+          </e>
           <e p="Information" t="Include">
             <e p="AccountPackage.cs" t="Include" />
             <e p="ErrorPackage.cs" t="Include" />
@@ -109,8 +116,10 @@
             <e p="LoginOrRegisterPackage.cs" t="Include" />
             <e p="SearchPackage.cs" t="Include" />
           </e>
-          <e p="IUserSystemClient.cs" t="Include" />
-          <e p="UserSystemClient.cs" t="Include" />
+          <e p="UserSystemClient" t="Include">
+            <e p="IUserSystemClient.cs" t="Include" />
+            <e p="UserSystemClient.cs" t="Include" />
+          </e>
         </e>
         <e p="Model" t="Include">
           <e p="FunctionType.cs" t="Include" />
