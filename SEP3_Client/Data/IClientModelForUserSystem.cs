@@ -6,6 +6,9 @@ namespace SEP3_Client.Data
 {
     public interface IClientModelForUserSystem
     {
+        bool HasFunction(FunctionType functionType);
+        void SystemOnLine(FunctionType functionType);
+        void SystemOffLine(FunctionType functionType);
         void UpdateAccount(Account account);
         void UpdateFriendList(FriendList friendList);
     }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SEP3_Client.Mediator;
+using SEP3_Client.Mediator.UserSystemClient;
 using SEP3_Client.Model;
 using SEP3_Client.Model.List.UserList;
 using SEP3_Client.Model.Unit.User;
@@ -30,7 +28,6 @@ namespace SEP3_Client.Data
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -38,10 +35,8 @@ namespace SEP3_Client.Data
         {
             if (userSystemClient.Connect(this))
             {
-                FunctionTypes.Add(FunctionType.UserSystem);
                 return userSystemClient.SendLoginOrRegisterPackage("login",id,password);
             }
-            FunctionTypes.Remove(FunctionType.UserSystem);
             return "Can't connect UserSystem.";
         }
 
@@ -49,14 +44,12 @@ namespace SEP3_Client.Data
         {
             userSystemClient.SendAccountPackage(account, "logoff");
             userSystemClient.Disconnect();
-            FunctionTypes.Remove(FunctionType.UserSystem);
         }
 
         public string Register(string userName, string password)
         {
             if (userSystemClient.Connect(this))
             {
-                FunctionTypes.Add(FunctionType.UserSystem);
                 return userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
             }
             FunctionTypes.Remove(FunctionType.UserSystem);
@@ -119,6 +112,16 @@ namespace SEP3_Client.Data
                 return friendList.GetFriendById(id).Copy();
             }
             return null;
+        }
+        
+        public void SystemOnLine(FunctionType functionType)
+        {
+            FunctionTypes.Add(functionType);
+        }
+
+        public void SystemOffLine(FunctionType functionType)
+        {
+            FunctionTypes.Remove(functionType);
         }
 
         public void UpdateAccount(Account account)

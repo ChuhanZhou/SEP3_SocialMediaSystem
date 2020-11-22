@@ -9,6 +9,7 @@ public interface UserSystemModel extends NamedPropertyChangeSubject
 {
     Account addNewAccount(String name, String password);
     String login(String id,String password);
+    void reLogin(String id);
     void logoff(String id);
     Account getAccountById(String id);
     Account getAccountByIdAndPassword(String id,String password);
@@ -20,4 +21,5 @@ public interface UserSystemModel extends NamedPropertyChangeSubject
     String addNewFriend(String id,FriendSetting friendSetting);
     FriendList getFriendListByAccount(Account account);
     void removeFriend(String id,String friendId);
+    boolean databaseSystemIsOnline();
 }

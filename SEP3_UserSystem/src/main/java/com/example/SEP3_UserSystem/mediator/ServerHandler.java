@@ -44,7 +44,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         login = false;
         this.userSystemModel.addListener("updateAccount",this);
         this.userSystemModel.addListener("updateFriendSetting",this);
-
+        this.userSystemModel.addListener("databaseOnline",this);
     }
 
     public void close()
@@ -81,7 +81,15 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
 
     private void sendInformationPackage(InformationPackage informationPackage)
     {
-        String send = gson.toJson(informationPackage);
+        String send = "";
+        if (userSystemModel.databaseSystemIsOnline())
+        {
+            send = gson.toJson(informationPackage);
+        }
+        else
+        {
+            send = gson.toJson(new ErrorPackage("Database System offline.",true));
+        }
         System.out.println("Send:"+send);
         out.println(send);
     }
@@ -257,6 +265,9 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                         sendInformationPackage(new AccountPackage(account.toClient(),"update"));
                         sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
                     }
+                    break;
+                case "databaseOnline":
+                    userSystemModel.reLogin(id);
                     break;
             }
         }
