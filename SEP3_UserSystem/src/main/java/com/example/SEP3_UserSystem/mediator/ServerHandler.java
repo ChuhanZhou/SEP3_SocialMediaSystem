@@ -197,7 +197,7 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             userSystemModel.logoff(id);
         }
         System.out.println("Connection with User[" + id + "] is disconnected.");

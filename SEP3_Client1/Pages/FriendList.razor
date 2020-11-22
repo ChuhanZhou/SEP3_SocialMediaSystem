@@ -1,0 +1,196 @@
+﻿@page "/FriendList"
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Friend List</h1>
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 400px;
+         margin: auto;
+         ">
+        <div style="text-align: left; width: 220px; height: 40px;">
+            <span class="oi oi-people" style="background-color: #86cfda;color: white;width: 40px;height: 40px;
+                  float: left;font-size: x-large;line-height:40px;text-align: center "></span>
+            <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+                                                   font-size: 25px;" @onclick="addGroup">Group Chat</button>
+        </div>
+        <br/>
+        <div style="text-align: left; width: 260px; height: 40px;">
+             <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
+             float: left;font-size: x-large;line-height:40px;text-align: center "></span>
+            <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+             font-size: 25px;" @onclick="addFriend">Friend request</button>
+            <div style="width: 30px; height: 40px;float: left;">
+            @if (show)
+            {
+                <div style="float:left;background-color: red;color: white;font-size:23px;height: 30px;width: 30px;display: inline-block; border-radius: 30px;text-align:center">@NeedAgreeNum()</div>
+            }
+            </div>
+         </div>
+        <br/>
+        <p>
+            <span class="oi oi-magnifying-glass"></span>
+            <input type="text" placeholder="AccountID" style="width:200px" @bind="id"/>
+            <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" @onclick="search"></button>
+            <button class="oi oi-x" style="background-color: #6f42c1; height: 26px" @onclick="showAll"></button>
+        </p>
+        @if (friendsToshow == null)
+        {
+            <p>
+                <em>Loading</em>
+            </p>
+        }
+        else
+        {
+            if (!friendsToshow.GetFriendSettingList().Any())
+            {
+                <p>
+                    <em>No friends in the list...</em>
+                </p>
+            }
+            else
+            {
+                <table class="table">
+                    <tbody>
+                    @foreach (var friend in friendsToshow.GetFriendSettingList())
+                    {
+                        <tr>
+                            <td>
+                                <img src="user.PNG" width="40px" height="40px">
+                                @if (string.IsNullOrEmpty(getNote(friend.Id)))
+                                {
+                                    @getUserName(friend.Id)
+                                }
+                                else
+                                {
+                                    @getNote(friend.Id)
+                                }
+                            </td>
+                            <td>
+                                <button>
+                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="() => seeFriendProfile(friend)"/>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private static FriendList page;
+    private FriendSettingList friendsToshow;
+    private FriendSettingList allFriends;
+    private string id;
+    private string nickName;
+    private bool show;
+
+    public static FriendList GetPage()
+    {
+        if (page==null)
+        {
+            page = new FriendList();
+        }
+        return page;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        friendsToshow = allFriends;
+        if (NeedAgreeNum()>0)
+        {
+            show = true;
+        }
+        else
+        {
+            show = false;
+        }
+        page = this;
+    }
+
+    private int NeedAgreeNum()
+    {
+        int n = 0;
+        for (int i = 0; i < ClientModel.GetFriendSettingList().FriendSettings.Count; i++)
+        {
+            if (ClientModel.GetFriendSettingList().FriendSettings[i].NeedAgree())
+            {
+                n++;
+            }
+        }
+        return n;
+
+    }
+
+    private string getUserName(string id)
+    {
+        return nickName=ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private string getNote(string id)
+    {
+        return nickName=ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private void search()
+    {
+        if (!string.IsNullOrEmpty(id))
+        {
+            friendsToshow = new FriendSettingList();
+            friendsToshow.AddNewFriendSetting(ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id));
+        }
+    }
+
+    private void addFriend()
+    {
+        NavigationManager.NavigateTo("/FriendRequest");
+    }
+
+    private void addGroup()
+    {
+        NavigationManager.NavigateTo("/Group");
+    }
+    
+    
+
+    private void seeFriendProfile(FriendSetting friendSetting)
+    {
+        FriendProfile.friendSetting = friendSetting;
+        NavigationManager.NavigateTo("/FriendProfile");
+    }
+    
+    private void showAll()
+    {
+        friendsToshow = allFriends;
+        id = null;
+    }
+
+    public void Update()
+    {
+        if (ClientModel!=null)
+        {
+            allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+            friendsToshow = allFriends;
+            if (NeedAgreeNum()>0)
+            {
+                show = true;
+            }
+            else
+            {
+                show = false;
+            }
+            search();
+        }
+    }
+}

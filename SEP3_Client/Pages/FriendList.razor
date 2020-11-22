@@ -70,8 +70,7 @@
                                 }
                             </td>
                             <td>
-                                <button>
-                                    <i class="oi oi-eye" style="color: cornflowerblue" @onclick="() => seeFriendProfile(friend)"/>
+                                <button class="oi oi-eye" style="color: cornflowerblue" @onclick="() => seeFriendProfile(friend)">
                                 </button>
                             </td>
                         </tr>
@@ -84,12 +83,21 @@
 </div>
 
 @code {
+    private static FriendList page;
     private FriendSettingList friendsToshow;
     private FriendSettingList allFriends;
     private string id;
     private string nickName;
     private bool show;
 
+    public static FriendList GetPage()
+    {
+        if (page==null)
+        {
+            page = new FriendList();
+        }
+        return page;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -107,7 +115,7 @@
         {
             show = false;
         }
-        
+        page = this;
     }
 
     private int NeedAgreeNum()
@@ -121,7 +129,6 @@
             }
         }
         return n;
-
     }
 
     private string getUserName(string id)
@@ -136,8 +143,11 @@
 
     private void search()
     {
-        friendsToshow = new FriendSettingList();
-        friendsToshow.AddNewFriendSetting(ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id));
+        if (!string.IsNullOrEmpty(id))
+        {
+            friendsToshow = new FriendSettingList();
+            friendsToshow.AddNewFriendSetting(ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id));
+        }
     }
 
     private void addFriend()
@@ -162,5 +172,24 @@
     {
         friendsToshow = allFriends;
         id = null;
+    }
+
+    public void Update()
+    {
+        if (ClientModel!=null)
+        {
+            Console.WriteLine("[[[[[[[[[[[[[[[[[[[[[");
+            allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+            friendsToshow = allFriends;
+            if (NeedAgreeNum()>0)
+            {
+                show = true;
+            }
+            else
+            {
+                show = false;
+            }
+            search();
+        }
     }
 }

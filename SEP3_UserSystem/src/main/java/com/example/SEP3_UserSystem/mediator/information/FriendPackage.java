@@ -14,7 +14,7 @@ public class FriendPackage extends InformationPackage{
 
     public FriendPackage(Friend friend, String keyword)
     {
-        super(InformationType.ACCOUNT,keyword);
+        super(InformationType.FRIEND,keyword);
         SendList = new FriendList();
         SendList.addNewFriend(friend);
     }

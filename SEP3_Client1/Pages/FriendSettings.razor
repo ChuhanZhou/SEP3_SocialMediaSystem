@@ -1,0 +1,71 @@
+﻿@page "/FriendSettings"
+@using SEP3_Client.Model.Unit.User
+@using SEP3_Client.Data
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <div>
+        <h1 style="text-shadow: 2px 2px 3px #818182; color: #4e555b; text-align: left;float: left;width: 350px">Friend Settings</h1>
+        <button class="btn btn-outline-dark" style=" width:auto;border-radius: 5px;background-color: #007bff;"
+                type="submit" @onclick="Save">Save</button></div><br/>
+        <div style="float: left;text-align: left;font-size: 25px">
+            <div style="float: left;margin: 20px auto;width: 300px;height: 30px">
+                <span class="oi oi-person" style="float: left;width:300px;height: 30px">Alias : </span>
+                <input type="text" style="float: left;width:300px;height: 30px;" @bind="FriendSetting.Note">
+            </div>
+            <br/>
+            <div style="float: left;margin: 20px auto;width: 300px;height: 30px">
+                <span class="oi oi-box" style="float: left;width:300px;height: 30px">Hide my posts:
+                    <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="FriendSetting.DisablePost">
+                        <option>False</option>
+                        <option>True</option></select></span>
+            </div><br/>
+            <div style=" float:left; width: 300px;height: auto;font-size: 20px">
+                <div style="height: 10px"></div>
+                <button class="oi oi-x" style="background-color: red ; border: 2px solid black; border-radius: 8px;
+                    padding: 10px;width: 150px" @onclick="Delete">Delete</button><br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private static FriendSettings friendSettings;
+    public static FriendSetting FriendSetting;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+    }
+
+    public static FriendSettings getPage()
+    {
+        if (friendSettings==null)
+        {
+            friendSettings = new FriendSettings();
+        }
+        return friendSettings;
+    }
+
+    private void Save()
+    {
+        FriendSetting newFriendSetting = FriendSetting;
+        ClientModel.UpdateFriendSetting(newFriendSetting);
+        NavigationManager.NavigateTo("/FriendProfile");
+    }
+
+    private void Delete()
+    {
+        ClientModel.RemoveFriend(FriendSetting.GetId());
+        NavigationManager.NavigateTo("/FriendList");
+    }
+    
+}

@@ -1,0 +1,44 @@
+﻿@page "/Group"
+@using SEP3_Client.Data
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Group chat</h1>
+<div style="float: left; width: 100%;height: auto;">
+<div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+    <button class="oi oi-chevron-right" style="float:right; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button>
+    <div style="float: left; width: 250px; height: 40px;">
+     <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
+     float: left;font-size: x-large;line-height:40px;text-align: center "></span>
+    <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+     font-size: 25px;" @onclick="addGroup">New Group
+    </button>
+    </div>
+</div>
+</div>
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+    }
+    
+    private void addGroup()
+    {
+        NavigationManager.NavigateTo("/AddGroup");
+    }
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendList");
+    }
+    
+}
