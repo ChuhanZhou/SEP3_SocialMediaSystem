@@ -98,6 +98,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
         show = false;
         saveSuccess = false;
     }

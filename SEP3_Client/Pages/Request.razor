@@ -51,7 +51,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        root = "false";
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        root = "False";
         error = null;
     }
   

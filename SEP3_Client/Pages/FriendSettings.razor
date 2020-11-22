@@ -37,7 +37,15 @@
 @code {
     private static FriendSettings friendSettings;
     public static FriendSetting FriendSetting;
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+    }
+
     public static FriendSettings getPage()
     {
         if (friendSettings==null)

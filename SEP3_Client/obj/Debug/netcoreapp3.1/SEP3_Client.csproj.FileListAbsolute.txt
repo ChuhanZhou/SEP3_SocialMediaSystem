@@ -202,3 +202,5 @@ C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\staticwebassets\SEP3_Client.StaticWebAssets.xml
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\SEP3_Client.genruntimeconfig.cache
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\SEP3_Client.csproj.CopyComplete
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\AddGroup.razor.g.cs
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\AddGroup.razor.g.cs

@@ -3,65 +3,67 @@
 @using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
-
 <div style="float: left; width: 100%;height: auto;">
 <div style="text-align: center;
          width: 300px;
-         height: 350px;
+         height: auto;
          margin: auto;
          ">
     <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b" >Profile</h1>
-    <div style="margin: 40px auto;width: 300px;height: 40px">
-        <span class="oi oi-person" style="float: left;width:50px;height:40px;color: #fd7e14;font-size: xx-large;line-height:50px;text-align: center"></span>
-        <input type="text" placeholder="Username" style="float: left;width:250px;height: 40px" @bind="username"/>
-    </div>
-     <div  style="float: left;margin: 20px auto; height: auto;width: 300px">
-        <span class="oi oi-calendar" style="float: left;width:300px;height: 30px">Birth of date: </span>
-        <div style="float: left">
-            <label style="visibility: hidden">m</label>
-            Month :
-            <select class="form-control selectpicker" style="width: auto; display: inline-block" @bind="month">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-            </select>
-        </div>
+    <div style="float: left;text-align: left;font-size: 17px">
+        <div style="float: left;margin: 20px auto;width: 300px;height: 30px"> 
+            <span class="oi oi-person" style="float: left;width:300px;height: 30px">Username : </span>
+            <input type="text" style="float: left;width:300px;height: 30px" @bind="username">
+         </div>
+        <div  style="float: left;margin: 20px auto; height: auto;width: 300px">
+            <span class="oi oi-calendar" style="float: left;width:300px;height: 30px">Birth of date: </span>
+            <div style="float: left">
+                <label style="visibility: hidden">m</label>
+                Month :
+                <select class="form-control selectpicker" style="width: auto; display: inline-block" @bind=month>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select>
+            </div>
+            </div>
+            <div style="height: 6px"></div>
         <div>
+            <label style="visibility: hidden">m</label>
             Day :
-            <select class="form-control selectpicker" style="width: 150px" @bind="day">
+            <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="day">
                 @for (int i = 0; i < GetDays(month); i++)
                 {
-                    <option>@(i+1)</option>
+                    <option>@(i + 1)</option>
                 }
             </select>
         </div>
-         <div style="float: left;margin: 20px auto;">
-             <span class="oi oi-star" style="float: left;width:300px;height: 30px">Gender:
-                 <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="gender">
-                     <option>M</option>
-                     <option>F</option></select></span>
-         </div><br/>
-    <div style="height: 6px"></div>
-         <div style="float: left; margin: 20px auto;width: 300px;height: 30px">
-             <span class="oi oi-home" style="float: left;width:300px;height: 30px">Hometown : </span>
-             <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown">
-         </div><br/>
+        <div style="float: left;margin: 20px auto;">
+            <span class="oi oi-star" style="float: left;width:300px;height: 30px">Gender:
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=gender>
+                    <option>M</option>
+                    <option>F</option></select></span>
+        </div><br/>
+        <div style="float: left; margin: 20px auto;width: 300px;height: 30px">
+            <span class="oi oi-home" style="float: left;width:300px;height: 30px">Hometown : </span>
+            <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown">
+        </div><br/>
         <div  style="float: left; margin: 20px auto;width: 300px;height: 30px">
-             <span class="oi oi-phone" style="float: left;width:300px;height: 30px">TelNo. :</span>
-             <input type="number" style="float: left;width:300px;height: 30px" @bind="telNo">
-         </div><br/>
+            <span class="oi oi-phone" style="float: left;width:300px;height: 30px">TelNo. :</span>
+            <input type="number" style="float: left;width:300px;height: 30px" @bind="telNo">
+        </div><br/>
     </div>
-    <div>
-        <button class="btn btn-light" style="width: 100%;height: 100%;background-color: #9fcdff" @onclick="update">SAVE</button>
+    <div style="float: left;margin: 20px auto;width: 300px; height: 40px">
+        <button class="btn btn-light" style="width: 100%; height: 100%;background-color: #9fcdff" @onclick="update">SAVE</button>
     </div>
    
 </div>
@@ -79,6 +81,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
         Account account = ClientModel.GetAccount();
         username = account.GetUserName();
         if (account.Birthday==null)
@@ -141,10 +147,6 @@
         }
         return 0;
     }
-
-    private void clickPen()
-    {
-        change = true;
-    }
+    
 
 }

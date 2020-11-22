@@ -68,6 +68,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
         Account account = ClientModel.GetAccount().Copy();
         accountId = account.GetId();
         username = account.GetUserName();
