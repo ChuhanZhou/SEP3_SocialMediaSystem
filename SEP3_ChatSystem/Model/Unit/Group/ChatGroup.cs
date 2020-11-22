@@ -5,12 +5,14 @@ namespace SEP3_ChatSystem.Model.Unit.Group
     public class ChatGroup
     {
         public string GroupId { get; set; }
+        public string GroupName { get; set; }
         public string CreatorId { get; set; }
         public List<string> AccountIdList { get; set; }
 
-        public ChatGroup(string groupId, string creatorId)
+        public ChatGroup(string groupId,string groupName,string creatorId)
         {
             GroupId = groupId;
+            GroupName = groupName;
             CreatorId = creatorId;
             AccountIdList = new List<string> {creatorId};
         }
