@@ -53,8 +53,8 @@
                                   {
                                       @if (click.Equals(false))
                                       {
-                                          <button @onclick="@(()=>changeStatusTo(request.Id,true))">Confirm</button>
-                                          <button @onclick="@(()=>changeStatusTo(request.Id,false))">Refuse</button>
+                                          <button @onclick="@(()=>changeStatusTo(request.Id,true))" style="background-color: #80bdff">Confirm</button>
+                                          <button @onclick="@(()=>changeStatusTo(request.Id,false))" style="background-color: #80bdff">Refuse</button>
                                       }
                                       else
                                       {
