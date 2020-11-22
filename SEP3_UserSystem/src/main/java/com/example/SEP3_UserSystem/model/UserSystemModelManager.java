@@ -186,13 +186,20 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
                 //System.out.println(222222);
                 if (hasId(friendId))
                 {
-                    account.getFriendSettingList().addNewFriendSetting(friendSetting);
-                    property.firePropertyChange("updateFriendSetting",null,id);
-                    cloudDatabaseModel.updateUser(accountList.getAccountById(id));
-                    accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
-                    property.firePropertyChange("updateFriendSetting",null,friendId);
-                    cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
-                    return null;
+                    if (getAccountById(id).getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId)==null)
+                    {
+                        account.getFriendSettingList().addNewFriendSetting(friendSetting);
+                        property.firePropertyChange("updateFriendSetting",null,id);
+                        cloudDatabaseModel.updateUser(accountList.getAccountById(id));
+                        accountList.getAccountById(friendId).getFriendSettingList().addNewFriendSetting(new FriendSetting(id));
+                        property.firePropertyChange("updateFriendSetting",null,friendId);
+                        cloudDatabaseModel.updateUser(accountList.getAccountById(friendId));
+                        return null;
+                    }
+                    else
+                    {
+                        return "You have a unconfirmed message of [" + friendId + "].";
+                    }
                 }
                 else
                 {
