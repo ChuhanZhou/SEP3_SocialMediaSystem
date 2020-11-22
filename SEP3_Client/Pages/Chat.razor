@@ -1,6 +1,15 @@
 ﻿@page "/Chat"
+@inject NavigationManager NavigationManager
 <h3>Chat</h3>
 
 @code {
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+    }
+
 }

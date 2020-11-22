@@ -87,6 +87,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
         friendRequests = ClientModel.GetFriendSettingList();
         click = false;
     }

@@ -94,6 +94,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
         allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
         friendsToshow = allFriends;
         if (NeedAgreeNum()>0)
