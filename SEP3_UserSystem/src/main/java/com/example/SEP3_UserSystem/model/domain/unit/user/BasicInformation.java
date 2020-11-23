@@ -17,6 +17,16 @@ public abstract class BasicInformation extends User{
         PhoneNumber = -1;
     }
 
+    public BasicInformation(BasicInformation basicInformation)
+    {
+        super(basicInformation);
+        UserName = basicInformation.UserName;
+        Birthday = basicInformation.Birthday.copy();
+        Gender = basicInformation.Gender;
+        Hometown = basicInformation.Hometown;
+        PhoneNumber = basicInformation.PhoneNumber;
+    }
+
     public String getUserName() {
         return UserName;
     }

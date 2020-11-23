@@ -90,8 +90,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
         {
             send = gson.toJson(new ErrorPackage("Database System offline.",true));
         }
-        System.out.println("Send:"+send);
+        System.out.println("Send To [" + id + "]:"+send);
         out.println(send);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void login(String id,String password)
@@ -120,13 +125,13 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
             id = account.getId();
             String receive;
             InformationPackage informationPackage;
-            sendInformationPackage(new AccountPackage(account.toClient(),"update"));
+            sendInformationPackage(new AccountPackage(userSystemModel.getAccountById(id),"update"));
             sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(account),"update"));
             login = true;
             while (login)
             {
                 receive = in.readLine();
-                System.out.println("Receive:"+receive);
+                System.out.println("Receive From ["+id+"]:"+receive);
                 informationPackage = gson.fromJson(receive,InformationPackage.class);
                 if (informationPackage==null)
                 {
@@ -268,6 +273,8 @@ public class ServerHandler implements Runnable, PropertyChangeListener {
                     break;
                 case "databaseOnline":
                     userSystemModel.reLogin(id);
+                    sendInformationPackage(new AccountPackage(userSystemModel.getAccountById(id).toClient(),"update"));
+                    sendInformationPackage(new FriendPackage(userSystemModel.getFriendListByAccount(userSystemModel.getAccountById(id)),"update"));
                     break;
             }
         }

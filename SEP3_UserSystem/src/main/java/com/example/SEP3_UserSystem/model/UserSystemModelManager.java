@@ -213,7 +213,6 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
                 {
                     //System.out.println(11111111);
                     account.getFriendSettingList().getFriendSettingFromUnconfirmedById(friendId).update(friendSetting);
-                    System.out.println(account.getFriendSettingList().getFriendSettingFromAgreeById(friendId).getStatus());
                     property.firePropertyChange("updateFriendSetting",null,id);
                     cloudDatabaseModel.updateUser(accountList.getAccountById(id));
                     if (friendSetting.getStatus()== FriendSettingStatus.AGREE)

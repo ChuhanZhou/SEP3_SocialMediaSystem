@@ -3,8 +3,11 @@ package com.example.SEP3_UserSystem.model.domain.unit.user;
 public class Friend extends BasicInformation {
 
     public Friend(Account account) {
-        super(account.getId(), account.getUserName());
-        setBirthday(account.getBirthday());
+        super(account);
+    }
+
+    public Friend(Friend friend) {
+        super(friend);
     }
 
     public Friend(String id, String userName, Birthday birthday) {
@@ -17,6 +20,6 @@ public class Friend extends BasicInformation {
     }
 
     public Friend copy() {
-        return new Friend(getId(),getUserName(),getBirthday());
+        return new Friend(this);
     }
 }
