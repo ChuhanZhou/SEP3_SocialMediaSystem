@@ -127,13 +127,13 @@ namespace SEP3_Client.Data
         public void UpdateAccount(Account account)
         {
             this.account = account;
-            UpdatePage.Update();
+            UpdatePage.UserSystemUpdate();
         }
 
         public void UpdateFriendList(FriendList friendList)
         {
             this.friendList = friendList;
-            UpdatePage.Update();
+            UpdatePage.UserSystemUpdate();
         }
     }
 }
