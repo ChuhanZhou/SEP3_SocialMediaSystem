@@ -138,7 +138,7 @@
 
     private string getNote(string id)
     {
-        return nickName=ClientModel.GetFriendById(id).GetUserName();
+        return nickName=ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id).GetNote();
     }
 
     private void search()
@@ -178,7 +178,6 @@
     {
         if (ClientModel!=null)
         {
-            Console.WriteLine("[[[[[[[[[[[[[[[[[[[[[");
             allFriends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
             friendsToshow = allFriends;
             if (NeedAgreeNum()>0)
@@ -192,4 +191,6 @@
             search();
         }
     }
+    
+    
 }
