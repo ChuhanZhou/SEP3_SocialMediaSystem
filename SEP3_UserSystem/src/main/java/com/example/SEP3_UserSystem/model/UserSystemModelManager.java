@@ -309,9 +309,11 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
         new Thread(()->{
             while (!databaseOnline)
             {
+                System.out.println("Try to reconnect with Database System in 10s.");
+                System.out.print("[");
                 for (int x=10;x>0;x--)
                 {
-                    System.out.println("Try to reconnect with Database System in " + x + "s.");
+                    System.out.print("-");
                     try
                     {
                         Thread.sleep(1000);
@@ -321,7 +323,7 @@ public class UserSystemModelManager implements UserSystemModel,UserSystemModelFo
                         e.printStackTrace();
                     }
                 }
-                System.out.println("Try reconnecting...");
+                System.out.println("]\nTry reconnecting...");
                 accountList = cloudDatabaseModel.getAllAccount();
             }
         }).start();
