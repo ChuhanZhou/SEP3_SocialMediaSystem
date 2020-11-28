@@ -154,58 +154,61 @@ namespace SEP3_ChatSystem.Mediator
             while (connect)
             {
                 string receive = GetReceive();
-                var receivePackage = JsonSerializer.Deserialize<InformationPackage>(receive);
-                string result = null;
-                switch (receivePackage.informationType)
+                if (receive!=null)
                 {
-                    case InformationType.PRIVATE_MESSAGE:
-                        PrivateMessagePackage privateMessagePackage = JsonSerializer.Deserialize<PrivateMessagePackage>(receive);
-                        foreach (var message in privateMessagePackage.SendList.MessageList)
-                        {
-                            result = chatModel.AddNewPrivateMessage(message);
-                            if (!string.IsNullOrEmpty(result))
+                    var receivePackage = JsonSerializer.Deserialize<InformationPackage>(receive);
+                    string result = null;
+                    switch (receivePackage.informationType)
+                    {
+                        case InformationType.PRIVATE_MESSAGE:
+                            PrivateMessagePackage privateMessagePackage = JsonSerializer.Deserialize<PrivateMessagePackage>(receive);
+                            foreach (var message in privateMessagePackage.SendList.MessageList)
                             {
-                                break;
+                                result = chatModel.AddNewPrivateMessage(message);
+                                if (!string.IsNullOrEmpty(result))
+                                {
+                                    break;
+                                }
                             }
-                        }
-                        break;
-                    case InformationType.GROUP_MESSAGE:
-                        GroupMessagePackage groupMessagePackage = JsonSerializer.Deserialize<GroupMessagePackage>(receive);
-                        foreach (var message in groupMessagePackage.SendList.MessageList)
-                        {
-                            result = chatModel.AddNewGroupMessage(message);
-                            if (!string.IsNullOrEmpty(result))
+                            break;
+                        case InformationType.GROUP_MESSAGE:
+                            GroupMessagePackage groupMessagePackage = JsonSerializer.Deserialize<GroupMessagePackage>(receive); 
+                            foreach (var message in groupMessagePackage.SendList.MessageList)
                             {
-                                break;
+                                result = chatModel.AddNewGroupMessage(message);
+                                if (!string.IsNullOrEmpty(result))
+                                {
+                                    break;
+                                }
                             }
-                        }
-                        break;
-                    case InformationType.CHAT_GROUP:
-                        ChatGroupPackage chatGroupPackage = JsonSerializer.Deserialize<ChatGroupPackage>(receive);
-                        switch (chatGroupPackage.Keyword)
-                        {
-                            case "Add":
-                                result = chatModel.AddNewGroup(chatGroupPackage.SendList.GetGroupByIndex(0),userId);
-                                break;
-                            case "Update":
-                                result = chatModel.UpdateGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
-                                break;
-                            case "AddUser":
-                                result = chatModel.AddNewGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId, chatGroupPackage.TargetId,userId);
-                                break;
-                            case "RemoveUser":
-                                result = chatModel.RemoveGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId,chatGroupPackage.TargetId,userId);
-                                break;
-                            case "Remove":
-                                result = chatModel.RemoveGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
-                                break;
-                        }
-                        break;
-                    default:
-                        result = "Wrong package.";
-                        break;
+                            break;
+                        case InformationType.CHAT_GROUP:
+                            ChatGroupPackage chatGroupPackage = JsonSerializer.Deserialize<ChatGroupPackage>(receive);
+                            switch (chatGroupPackage.Keyword)
+                            {
+                                case "Add":
+                                    result = chatModel.AddNewGroup(chatGroupPackage.SendList.GetGroupByIndex(0),userId);
+                                    break;
+                                case "Update":
+                                    result = chatModel.UpdateGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
+                                    break;
+                                case "AddUser":
+                                    result = chatModel.AddNewGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId, chatGroupPackage.TargetId,userId);
+                                    break;
+                                case "RemoveUser":
+                                    result = chatModel.RemoveGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId,chatGroupPackage.TargetId,userId);
+                                    break;
+                                case "Remove":
+                                    result = chatModel.RemoveGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
+                                    break;
+                            }
+                            break;
+                        default:
+                            result = "Wrong package.";
+                            break;
+                    }
+                    SendErrorPackage(result);
                 }
-                SendErrorPackage(result);
             }
         }
         

@@ -56,7 +56,7 @@ namespace SEP3_ChatSystem.Model.List.Group
         {
             if (index>=0&&index<GroupList.Count)
             {
-                return GroupList[0];
+                return GroupList[index];
             }
 
             return null;

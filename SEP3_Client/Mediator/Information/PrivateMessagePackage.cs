@@ -17,5 +17,7 @@ namespace SEP3_Client.Mediator.Information
             SendList = new PrivateMessageList();
             SendList.AddMessage(message);
         }
+        
+        public PrivateMessagePackage(){}
     }
 }

@@ -17,5 +17,7 @@ namespace SEP3_ChatSystem.Mediator.Information
             SendList = new GroupMessageList();
             SendList.AddMessage(message);
         }
+        
+        public GroupMessagePackage(){}
     }
 }

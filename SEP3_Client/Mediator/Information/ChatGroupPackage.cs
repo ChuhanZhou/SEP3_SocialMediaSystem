@@ -27,5 +27,7 @@ namespace SEP3_Client.Mediator.Information
             SendList = new ChatGroupList();
             SendList.AddNewGroup(chatGroup);
         }
+        
+        public ChatGroupPackage(){}
     }
 }

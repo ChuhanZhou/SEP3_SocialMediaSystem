@@ -41,7 +41,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
         
         public bool Connect(IClientModelForUserSystem clientModel)
         {
-            Console.WriteLine("Starting client...");
+            Console.WriteLine("Starting UserSystem client...");
             try
             {
                 client = new TcpClient(host, port);
@@ -49,6 +49,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
                 login = false;
                 this.clientModel = clientModel;
                 this.clientModel.SystemOnLine(FunctionType.UserSystem);
+                Console.WriteLine("UserSystem online.");
                 return true;
             }
             catch (Exception e)
@@ -65,6 +66,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             client.Close();
             login = false;
             clientModel.SystemOffLine(FunctionType.UserSystem);
+            Console.WriteLine("UserSystem offline.");
         }
 
         private void Send(string information)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using SEP3_Client.Mediator.ChatSystemClient;
 using SEP3_Client.Mediator.UserSystemClient;
@@ -58,14 +59,17 @@ namespace SEP3_Client.Data
 
         private void ConnectChatSystem()
         {
-            chatSystemClient.Connect(this);
-            chatSystemClient.Login();
+            new Thread(()=>
+            {
+                chatSystemClient.Connect(this);
+            }).Start();
         }
 
         public void Logoff()
         {
             userSystemClient.SendAccountPackage(account, "logoff");
             userSystemClient.Disconnect();
+            chatSystemClient.Logoff();
         }
 
         public string Register(string userName, string password)

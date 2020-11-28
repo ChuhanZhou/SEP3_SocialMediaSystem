@@ -62,6 +62,7 @@ namespace SEP3_ChatSystem.Model.Unit.Group
             return new ChatGroup
             {
                 GroupId = GroupId,
+                GroupName = GroupName,
                 CreatorId = CreatorId,
                 AccountIdList = new List<string>(AccountIdList)
             };

@@ -8,8 +8,8 @@ namespace SEP3_Client.Mediator.ChatSystemClient
     public interface IChatSystemClient
     {
         bool Connect(IClientModelForChatSystem clientModel);
-        void Disconnect();
         void Login();
+        void Logoff();
         string SendChatGroupPackage(ChatGroup chatGroup,string targetId,string keyword);
         string SendPrivateMessagePackage(PrivateMessageList privateMessageList);
         string SendPrivateMessagePackage(PrivateMessage privateMessage);

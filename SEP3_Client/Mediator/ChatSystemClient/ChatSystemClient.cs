@@ -26,6 +26,7 @@ namespace SEP3_Client.Mediator.ChatSystemClient
         private bool sending;
         private bool receiving;
         private bool isReceive;
+        private bool reconnect;
         private string receiveMessage;
 
         public ChatSystemClient() : this(PORT, HOST)
@@ -44,6 +45,7 @@ namespace SEP3_Client.Mediator.ChatSystemClient
         {
             this.port = port;
             this.host = host;
+            reconnect = true;
         }
 
         private void Send(string information)
@@ -101,40 +103,67 @@ namespace SEP3_Client.Mediator.ChatSystemClient
             catch (Exception e)
             {
                 Console.WriteLine("Disconnect [Exception]" + e.Message);
-                Disconnect();
+                //Console.WriteLine(e);
                 receiving = false;
+                Disconnect();
                 return null;
             }
         }
 
         public bool Connect(IClientModelForChatSystem clientModel)
         {
-            Console.WriteLine("Starting client...");
+            Console.WriteLine("Starting ChatSystem client...");
             try
             {
+                this.clientModel = clientModel;
+                login = false;
                 client = new TcpClient(host, port);
                 stream = client.GetStream();
-                login = false;
-                this.clientModel = clientModel;
                 this.clientModel.SystemOnLine(FunctionType.ChatSystem);
+                Console.WriteLine("ChatSystem online.");
+                reconnect = true;
+                Login();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Can't connect ChatSystem [Exception]" + e.Message);
-                //Console.WriteLine(e);
+                Disconnect();
                 return false;
             }
         }
 
-        public void Disconnect()
+        private void Disconnect()
         {
-            stream.Close();
-            client.Close();
+            try
+            {
+                stream.Close();
+                client.Close();
+            }
+            catch
+            {
+            }
             login = false;
             clientModel.SystemOffLine(FunctionType.ChatSystem);
+            Console.WriteLine("ChatSystem offline.");
+            Reconnect();
         }
 
+        private void Reconnect()
+        {
+            if (reconnect)
+            {
+                Console.Write("Try to reconnect chat system in 10s.\n[");
+                for (int i = 0; i < 10; i++)
+                {
+                    Thread.Sleep(1000);
+                    Console.Write("-");
+                }
+                Console.WriteLine("]\nReconnecting chat system...");
+                Connect(clientModel);
+            }
+        }
+        
         public void Login()
         {
             if (clientModel.HasFunction(FunctionType.ChatSystem))
@@ -159,7 +188,13 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 }
             }
         }
-        
+
+        public void Logoff()
+        {
+            reconnect = false;
+            Disconnect();
+        }
+
         public string SendChatGroupPackage(ChatGroup chatGroup, string targetId, string keyword)
         {
             if (clientModel.HasFunction(FunctionType.ChatSystem))
@@ -280,7 +315,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 {
                     Thread.Sleep(100);
                 }
-
                 sending = true;
                 isReceive = false;
                 GroupMessagePackage sendPackage = new GroupMessagePackage(groupMessage, null);
@@ -307,7 +341,7 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 while (login)
                 {
                     var receive = GetReceive();
-                    try
+                    if (receive!=null)
                     {
                         var informationPackage = JsonSerializer.Deserialize<InformationPackage>(receive);
                         switch (informationPackage.GetInformationType())
@@ -348,11 +382,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                                 isReceive = true;
                                 break;
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Wrong deserialize: " + receive + " [Exception]" + e.Message);
-                        break;
                     }
                 }
             }

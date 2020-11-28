@@ -9,7 +9,7 @@ namespace SEP3_ChatSystem.Mediator
     public class ServerConnector
     {
         private IChatModel chatModel;
-        private string HOST = "localhost";
+        private string HOST = "127.0.0.1";
         private int PORT = 3010;
 
         public ServerConnector(IChatModel chatModel)
