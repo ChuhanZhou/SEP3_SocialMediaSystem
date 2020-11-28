@@ -2,6 +2,6 @@
 {
     public enum FunctionType
     {
-        UserSystem
+        UserSystem,ChatSystem
     }
 }

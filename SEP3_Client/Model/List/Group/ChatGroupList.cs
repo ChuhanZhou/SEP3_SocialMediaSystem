@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SEP3_ChatSystem.Model.Unit.Group;
+using SEP3_Client.Model.Unit.Group;
 
-namespace SEP3_ChatSystem.Model.List.Group
+namespace SEP3_Client.Model.List.Group
 {
     public class ChatGroupList
     {

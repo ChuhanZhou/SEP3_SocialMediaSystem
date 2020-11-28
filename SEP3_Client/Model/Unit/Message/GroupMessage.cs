@@ -1,6 +1,6 @@
-﻿using SEP3_ChatSystem.Model.List.Group;
+﻿using SEP3_Client.Model.List.Group;
 
-namespace SEP3_ChatSystem.Model.Unit.Message
+namespace SEP3_Client.Model.Unit.Message
 {
     public class GroupMessage : Message
     {

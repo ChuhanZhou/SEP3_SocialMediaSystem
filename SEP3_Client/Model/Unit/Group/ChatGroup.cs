@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SEP3_ChatSystem.Model.Unit.Group
+namespace SEP3_Client.Model.Unit.Group
 {
     public class ChatGroup
     {

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SEP3_ChatSystem.Model.List.Group;
-using SEP3_ChatSystem.Model.Unit.Group;
-using SEP3_ChatSystem.Model.Unit.Message;
+using SEP3_Client.Model.List.Group;
+using SEP3_Client.Model.Unit.Message;
 
-namespace SEP3_ChatSystem.Model.List.Message
+namespace SEP3_Client.Model.List.Message
 {
     public class GroupMessageList
     {

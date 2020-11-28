@@ -1,22 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using SEP3_Client.Mediator.ChatSystemClient;
 using SEP3_Client.Mediator.UserSystemClient;
 using SEP3_Client.Model;
+using SEP3_Client.Model.List.Group;
+using SEP3_Client.Model.List.Message;
 using SEP3_Client.Model.List.UserList;
+using SEP3_Client.Model.Unit.Group;
+using SEP3_Client.Model.Unit.Message;
 using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Data
 {
-    public class ClientModelManager : IClientModel,IClientModelForUserSystem
+    public class ClientModelManager : IClientModel,IClientModelForUserSystem,IClientModelForChatSystem
     {
         private List<FunctionType> FunctionTypes;
         private Account account;
         private FriendList friendList;
+        private ChatGroupList chatGroupList;
+        private PrivateMessageList privateMessageList;
+        private GroupMessageList groupMessageList;
+        
         private IUserSystemClient userSystemClient;
+        private IChatSystemClient chatSystemClient;
         public ClientModelManager()
         {
             FunctionTypes = new List<FunctionType>();
             userSystemClient = new UserSystemClient();
+            chatSystemClient = new ChatSystemClient();
         }
         
         public bool HasFunction(FunctionType functionType)
@@ -35,9 +46,20 @@ namespace SEP3_Client.Data
         {
             if (userSystemClient.Connect(this))
             {
-                return userSystemClient.SendLoginOrRegisterPackage("login",id,password);
+                string result = userSystemClient.SendLoginOrRegisterPackage("login",id,password);
+                if (result==null)
+                {
+                    ConnectChatSystem();
+                }
+                return result;
             }
             return "Can't connect UserSystem.";
+        }
+
+        private void ConnectChatSystem()
+        {
+            chatSystemClient.Connect(this);
+            chatSystemClient.Login();
         }
 
         public void Logoff()
@@ -50,7 +72,12 @@ namespace SEP3_Client.Data
         {
             if (userSystemClient.Connect(this))
             {
-                return userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
+                string result = userSystemClient.SendLoginOrRegisterPackage("register",userName,password);
+                if (result==null)
+                {
+                    ConnectChatSystem();
+                }
+                return result;
             }
             FunctionTypes.Remove(FunctionType.UserSystem);
             return "Can't connect UserSystem.";
@@ -113,7 +140,63 @@ namespace SEP3_Client.Data
             }
             return null;
         }
-        
+
+        public string AddNewGroup(string groupName)
+        {
+            return chatSystemClient.SendChatGroupPackage(new ChatGroup(groupName,account.Id), null, "Add");
+        }
+
+        public ChatGroupList GetGroupList()
+        {
+            return chatGroupList.Copy();
+        }
+
+        public ChatGroup GetGroupByGroupId(string groupId)
+        {
+            return chatGroupList.GetGroupByGroupId(groupId).Copy();
+        }
+
+        public string UpdateGroupInformation(ChatGroup chatGroup)
+        {
+            return chatSystemClient.SendChatGroupPackage(chatGroup, null, "Update");
+        }
+
+        public string AddGroupMember(ChatGroup chatGroup, string newMemberId)
+        {
+            return chatSystemClient.SendChatGroupPackage(chatGroup, newMemberId, "AddUser");
+        }
+
+        public string RemoveGroupMember(ChatGroup chatGroup, string removeMemberId)
+        {
+            return chatSystemClient.SendChatGroupPackage(chatGroup, removeMemberId, "RemoveUser");
+        }
+
+        public string RemoveGroup(ChatGroup chatGroup)
+        {
+            return chatSystemClient.SendChatGroupPackage(chatGroup, null, "Remove");
+
+        }
+
+        public PrivateMessageList GetMessageById(string id)
+        {
+            return privateMessageList.GetMessageById(id).Copy();
+        }
+
+        public GroupMessageList GetMessageByGroupId(string groupId)
+        {
+            return groupMessageList.GetMessageByGroupId(groupId);
+        }
+
+        public string SendPrivateMessage(PrivateMessage message)
+        {
+            return chatSystemClient.SendPrivateMessagePackage(message);
+        }
+
+        public string SendGroupMessage(GroupMessage message)
+        {
+            return chatSystemClient.SendGroupMessagePackage(message);
+        }
+
         public void SystemOnLine(FunctionType functionType)
         {
             FunctionTypes.Add(functionType);
@@ -122,6 +205,36 @@ namespace SEP3_Client.Data
         public void SystemOffLine(FunctionType functionType)
         {
             FunctionTypes.Remove(functionType);
+        }
+
+        public void UpdateChatGroupList(ChatGroupList chatGroupList)
+        {
+            this.chatGroupList = chatGroupList.Copy();
+            UpdatePage.ChatSystemUpdate();
+        }
+
+        public void UpdatePrivateMessageList(PrivateMessageList privateMessageList)
+        {
+            this.privateMessageList = privateMessageList.Copy();
+            UpdatePage.ChatSystemUpdate();
+        }
+
+        public void UpdateGroupMessageList(GroupMessageList groupMessageList)
+        {
+            this.groupMessageList = groupMessageList.Copy();
+            UpdatePage.ChatSystemUpdate();
+        }
+
+        public void AddPrivateMessage(PrivateMessage newMessage)
+        {
+            privateMessageList.AddMessage(newMessage);
+            UpdatePage.ChatSystemUpdate();
+        }
+
+        public void AddGroupMessage(GroupMessage newMessage)
+        {
+            groupMessageList.AddMessage(newMessage);
+            UpdatePage.ChatSystemUpdate();
         }
 
         public void UpdateAccount(Account account)

@@ -232,7 +232,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
         }
 
-        public void Start()
+        private void Start()
         {
             while (clientModel.HasFunction(FunctionType.UserSystem))
             {

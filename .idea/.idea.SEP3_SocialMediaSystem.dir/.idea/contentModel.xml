@@ -17,7 +17,18 @@
           <e p="ChatModelManager.cs" t="Include" />
           <e p="IChatModel.cs" t="Include" />
         </e>
-        <e p="Mediator" t="Include" />
+        <e p="Mediator" t="Include">
+          <e p="Information" t="Include">
+            <e p="ChatGroupPackage.cs" t="Include" />
+            <e p="ErrorPackage.cs" t="Include" />
+            <e p="GroupMessagePackage.cs" t="Include" />
+            <e p="InformationPackage.cs" t="Include" />
+            <e p="InformationType.cs" t="Include" />
+            <e p="PrivateMessagePackage.cs" t="Include" />
+          </e>
+          <e p="ServerConnector.cs" t="Include" />
+          <e p="ServerHandler.cs" t="Include" />
+        </e>
         <e p="Model" t="Include">
           <e p="List" t="Include">
             <e p="Group" t="Include">
@@ -100,6 +111,7 @@
         <e p="Data" t="Include">
           <e p="ClientModelManager.cs" t="Include" />
           <e p="IClientModel.cs" t="Include" />
+          <e p="IClientModelForChatSystem.cs" t="Include" />
           <e p="IClientModelForUserSystem.cs" t="Include" />
           <e p="UpdatePage.cs" t="Include" />
         </e>
@@ -110,12 +122,15 @@
           </e>
           <e p="Information" t="Include">
             <e p="AccountPackage.cs" t="Include" />
+            <e p="ChatGroupPackage.cs" t="Include" />
             <e p="ErrorPackage.cs" t="Include" />
             <e p="FriendPackage.cs" t="Include" />
             <e p="FriendSettingPackage.cs" t="Include" />
+            <e p="GroupMessagePackage.cs" t="Include" />
             <e p="InformationPackage.cs" t="Include" />
             <e p="InformationType.cs" t="Include" />
             <e p="LoginOrRegisterPackage.cs" t="Include" />
+            <e p="PrivateMessagePackage.cs" t="Include" />
             <e p="SearchPackage.cs" t="Include" />
           </e>
           <e p="UserSystemClient" t="Include">
@@ -126,6 +141,13 @@
         <e p="Model" t="Include">
           <e p="FunctionType.cs" t="Include" />
           <e p="List" t="Include">
+            <e p="Group" t="Include">
+              <e p="ChatGroupList.cs" t="Include" />
+            </e>
+            <e p="Message" t="Include">
+              <e p="GroupMessageList.cs" t="Include" />
+              <e p="PrivateMessageList.cs" t="Include" />
+            </e>
             <e p="UserList" t="Include">
               <e p="AccountList.cs" t="Include" />
               <e p="FriendList.cs" t="Include" />
@@ -133,6 +155,15 @@
             </e>
           </e>
           <e p="Unit" t="Include">
+            <e p="Group" t="Include">
+              <e p="ChatGroup.cs" t="Include" />
+            </e>
+            <e p="Message" t="Include">
+              <e p="GroupMessage.cs" t="Include" />
+              <e p="Message.cs" t="Include" />
+              <e p="MessageType.cs" t="Include" />
+              <e p="PrivateMessage.cs" t="Include" />
+            </e>
             <e p="User" t="Include">
               <e p="Account.cs" t="Include" />
               <e p="BasicInformation.cs" t="Include" />
@@ -210,9 +241,6 @@
           <e p="people_multiple_76px_1116527_easyicon.net.png" t="Include" />
           <e p="user.PNG" t="Include" />
         </e>
-      </e>
-      <e p="SEP3_Client1" t="IncludeRecursive">
-        <e p="SEP3_Client.csproj" t="IncludeRecursive" />
       </e>
     </e>
   </component>

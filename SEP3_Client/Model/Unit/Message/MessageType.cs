@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SEP3_ChatSystem.Model.Unit.Message
+namespace SEP3_Client.Model.Unit.Message
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MessageType

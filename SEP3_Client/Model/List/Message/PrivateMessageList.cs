@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SEP3_ChatSystem.Model.List.Group;
-using SEP3_ChatSystem.Model.Unit.Group;
-using SEP3_ChatSystem.Model.Unit.Message;
+using SEP3_Client.Model.Unit.Message;
 
-namespace SEP3_ChatSystem.Model.List.Message
+namespace SEP3_Client.Model.List.Message
 {
-    public class GroupMessageList
+    public class PrivateMessageList
     {
-        public List<GroupMessage> MessageList { get; set; }
+        public List<PrivateMessage> MessageList { get; set; }
 
-        public GroupMessageList()
+        public PrivateMessageList()
         {
-            MessageList = new List<GroupMessage>();
+            MessageList = new List<PrivateMessage>();
         }
 
-        public void AddMessage(GroupMessage newMessage)
+        public void AddMessage(PrivateMessage newMessage)
         {
             MessageList.Add(newMessage);
         }
@@ -25,7 +23,7 @@ namespace SEP3_ChatSystem.Model.List.Message
             return MessageList.Count;
         }
 
-        public GroupMessage GetMessageByIndex(int index)
+        public PrivateMessage GetMessageByIndex(int index)
         {
             if (index>=0&&index<MessageList.Count)
             {
@@ -37,9 +35,9 @@ namespace SEP3_ChatSystem.Model.List.Message
             }
         }
 
-        public GroupMessageList GetMessageBySenderId(string id)
+        public PrivateMessageList GetMessageBySenderId(string id)
         {
-            var messageList = new GroupMessageList();
+            var messageList = new PrivateMessageList();
             foreach (var message in MessageList)
             {
                 if (message.SenderId==id)
@@ -50,12 +48,12 @@ namespace SEP3_ChatSystem.Model.List.Message
             return messageList;
         }
         
-        public GroupMessageList GetMessageByGroupId(string id)
+        public PrivateMessageList GetMessageByReceiverId(string id)
         {
-            var messageList = new GroupMessageList();
+            var messageList = new PrivateMessageList();
             foreach (var message in MessageList)
             {
-                if (message.GroupId==id)
+                if (message.ReceiverId==id)
                 {
                     messageList.AddMessage(message);
                 }
@@ -63,26 +61,26 @@ namespace SEP3_ChatSystem.Model.List.Message
             return messageList;
         }
         
-        public GroupMessageList GetMessageByUserId(string id)
+        public PrivateMessageList GetMessageById(string id)
         {
-            var messageList = new GroupMessageList();
+            var messageList = new PrivateMessageList();
             foreach (var message in MessageList)
             {
-                if (ChatGroupList.GetAllGroupList().GetGroupByGroupId(message.GroupId).HasId(id))
+                if (message.SenderId==id||message.ReceiverId==id)
                 {
                     messageList.AddMessage(message);
                 }
             }
             return messageList;
         }
-        
-        public void RemoveMessageById(string senderId, string groupId)
+
+        public void RemoveMessageById(string senderId, string receiverId)
         {
             if (!string.IsNullOrEmpty(senderId))
             {
-                if (!string.IsNullOrEmpty(groupId))
+                if (!string.IsNullOrEmpty(receiverId))
                 {
-                    foreach (var message in MessageList.Where(message => message.SenderId==senderId&&message.GroupId==groupId))
+                    foreach (var message in MessageList.Where(message => message.SenderId==senderId&&message.ReceiverId==receiverId))
                     {
                         MessageList.Remove(message);
                     }
@@ -97,19 +95,19 @@ namespace SEP3_ChatSystem.Model.List.Message
             }
             else
             {
-                if (!string.IsNullOrEmpty(groupId))
+                if (!string.IsNullOrEmpty(receiverId))
                 {
-                    foreach (var message in MessageList.Where(message => message.GroupId==groupId))
+                    foreach (var message in MessageList.Where(message => message.ReceiverId==receiverId))
                     {
                         MessageList.Remove(message);
                     }
                 }
             }
         }
-        
-        public GroupMessageList Copy()
+
+        public PrivateMessageList Copy()
         {
-            var messageList = new GroupMessageList();
+            var messageList = new PrivateMessageList();
             foreach (var message in MessageList)
             {
                 messageList.AddMessage(message.Copy());
