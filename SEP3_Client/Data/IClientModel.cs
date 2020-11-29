@@ -38,5 +38,7 @@ namespace SEP3_Client.Data
         GroupMessageList GetMessageByGroupId(string groupId);
         string SendPrivateMessage(PrivateMessage message);
         string SendGroupMessage(GroupMessage message);
+        PrivateMessageList GetOfflineMessageById(string id);
+        GroupMessageList GetOfflineMessageByGroupId(string groupId);
     }
 }

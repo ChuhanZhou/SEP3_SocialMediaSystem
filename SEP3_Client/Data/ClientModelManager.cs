@@ -22,6 +22,9 @@ namespace SEP3_Client.Data
         private PrivateMessageList privateMessageList;
         private GroupMessageList groupMessageList;
         
+        private PrivateMessageList offlinePrivateMessageList;
+        private GroupMessageList offlineGroupMessageList;
+        
         private IUserSystemClient userSystemClient;
         private IChatSystemClient chatSystemClient;
         public ClientModelManager()
@@ -30,6 +33,8 @@ namespace SEP3_Client.Data
             userSystemClient = new UserSystemClient();
             chatSystemClient = new ChatSystemClient();
             chatGroupList = ChatGroupList.GetAllGroupList();
+            offlinePrivateMessageList = new PrivateMessageList();
+            offlineGroupMessageList = new GroupMessageList();
         }
         
         public bool HasFunction(FunctionType functionType)
@@ -189,22 +194,50 @@ namespace SEP3_Client.Data
 
         public GroupMessageList GetMessageByGroupId(string groupId)
         {
-            return groupMessageList.GetMessageByGroupId(groupId);
+            return groupMessageList.GetMessageByGroupId(groupId).Copy();
         }
 
         public string SendPrivateMessage(PrivateMessage message)
         {
+            if (!HasFunction(FunctionType.ChatSystem))
+            {
+                offlinePrivateMessageList.AddMessage(message);
+            }
             return chatSystemClient.SendPrivateMessagePackage(message);
         }
 
         public string SendGroupMessage(GroupMessage message)
         {
+            if (!HasFunction(FunctionType.ChatSystem))
+            {
+                offlineGroupMessageList.AddMessage(message);
+            }
             return chatSystemClient.SendGroupMessagePackage(message);
+        }
+
+        public PrivateMessageList GetOfflineMessageById(string id)
+        {
+            return offlinePrivateMessageList.GetMessageById(id).Copy();
+        }
+
+        public GroupMessageList GetOfflineMessageByGroupId(string groupId)
+        {
+            return offlineGroupMessageList.GetMessageByGroupId(groupId).Copy();
         }
 
         public void SystemOnLine(FunctionType functionType)
         {
             FunctionTypes.Add(functionType);
+            foreach (var message in offlinePrivateMessageList.MessageList)
+            {
+                chatSystemClient.SendPrivateMessagePackage(new PrivateMessage(message.SenderId,message.ReceiverId,message.MessageInfo));
+            }
+            offlinePrivateMessageList = new PrivateMessageList();
+            foreach (var message in offlineGroupMessageList.MessageList)
+            {
+                chatSystemClient.SendGroupMessagePackage(new GroupMessage(message.SenderId,message.GroupId,message.MessageInfo));
+            }
+            offlineGroupMessageList = new GroupMessageList();
         }
 
         public void SystemOffLine(FunctionType functionType)
