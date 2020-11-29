@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using SEP3_ChatSystem.Database;
 using SEP3_ChatSystem.Mediator;
 using SEP3_ChatSystem.Model.List.Group;
 using SEP3_ChatSystem.Model.List.Message;
@@ -8,12 +11,14 @@ using SEP3_ChatSystem.Model.Unit.Message;
 
 namespace SEP3_ChatSystem.Data
 {
-    public class ChatModelManager : IChatModel
+    public class ChatModelManager : IChatModel,IChatModelForDatabase
     {
         private List<ServerHandler> handlers;
         private ChatGroupList chatGroupList;
         private PrivateMessageList privateMessageList;
         private GroupMessageList groupMessageList;
+        private ICloudDatabase cloudDatabase;
+        private bool databaseOnline;
 
         public ChatModelManager()
         {
@@ -21,9 +26,11 @@ namespace SEP3_ChatSystem.Data
             chatGroupList = ChatGroupList.GetAllGroupList();
             privateMessageList = new PrivateMessageList();
             groupMessageList = new GroupMessageList();
+            databaseOnline = true;
+            cloudDatabase = new CloudDatabase(this);
         }
         
-        private string GetRandomId()
+        private static string GetRandomId()
         {
             string randomId = "";
             for (int x=0;x<8;x++)
@@ -43,7 +50,7 @@ namespace SEP3_ChatSystem.Data
             handlers.Remove(handler);
         }
 
-        public string AddNewGroup(ChatGroup chatGroup, string userId)
+        public async Task<string> AddNewGroup(ChatGroup chatGroup, string userId)
         {
             if (chatGroup.CreatorId==userId)
             {
@@ -54,18 +61,20 @@ namespace SEP3_ChatSystem.Data
                 }
                 ChatGroup newGroup = new ChatGroup(newId, chatGroup);
                 chatGroupList.AddNewGroup(newGroup);
-                UpdateChatGroup(newGroup);
+                await cloudDatabase.AddChatGroup(newGroup);
+                await UpdateChatGroup(newGroup);
                 return null;
             }
             return "Wrong creator.";
         }
 
-        public ChatGroupList GetChatGroupByUserId(string userId)
+        public async Task<ChatGroupList> GetChatGroupByUserId(string userId)
         {
+            chatGroupList = await cloudDatabase.GetAllChatGroup();
             return chatGroupList.GetGroupByUserId(userId).Copy();
         }
 
-        public string UpdateGroup(ChatGroup chatGroup, string userId)
+        public async Task<string> UpdateGroup(ChatGroup chatGroup, string userId)
         {
             ChatGroup oldGroup = chatGroupList.GetGroupByGroupId(chatGroup.GroupId);
             if (oldGroup!=null)
@@ -85,7 +94,8 @@ namespace SEP3_ChatSystem.Data
 
                     oldGroup.CreatorId = chatGroup.CreatorId;
                     oldGroup.GroupName = chatGroup.GroupName;
-                    UpdateChatGroup(oldGroup);
+                    await cloudDatabase.UpdateChatGroup(oldGroup);
+                    await UpdateChatGroup(oldGroup);
                     return null;
                 }
                 else
@@ -108,7 +118,12 @@ namespace SEP3_ChatSystem.Data
                 {
                     if (!targetGroup.HasId(newUserId))
                     {
-                        return targetGroup.AddAccountId(newUserId);
+                        string result = targetGroup.AddAccountId(newUserId);
+                        if (result==null)
+                        {
+                            cloudDatabase.UpdateChatGroup(targetGroup);
+                        }
+                        return result;
                     }
                     return "The user[" + newUserId + "] is not a new member in this group.";
                 }
@@ -133,6 +148,7 @@ namespace SEP3_ChatSystem.Data
                         return "You are the creator of this group, you can't remove yourself.";
                     }
                     targetGroup.RemoveAccountById(removeUserId);
+                    cloudDatabase.UpdateChatGroup(targetGroup);
                     return null;
                 }
                 return "You are not a member in this group.";
@@ -140,7 +156,7 @@ namespace SEP3_ChatSystem.Data
             return "Can't find the chat group [" + groupId + "].";
         }
 
-        public string RemoveGroup(ChatGroup chatGroup, string userId)
+        public async Task<string> RemoveGroup(ChatGroup chatGroup, string userId)
         {
             ChatGroup oldGroup = chatGroupList.GetGroupByGroupId(chatGroup.GroupId);
             if (oldGroup!=null)
@@ -149,7 +165,8 @@ namespace SEP3_ChatSystem.Data
                 {
                     chatGroupList.RemoveGroupByGroupId(oldGroup.GroupId);
                     groupMessageList.RemoveMessageById(null,oldGroup.GroupId);
-                    UpdateChatGroup(oldGroup);
+                    await cloudDatabase.RemoveChatGroup(oldGroup);
+                    await UpdateChatGroup(oldGroup);
                     return null;
                 }
                 else
@@ -166,39 +183,49 @@ namespace SEP3_ChatSystem.Data
         public string AddNewPrivateMessage(PrivateMessage message)
         {
             privateMessageList.AddMessage(message);
+            cloudDatabase.AddPrivateMessage(message);
             SendNewMessage(message);
             return null;
         }
 
-        public PrivateMessageList GetPrivateMessageById(string id)
+        public async Task<PrivateMessageList> GetPrivateMessageById(string id)
         {
+            privateMessageList = await cloudDatabase.GetAllPrivateMessage();
             return privateMessageList.GetMessageById(id).Copy();
         }
 
         public string AddNewGroupMessage(GroupMessage message)
         {
             groupMessageList.AddMessage(message);
+            cloudDatabase.AddGroupMessage(message);
             SendNewMessage(message);
             return null;
         }
 
-        public GroupMessageList GetGroupMessageByUserId(string userId)
+        public async Task<GroupMessageList> GetGroupMessageByUserId(string userId)
         {
+            groupMessageList = await cloudDatabase.GetAllGroupMessage();
             return groupMessageList.GetMessageByUserId(userId).Copy();
         }
 
-        public GroupMessageList GetGroupMessageByGroupId(string groupId)
+        public async Task<GroupMessageList> GetGroupMessageByGroupId(string groupId)
         {
+            groupMessageList = await cloudDatabase.GetAllGroupMessage();
             return groupMessageList.GetMessageByGroupId(groupId).Copy();
         }
 
-        private void UpdateChatGroup(ChatGroup group)
+        public bool DatabaseSystemIsOnline()
+        {
+            return databaseOnline;
+        }
+
+        private async Task UpdateChatGroup(ChatGroup group)
         {
             foreach (var handler in handlers)
             {
                 if (group.HasId(handler.GetId()))
                 {
-                    handler.UpdateChatGroup();
+                    await handler.UpdateChatGroup();
                 }
             }
         }
@@ -212,6 +239,47 @@ namespace SEP3_ChatSystem.Data
                     handler.NewMessage(message);
                 }
             }
+        }
+
+        public async Task DatabaseSystemOnline()
+        {
+            if (!databaseOnline)
+            {
+                databaseOnline = true;
+                privateMessageList = await cloudDatabase.GetAllPrivateMessage();
+                groupMessageList = await cloudDatabase.GetAllGroupMessage();
+                Console.WriteLine("Reconnect to Database System successfully.");
+                foreach (var handler in handlers)
+                {
+                    await handler.DatabaseOnline();
+                }
+            }
+        }
+
+        public void DatabaseSystemOffline()
+        {
+            if (databaseOnline)
+            {
+                databaseOnline = false;
+                TryToConnectWithDatabaseSystem();
+            }
+        }
+        
+        private void TryToConnectWithDatabaseSystem()
+        {
+            new Thread(async ()=>{
+                while (!databaseOnline)
+                {
+                    Console.Write("Try to reconnect with Database System in 5s.\n[");
+                    for (int x=10;x>0;x--)
+                    {
+                        Console.Write("-");
+                        Thread.Sleep(500);
+                    }
+                    Console.WriteLine("]\nTry reconnecting...");
+                    chatGroupList.GroupList = (await cloudDatabase.GetAllChatGroup()).GroupList;
+                }
+            }).Start();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using SEP3_ChatSystem.Data;
 using SEP3_ChatSystem.Mediator.Information;
 using SEP3_ChatSystem.Model.List.Group;
@@ -26,10 +27,10 @@ namespace SEP3_ChatSystem.Mediator
             this.client = client;
             stream = client.GetStream();
             userId = "Unknown";
-            connect = true;
+            connect = false;
             sending = false;
             receiving = false;
-            AfterConnect();
+            new Thread(async ()=>await AfterConnect()).Start();
         }
 
         private void Disconnect()
@@ -38,6 +39,7 @@ namespace SEP3_ChatSystem.Mediator
             client.Close();
             connect = false;
             Console.WriteLine("Disconnect with [" + userId + "].");
+            chatModel.RemoveHandler(this);
         }
 
         public string GetId()
@@ -52,23 +54,36 @@ namespace SEP3_ChatSystem.Mediator
                 Thread.Sleep(100);
             }
             sending = true;
-            
-            byte[] dataToClient = Encoding.ASCII.GetBytes(information);
-
-            string length = "";
-            for (int i = 0; i < 10-Encoding.ASCII.GetBytes(""+dataToClient.Length).Length; i++)
+            try
             {
-                length += "0";
+                if (!chatModel.DatabaseSystemIsOnline()&&connect)
+                {
+                    information = JsonSerializer.Serialize(new ErrorPackage("Database System offline.",true));
+                }
+            
+                byte[] dataToClient = Encoding.ASCII.GetBytes(information);
+
+                string length = "";
+                for (int i = 0; i < 10-Encoding.ASCII.GetBytes(""+dataToClient.Length).Length; i++)
+                {
+                    length += "0";
+                }
+                length += dataToClient.Length;
+            
+                byte[] dataLength = Encoding.ASCII.GetBytes(length);
+                Console.WriteLine("Send Package Length ["+userId+"]:"+length);
+                stream.Write(dataLength, 0, dataLength.Length);
+            
+                Console.WriteLine("Send to ["+userId+"]:"+information);
+                stream.Write(dataToClient, 0, dataToClient.Length);
+                sending = false;
             }
-            length += dataToClient.Length;
-            
-            byte[] dataLength = Encoding.ASCII.GetBytes(length);
-            Console.WriteLine("Send Package Length ["+userId+"]:"+length);
-            stream.Write(dataLength, 0, dataLength.Length);
-            
-            Console.WriteLine("Send to ["+userId+"]:"+information);
-            stream.Write(dataToClient, 0, dataToClient.Length);
-            sending = false;
+            catch (Exception e)
+            {
+                Console.WriteLine("Disconnect [Exception]" + e.Message);
+                Disconnect();
+                sending = false;
+            }
         }
         
         private string GetReceive()
@@ -145,12 +160,13 @@ namespace SEP3_ChatSystem.Mediator
             Send(send);
         }
 
-        private void AfterConnect()
+        private async Task AfterConnect()
         {
             userId = GetReceive();
-            SendChatGroupPackage(new ChatGroupPackage(chatModel.GetChatGroupByUserId(userId),"init"));
-            SendPrivateMessagePackage(new PrivateMessagePackage(chatModel.GetPrivateMessageById(userId),"init"));
-            SendGroupMessagePackage(new GroupMessagePackage(chatModel.GetGroupMessageByUserId(userId),"init"));
+            SendChatGroupPackage(new ChatGroupPackage(await chatModel.GetChatGroupByUserId(userId),"init"));
+            SendPrivateMessagePackage(new PrivateMessagePackage(await chatModel.GetPrivateMessageById(userId),"init"));
+            SendGroupMessagePackage(new GroupMessagePackage(await chatModel.GetGroupMessageByUserId(userId),"init"));
+            connect = true;
             while (connect)
             {
                 string receive = GetReceive();
@@ -187,10 +203,10 @@ namespace SEP3_ChatSystem.Mediator
                             switch (chatGroupPackage.Keyword)
                             {
                                 case "Add":
-                                    result = chatModel.AddNewGroup(chatGroupPackage.SendList.GetGroupByIndex(0),userId);
+                                    result = await chatModel.AddNewGroup(chatGroupPackage.SendList.GetGroupByIndex(0),userId);
                                     break;
                                 case "Update":
-                                    result = chatModel.UpdateGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
+                                    result = await chatModel.UpdateGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
                                     break;
                                 case "AddUser":
                                     result = chatModel.AddNewGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId, chatGroupPackage.TargetId,userId);
@@ -199,7 +215,7 @@ namespace SEP3_ChatSystem.Mediator
                                     result = chatModel.RemoveGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId,chatGroupPackage.TargetId,userId);
                                     break;
                                 case "Remove":
-                                    result = chatModel.RemoveGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
+                                    result = await chatModel.RemoveGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
                                     break;
                             }
                             break;
@@ -212,9 +228,9 @@ namespace SEP3_ChatSystem.Mediator
             }
         }
         
-        public void UpdateChatGroup()
+        public async Task UpdateChatGroup()
         {
-            ChatGroupList chatGroupList = chatModel.GetChatGroupByUserId(userId);
+            ChatGroupList chatGroupList = await chatModel.GetChatGroupByUserId(userId);
             SendChatGroupPackage(new ChatGroupPackage(chatGroupList,"update"));
         }
 
@@ -229,6 +245,13 @@ namespace SEP3_ChatSystem.Mediator
                     SendGroupMessagePackage(new GroupMessagePackage((GroupMessage)message,"update"));
                     break;
             }
+        }
+
+        public async Task DatabaseOnline()
+        {
+            SendChatGroupPackage(new ChatGroupPackage(await chatModel.GetChatGroupByUserId(userId),"init"));
+            SendPrivateMessagePackage(new PrivateMessagePackage(await chatModel.GetPrivateMessageById(userId),"init"));
+            SendGroupMessagePackage(new GroupMessagePackage(await chatModel.GetGroupMessageByUserId(userId),"init"));
         }
     }
 }

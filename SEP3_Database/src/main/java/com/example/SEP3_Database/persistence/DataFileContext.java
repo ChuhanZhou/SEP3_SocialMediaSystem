@@ -5,6 +5,7 @@ import com.example.SEP3_Database.model.domain.list.message.GroupMessageList;
 import com.example.SEP3_Database.model.domain.list.message.PrivateMessageList;
 import com.google.gson.Gson;
 import com.example.SEP3_Database.model.domain.list.userList.AccountList;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,8 +13,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class DataFileContext {
-    private static Gson gson = new Gson();
-    private static String address = "SEP3_SocialMediaSystem/SEP3_Database/src/main/java/com/example/SEP3_Database/dataFile";
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static String address = "SEP3_SocialMediaSystem/SEP3_Database/src/main/java/com/example/SEP3_Database/dataFile/";
 
     public static AccountList readAccountListData()
     {
@@ -25,7 +26,11 @@ public class DataFileContext {
                 updateAccountListData(new AccountList());
             }
             Scanner input = new Scanner(file);
-            String json = input.nextLine();
+            String json = "";
+            while (input.hasNext())
+            {
+                json += input.nextLine();
+            }
             AccountList accountList = gson.fromJson(json,AccountList.class);
             return accountList;
         }
@@ -62,7 +67,11 @@ public class DataFileContext {
                 updateChatGroupListData(new ChatGroupList());
             }
             Scanner input = new Scanner(file);
-            String json = input.nextLine();
+            String json = "";
+            while (input.hasNext())
+            {
+                json += input.nextLine();
+            }
             ChatGroupList chatGroupList = gson.fromJson(json,ChatGroupList.class);
             return chatGroupList;
         }
@@ -99,7 +108,11 @@ public class DataFileContext {
                 updatePrivateMessageListData(new PrivateMessageList());
             }
             Scanner input = new Scanner(file);
-            String json = input.nextLine();
+            String json = "";
+            while (input.hasNext())
+            {
+                json += input.nextLine();
+            }
             PrivateMessageList privateMessageList = gson.fromJson(json,PrivateMessageList.class);
             return privateMessageList;
         }
@@ -136,7 +149,11 @@ public class DataFileContext {
                 updateGroupMessageListData(new GroupMessageList());
             }
             Scanner input = new Scanner(file);
-            String json = input.nextLine();
+            String json = "";
+            while (input.hasNext())
+            {
+                json += input.nextLine();
+            }
             GroupMessageList groupMessageList = gson.fromJson(json,GroupMessageList.class);
             return groupMessageList;
         }

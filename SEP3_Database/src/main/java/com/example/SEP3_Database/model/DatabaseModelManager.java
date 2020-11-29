@@ -139,16 +139,19 @@ public class DatabaseModelManager implements DatabaseModel{
     }
 
     @Override
-    public void removeChatGroup(ChatGroup chatGroup) {
+    public void removeChatGroup(String groupId) {
         ChatGroupList chatGroupList = DataFileContext.readChatGroupListData();
-        if (chatGroupList!=null)
+        GroupMessageList groupMessageList = DataFileContext.readGroupMessageListData();
+        if (chatGroupList!=null&&groupMessageList!=null)
         {
             if (databaseOnline)
             {
                 //database code
             }
-            chatGroupList.removeGroupByGroupId(chatGroup.getGroupId());
+            chatGroupList.removeGroupByGroupId(groupId);
+            groupMessageList.removeMessageById(null,groupId);
             DataFileContext.updateChatGroupListData(chatGroupList);
+            DataFileContext.updateGroupMessageListData(groupMessageList);
         }
     }
 

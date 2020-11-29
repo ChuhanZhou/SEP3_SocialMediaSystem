@@ -16,6 +16,11 @@
         <e p="Data" t="Include">
           <e p="ChatModelManager.cs" t="Include" />
           <e p="IChatModel.cs" t="Include" />
+          <e p="IChatModelForDatabase.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="CloudDatabase.cs" t="Include" />
+          <e p="ICloudDatabase.cs" t="Include" />
         </e>
         <e p="Mediator" t="Include">
           <e p="Information" t="Include">

@@ -18,7 +18,7 @@ public interface DatabaseModel {
     void addChatGroup(ChatGroup newChatGroup);
     ChatGroupList getAllChatGroup();
     void updateChatGroup(ChatGroup newChatGroup);
-    void removeChatGroup(ChatGroup chatGroup);
+    void removeChatGroup(String groupId);
 
     void addPrivateMessage(PrivateMessage newMessage);
     PrivateMessageList getAllPrivateMessage();

@@ -54,26 +54,34 @@ namespace SEP3_Client.Mediator.ChatSystemClient
             {
                 Thread.Sleep(100);
             }
-
             sending = true;
-
-            byte[] dataToClient = Encoding.ASCII.GetBytes(information);
-
-            string length = "";
-            for (int i = 0; i < 10 - Encoding.ASCII.GetBytes("" + dataToClient.Length).Length; i++)
+            try
             {
-                length += "0";
+                byte[] dataToClient = Encoding.ASCII.GetBytes(information);
+
+                string length = "";
+                for (int i = 0; i < 10 - Encoding.ASCII.GetBytes("" + dataToClient.Length).Length; i++)
+                {
+                    length += "0";
+                }
+
+                length += dataToClient.Length;
+
+                byte[] dataLength = Encoding.ASCII.GetBytes(length);
+                Console.WriteLine("Send Package Length:" + length);
+                stream.Write(dataLength, 0, dataLength.Length);
+
+                Console.WriteLine("Send:" + information);
+                stream.Write(dataToClient, 0, dataToClient.Length);
+                sending = false;
             }
-
-            length += dataToClient.Length;
-
-            byte[] dataLength = Encoding.ASCII.GetBytes(length);
-            Console.WriteLine("Send Package Length:" + length);
-            stream.Write(dataLength, 0, dataLength.Length);
-
-            Console.WriteLine("Send:" + information);
-            stream.Write(dataToClient, 0, dataToClient.Length);
-            sending = false;
+            catch (Exception e)
+            {
+                Console.WriteLine("Disconnect [Exception]" + e.Message);
+                sending = false;
+                Disconnect();
+            }
+            
         }
 
         private string GetReceive()
@@ -82,9 +90,7 @@ namespace SEP3_Client.Mediator.ChatSystemClient
             {
                 Thread.Sleep(100);
             }
-
             receiving = true;
-
             try
             {
                 byte[] packageLength = new byte[10];
