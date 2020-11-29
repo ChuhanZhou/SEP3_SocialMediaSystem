@@ -184,7 +184,6 @@ namespace SEP3_Client.Data
         public string RemoveGroup(ChatGroup chatGroup)
         {
             return chatSystemClient.SendChatGroupPackage(chatGroup, null, "Remove");
-
         }
 
         public PrivateMessageList GetMessageById(string id)
@@ -202,6 +201,7 @@ namespace SEP3_Client.Data
             if (!HasFunction(FunctionType.ChatSystem))
             {
                 offlinePrivateMessageList.AddMessage(message);
+                UpdatePage.ChatSystemUpdate();
             }
             return chatSystemClient.SendPrivateMessagePackage(message);
         }
@@ -211,6 +211,7 @@ namespace SEP3_Client.Data
             if (!HasFunction(FunctionType.ChatSystem))
             {
                 offlineGroupMessageList.AddMessage(message);
+                UpdatePage.ChatSystemUpdate();
             }
             return chatSystemClient.SendGroupMessagePackage(message);
         }
