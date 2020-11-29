@@ -104,7 +104,7 @@ namespace SEP3_ChatSystem.Model.List.Group
         {
             foreach (var group in GroupList)
             {
-                if (group.HasId(id))
+                if (group.GroupId==id)
                 {
                     GroupList.Remove(group);
                 }

@@ -1,24 +1,59 @@
 package com.example.SEP3_Database.model.domain.unit.message;
 
-import com.google.api.client.util.DateTime;
-
-import java.sql.Time;
-import java.time.Clock;
+import com.example.SEP3_Database.model.domain.unit.time.MyTime;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 public abstract class Message {
     public String MessageInfo;
-    public MessageType MessageType;
+    public MessageType Type;
     public String SenderId;
-    public LocalDateTime Time;
-    public Message(String senderId,String messageInfo,MessageType messageType)
+    public MyTime Time;
+    public Message(String senderId,String messageInfo,MessageType type)
     {
         SenderId = senderId;
         MessageInfo = messageInfo;
-        MessageType = messageType;
-        Time = LocalDateTime.now();
+        Type = type;
+        Time = new MyTime(LocalDateTime.now());
     }
 
-    public abstract boolean CanRead(String userId);
+    public Message(String senderId,String messageInfo,MessageType type,MyTime time)
+    {
+        SenderId = senderId;
+        MessageInfo = messageInfo;
+        Type = type;
+        Time = time;
+    }
+
+    public String getMessageInfo() {
+        return MessageInfo;
+    }
+
+    public void setMessageInfo(String messageInfo) {
+        MessageInfo = messageInfo;
+    }
+
+    public MessageType getMessageType() {
+        return Type;
+    }
+
+    public void setMessageType(MessageType type) {
+        Type = type;
+    }
+
+    public String getSenderId() {
+        return SenderId;
+    }
+
+    public void setSenderId(String senderId) {
+        SenderId = senderId;
+    }
+
+    public MyTime getTime() {
+        return Time;
+    }
+
+    public void setTime(MyTime time) {
+        Time = time;
+    }
 }

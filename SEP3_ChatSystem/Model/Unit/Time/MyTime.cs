@@ -21,7 +21,7 @@ namespace SEP3_ChatSystem.Model.Unit.Time
 
         public string ToString()
         {
-            return Day + "/" + Minute + "/" + Year + "-" + Hour + ":" + Minute;
+            return Day + "/" + Month + "/" + Year + "-" + Hour + ":" + Minute;
         }
     }
 }

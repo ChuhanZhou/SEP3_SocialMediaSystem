@@ -19,7 +19,7 @@ namespace SEP3_Client.Model.Unit.Message
             return new GroupMessage
             {
                 MessageInfo = MessageInfo,
-                MessageType = MessageType,
+                Type = Type,
                 SenderId = SenderId,
                 Time = Time,
                 GroupId = GroupId

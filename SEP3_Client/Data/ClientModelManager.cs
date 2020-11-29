@@ -29,6 +29,7 @@ namespace SEP3_Client.Data
             FunctionTypes = new List<FunctionType>();
             userSystemClient = new UserSystemClient();
             chatSystemClient = new ChatSystemClient();
+            chatGroupList = ChatGroupList.GetAllGroupList();
         }
         
         public bool HasFunction(FunctionType functionType)
@@ -213,7 +214,7 @@ namespace SEP3_Client.Data
 
         public void UpdateChatGroupList(ChatGroupList chatGroupList)
         {
-            this.chatGroupList = chatGroupList.Copy();
+            this.chatGroupList.GroupList = chatGroupList.Copy().GroupList;
             UpdatePage.ChatSystemUpdate();
         }
 

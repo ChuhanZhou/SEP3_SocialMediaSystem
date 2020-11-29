@@ -54,11 +54,11 @@ public class ChatGroupList {
 
     public ChatGroup getGroupByGroupId(String id)
     {
-        foreach (var group in GroupList)
+        for (int x=0;x<GroupList.size();x++)
         {
-            if (group.GroupId==id)
+            if (GroupList.get(x).getGroupId()==id)
             {
-                return group;
+                return GroupList.get(x);
             }
         }
         return null;
@@ -67,11 +67,11 @@ public class ChatGroupList {
     public ChatGroupList getGroupByCreatorId(String id)
     {
         ChatGroupList chatGroupList = new ChatGroupList();
-        foreach (var group in GroupList)
+        for (int x=0;x<GroupList.size();x++)
         {
-            if (group.CreatorId==id)
+            if (GroupList.get(x).getCreatorId()==id)
             {
-                chatGroupList.AddNewGroup(group);
+                chatGroupList.GroupList.add(GroupList.get(x));
             }
         }
         return chatGroupList;
@@ -80,11 +80,11 @@ public class ChatGroupList {
     public ChatGroupList getGroupByUserId(String id)
     {
         ChatGroupList chatGroupList = new ChatGroupList();
-        foreach (var group in GroupList)
+        for (int x=0;x<GroupList.size();x++)
         {
-            if (group.HasId(id))
+            if (GroupList.get(x).hasId(id))
             {
-                chatGroupList.AddNewGroup(group);
+                chatGroupList.GroupList.add(GroupList.get(x));
             }
         }
         return chatGroupList;
@@ -92,26 +92,27 @@ public class ChatGroupList {
 
     public void removeGroupByGroupId(String id)
     {
-        foreach (var group in GroupList)
+        for (int x=0;x<GroupList.size();x++)
         {
-            if (group.HasId(id))
+            if (GroupList.get(x).getGroupId()==id)
             {
-                GroupList.Remove(group);
+                GroupList.remove(x);
+                break;
             }
         }
     }
 
     public void removeGroupByIndex(int index)
     {
-        GroupList.RemoveAt(index);
+        GroupList.remove(index);
     }
 
     public ChatGroupList copy()
     {
         ChatGroupList copy = new ChatGroupList();
-        for       foreach (var group in GroupList)
+        for (int x=0;x<GroupList.size();x++)
         {
-            copy.GroupList.Add(group.Copy());
+            copy.GroupList.add(GroupList.get(x).copy());
         }
         return copy;
     }
