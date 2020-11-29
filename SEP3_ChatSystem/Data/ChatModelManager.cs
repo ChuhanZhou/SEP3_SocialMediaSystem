@@ -148,6 +148,7 @@ namespace SEP3_ChatSystem.Data
                 if (userId==oldGroup.CreatorId)
                 {
                     chatGroupList.RemoveGroupByGroupId(oldGroup.GroupId);
+                    groupMessageList.RemoveMessageById(null,oldGroup.GroupId);
                     UpdateChatGroup(oldGroup);
                     return null;
                 }

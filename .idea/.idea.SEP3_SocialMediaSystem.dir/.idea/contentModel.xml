@@ -218,6 +218,9 @@
           <e p="SurveyPrompt.razor" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
+        <e p="Utility" t="Include">
+          <e p="MyString.cs" t="Include" />
+        </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
             <e p="bootstrap" t="Include">

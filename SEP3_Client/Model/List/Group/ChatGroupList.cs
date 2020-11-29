@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SEP3_Client.Model.Unit.Group;
+using SEP3_Client.Utility;
 
 namespace SEP3_Client.Model.List.Group
 {
@@ -101,6 +103,19 @@ namespace SEP3_Client.Model.List.Group
             return chatGroupList;
         }
 
+        public ChatGroupList GetGroupByGroupName(string groupName)
+        {
+            ChatGroupList chatGroupList = new ChatGroupList();
+            foreach (var group in GroupList)
+            {
+                if (MyString.HaveOrInside(groupName,group.GroupName))
+                {
+                    chatGroupList.AddNewGroup(group);
+                }
+            }
+            return chatGroupList;
+        }
+        
         public string UpdateGroup(ChatGroup chatGroup)
         {
             foreach (var group in GroupList.Where(group => group.GroupId==chatGroup.GroupId))

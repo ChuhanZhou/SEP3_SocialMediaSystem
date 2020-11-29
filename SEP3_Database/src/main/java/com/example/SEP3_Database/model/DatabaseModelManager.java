@@ -197,4 +197,18 @@ public class DatabaseModelManager implements DatabaseModel{
         }
         return DataFileContext.readGroupMessageListData();
     }
+
+    @Override
+    public void removeGroupMessage(String groupId) {
+        GroupMessageList groupMessageList = DataFileContext.readGroupMessageListData();
+        if (groupMessageList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            groupMessageList.removeMessageById(null,groupId);
+            DataFileContext.updateGroupMessageListData(groupMessageList);
+        }
+    }
 }

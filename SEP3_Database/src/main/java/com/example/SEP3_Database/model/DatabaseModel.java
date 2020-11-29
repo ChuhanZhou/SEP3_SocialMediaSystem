@@ -25,4 +25,5 @@ public interface DatabaseModel {
 
     void addGroupMessage(GroupMessage newMessage);
     GroupMessageList getAllGroupMessage();
+    void removeGroupMessage(String groupId);
 }

@@ -78,26 +78,26 @@ public class PrivateMessageList {
 
     public void RemoveMessageById(String senderId, String receiverId)
     {
-        ArrayList<PrivateMessage> copyList = this.copy().MessageList;
+        ArrayList<PrivateMessage> privateMessageList = new ArrayList<>();
         if (senderId!=null)
         {
             if (receiverId!=null)
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).SenderId==senderId&&copyList.get(x).getReceiverId()==receiverId)
+                    if (MessageList.get(x).SenderId!=senderId||MessageList.get(x).getReceiverId()!=receiverId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        privateMessageList.add(MessageList.get(x));
                     }
                 }
             }
             else
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).SenderId==senderId)
+                    if (MessageList.get(x).SenderId!=senderId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        privateMessageList.add(MessageList.get(x));
                     }
                 }
             }
@@ -106,11 +106,11 @@ public class PrivateMessageList {
         {
             if (receiverId!=null)
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).getReceiverId()==receiverId)
+                    if (MessageList.get(x).getReceiverId()!=receiverId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        privateMessageList.add(MessageList.get(x));
                     }
                 }
             }

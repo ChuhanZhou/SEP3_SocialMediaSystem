@@ -65,26 +65,26 @@ public class GroupMessageList {
 
     public void removeMessageById(String senderId, String groupId)
     {
-        ArrayList<GroupMessage> copyList = this.copy().MessageList;
+        ArrayList<GroupMessage> groupMessageList = new ArrayList<>();
         if (senderId!=null)
         {
             if (groupId!=null)
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).SenderId==senderId&&copyList.get(x).getGroupId()==groupId)
+                    if (MessageList.get(x).SenderId!=senderId||MessageList.get(x).getGroupId()!=groupId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        groupMessageList.add(MessageList.get(x));
                     }
                 }
             }
             else
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).SenderId==senderId)
+                    if (MessageList.get(x).SenderId!=senderId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        groupMessageList.add(MessageList.get(x));
                     }
                 }
             }
@@ -93,15 +93,16 @@ public class GroupMessageList {
         {
             if (groupId!=null)
             {
-                for (int x=0;x<copyList.size();x++)
+                for (int x=0;x<MessageList.size();x++)
                 {
-                    if (copyList.get(x).getGroupId()==groupId)
+                    if (MessageList.get(x).getGroupId()!=groupId)
                     {
-                        MessageList.remove(copyList.get(x));
+                        groupMessageList.add(MessageList.get(x));
                     }
                 }
             }
         }
+        MessageList = groupMessageList;
     }
 
     public GroupMessageList copy()
