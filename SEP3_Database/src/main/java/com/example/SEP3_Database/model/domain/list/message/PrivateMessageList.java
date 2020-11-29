@@ -12,17 +12,20 @@ public class PrivateMessageList {
         MessageList = new ArrayList<>();
     }
 
-    public void AddMessage(PrivateMessage newMessage)
+    public void addMessage(PrivateMessage newMessage)
     {
-        MessageList.add(newMessage);
+        if (newMessage!=null)
+        {
+            MessageList.add(newMessage);
+        }
     }
 
-    public int GetSize()
+    public int getSize()
     {
         return MessageList.size();
     }
 
-    public PrivateMessage GetMessageByIndex(int index)
+    public PrivateMessage getMessageByIndex(int index)
     {
         if (index>=0&&index<MessageList.size())
         {
@@ -34,40 +37,40 @@ public class PrivateMessageList {
         }
     }
 
-    public PrivateMessageList GetMessageBySenderId(String id)
+    public PrivateMessageList getMessageBySenderId(String id)
     {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
             if (MessageList.get(x).SenderId==id)
             {
-                messageList.AddMessage(MessageList.get(x));
+                messageList.addMessage(MessageList.get(x));
             }
         }
         return messageList;
     }
 
-    public PrivateMessageList GetMessageByReceiverId(String id)
+    public PrivateMessageList getMessageByReceiverId(String id)
     {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
             if (MessageList.get(x).getReceiverId()==id)
             {
-                messageList.AddMessage(MessageList.get(x));
+                messageList.addMessage(MessageList.get(x));
             }
         }
         return messageList;
     }
 
-    public PrivateMessageList GetMessageById(String id)
+    public PrivateMessageList getMessageById(String id)
     {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
             if (MessageList.get(x).SenderId==id||MessageList.get(x).getReceiverId()==id)
             {
-                messageList.AddMessage(MessageList.get(x));
+                messageList.addMessage(MessageList.get(x));
             }
         }
         return messageList;

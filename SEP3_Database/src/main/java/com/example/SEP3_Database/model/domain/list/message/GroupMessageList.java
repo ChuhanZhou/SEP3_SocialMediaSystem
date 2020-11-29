@@ -12,17 +12,20 @@ public class GroupMessageList {
         MessageList = new ArrayList<>();
     }
 
-    public void AddMessage(GroupMessage newMessage)
+    public void addMessage(GroupMessage newMessage)
     {
-        MessageList.add(newMessage);
+        if (newMessage!=null)
+        {
+            MessageList.add(newMessage);
+        }
     }
 
-    public int GetSize()
+    public int getSize()
     {
         return MessageList.size();
     }
 
-    public GroupMessage GetMessageByIndex(int index)
+    public GroupMessage getMessageByIndex(int index)
     {
         if (index>=0&&index<MessageList.size())
         {
@@ -34,33 +37,33 @@ public class GroupMessageList {
         }
     }
 
-    public GroupMessageList GetMessageBySenderId(String id)
+    public GroupMessageList getMessageBySenderId(String id)
     {
         var messageList = new GroupMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
             if (MessageList.get(x).SenderId==id)
             {
-                messageList.AddMessage(MessageList.get(x));
+                messageList.addMessage(MessageList.get(x));
             }
         }
         return messageList;
     }
 
-    public GroupMessageList GetMessageByGroupId(String id)
+    public GroupMessageList getMessageByGroupId(String id)
     {
         var messageList = new GroupMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
             if (MessageList.get(x).getGroupId()==id)
             {
-                messageList.AddMessage(MessageList.get(x));
+                messageList.addMessage(MessageList.get(x));
             }
         }
         return messageList;
     }
 
-    public void RemoveMessageById(String senderId, String groupId)
+    public void removeMessageById(String senderId, String groupId)
     {
         ArrayList<GroupMessage> copyList = this.copy().MessageList;
         if (senderId!=null)

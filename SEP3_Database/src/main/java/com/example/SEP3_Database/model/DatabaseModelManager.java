@@ -2,7 +2,13 @@ package com.example.SEP3_Database.model;
 
 import com.example.SEP3_Database.jdbc.JDBC_interface;
 import com.example.SEP3_Database.jdbc.Jdbc_User;
+import com.example.SEP3_Database.model.domain.list.groupList.ChatGroupList;
+import com.example.SEP3_Database.model.domain.list.message.GroupMessageList;
+import com.example.SEP3_Database.model.domain.list.message.PrivateMessageList;
 import com.example.SEP3_Database.model.domain.list.userList.AccountList;
+import com.example.SEP3_Database.model.domain.unit.group.ChatGroup;
+import com.example.SEP3_Database.model.domain.unit.message.GroupMessage;
+import com.example.SEP3_Database.model.domain.unit.message.PrivateMessage;
 import com.example.SEP3_Database.persistence.DataFileContext;
 import com.example.SEP3_Database.model.domain.unit.user.Account;
 
@@ -93,5 +99,102 @@ public class DatabaseModelManager implements DatabaseModel{
             accountList.removeAccountById(account.getId());
             DataFileContext.updateAccountListData(accountList);
         }
+    }
+
+    @Override
+    public void addChatGroup(ChatGroup newChatGroup) {
+        ChatGroupList chatGroupList = DataFileContext.readChatGroupListData();
+        if (chatGroupList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            chatGroupList.addNewGroup(newChatGroup);
+            DataFileContext.updateChatGroupListData(chatGroupList);
+        }
+    }
+
+    @Override
+    public ChatGroupList getAllChatGroup() {
+        if (databaseOnline)
+        {
+            //database code
+        }
+        return DataFileContext.readChatGroupListData();
+    }
+
+    @Override
+    public void updateChatGroup(ChatGroup newChatGroup) {
+        ChatGroupList chatGroupList = DataFileContext.readChatGroupListData();
+        if (chatGroupList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            chatGroupList.updateGroup(newChatGroup);
+            DataFileContext.updateChatGroupListData(chatGroupList);
+        }
+    }
+
+    @Override
+    public void removeChatGroup(ChatGroup chatGroup) {
+        ChatGroupList chatGroupList = DataFileContext.readChatGroupListData();
+        if (chatGroupList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            chatGroupList.removeGroupByGroupId(chatGroup.getGroupId());
+            DataFileContext.updateChatGroupListData(chatGroupList);
+        }
+    }
+
+    @Override
+    public void addPrivateMessage(PrivateMessage newMessage) {
+        PrivateMessageList privateMessageList = DataFileContext.readPrivateMessageListData();
+        if (privateMessageList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            privateMessageList.addMessage(newMessage);
+            DataFileContext.updatePrivateMessageListData(privateMessageList);
+        }
+    }
+
+    @Override
+    public PrivateMessageList getAllPrivateMessage() {
+        if (databaseOnline)
+        {
+            //database code
+        }
+        return DataFileContext.readPrivateMessageListData();
+    }
+
+    @Override
+    public void addGroupMessage(GroupMessage newMessage) {
+        GroupMessageList groupMessageList = DataFileContext.readGroupMessageListData();
+        if (groupMessageList!=null)
+        {
+            if (databaseOnline)
+            {
+                //database code
+            }
+            groupMessageList.addMessage(newMessage);
+            DataFileContext.updateGroupMessageListData(groupMessageList);
+        }
+    }
+
+    @Override
+    public GroupMessageList getAllGroupMessage() {
+        if (databaseOnline)
+        {
+            //database code
+        }
+        return DataFileContext.readGroupMessageListData();
     }
 }

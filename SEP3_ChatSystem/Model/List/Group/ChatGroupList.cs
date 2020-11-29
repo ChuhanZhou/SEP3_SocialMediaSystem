@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SEP3_ChatSystem.Model.Unit.Group;
 
 namespace SEP3_ChatSystem.Model.List.Group
@@ -98,6 +99,18 @@ namespace SEP3_ChatSystem.Model.List.Group
                 }
             }
             return chatGroupList;
+        }
+
+        public string UpdateGroup(ChatGroup chatGroup)
+        {
+            foreach (var group in GroupList.Where(group => group.GroupId==chatGroup.GroupId))
+            {
+                group.CreatorId = chatGroup.CreatorId;
+                group.GroupName = chatGroup.GroupName;
+                group.AccountIdList = chatGroup.AccountIdList;
+                return null;
+            }
+            return "Can find the old group.";
         }
 
         public void RemoveGroupByGroupId(string id)

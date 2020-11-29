@@ -14,15 +14,19 @@ public class ChatGroupList {
 
     public String addNewGroup(ChatGroup newGroup)
     {
-        if (!hasGroupId(newGroup.getGroupId()))
+        if (newGroup!=null)
         {
-            GroupList.add(newGroup);
-            return null;
+            if (!hasGroupId(newGroup.getGroupId()))
+            {
+                GroupList.add(newGroup);
+                return null;
+            }
+            else
+            {
+                return "This is not a new group";
+            }
         }
-        else
-        {
-            return "This is not a new group";
-        }
+        return "Input null.";
     }
 
     public boolean hasGroupId(String id)
@@ -88,6 +92,21 @@ public class ChatGroupList {
             }
         }
         return chatGroupList;
+    }
+
+    public String updateGroup(ChatGroup chatGroup)
+    {
+        for (int x=0;x<GroupList.size();x++)
+        {
+            if (GroupList.get(x).getGroupId()==chatGroup.getGroupId())
+            {
+                GroupList.get(x).setGroupName(chatGroup.getGroupName());
+                GroupList.get(x).setCreatorId(chatGroup.getCreatorId());
+                GroupList.get(x).setAccountIdList(chatGroup.getAccountIdList());
+                return null;
+            }
+        }
+        return "Can find the old group.";
     }
 
     public void removeGroupByGroupId(String id)
