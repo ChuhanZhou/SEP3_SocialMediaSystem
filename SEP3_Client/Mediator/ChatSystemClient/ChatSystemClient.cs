@@ -50,11 +50,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
 
         private void Send(string information)
         {
-            while (sending)
-            {
-                Thread.Sleep(100);
-            }
-            sending = true;
             try
             {
                 byte[] dataToClient = Encoding.ASCII.GetBytes(information);
@@ -73,12 +68,10 @@ namespace SEP3_Client.Mediator.ChatSystemClient
 
                 Console.WriteLine("Send:" + information);
                 stream.Write(dataToClient, 0, dataToClient.Length);
-                sending = false;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Disconnect [Exception]" + e.Message);
-                sending = false;
                 Disconnect();
             }
             

@@ -18,7 +18,7 @@
     "SEP3_ChatSystem": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5011;http://localhost:5010",
+      "applicationUrl": "https://localhost:6001;http://localhost:6000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
