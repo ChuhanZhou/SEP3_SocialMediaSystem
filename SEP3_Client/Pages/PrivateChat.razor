@@ -98,12 +98,11 @@
         Account = ClientModel.GetAccount();
         friend = ClientModel.GetFriendById(FriendSetting.Id);
         MessageList = ClientModel.GetMessageById(friend.Id);
-        message = null;
     }
     
     private void send()
     {
-        if (message!=null)
+        if (!string.IsNullOrEmpty(message))
         {
             MessageList.AddMessage(new PrivateMessage(Account.Id,friend.Id,message));
             message = null;

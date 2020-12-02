@@ -93,12 +93,11 @@
         }
         MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
         Account = ClientModel.GetAccount();
-        message = null;
     }
 
     private void send()
     {
-        if (message!=null)
+        if (!string.IsNullOrEmpty(message))
         {
             MessageList.AddMessage(new GroupMessage(Account.Id,Group.GroupId,message));
             message = null;
