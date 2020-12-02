@@ -14,7 +14,7 @@ public abstract class BasicInformation extends User{
         Birthday = new Birthday();
         Gender = ' ';
         Hometown = "";
-        PhoneNumber = -1;
+        PhoneNumber = 0;
     }
 
     public String getUserName() {

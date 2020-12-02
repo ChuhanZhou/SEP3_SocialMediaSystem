@@ -230,8 +230,17 @@
         </e>
         <e p="Data" t="Include" />
         <e p="Model" t="Include">
+          <e p="List" t="Include">
+            <e p="Post" t="Include">
+              <e p="CommentList.cs" t="Include" />
+              <e p="PostList.cs" t="Include" />
+            </e>
+          </e>
           <e p="Unit" t="Include">
-            <e p="Post.cs" t="Include" />
+            <e p="Post" t="Include">
+              <e p="Comment.cs" t="Include" />
+              <e p="Post.cs" t="Include" />
+            </e>
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive">

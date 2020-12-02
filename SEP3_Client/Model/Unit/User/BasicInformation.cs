@@ -16,7 +16,7 @@ namespace SEP3_Client.Model.Unit.User
             Birthday = new Birthday();
             Gender = ' ';
             Hometown = "";
-            PhoneNumber = -1;
+            PhoneNumber = 0;
         }
 
         public BasicInformation(string id,string userName, Birthday birthday, char gender, string homeTown, long phoneNumber) :

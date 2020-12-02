@@ -8,7 +8,6 @@ C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\bin\Debu
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\bin\Debug\netcoreapp3.1\SEP3_ChatSystem.dll
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\bin\Debug\netcoreapp3.1\SEP3_ChatSystem.pdb
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\bin\Debug\netcoreapp3.1\SEP3_ChatSystem.Views.dll
-C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\bin\Debug\netcoreapp3.1\SEP3_ChatSystem.Views.pdb
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.csprojAssemblyReference.cache
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.AssemblyInfoInputs.cache
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.AssemblyInfo.cs

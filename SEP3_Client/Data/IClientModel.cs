@@ -18,13 +18,13 @@ namespace SEP3_Client.Data
         string Register(string userName, string password);
         //UserSystem
         Account GetAccount();
-        Task<string> ChangePassword(string oldPassword, string newPassword);
-        Task<string> UpdateBasicInformation(Account account);
-        Task<bool> SearchId(string id);
-        Task<string> AddNewFriend(FriendSetting newFriendSetting);
+        string ChangePassword(string oldPassword, string newPassword);
+        string UpdateBasicInformation(Account account);
+        bool SearchId(string id);
+        string AddNewFriend(FriendSetting newFriendSetting);
         FriendSettingList GetFriendSettingList();
-        Task<string> UpdateFriendSetting(FriendSetting newFriendSetting);
-        Task RemoveFriend(string id);
+        string UpdateFriendSetting(FriendSetting newFriendSetting);
+        void RemoveFriend(string id);
         Friend GetFriendById(string id);
         //ChatSystem
         string AddNewGroup(string groupName);
