@@ -12,14 +12,6 @@ namespace SEP3_ChatSystem
             ChatModelManager chatModelManager = new ChatModelManager();
             ServerConnector server = new ServerConnector(chatModelManager);
             server.Start();
-            //CreateHostBuilder(args).Build().Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }

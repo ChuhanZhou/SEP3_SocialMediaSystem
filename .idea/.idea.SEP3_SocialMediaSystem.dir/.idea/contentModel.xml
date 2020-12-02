@@ -8,8 +8,6 @@
     <e p="C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3_ChatSystem" t="IncludeRecursive">
-        <e p="_Imports.razor" t="Include" />
-        <e p="App.razor" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -63,52 +61,15 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
               <e p="SEP3_ChatSystem.AssemblyInfo.cs" t="Include" />
-              <e p="SEP3_ChatSystem.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
-        </e>
-        <e p="Pages" t="Include">
-          <e p="_Host.cshtml" t="Include" />
-          <e p="Error.cshtml" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="SEP3_ChatSystem.csproj" t="IncludeRecursive" />
-        <e p="Shared" t="Include">
-          <e p="MainLayout.razor" t="Include" />
-          <e p="NavMenu.razor" t="Include" />
-          <e p="SurveyPrompt.razor" t="Include" />
-        </e>
         <e p="Startup.cs" t="Include" />
-        <e p="wwwroot" t="Include">
-          <e p="css" t="Include">
-            <e p="bootstrap" t="Include">
-              <e p="bootstrap.min.css" t="Include" />
-              <e p="bootstrap.min.css.map" t="Include" />
-            </e>
-            <e p="open-iconic" t="Include">
-              <e p="font" t="Include">
-                <e p="css" t="Include">
-                  <e p="open-iconic-bootstrap.min.css" t="Include" />
-                </e>
-                <e p="fonts" t="Include">
-                  <e p="open-iconic.eot" t="Include" />
-                  <e p="open-iconic.otf" t="Include" />
-                  <e p="open-iconic.svg" t="Include" />
-                  <e p="open-iconic.ttf" t="Include" />
-                  <e p="open-iconic.woff" t="Include" />
-                </e>
-              </e>
-              <e p="FONT-LICENSE" t="Include" />
-              <e p="ICON-LICENSE" t="Include" />
-              <e p="README.md" t="Include" />
-            </e>
-            <e p="site.css" t="Include" />
-          </e>
-          <e p="favicon.ico" t="Include" />
-        </e>
       </e>
       <e p="SEP3_Client" t="IncludeRecursive">
         <e p="_Imports.razor" t="Include" />
@@ -255,6 +216,33 @@
           <e p="people_multiple_76px_1116527_easyicon.net.png" t="Include" />
           <e p="user.PNG" t="Include" />
         </e>
+      </e>
+      <e p="SEP3_PostSystem" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="PostListController.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include" />
+        <e p="Model" t="Include">
+          <e p="Unit" t="Include">
+            <e p="Post.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="SEP3_PostSystem.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="SEP3_PostSystem.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
       </e>
     </e>
   </component>
