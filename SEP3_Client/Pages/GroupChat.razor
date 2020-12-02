@@ -73,10 +73,13 @@
             }
         </div>
         <br/>
-         <div>
-             <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
-             <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
-         </div>
+        <div>
+            <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
+            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
+        </div>
+        <div style="color: red">
+            @error
+        </div>
     </div>
 </div>
 @code {
@@ -84,6 +87,8 @@
     private GroupMessageList MessageList;
     private Account Account;
     private string message;
+    private string error;
+    
 
     protected override async Task OnInitializedAsync()
     {
@@ -99,7 +104,8 @@
     {
         if (!string.IsNullOrEmpty(message))
         {
-            MessageList.AddMessage(new GroupMessage(Account.Id,Group.GroupId,message));
+            GroupMessage groupMessage = new GroupMessage(Account.Id,Group.GroupId,message);
+            error=ClientModel.SendGroupMessage(groupMessage);
             message = null;
         }
         

@@ -68,6 +68,7 @@
                                     }
                                 </td>
                             </tr>
+
                         }
                         </tbody>
                     </table>
@@ -79,6 +80,9 @@
             <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
             <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
         </div>
+        <div style="color: red">
+            @error
+        </div>
     </div>
 </div>
 
@@ -88,6 +92,7 @@
     public static FriendSetting FriendSetting;
     private Friend friend;
     private string message;
+    private string error;
 
     protected override async Task OnInitializedAsync()
     {
@@ -98,13 +103,17 @@
         Account = ClientModel.GetAccount();
         friend = ClientModel.GetFriendById(FriendSetting.Id);
         MessageList = ClientModel.GetMessageById(friend.Id);
+        error = "";
+        message = "";
     }
     
     private void send()
     {
         if (!string.IsNullOrEmpty(message))
         {
-            MessageList.AddMessage(new PrivateMessage(Account.Id,friend.Id,message));
+            Console.WriteLine("mmmmmmmmm"+error);
+            error=ClientModel.SendPrivateMessage(new PrivateMessage(Account.Id, friend.Id, message));
+            Console.WriteLine("kkkkkkkk"+error);
             message = null;
         }
         
