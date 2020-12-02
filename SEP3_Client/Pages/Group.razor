@@ -1,5 +1,7 @@
 ﻿@page "/Group"
 @using SEP3_Client.Data
+@using SEP3_Client.Model.List.Group
+@using SEP3_Client.Model.Unit.Group
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Group chat</h1>
@@ -13,15 +15,59 @@
         Back
     </button>
     <div style="float: left; width: 250px; height: 40px;">
-     <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
+        <span class="oi oi-plus" style="background-color: #e0a800; color: white;width: 40px;height: 40px;
      float: left;font-size: x-large;line-height:40px;text-align: center "></span>
-    <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
+        <button style="border: none;width: 180px; height: 40px;float: left;text-align: left;background-color: white;
      font-size: 25px;" @onclick="addGroup">New Group
-    </button>
+        </button>
     </div>
+    <p style="width: 800px;height: 35px;text-align: center">
+        <div class="oi oi-magnifying-glass" style="height: 26px;width: 25px"></div>
+        <input type="text" placeholder="Group name" style="width:200px" @bind="groupName"/>
+        <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" @onclick="search"></button>
+    </p>
+     @if (GroupsToShow == null)
+            {
+                <p>
+                    <em>Loading</em>
+                </p>
+            }
+     else
+     {
+         if (!GroupsToShow.GroupList.Any())
+         {
+             <p>
+                 <em>No groups in the list...</em>
+             </p>
+         }
+         else
+         {
+             <table class="table">
+                 <tbody>
+                 @foreach (var group in GroupsToShow.GroupList)
+                 {
+                     <tr>
+                         <td>
+                             <img src="people_multiple_76px_1116527_easyicon.net.png" width="40px" height="40px">
+                             @group.GroupName
+                         </td>
+                         <td>
+                             <button class="oi oi-chat" style="color: cornflowerblue" @onclick="() => Chat(group)">
+                             </button>
+                         </td>
+                     </tr>
+                 }
+                 </tbody>
+             </table>
+         }
+     }
 </div>
 </div>
 @code {
+    private ChatGroupList GroupsToShow;
+    private ChatGroupList AllGroups;
+    private string groupName;
+    
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,16 +75,40 @@
         {
             NavigationManager.NavigateTo("");
         }
+        AllGroups = ClientModel.GetGroupList();
+        GroupsToShow = AllGroups;
+    }
+
+    private void search()
+    {
+        if (!string.IsNullOrEmpty(groupName))
+        {
+            GroupsToShow = new ChatGroupList();
+            foreach (var group in ClientModel.GetGroupList().GetGroupByGroupName(groupName).GroupList)
+            {
+                GroupsToShow.AddNewGroup(group);
+            }
+        }
+        else
+        {
+            GroupsToShow = AllGroups;
+        }
     }
     
     private void addGroup()
     {
-        NavigationManager.NavigateTo("/AddGroup");
+        NavigationManager.NavigateTo("/Invitation");
     }
 
     private void back()
     {
         NavigationManager.NavigateTo("/FriendList");
+    }
+
+    private void Chat(ChatGroup group)
+    {
+        GroupChat.Group = group;
+        NavigationManager.NavigateTo("/GroupChat");
     }
     
 }

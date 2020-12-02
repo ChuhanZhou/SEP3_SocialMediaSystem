@@ -1,4 +1,6 @@
 ﻿@page "/AddGroup"
+@using SEP3_Client.Data
+@inject IClientModel ClientModel
 @inject NavigationManager NavigationManager
 <div style="float: left; width: 100%;height: auto;">
 <div style="text-align: center;
@@ -12,21 +14,41 @@
     <p>
         <span class="oi oi-flag"></span>
         <input type="text" placeholder="Group name" style="width:400px" @bind="groupName"/>
-        <button class="oi oi-plus" style="background-color: #ed969e; height: 26px" @onclick="addGroup" ></button>
+        <button class="oi oi-plus" style="float:right;background-color: #ed969e; height: 26px" @onclick="addGroup" ></button>
+    </p>
+    <p style="color: red">
+        @error
     </p>
 </div>
 </div>
 
 @code {
     private string groupName;
+    private string error;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+    }
 
     private void addGroup()
     {
-        NavigationManager.NavigateTo("/Group");
+        if (groupName!=null)
+        {
+            ClientModel.AddNewGroup(groupName);
+            NavigationManager.NavigateTo("/Group");
+        }
+        else
+        {
+            error = "Please write the group name";
+        }
     }
 
     private void back()
     {
-        NavigationManager.NavigateTo("/Group");
+        NavigationManager.NavigateTo("/Interest");
     }
 }

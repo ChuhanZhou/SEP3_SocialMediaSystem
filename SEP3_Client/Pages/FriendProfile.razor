@@ -27,7 +27,7 @@
         <div style="float: left; width: 100%;height: auto;">
             <div>
                 <button class="oi oi-chat" style="border: 2px solid black;border-radius: 8px; background-color: #8fd19e; width: 100px;
-                padding: 10px;height: auto;text-align: center;margin: auto; font-size: 20px;float: right">
+                padding: 10px;height: auto;text-align: center;margin: auto; font-size: 20px;float: right" @onclick="Chat">
                     Chat
                 </button>
             </div>
@@ -77,6 +77,11 @@
     {
         FriendSettings.FriendSetting = friendSetting;
         NavigationManager.NavigateTo("/FriendSettings");
+    }
+
+    private void Chat()
+    {
+        NavigationManager.NavigateTo("/PrivateChat");
     }
     
     

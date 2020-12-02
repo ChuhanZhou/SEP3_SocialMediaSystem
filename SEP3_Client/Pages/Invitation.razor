@@ -1,0 +1,141 @@
+﻿@page "/Invitation"
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.Group
+@using System.Runtime.InteropServices
+@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+<div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button>
+    <EditForm Model="@ChatGroup" OnValidSubmit="@addGroup">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            <button type="submit" style="float:right; text-align: left;height: 30px; background-color: #8fd19e">
+                Confirm
+            </button>
+            <div>
+                <p style="color: red">
+                    @error
+                </p>
+            </div>
+    <div class="form-group">
+        <form>
+            @foreach (var friend in friendList.GetFriendSettingList())
+            {
+                <input type="checkbox" checked="@hasMember(friend.Id)" @onchange="@(() => ChooseMember(friend.Id))">
+                <img src="user.PNG" width="40px" height="40px">
+                @if (friend.GetNote() == null)
+                {
+                    @getUserName(friend.GetId())
+                }
+                else
+                {
+                    @friend.Note
+                }
+                <br/>
+            }
+        </form>
+    </div>
+    </EditForm>
+    
+</div>
+</div>
+
+@code {
+    private ChatGroup ChatGroup;
+    private FriendSettingList friendList;
+    private string error;
+    public static string GroupId;
+    private Account Account;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        if (ChatGroup==null)
+        {
+            ChatGroup = new ChatGroup();
+        }
+        else
+        {
+            ChatGroup = ClientModel.GetGroupByGroupId(GroupId);
+        }
+        Account = ClientModel.GetAccount();
+
+    }
+
+    private string getUserName(string id)
+    {
+        return ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private void ChooseMember(string memberId)
+    {
+        if (hasMember(memberId))
+        {
+            if (ChatGroup.CreatorId.Equals(Account.Id))
+            {
+                ClientModel.RemoveGroupMember(ChatGroup, memberId);
+            }
+        }
+        else
+        {
+              ClientModel.AddGroupMember(ChatGroup, memberId);
+        }
+    }
+
+    private bool hasMember(string memberId)
+    {
+        foreach (var member in ClientModel.GetGroupByGroupId(ChatGroup.GroupId).AccountIdList)
+        {
+            if (member.Equals(memberId))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void back()
+    {
+        if (ChatGroup == null)
+        {
+            NavigationManager.NavigateTo("/Group");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/GroupSetting");
+        }
+    }
+
+    private void addGroup()
+    {
+        if (ChatGroup==null)
+        {
+            if (ChatGroup.AccountIdList.Count>2)
+            {
+                 NavigationManager.NavigateTo("/AddGroup");
+            }
+            else
+            {
+                error = "Please invite some friends";
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/GroupSetting");
+        }
+    }
+    
+}
