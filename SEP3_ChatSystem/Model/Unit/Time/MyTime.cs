@@ -18,6 +18,8 @@ namespace SEP3_ChatSystem.Model.Unit.Time
             Hour = dateTime.Hour;
             Minute = dateTime.Minute;
         }
+        
+        public MyTime(){}
 
         public string ToString()
         {
