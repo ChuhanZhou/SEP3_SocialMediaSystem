@@ -1,3 +1,28 @@
 {
-  "MessageList": []
+  "MessageList": [
+    {
+      "ReceiverId": "1DB319FC",
+      "MessageInfo": "Hello",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 2,
+        "Hour": 3,
+        "Minute": 4
+      }
+    },
+    {
+      "ReceiverId": "1DB319FC",
+      "MessageInfo": "Good Morning",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 2,
+        "Hour": 3,
+        "Minute": 17
+      }
+    }
+  ]
 }

@@ -63,7 +63,7 @@
             NavigationManager.NavigateTo("");
         }
         friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-        if (ChatGroup==null)
+        if (GroupId==null)
         {
             ChatGroup = new ChatGroup();
         }
@@ -123,7 +123,7 @@
     {
         if (ChatGroup==null)
         {
-            if (ChatGroup.AccountIdList.Count>2)
+            if (ChatGroup.AccountIdList.Count>1)
             {
                  NavigationManager.NavigateTo("/AddGroup");
             }

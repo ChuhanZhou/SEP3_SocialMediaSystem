@@ -88,6 +88,7 @@
 
 @code {
     private Account Account;
+    private static PrivateChat page;
     private PrivateMessageList MessageList;
     public static FriendSetting FriendSetting;
     private Friend friend;
@@ -105,25 +106,43 @@
         MessageList = ClientModel.GetMessageById(friend.Id);
         error = "";
         message = "";
+        page = this;
+    }
+
+    public static PrivateChat GetPage()
+    {
+        if (page == null)
+        {
+            page = new PrivateChat();
+        }
+        return page;
     }
     
     private void send()
     {
         if (!string.IsNullOrEmpty(message))
         {
-            Console.WriteLine("mmmmmmmmm"+error);
             error=ClientModel.SendPrivateMessage(new PrivateMessage(Account.Id, friend.Id, message));
-            Console.WriteLine("kkkkkkkk"+error);
             message = null;
         }
-        
     }
 
     private void back()
     {
         NavigationManager.NavigateTo("/FriendProfile");
     }
-    
-    
+
+    public void Update()
+    {
+        if (ClientModel != null)
+        {
+            Account = ClientModel.GetAccount();
+            friend = ClientModel.GetFriendById(FriendSetting.Id);
+            MessageList = ClientModel.GetMessageById(friend.Id);
+            error = "";
+            message = "";
+        }
+    }
+
 
 }

@@ -13,7 +13,8 @@ namespace SEP3_Client.Data
         
         public static void ChatSystemUpdate()
         {
-            
+            Console.WriteLine("--------------------------------");
+            PrivateChat.GetPage().Update();
         }
     }
 }

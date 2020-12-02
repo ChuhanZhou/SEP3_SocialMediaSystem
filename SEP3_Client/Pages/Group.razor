@@ -21,6 +21,7 @@
      font-size: 25px;" @onclick="addGroup">New Group
         </button>
     </div>
+      <br/>
     <p style="width: 800px;height: 35px;text-align: center">
         <div class="oi oi-magnifying-glass" style="height: 26px;width: 25px"></div>
         <input type="text" placeholder="Group name" style="width:200px" @bind="groupName"/>
@@ -97,6 +98,7 @@
     
     private void addGroup()
     {
+        Invitation.GroupId = null;
         NavigationManager.NavigateTo("/Invitation");
     }
 
