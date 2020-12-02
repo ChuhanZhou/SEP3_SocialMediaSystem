@@ -1,0 +1,124 @@
+﻿@page "/GroupChat"
+@using SEP3_Client.Model.Unit.Group
+@using SEP3_Client.Model.List.Message
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.Message
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+
+<div style="height: 30px"></div>
+<div style="text-align: center; width: 150px;height: 40px;float: left">
+    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button></div>
+<div style="float: right; text-align: left;width: 320px;">
+    <button class="oi oi-cog" style="width: 40px;height: 40px;font-size: xx-large;line-height:50px;text-align: center;border: none;background-color: white" @onclick="clickCog"></button>
+</div>
+<img src="people_multiple_76px_1116527_easyicon.net.png" style="float: left" width="65px" height="65px">
+<h1>@Group.GroupName</h1>
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 900px;
+         height: 600px;
+         margin: auto;
+         ">
+        <div style="height: 600px;width:100%;overflow: auto;">
+            @if (MessageList == null)
+            {
+                <p>
+                    <em>Loading</em>
+                </p>
+            }
+            else
+            {
+                if (!MessageList.MessageList.Any())
+                {
+                    <p>
+                        <em>Now you can chat in the group...</em>
+                    </p>
+                }
+                else
+                {
+                    <table class="table">
+                        <tbody>
+                        @foreach (var msg in MessageList.MessageList)
+                        {
+                            <tr style="width: 70%">
+                                <td style="width: 70%">
+                                    @if (msg.SenderId.Equals(Account.Id))
+                                    {
+                                        <img src="user.PNG" width="40px" height="40px" style="float: right">
+                                        <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                        <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;border-radius:20px;
+                            background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                            word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                        <div style="width: 70%;float: left;"><div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div> 
+                                            <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                         background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                         word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+        <br/>
+        <div>
+            <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
+            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
+        </div>
+        <div style="color: red">
+            @error
+        </div>
+    </div>
+</div>
+@code {
+    public static ChatGroup Group;
+    private GroupMessageList MessageList;
+    private Account Account;
+    private string message;
+    private string error;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
+        Account = ClientModel.GetAccount();
+    }
+
+    private void send()
+    {
+        if (!string.IsNullOrEmpty(message))
+        {
+            GroupMessage groupMessage = new GroupMessage(Account.Id,Group.GroupId,message);
+            error=ClientModel.SendGroupMessage(groupMessage);
+            message = null;
+        }
+        
+    }
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/Group");
+    }
+
+    private void clickCog()
+    {
+        GroupSetting.ChatGroup = Group;
+        NavigationManager.NavigateTo("/GroupSetting");
+    }
+}
