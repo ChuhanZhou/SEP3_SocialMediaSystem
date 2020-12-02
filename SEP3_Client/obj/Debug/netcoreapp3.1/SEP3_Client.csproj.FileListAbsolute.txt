@@ -214,3 +214,11 @@ C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\GroupSetting.razor.g.cs
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Invitation.razor.g.cs
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\PrivateChat.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\GroupChat.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\GroupSetting.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Invitation.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\PrivateChat.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\GroupChat.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\GroupSetting.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Invitation.razor.g.cs
+C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\PrivateChat.razor.g.cs

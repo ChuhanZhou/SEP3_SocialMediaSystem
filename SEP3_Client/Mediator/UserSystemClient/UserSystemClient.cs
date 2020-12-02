@@ -128,7 +128,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
         }
 
-        public async Task<string> SendAccountPackage(Account account, string keyword)
+        public string SendAccountPackage(Account account, string keyword)
         {
             if (clientModel.HasFunction(FunctionType.UserSystem))
             {
@@ -154,7 +154,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
         }
         
-        public async Task<string> SendAccountPackage(Account oldAccount, Account newAccount, string keyword)
+        public string SendAccountPackage(Account oldAccount, Account newAccount, string keyword)
         {
             if (clientModel.HasFunction(FunctionType.UserSystem))
             {
@@ -182,7 +182,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
         }
 
-        public async Task<string> SendFriendSettingPackage(FriendSetting friendSetting, string keyword)
+        public string SendFriendSettingPackage(FriendSetting friendSetting, string keyword)
         {
             if (clientModel.HasFunction(FunctionType.UserSystem))
             {
@@ -208,7 +208,7 @@ namespace SEP3_Client.Mediator.UserSystemClient
             }
         }
 
-        public async Task<bool> SendSearchPackage(string id, string keyword)
+        public bool SendSearchPackage(string id, string keyword)
         {
             if (clientModel.HasFunction(FunctionType.UserSystem))
             {

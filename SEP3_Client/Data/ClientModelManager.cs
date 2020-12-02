@@ -98,29 +98,29 @@ namespace SEP3_Client.Data
             return account.Copy();
         }
 
-        public async Task<string> ChangePassword(string oldPassword, string newPassword)
+        public string ChangePassword(string oldPassword, string newPassword)
         {
             Account oldAccount = new Account(account.GetId(), account.GetUserName(), oldPassword);
             Account newAccount = new Account(account.GetId(), account.GetUserName(), newPassword);
-            return await userSystemClient.SendAccountPackage(oldAccount,newAccount, "changePassword");
+            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "changePassword");
         }
 
-        public async Task<string> UpdateBasicInformation(Account account)
+        public string UpdateBasicInformation(Account account)
         {
             Account oldAccount = this.account;
             Account newAccount = account;
             
-            return await userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
+            return userSystemClient.SendAccountPackage(oldAccount,newAccount, "updateBasicInformation");
         }
 
-        public async Task<bool> SearchId(string id)
+        public bool SearchId(string id)
         {
-            return await userSystemClient.SendSearchPackage(id, "hasUser");
+            return userSystemClient.SendSearchPackage(id, "hasUser");
         }
 
-        public async Task<string> AddNewFriend(FriendSetting newFriendSetting)
+        public string AddNewFriend(FriendSetting newFriendSetting)
         {
-            return await userSystemClient.SendFriendSettingPackage(newFriendSetting,"addNewFriend");
+            return userSystemClient.SendFriendSettingPackage(newFriendSetting,"addNewFriend");
         }
 
         public FriendSettingList GetFriendSettingList()
@@ -128,17 +128,17 @@ namespace SEP3_Client.Data
             return account.FriendSettingList.Copy();
         }
 
-        public async Task<string> UpdateFriendSetting(FriendSetting newFriendSetting)
+        public string UpdateFriendSetting(FriendSetting newFriendSetting)
         {
             
-            return await userSystemClient.SendFriendSettingPackage(newFriendSetting,"updateFriend");
+            return userSystemClient.SendFriendSettingPackage(newFriendSetting,"updateFriend");
         }
 
-        public async Task RemoveFriend(string id)
+        public void RemoveFriend(string id)
         {
             FriendSetting newFriendSetting = account.GetFriendSettingList().GetFriendSettingFromAgreeById(id).Copy();
             newFriendSetting.Delete();
-            await userSystemClient.SendFriendSettingPackage(newFriendSetting,"removeFriend");
+            userSystemClient.SendFriendSettingPackage(newFriendSetting,"removeFriend");
         }
 
         public Friend GetFriendById(string id)
