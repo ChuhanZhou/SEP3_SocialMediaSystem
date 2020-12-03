@@ -15,7 +15,22 @@ namespace SEP3_PostSystem.UserSystem
         {
             client = new HttpClient();
         }
-        
+
+        public async Task<bool> HasId(string id)
+        {
+            try
+            {
+                var message = await client.GetStringAsync(uri + "hasId?userId="+id);
+                Console.WriteLine("Get Receive: " + message);
+                Console.WriteLine("Get end");
+                return Convert.ToBoolean(message);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public async Task<FriendList> GetFriendListByUserId(string id)
         {
             try

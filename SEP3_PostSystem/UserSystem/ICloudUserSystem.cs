@@ -5,6 +5,7 @@ namespace SEP3_PostSystem.UserSystem
 {
     public interface ICloudUserSystem
     {
+        Task<bool> HasId(string id);
         Task<FriendList> GetFriendListByUserId(string id);
     }
 }
