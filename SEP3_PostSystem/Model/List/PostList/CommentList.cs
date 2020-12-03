@@ -2,7 +2,7 @@
 using System.Linq;
 using SEP3_PostSystem.Model.Unit.Post;
 
-namespace SEP3_PostSystem.Model.List.Post
+namespace SEP3_PostSystem.Model.List.PostList
 {
     public class CommentList
     {
@@ -13,10 +13,10 @@ namespace SEP3_PostSystem.Model.List.Post
             Comments = new List<Comment>();
         }
 
-        public CommentList(CommentList commentList)
+        public CommentList(List<Comment> commentList)
         {
             Comments = new List<Comment>();
-            foreach (var comment in commentList.Comments)
+            foreach (var comment in commentList)
             {
                 Comments.Add(comment.Copy());
             }
@@ -75,7 +75,7 @@ namespace SEP3_PostSystem.Model.List.Post
 
         public CommentList Copy()
         {
-            return new CommentList(this);
+            return new CommentList(Comments);
         }
     }
 }

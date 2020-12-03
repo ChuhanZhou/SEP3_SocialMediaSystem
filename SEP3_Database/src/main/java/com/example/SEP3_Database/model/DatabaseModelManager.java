@@ -28,7 +28,7 @@ public class DatabaseModelManager implements DatabaseModel{
         return modelManager;
     }
 
-    public DatabaseModelManager()
+    private DatabaseModelManager()
     {
         jdbc = new Jdbc_User();
         databaseOnline = false;
