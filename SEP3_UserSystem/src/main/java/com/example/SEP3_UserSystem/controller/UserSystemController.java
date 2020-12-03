@@ -1,4 +1,4 @@
-package com.example.SEP3_UserSystem.Controller;
+package com.example.SEP3_UserSystem.controller;
 
 import com.example.SEP3_UserSystem.model.UserSystemModel;
 import com.example.SEP3_UserSystem.model.UserSystemModelManager;
