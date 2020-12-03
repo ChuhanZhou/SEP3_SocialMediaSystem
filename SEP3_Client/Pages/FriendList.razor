@@ -70,6 +70,9 @@
                                 }
                             </td>
                             <td>
+                                @getFriendStatus(friend.Id)
+                            </td>
+                            <td>
                                 <button class="oi oi-eye" style="color: cornflowerblue" @onclick="() => seeFriendProfile(friend)">
                                 </button>
                             </td>
@@ -116,6 +119,11 @@
             show = false;
         }
         page = this;
+    }
+
+    private string getFriendStatus(string id)
+    {
+        return ClientModel.GetFriendById(id).UserStatus.Status;
     }
 
     private int NeedAgreeNum()

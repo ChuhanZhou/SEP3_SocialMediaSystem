@@ -9,12 +9,15 @@ namespace SEP3_Client.Data
         {
             Console.WriteLine("--------------------------------");
             FriendList.GetPage().Update();
+            //FriendRequest.GetPage().Update();
         }
         
         public static void ChatSystemUpdate()
         {
             Console.WriteLine("--------------------------------");
             PrivateChat.GetPage().Update();
+            //GroupChat.GetPage().Update();
+            //GroupSetting.GetPage().Update();
         }
     }
 }

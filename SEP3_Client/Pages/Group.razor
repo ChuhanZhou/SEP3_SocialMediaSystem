@@ -21,12 +21,17 @@
      font-size: 25px;" @onclick="addGroup">New Group
         </button>
     </div>
-      <br/>
+    <br/>
+    <div style="width: 100%;height: 30px;float:left;">
+    </div>
     <p style="width: 800px;height: 35px;text-align: center">
         <div class="oi oi-magnifying-glass" style="height: 26px;width: 25px"></div>
         <input type="text" placeholder="Group name" style="width:200px" @bind="groupName"/>
         <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" @onclick="search"></button>
     </p>
+    <br/>
+    <div style="width: 100%;height: 20px;float:left;">
+        </div>
      @if (GroupsToShow == null)
             {
                 <p>
@@ -98,8 +103,7 @@
     
     private void addGroup()
     {
-        Invitation.GroupId = null;
-        NavigationManager.NavigateTo("/Invitation");
+        NavigationManager.NavigateTo("/AddGroup");
     }
 
     private void back()
@@ -110,6 +114,7 @@
     private void Chat(ChatGroup group)
     {
         GroupChat.Group = group;
+        GroupSetting.ChatGroup = group;
         NavigationManager.NavigateTo("/GroupChat");
     }
     

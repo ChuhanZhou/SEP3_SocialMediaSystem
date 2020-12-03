@@ -15,17 +15,18 @@
     <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
         Back
     </button>
-    <EditForm Model="@ChatGroup" OnValidSubmit="@addGroup">
+    <EditForm Model="@ChatGroup" OnValidSubmit="@addMembers">
             <DataAnnotationsValidator/>
             <ValidationSummary/>
             <button type="submit" style="float:right; text-align: left;height: 30px; background-color: #8fd19e">
                 Confirm
             </button>
-            <div>
-                <p style="color: red">
+            <div style="width: 100%">
+                <p style="color: red;font-size: 20px;text-align: center">
                     @error
                 </p>
             </div>
+            <br/>
     <div class="form-group">
         <form>
             @foreach (var friend in friendList.GetFriendSettingList())
@@ -63,14 +64,7 @@
             NavigationManager.NavigateTo("");
         }
         friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-        if (GroupId==null)
-        {
-            ChatGroup = new ChatGroup();
-        }
-        else
-        {
-            ChatGroup = ClientModel.GetGroupByGroupId(GroupId);
-        }
+        ChatGroup = ClientModel.GetGroupByGroupId(GroupId);
         Account = ClientModel.GetAccount();
 
     }
@@ -97,45 +91,24 @@
 
     private bool hasMember(string memberId)
     {
-        foreach (var member in ClientModel.GetGroupByGroupId(ChatGroup.GroupId).AccountIdList)
-        {
-            if (member.Equals(memberId))
-            {
-                return true;
-            }
-        }
-        return false;
+      foreach (var member in ClientModel.GetGroupByGroupId(GroupId).AccountIdList)
+       {
+           if (member.Equals(memberId))
+           {
+               return true;
+           }
+       }
+       return false;
     }
 
     private void back()
     {
-        if (ChatGroup == null)
-        {
-            NavigationManager.NavigateTo("/Group");
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/GroupSetting");
-        }
+        NavigationManager.NavigateTo("/GroupSetting");
     }
 
-    private void addGroup()
+    private void addMembers()
     {
-        if (ChatGroup==null)
-        {
-            if (ChatGroup.AccountIdList.Count>1)
-            {
-                 NavigationManager.NavigateTo("/AddGroup");
-            }
-            else
-            {
-                error = "Please invite some friends";
-            }
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/GroupSetting");
-        }
+        NavigationManager.NavigateTo("/GroupSetting");
     }
     
 }

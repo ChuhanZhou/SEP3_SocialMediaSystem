@@ -2,7 +2,7 @@
 @using SEP3_Client.Data
 @inject IClientModel ClientModel
 @inject NavigationManager NavigationManager
-<div style="float: left; width: 100%;height: auto;">
+<div style="float: left; width: 100%;height: auto;" xmlns="http://www.w3.org/1999/html">
 <div style="text-align: center;
          width: 800px;
          height: 800px;
@@ -11,12 +11,14 @@
     <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
         Back
     </button>
-    <p>
-        <span class="oi oi-flag"></span>
+    <button class="oi oi-plus" style="background-color: #ed969e; height: 30px;float: right;" @onclick="addGroup" >Create</button>
+        <h1 style="text-shadow: 2px 2px 3px #818182; color: #4e555b;">Create a group</h1>
+        <div style="height: 30px;width: 100%"></div>
+    <p style="font-size: 30px;float: left">
+        <span class="oi oi-flag"></span>Group Name: 
         <input type="text" placeholder="Group name" style="width:400px" @bind="groupName"/>
-        <button class="oi oi-plus" style="float:right;background-color: #ed969e; height: 26px" @onclick="addGroup" ></button>
-    </p>
-    <p style="color: red">
+    </p><br/>
+    <p style="color: red;font-size: 20px">
         @error
     </p>
 </div>
@@ -49,6 +51,6 @@
 
     private void back()
     {
-        NavigationManager.NavigateTo("/Interest");
+        NavigationManager.NavigateTo("/Group");
     }
 }
