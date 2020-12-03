@@ -228,18 +228,37 @@
         <e p="Controllers" t="Include">
           <e p="PostListController.cs" t="Include" />
         </e>
-        <e p="Data" t="Include" />
+        <e p="Data" t="Include">
+          <e p="IPostModel.cs" t="Include" />
+          <e p="PostModel.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include" />
         <e p="Model" t="Include">
           <e p="List" t="Include">
-            <e p="Post" t="Include">
+            <e p="PostList" t="Include">
               <e p="CommentList.cs" t="Include" />
               <e p="PostList.cs" t="Include" />
+            </e>
+            <e p="UserList" t="Include">
+              <e p="AccountList.cs" t="Include" />
+              <e p="FriendList.cs" t="Include" />
+              <e p="FriendSettingList.cs" t="Include" />
             </e>
           </e>
           <e p="Unit" t="Include">
             <e p="Post" t="Include">
               <e p="Comment.cs" t="Include" />
               <e p="Post.cs" t="Include" />
+            </e>
+            <e p="User" t="Include">
+              <e p="Account.cs" t="Include" />
+              <e p="BasicInformation.cs" t="Include" />
+              <e p="Birthday.cs" t="Include" />
+              <e p="Friend.cs" t="Include" />
+              <e p="FriendSetting.cs" t="Include" />
+              <e p="FriendSettingStatus.cs" t="Include" />
+              <e p="User.cs" t="Include" />
+              <e p="UserStatus.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -256,6 +275,10 @@
         </e>
         <e p="SEP3_PostSystem.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />
+        <e p="UserSystem" t="Include">
+          <e p="CloudUserSystem.cs" t="Include" />
+          <e p="ICloudUserSystem.cs" t="Include" />
+        </e>
       </e>
     </e>
   </component>

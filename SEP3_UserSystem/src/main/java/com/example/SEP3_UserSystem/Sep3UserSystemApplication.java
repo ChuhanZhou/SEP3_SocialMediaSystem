@@ -12,7 +12,7 @@ public class Sep3UserSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Sep3UserSystemApplication.class, args);
-		UserSystemModel userSystemModel = new UserSystemModelManager();
+		UserSystemModel userSystemModel = UserSystemModelManager.getModelManager();
 		ServerConnector server = new ServerConnector(userSystemModel);
 		Thread thread = new Thread(server,"[UserSystemServer]");
 		thread.setDaemon(true);

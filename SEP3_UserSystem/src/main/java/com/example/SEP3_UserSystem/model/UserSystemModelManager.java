@@ -12,12 +12,22 @@ import java.beans.PropertyChangeSupport;
 
 public class UserSystemModelManager implements UserSystemModel,UserSystemModelForDatabaseSystem
 {
+    private static UserSystemModelManager modelManager;
     private AccountList accountList;
     private PropertyChangeSupport property;
     private CloudDatabaseModel cloudDatabaseModel;
     private boolean databaseOnline;
 
-    public UserSystemModelManager()
+    public static UserSystemModelManager getModelManager()
+    {
+        if (modelManager == null)
+        {
+            modelManager = new UserSystemModelManager();
+        }
+        return modelManager;
+    }
+
+    private UserSystemModelManager()
     {
         property = new PropertyChangeSupport(this);
         accountList = new AccountList();
