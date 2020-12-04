@@ -11,7 +11,7 @@ namespace SEP3_PostSystem.Data
         string UpdatePostLike(string postId,string userId);
         string CommentPost(string postId,Comment comment,string userId);
         string RemoveComment(string postId,string commentId,string userId);
-        string UpdatePostByReader(Post newPost,string userId);
+        string UpdatePostBySender(Post newPost,string userId);
         void RemovePost(string postId,string userId);
     }
 }

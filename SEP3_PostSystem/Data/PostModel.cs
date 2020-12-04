@@ -116,7 +116,7 @@ namespace SEP3_PostSystem.Data
             return null;
         }
 
-        public string UpdatePostByReader(Post newPost, string userId)
+        public string UpdatePostBySender(Post newPost, string userId)
         {
             if (!postList.HasPostId(newPost.PostId)) return "Can't find post.";
             var post = postList.GetPostByPostId(newPost.PostId);

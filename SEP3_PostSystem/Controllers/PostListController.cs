@@ -46,5 +46,79 @@ namespace SEP3_PostSystem.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPut]
+        public ActionResult<string> UpdatePost([FromBody] Post newPost, [FromQuery] string userId)
+        {
+            try
+            {
+                return postModel.UpdatePostBySender(newPost,userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpDelete]
+        public ActionResult<string> RemovePost([FromHeader] string postId, [FromQuery] string userId)
+        {
+            try
+            {
+                postModel.RemovePost(postId,userId);
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("like")]
+        public ActionResult<string> UpdatePostLike([FromHeader] string postId, [FromQuery] string userId)
+        {
+            try
+            {
+                return postModel.UpdatePostLike(postId,userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpPost]
+        [Route("comment")]
+        public ActionResult<string> AddComment([FromHeader] string postId,[FromBody] Comment comment,[FromQuery] string userId)
+        {
+            try
+            {
+                return postModel.CommentPost(postId,comment,userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpDelete]
+        [Route("comment")]
+        public ActionResult<string> RemoveComment([FromHeader] string postId,[FromQuery] string commentId,[FromQuery] string userId)
+        {
+            try
+            {
+                return postModel.RemoveComment(postId,commentId,userId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
