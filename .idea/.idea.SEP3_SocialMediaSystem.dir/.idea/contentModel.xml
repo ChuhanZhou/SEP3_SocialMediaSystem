@@ -243,6 +243,7 @@
         </e>
         <e p="Data" t="Include">
           <e p="IPostModel.cs" t="Include" />
+          <e p="IPostModelForDatabase.cs" t="Include" />
           <e p="PostModel.cs" t="Include" />
         </e>
         <e p="Database" t="Include">

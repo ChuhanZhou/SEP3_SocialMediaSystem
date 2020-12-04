@@ -8,12 +8,13 @@ using SEP3_PostSystem.UserSystem;
 
 namespace SEP3_PostSystem.Data
 {
-    public class PostModel : IPostModel
+    public class PostModel : IPostModel,IPostModelForDatabase
     {
         private static PostModel postModel;
         private PostList postList;
         private ICloudUserSystem cloudUserSystem;
         private ICloudDatabase cloudDatabase;
+        private bool databaseOnline;
 
         public static PostModel GetPostModel()
         {
@@ -29,7 +30,7 @@ namespace SEP3_PostSystem.Data
         {
             postList = new PostList();
             cloudUserSystem = new CloudUserSystem();
-            cloudDatabase = new CloudDatabase();
+            cloudDatabase = new CloudDatabase(this);
         }
         
         private static string GetRandomId()
@@ -152,6 +153,25 @@ namespace SEP3_PostSystem.Data
                     postList.RemovePostByPostId(postId);
                     cloudDatabase.RemovePost(postId);
                 }
+            }
+        }
+
+        public async Task DatabaseSystemOnline()
+        {
+            if (!databaseOnline)
+            {
+                databaseOnline = true;
+                postList = await cloudDatabase.GetAllPost(); 
+                Console.WriteLine("Reconnect to Database System successfully.");
+                
+            }
+        }
+
+        public void DatabaseSystemOffline()
+        {
+            if (databaseOnline)
+            {
+                databaseOnline = false;
             }
         }
     }
