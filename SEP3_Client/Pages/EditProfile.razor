@@ -74,7 +74,7 @@
     private int month;
     private int day;
     private bool change;
-    private static EditProfile editProfile;
+    //private static EditProfile editProfile;
     private char gender;
     private string hometown;
     private long telNo;
@@ -115,27 +115,28 @@
         {
             telNo = account.GetPhoneNumber();
         }
+        //editProfile = null;
     }
 
-    public static EditProfile ChangePage()
-    {
-        if (editProfile==null)
-        {
-            editProfile = new EditProfile();
-        }
-        return editProfile;
-    }
+    //public static EditProfile GetPage()
+    //{
+    //    if (editProfile==null)
+    //    {
+    //        editProfile = new EditProfile();
+    //    }
+    //    return editProfile;
+    //}
 
     private List<int> num = new[]
     {
         31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     }.ToList();
 
-    private async Task update()
+    private void update()
     {
         Account newAccount = ClientModel.GetAccount().Copy();
         newAccount.Update(username,new Birthday(day,month),gender,hometown,telNo);
-        await ClientModel.UpdateBasicInformation(newAccount);
+        ClientModel.UpdateBasicInformation(newAccount);
         NavigationManager.NavigateTo("/Profile");
     }
 
@@ -147,6 +148,6 @@
         }
         return 0;
     }
-    
+
 
 }

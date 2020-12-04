@@ -57,6 +57,9 @@
             </div>
         }
         <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+              GroupID:  @ChatGroup.GroupId
+          </div><br/>
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
             <button class="oi oi-lock-locked" style="background-color: #80bdff; border: 2px solid black; border-radius: 8px;
                     padding: 10px;width: 400px" @onclick="invite"> Invite more friends</button><br/>
         </div>
@@ -75,6 +78,7 @@
     private Account Account;
     private bool show;
     private bool showMembers;
+    private static GroupSetting page;
 
     protected override async Task OnInitializedAsync()
     {
@@ -84,14 +88,24 @@
         }
         Account = ClientModel.GetAccount();
         if (ChatGroup.CreatorId.Equals(Account.Id))
-        {
-            show = true;
-        }
-        else
-        {
-            show = false;
-        }
+          {
+              show = true;
+          }
+          else
+          {
+              show = false;
+          }
         showMembers = false;
+        page = this;
+    }
+
+    public static GroupSetting GetPage()
+    {
+        if (page == null)
+        {
+            page = new GroupSetting();
+        }
+        return page;
     }
 
     private string getGroupId()
@@ -157,6 +171,20 @@
             }
         }
         return false;
+    }
+
+    public void Update()
+    {
+        Account = ClientModel.GetAccount();
+        if (ChatGroup.CreatorId.Equals(Account.Id))
+        {
+            show = true;
+        }
+        else
+        {
+            show = false;
+        }
+        showMembers = false;
     }
     
 }

@@ -94,6 +94,7 @@
         friendRequests = ClientModel.GetFriendSettingList();
         friendRequests.GetFriendSettingList().Reverse();
         click = false;
+        friendRequest = this;
     }
     
     public static FriendRequest GetPage()
@@ -105,9 +106,9 @@
         return friendRequest;
     }
 
-    private async Task sendRequest()
+    private void sendRequest()
     {
-        if (await ClientModel.SearchId(requestID))
+        if ( ClientModel.SearchId(requestID))
         {
             Request.accountID = requestID;
             Request.toAgree = false;
@@ -137,7 +138,13 @@
     {
         NavigationManager.NavigateTo("/FriendList");
     }
-    
+
+    public void Update()
+    {
+        friendRequests = ClientModel.GetFriendSettingList();
+        friendRequests.GetFriendSettingList().Reverse();
+        click = false;
+    }
     
     
 }

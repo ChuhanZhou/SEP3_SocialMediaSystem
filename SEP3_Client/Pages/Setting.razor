@@ -127,9 +127,9 @@
         
     }
 
-    private async Task Save()
+    private void Save()
     {
-        error = await ClientModel.ChangePassword(oldPassword, password);
+        error = ClientModel.ChangePassword(oldPassword, password);
         if (error==null)
         {
             saveSuccess = true;

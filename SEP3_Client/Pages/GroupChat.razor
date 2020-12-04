@@ -88,7 +88,8 @@
     private Account Account;
     private string message;
     private string error;
-    
+    private static GroupChat groupChat;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -98,6 +99,7 @@
         }
         MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
         Account = ClientModel.GetAccount();
+        groupChat = this;
     }
 
     private void send()
@@ -111,6 +113,15 @@
         
     }
 
+    public static GroupChat GetPage()
+    {
+        if (groupChat==null)
+        {
+            groupChat = new GroupChat();
+        }
+        return groupChat;
+    }
+
     private void back()
     {
         NavigationManager.NavigateTo("/Group");
@@ -118,7 +129,13 @@
 
     private void clickCog()
     {
-        GroupSetting.ChatGroup = Group;
+        GroupSetting.ChatGroup = ClientModel.GetGroupByGroupId(Group.GroupId);
         NavigationManager.NavigateTo("/GroupSetting");
+    }
+
+    public void Update()
+    {
+        MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
+        Account = ClientModel.GetAccount();
     }
 }

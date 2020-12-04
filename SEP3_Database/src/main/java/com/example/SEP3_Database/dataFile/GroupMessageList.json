@@ -1,3 +1,16 @@
 {
-  "MessageList": []
+  "MessageList": [
+    {
+      "GroupId": "77FEF8C4",
+      "MessageInfo": "Hi",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 3,
+        "Hour": 19,
+        "Minute": 41
+      }
+    }
+  ]
 }
