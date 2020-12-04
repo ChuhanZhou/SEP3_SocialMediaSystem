@@ -3,6 +3,7 @@ package com.example.SEP3_Database.persistence;
 import com.example.SEP3_Database.model.domain.list.groupList.ChatGroupList;
 import com.example.SEP3_Database.model.domain.list.message.GroupMessageList;
 import com.example.SEP3_Database.model.domain.list.message.PrivateMessageList;
+import com.example.SEP3_Database.model.domain.list.postList.PostList;
 import com.google.gson.Gson;
 import com.example.SEP3_Database.model.domain.list.userList.AccountList;
 import com.google.gson.GsonBuilder;
@@ -170,6 +171,47 @@ public class DataFileContext {
         {
             String json = gson.toJson(groupMessageList);
             File file = new File(address + "GroupMessageList.json");
+            PrintWriter out = new PrintWriter(file);
+            out.print(json);
+            out.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static PostList readPostListData()
+    {
+        try
+        {
+            File file = new File(address + "PostList.json");
+            if (!file.exists())
+            {
+                updatePostListData(new PostList());
+            }
+            Scanner input = new Scanner(file);
+            String json = "";
+            while (input.hasNext())
+            {
+                json += input.nextLine();
+            }
+            PostList postList = gson.fromJson(json,PostList.class);
+            return postList;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void updatePostListData(PostList postList)
+    {
+        try
+        {
+            String json = gson.toJson(postList);
+            File file = new File(address + "PostList.json");
             PrintWriter out = new PrintWriter(file);
             out.print(json);
             out.close();

@@ -39,7 +39,7 @@ namespace SEP3_PostSystem.Model.Unit.Post
             DisableList = new List<string>(post.DisableList);
         }
 
-        private Post(Post post)
+        public Post(Post post)
         {
             PostId = post.PostId;
             SenderId = post.SenderId;

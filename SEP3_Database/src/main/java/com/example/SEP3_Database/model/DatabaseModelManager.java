@@ -5,10 +5,12 @@ import com.example.SEP3_Database.jdbc.Jdbc_User;
 import com.example.SEP3_Database.model.domain.list.groupList.ChatGroupList;
 import com.example.SEP3_Database.model.domain.list.message.GroupMessageList;
 import com.example.SEP3_Database.model.domain.list.message.PrivateMessageList;
+import com.example.SEP3_Database.model.domain.list.postList.PostList;
 import com.example.SEP3_Database.model.domain.list.userList.AccountList;
 import com.example.SEP3_Database.model.domain.unit.group.ChatGroup;
 import com.example.SEP3_Database.model.domain.unit.message.GroupMessage;
 import com.example.SEP3_Database.model.domain.unit.message.PrivateMessage;
+import com.example.SEP3_Database.model.domain.unit.post.Post;
 import com.example.SEP3_Database.persistence.DataFileContext;
 import com.example.SEP3_Database.model.domain.unit.user.Account;
 
@@ -108,7 +110,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                jdbc.InsertChatGroupTable(newChatGroup);
             }
             chatGroupList.addNewGroup(newChatGroup);
             DataFileContext.updateChatGroupListData(chatGroupList);
@@ -119,7 +121,7 @@ public class DatabaseModelManager implements DatabaseModel{
     public ChatGroupList getAllChatGroup() {
         if (databaseOnline)
         {
-            //database code
+            return jdbc.getChatGroupList();
         }
         return DataFileContext.readChatGroupListData();
     }
@@ -131,7 +133,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                jdbc.updateChatGroup(newChatGroup);
             }
             chatGroupList.updateGroup(newChatGroup);
             DataFileContext.updateChatGroupListData(chatGroupList);
@@ -146,7 +148,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                //jdbc.
             }
             chatGroupList.removeGroupByGroupId(groupId);
             groupMessageList.removeMessageById(null,groupId);
@@ -162,7 +164,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                jdbc.InsertIntoPrivateMessageTable(newMessage);
             }
             privateMessageList.addMessage(newMessage);
             DataFileContext.updatePrivateMessageListData(privateMessageList);
@@ -173,7 +175,7 @@ public class DatabaseModelManager implements DatabaseModel{
     public PrivateMessageList getAllPrivateMessage() {
         if (databaseOnline)
         {
-            //database code
+            return jdbc.getPrivateMessageList();
         }
         return DataFileContext.readPrivateMessageListData();
     }
@@ -185,7 +187,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                jdbc.InsertIntoGroupMessageTable(newMessage);
             }
             groupMessageList.addMessage(newMessage);
             DataFileContext.updateGroupMessageListData(groupMessageList);
@@ -196,7 +198,7 @@ public class DatabaseModelManager implements DatabaseModel{
     public GroupMessageList getAllGroupMessage() {
         if (databaseOnline)
         {
-            //database code
+            return jdbc.getGroupMessageList();
         }
         return DataFileContext.readGroupMessageListData();
     }
@@ -212,6 +214,57 @@ public class DatabaseModelManager implements DatabaseModel{
             }
             groupMessageList.removeMessageById(null,groupId);
             DataFileContext.updateGroupMessageListData(groupMessageList);
+        }
+    }
+
+    @Override
+    public void addPost(Post newPost) {
+        PostList postList = DataFileContext.readPostListData();
+        if (postList!=null)
+        {
+            if (databaseOnline)
+            {
+                //jdbc.;
+            }
+            postList.addPost(newPost);
+            DataFileContext.updatePostListData(postList);
+        }
+    }
+
+    @Override
+    public PostList getAllPost() {
+        if (databaseOnline)
+        {
+            //return jdbc.;
+        }
+        return DataFileContext.readPostListData();
+    }
+
+    @Override
+    public void updatePost(Post newPost) {
+        PostList postList = DataFileContext.readPostListData();
+        if (postList!=null)
+        {
+            if (databaseOnline)
+            {
+                //jdbc.;
+            }
+            postList.updatePost(newPost);
+            DataFileContext.updatePostListData(postList);
+        }
+    }
+
+    @Override
+    public void removePost(String postId) {
+        PostList postList = DataFileContext.readPostListData();
+        if (postList!=null)
+        {
+            if (databaseOnline)
+            {
+                //jdbc.;
+            }
+            postList.removePostByPostId(postId);
+            DataFileContext.updatePostListData(postList);
         }
     }
 }

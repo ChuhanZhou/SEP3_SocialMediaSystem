@@ -14,8 +14,8 @@ namespace SEP3_ChatSystem.Data
         Task<string> AddNewGroup(ChatGroup chatGroup, string userId);
         Task<ChatGroupList> GetChatGroupByUserId(string userId);
         Task<string> UpdateGroup(ChatGroup chatGroup, string userId);
-        string AddNewGroupMember(string groupId,string newUserId, string userId);
-        string RemoveGroupMember(string groupId,string removeUserId, string userId);
+        Task<string> AddNewGroupMember(string groupId,string newUserId, string userId);
+        Task<string> RemoveGroupMember(string groupId,string removeUserId, string userId);
         Task<string> RemoveGroup(ChatGroup chatGroup, string userId);
         string AddNewPrivateMessage(PrivateMessage message);
         Task<PrivateMessageList> GetPrivateMessageById(string id);

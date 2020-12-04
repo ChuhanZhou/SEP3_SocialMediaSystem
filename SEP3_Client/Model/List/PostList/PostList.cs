@@ -68,12 +68,12 @@ namespace SEP3_Client.Model.List.PostList
             return postList;
         }
 
-        public string UpdatePost(Post post)
+        public string UpdatePost(Post newPost)
         {
-            var target = GetPostByPostId(post.PostId);
+            var target = GetPostByPostId(newPost.PostId);
             if (target!=null)
             {
-                target.UpdateByPost(post);
+                target = new Post(newPost);
                 return null;
             }
             return "Not find post.";

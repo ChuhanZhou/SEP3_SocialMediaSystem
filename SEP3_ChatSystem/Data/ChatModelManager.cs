@@ -109,7 +109,7 @@ namespace SEP3_ChatSystem.Data
             }
         }
 
-        public string AddNewGroupMember(string groupId, string newUserId, string userId)
+        public async Task<string> AddNewGroupMember(string groupId, string newUserId, string userId)
         {
             var targetGroup = chatGroupList.GetGroupByGroupId(groupId);
             if (targetGroup!=null)
@@ -121,7 +121,8 @@ namespace SEP3_ChatSystem.Data
                         string result = targetGroup.AddAccountId(newUserId);
                         if (result==null)
                         {
-                            cloudDatabase.UpdateChatGroup(targetGroup);
+                            await cloudDatabase.UpdateChatGroup(targetGroup);
+                            await UpdateChatGroup(targetGroup);
                         }
                         return result;
                     }
@@ -132,7 +133,7 @@ namespace SEP3_ChatSystem.Data
             return "Can't find the chat group [" + groupId + "].";
         }
 
-        public string RemoveGroupMember(string groupId, string removeUserId, string userId)
+        public async Task<string> RemoveGroupMember(string groupId, string removeUserId, string userId)
         {
             var targetGroup = chatGroupList.GetGroupByGroupId(groupId);
             if (targetGroup!=null)
@@ -148,7 +149,8 @@ namespace SEP3_ChatSystem.Data
                         return "You are the creator of this group, you can't remove yourself.";
                     }
                     targetGroup.RemoveAccountById(removeUserId);
-                    cloudDatabase.UpdateChatGroup(targetGroup);
+                    await cloudDatabase.UpdateChatGroup(targetGroup);
+                    await UpdateChatGroup(targetGroup);
                     return null;
                 }
                 return "You are not a member in this group.";

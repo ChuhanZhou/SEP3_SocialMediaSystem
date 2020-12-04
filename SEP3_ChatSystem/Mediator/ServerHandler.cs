@@ -209,10 +209,10 @@ namespace SEP3_ChatSystem.Mediator
                                     result = await chatModel.UpdateGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);
                                     break;
                                 case "AddUser":
-                                    result = chatModel.AddNewGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId, chatGroupPackage.TargetId,userId);
+                                    result = await chatModel.AddNewGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId, chatGroupPackage.TargetId,userId);
                                     break;
                                 case "RemoveUser":
-                                    result = chatModel.RemoveGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId,chatGroupPackage.TargetId,userId);
+                                    result = await chatModel.RemoveGroupMember(chatGroupPackage.SendList.GetGroupByIndex(0).GroupId,chatGroupPackage.TargetId,userId);
                                     break;
                                 case "Remove":
                                     result = await chatModel.RemoveGroup(chatGroupPackage.SendList.GetGroupByIndex(0), userId);

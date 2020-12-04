@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+using SEP3_ChatSystem.Data;
 using SEP3_PostSystem.Model.List.PostList;
 using SEP3_PostSystem.Model.Unit.Post;
 
@@ -6,24 +11,81 @@ namespace SEP3_PostSystem.Database
 {
     public class CloudDatabase : ICloudDatabase
     {
-        public Task<string> AddPost(Post post)
+        private HttpClient client;
+        private const string uri = "http://localhost:8070/api/";
+
+        public CloudDatabase()
         {
-            throw new System.NotImplementedException();
+            client = new HttpClient();
+        }
+        public async Task<string> AddPost(Post post)
+        {
+            try
+            {
+                var newPostJson = JsonSerializer.Serialize(post);
+                HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+                var message = await client.PostAsync(uri + "post", httpContent);
+                Console.WriteLine("Post send: " + newPostJson);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("API Part Receive: " + result);
+                Console.WriteLine("Post end");
+                return null;
+            }
+            catch (Exception e)
+            {
+                return "Data base offline.";
+            }
         }
 
-        public Task<PostList> GetAllPost()
+        public async Task<PostList> GetAllPost()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var message = await client.GetStringAsync(uri + "post");
+                Console.WriteLine("Get Receive: " + message);
+                var postList = JsonSerializer.Deserialize<PostList>(message);
+                Console.WriteLine("Get end");
+                return postList;
+            }
+            catch (Exception e)
+            {
+                return new PostList();
+            }
         }
 
-        public Task<string> UpdatePost(Post post)
+        public async Task<string> UpdatePost(Post post)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var newPostJson = JsonSerializer.Serialize(post);
+                HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+                var message = await client.PutAsync(uri + "post", httpContent);
+                Console.WriteLine("Put send: " + newPostJson);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("API Part Receive: " + result);
+                Console.WriteLine("Put end");
+                return null;
+            }
+            catch (Exception e)
+            {
+                return "Data base offline.";
+            }
+            
         }
 
-        public Task<string> RemovePost(string postId)
+        public async Task<string> RemovePost(string postId)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                await client.DeleteAsync(uri + "post?postId=" + postId);
+                Console.WriteLine("Delete: "+ uri + "post?postId=" + postId); 
+                Console.WriteLine("Delete end");
+                return null;
+            }
+            catch (Exception e)
+            {
+                return "Data base offline.";
+            }
         }
     }
 }
