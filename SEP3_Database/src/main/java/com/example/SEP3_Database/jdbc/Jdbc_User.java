@@ -633,6 +633,15 @@ public class Jdbc_User implements JDBC_interface {
         }
     }
 
+    public void DeleteGroupById(String groupId) {
+        try {
+            executeSQL = "Delete From chatgrouptable Where groupId = \"" + groupId + "\"";
+            System.out.println(executeSQL+">>>");
+            stmt.executeUpdate(executeSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public ChatGroupList getChatGroupList() {
         return chatGroupList;
     }
@@ -700,7 +709,17 @@ public class Jdbc_User implements JDBC_interface {
             e.printStackTrace();
         }
     }
-
+    public void DeleteGroupMessageById(String id)
+    {
+        try {
+            executeSQL = "Delete From groupmessagetable where GroupId=\"" + id + "\"";
+            stmt.executeUpdate(executeSQL);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public GroupMessageList getGroupMessageList() {
         return groupMessageList;
     }
@@ -768,7 +787,14 @@ public class Jdbc_User implements JDBC_interface {
             e.printStackTrace();
         }
     }
-
+    public void DeletePrivateMessageById(String id) {
+        try {
+            executeSQL = "Delete From privatemessagetable where SenderId=\"" + id + "\"";
+            stmt.executeUpdate(executeSQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public PrivateMessageList getPrivateMessageList() {
         return privateMessageList;
     }

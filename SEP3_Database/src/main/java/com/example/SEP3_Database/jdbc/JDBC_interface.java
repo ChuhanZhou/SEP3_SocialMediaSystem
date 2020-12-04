@@ -12,6 +12,7 @@ import com.example.SEP3_Database.model.domain.unit.user.Account;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Timer;
 
 public interface JDBC_interface {
@@ -53,49 +54,64 @@ public interface JDBC_interface {
 
     public void listPM();
 
+    public void DeletePrivateMessageById(String id);
+
+    public void DeleteGroupById(String id);
+
+    public void DeleteGroupMessageById(String id);
+
     public PrivateMessageList getPrivateMessageList();
 }
 
 //class interfacetest {
-//    //
+//
 //    public static void main(String[] args) {
 //        Jdbc_User jdbc = new Jdbc_User();
 //        System.out.println(jdbc.init());
 ////       // jdbc.GetAllUserData();
 //        jdbc.DeleteDatabase();
 //        jdbc.CreateDataBase();
-//        LocalDateTime dateTime = LocalDateTime.now();
-//        MyTime time = new MyTime(dateTime);
-//        PrivateMessage PrivateMessage = new PrivateMessage("a1","a2","helloSQL");
-//        PrivateMessage.setMessageType(MessageType.PRIVATE);
-//        PrivateMessage.setTime(time);
-//        jdbc.InsertIntoPrivateMessageTable(PrivateMessage);
-//        jdbc.listPM();
-//        System.out.println(jdbc.getPrivateMessageList().getMessageByIndex(0).getMessageType());
-//        PrivateMessage.setMessageInfo("GoodBySql");
-//        PrivateMessage.setSenderId("a4");
-//        jdbc.updatePrivateMessage(PrivateMessage);
-//jdbc.listGM();y
-//System.out.println(jdbc.getGroupMessageList().getMessageByIndex(0).getMessageInfo());
-//ChatGroup chatGroup = new ChatGroup("test","12a");
-//chatGroup.setGroupId("g1");
-//ArrayList<String> idList = new ArrayList<>();
-//idList.add("a1");
-//idList.add("a2");
-//idList.add("a3");
-//chatGroup.setAccountIdList(idList);
-//jdbc.InsertChatGroupTable(chatGroup);
-//jdbc.listChar();
-//System.out.println(jdbc.getChatGroupList().getGroupByIndex(0).getAccountIdList().get(1));
-//chatGroup.setCreatorId("21a");
-//chatGroup.setGroupName("not test");
-//idList.add("a4");
-//chatGroup.setAccountIdList(idList);
-//jdbc.updateChatGroup(chatGroup);
+//        jdbc.listGM();
+//        // System.out.println(jdbc.getGroupMessageList().getMessageByIndex(0).getMessageInfo());
+//        ChatGroup chatGroup = new ChatGroup("test", "12a");
+//        chatGroup.setGroupId("g1");
+//        ArrayList<String> idList = new ArrayList<>();
+//        idList.add("a1");
+//        idList.add("a2");
+//        idList.add("a3");
+//        chatGroup.setAccountIdList(idList);
+//        jdbc.InsertChatGroupTable(chatGroup);
+//        jdbc.listChar();
+//        System.out.println(jdbc.getChatGroupList().getGroupByIndex(0).getAccountIdList().get(1));
+//        chatGroup.setCreatorId("21a");
+//        chatGroup.setGroupName("not test");
+//        idList.add("a4");
+//        chatGroup.setAccountIdList(idList);
+//        jdbc.updateChatGroup(chatGroup);
+//        System.out.println("Are you sure to delete");
+//        Scanner scanner = new Scanner(System.in);
+//        String next = scanner.nextLine();
+//        if (next.equals("y")) {
+//            jdbc.DeleteGroupById("g1");
+//        } else {
+//            System.out.println("Exited");
+//        }
+//        //LocalDateTime dateTime = LocalDateTime.now();
+//        //MyTime time = new MyTime(dateTime);
+//        //PrivateMessage PrivateMessage = new PrivateMessage("a1", "a2", "helloSQL");
+//        //PrivateMessage.setMessageType(MessageType.PRIVATE);
+//        //PrivateMessage.setTime(time);
+//        //jdbc.InsertIntoPrivateMessageTable(PrivateMessage);
+//        //jdbc.listPM();
+//        //System.out.println(jdbc.getPrivateMessageList().getMessageByIndex(0).getMessageType());
+//        //PrivateMessage.setMessageInfo("GoodBySql");
+//        //PrivateMessage.setSenderId("a4");
+//        //jdbc.updatePrivateMessage(PrivateMessage);
 //
-//        //jdbc.getAccount("a1");
-//        //System.out.println(jdbc.getAccount("a1").getId()+" :DATA>>>"+jdbc.getAccount("a1").getUserName()+"PS>>>"+jdbc.getAccount("a1").getPasswordForDataBase());
-//        //System.out.println(jdbc.getAccount("a1").getFriendSettingList().getFriendSettingByIndex(0));
+//    }
+////        //jdbc.getAccount("a1");
+////        //System.out.println(jdbc.getAccount("a1").getId()+" :DATA>>>"+jdbc.getAccount("a1").getUserName()+"PS>>>"+jdbc.getAccount("a1").getPasswordForDataBase());
+////        //System.out.println(jdbc.getAccount("a1").getFriendSettingList().getFriendSettingByIndex(0));
 //       // Birthday birthday = new Birthday(11, 2);
 //       // //  //jdbc.GetUserData("a5");
 //       // //  System.out.println("_________________");
