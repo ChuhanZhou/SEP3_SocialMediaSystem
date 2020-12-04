@@ -81,6 +81,7 @@
           <e p="ClientModelManager.cs" t="Include" />
           <e p="IClientModel.cs" t="Include" />
           <e p="IClientModelForChatSystem.cs" t="Include" />
+          <e p="IClientModelForPostSystem.cs" t="Include" />
           <e p="IClientModelForUserSystem.cs" t="Include" />
           <e p="UpdatePage.cs" t="Include" />
         </e>
@@ -244,7 +245,6 @@
           <e p="IPostModel.cs" t="Include" />
           <e p="PostModel.cs" t="Include" />
         </e>
-        <e p="Database" t="Include" />
         <e p="Model" t="Include">
           <e p="List" t="Include">
             <e p="PostList" t="Include">

@@ -19,5 +19,11 @@ namespace SEP3_Client.Data
             //GroupChat.GetPage().Update();
             //GroupSetting.GetPage().Update();
         }
+        
+        public static void PostSystemUpdate()
+        {
+            Console.WriteLine("----------------PostSystemUpdate----------------");
+            
+        }
     }
 }

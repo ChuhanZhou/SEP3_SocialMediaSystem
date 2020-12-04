@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using SEP3_Client.Data;
+using SEP3_Client.Model;
 using SEP3_Client.Model.List.PostList;
 using SEP3_Client.Model.Unit.Post;
 
@@ -12,10 +14,12 @@ namespace SEP3_Client.Mediator.CloudPostSystem
     {
         private HttpClient client;
         private const string uri = "http://localhost:7000/api/";
+        private IClientModelForPostSystem clientModel;
 
-        public CloudPostSystem()
+        public CloudPostSystem(ClientModelManager clientModel)
         {
             client = new HttpClient();
+            this.clientModel = clientModel;
         }
         
         public async Task<string> AddPost(Post post, string userId)
@@ -24,47 +28,132 @@ namespace SEP3_Client.Mediator.CloudPostSystem
             {
                 var newPostJson = JsonSerializer.Serialize(post);
                 HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
-                var message = await client.PostAsync(uri + "post", httpContent);
+                var message = await client.PostAsync(uri + "post/"+userId, httpContent);
                 Console.WriteLine("Post send: " + newPostJson);
                 var result = await message.Content.ReadAsStringAsync();
-                Console.WriteLine("Receive: " + result);
+                Console.WriteLine("Post receive: " + result);
                 Console.WriteLine("Post end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
                 return result;
             }
             catch (Exception e)
             {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
                 return "Post system offline.";
             }
         }
 
-        public Task<PostList> GetPost(string userId)
+        public async Task<PostList> GetPost(string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var message = await client.GetStringAsync(uri + "post/" + userId);
+                Console.WriteLine("Get Receive: " + message);
+                var postList = JsonSerializer.Deserialize<PostList>(message);
+                Console.WriteLine("Get end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+                return postList;
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+                return new PostList();
+            }
         }
 
-        public Task<string> UpdatePostLike(string postId, string userId)
+        public async Task<string> UpdatePostLike(string postId, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var message = await client.PutAsync(uri + "post/like/" + postId + "?userId=" + userId, null);
+                Console.WriteLine("Put send: " + uri + "post/like/" + postId + "?userId=" + userId);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("Put receive: " + result);
+                Console.WriteLine("Put end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+                return "Post system offline.";
+            }
         }
 
-        public Task<string> AddComment(string postId, Comment comment, string userId)
+        public async Task<string> AddComment(string postId, Comment comment, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var newCommentJson = JsonSerializer.Serialize(comment);
+                HttpContent httpContent = new StringContent(newCommentJson, Encoding.UTF8, "application/json");
+                var message = await client.PostAsync(uri + "post/comment/" + postId + "?userId=" + userId, httpContent);
+                Console.WriteLine("Post send: " + newCommentJson);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("Post receive: " + result);
+                Console.WriteLine("Post end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+                return "Post system offline.";
+            }
         }
 
-        public Task<string> RemoveComment(string postId, string commentId, string userId)
+        public async Task<string> RemoveComment(string postId, string commentId, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var message = await client.DeleteAsync(uri + "post/comment/" + postId + "?commentId=" + commentId + "&userId=" + userId);
+                Console.WriteLine("Delete send: " + uri + "post/comment/" + postId + "?commentId=" + commentId + "&userId=" + userId);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("Delete receive: " + result);
+                Console.WriteLine("Delete end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+                return "Post system offline.";
+            }
         }
 
-        public Task<string> UpdatePostBySender(Post newPost, string userId)
+        public async Task<string> UpdatePostBySender(Post newPost, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var newPostJson = JsonSerializer.Serialize(newPost);
+                HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+                var message = await client.PutAsync(uri + "post/" + userId, httpContent);
+                Console.WriteLine("Put send: " + newPostJson);
+                var result = await message.Content.ReadAsStringAsync();
+                Console.WriteLine("Put receive: " + result);
+                Console.WriteLine("Put end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+                return result;
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+                return "Post system offline.";
+            }
         }
 
-        public Task RemovePost(string postId, string userId)
+        public async Task RemovePost(string postId, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await client.DeleteAsync(uri + "post/" + postId + "?userId=" + userId);
+                Console.WriteLine("Delete send: " + uri + "post/" + postId + "?userId=" + userId);
+                Console.WriteLine("Delete end");
+                clientModel.SystemOnLine(FunctionType.PostSystem);
+            }
+            catch (Exception e)
+            {
+                clientModel.SystemOffLine(FunctionType.PostSystem);
+            }
         }
     }
 }

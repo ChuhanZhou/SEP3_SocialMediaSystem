@@ -2,18 +2,21 @@
 using System.Threading;
 using System.Threading.Tasks;
 using SEP3_Client.Mediator.ChatSystemClient;
+using SEP3_Client.Mediator.CloudPostSystem;
 using SEP3_Client.Mediator.UserSystemClient;
 using SEP3_Client.Model;
 using SEP3_Client.Model.List.Group;
 using SEP3_Client.Model.List.Message;
+using SEP3_Client.Model.List.PostList;
 using SEP3_Client.Model.List.UserList;
 using SEP3_Client.Model.Unit.Group;
 using SEP3_Client.Model.Unit.Message;
+using SEP3_Client.Model.Unit.Post;
 using SEP3_Client.Model.Unit.User;
 
 namespace SEP3_Client.Data
 {
-    public class ClientModelManager : IClientModel,IClientModelForUserSystem,IClientModelForChatSystem
+    public class ClientModelManager : IClientModel,IClientModelForUserSystem,IClientModelForChatSystem,IClientModelForPostSystem
     {
         private List<FunctionType> FunctionTypes;
         private Account account;
@@ -21,17 +24,19 @@ namespace SEP3_Client.Data
         private ChatGroupList chatGroupList;
         private PrivateMessageList privateMessageList;
         private GroupMessageList groupMessageList;
-        
+
         private PrivateMessageList offlinePrivateMessageList;
         private GroupMessageList offlineGroupMessageList;
         
         private IUserSystemClient userSystemClient;
         private IChatSystemClient chatSystemClient;
+        private ICloudPostSystem postSystem;
         public ClientModelManager()
         {
             FunctionTypes = new List<FunctionType>();
             userSystemClient = new UserSystemClient(2030,"localhost");
             chatSystemClient = new ChatSystemClient(3010,"localhost");
+            postSystem = new CloudPostSystem(this);
             chatGroupList = ChatGroupList.GetAllGroupList();
             offlinePrivateMessageList = new PrivateMessageList();
             offlineGroupMessageList = new GroupMessageList();
@@ -224,6 +229,52 @@ namespace SEP3_Client.Data
         public GroupMessageList GetOfflineMessageByGroupId(string groupId)
         {
             return offlineGroupMessageList.GetMessageByGroupId(groupId).Copy();
+        }
+
+        public async Task<string> AddPost(Post post)
+        {
+            var result = await postSystem.AddPost(post, account.Id);
+            UpdatePage.PostSystemUpdate();
+            return result;
+        }
+
+        public async Task<PostList> GetPost()
+        {
+            return await postSystem.GetPost(account.Id);
+        }
+
+        public async Task<string> UpdatePostLike(string postId)
+        {
+            var result = await postSystem.UpdatePostLike(postId,account.Id);
+            UpdatePage.PostSystemUpdate();
+            return result;
+        }
+
+        public async Task<string> AddComment(string postId, Comment comment)
+        {
+            var result = await postSystem.AddComment(postId, comment, account.Id);
+            UpdatePage.PostSystemUpdate();
+            return result;
+        }
+
+        public async Task<string> RemoveComment(string postId, string commentId)
+        {
+            var result = await postSystem.RemoveComment(postId, commentId, account.Id);
+            UpdatePage.PostSystemUpdate();
+            return result;
+        }
+
+        public async Task<string> UpdatePostBySender(Post newPost)
+        {
+            var result = await postSystem.UpdatePostBySender(newPost, account.Id);
+            UpdatePage.PostSystemUpdate();
+            return result;
+        }
+
+        public void RemovePost(string postId)
+        {
+            postSystem.RemovePost(postId, account.Id);
+            UpdatePage.PostSystemUpdate();
         }
 
         public void SystemOnLine(FunctionType functionType)

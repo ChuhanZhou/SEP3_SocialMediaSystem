@@ -48,7 +48,7 @@ namespace SEP3_PostSystem.Controllers
         }
 
         [HttpPut]
-        public ActionResult<string> UpdatePost([FromBody] Post newPost, [FromQuery] string userId)
+        public ActionResult<string> UpdatePost([FromBody] Post newPost, [FromHeader] string userId)
         {
             try
             {
