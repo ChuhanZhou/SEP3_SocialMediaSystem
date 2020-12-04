@@ -42,7 +42,7 @@ public class GroupMessageList {
         var messageList = new GroupMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
-            if (MessageList.get(x).SenderId==id)
+            if (MessageList.get(x).SenderId.equals(id))
             {
                 messageList.addMessage(MessageList.get(x));
             }
@@ -55,7 +55,7 @@ public class GroupMessageList {
         var messageList = new GroupMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
-            if (MessageList.get(x).getGroupId()==id)
+            if (MessageList.get(x).getGroupId().equals(id))
             {
                 messageList.addMessage(MessageList.get(x));
             }
@@ -72,7 +72,7 @@ public class GroupMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).SenderId!=senderId||MessageList.get(x).getGroupId()!=groupId)
+                    if (!MessageList.get(x).SenderId.equals(senderId) || !MessageList.get(x).getGroupId().equals(groupId))
                     {
                         groupMessageList.add(MessageList.get(x));
                     }
@@ -82,7 +82,7 @@ public class GroupMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).SenderId!=senderId)
+                    if (!MessageList.get(x).SenderId.equals(senderId))
                     {
                         groupMessageList.add(MessageList.get(x));
                     }
@@ -95,7 +95,7 @@ public class GroupMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).getGroupId()!=groupId)
+                    if (!MessageList.get(x).getGroupId().equals(groupId))
                     {
                         groupMessageList.add(MessageList.get(x));
                     }

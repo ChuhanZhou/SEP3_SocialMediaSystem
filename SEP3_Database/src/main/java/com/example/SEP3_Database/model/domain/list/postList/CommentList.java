@@ -25,7 +25,7 @@ public class CommentList {
     {
         for (int x=0;x<Comments.size();x++)
         {
-            if (Comments.get(x).getCommentId()==id)
+            if (Comments.get(x).getCommentId().equals(id))
             {
                 return true;
             }
@@ -53,7 +53,7 @@ public class CommentList {
     {
         for (int x=0;x<Comments.size();x++)
         {
-            if (Comments.get(x).getCommentId()==id)
+            if (Comments.get(x).getCommentId().equals(id))
             {
                 return Comments.get(x);
             }
@@ -75,7 +75,7 @@ public class CommentList {
     {
         for (int x=0;x<Comments.size();x++)
         {
-            if (Comments.get(x).getCommentId()==id)
+            if (Comments.get(x).getCommentId().equals(id))
             {
                 Comments.remove(x);
                 break;

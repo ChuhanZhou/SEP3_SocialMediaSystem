@@ -26,7 +26,7 @@ public class ChatGroup {
         AccountIdList.add(CreatorId);
     }
 
-    public ChatGroup(ChatGroup chatGroup)
+    private ChatGroup(ChatGroup chatGroup)
     {
         GroupId = chatGroup.GroupId;
         GroupName = chatGroup.GroupName;
@@ -83,12 +83,20 @@ public class ChatGroup {
     {
         for (int x=0;x<AccountIdList.size();x++)
         {
-            if (searchId==AccountIdList.get(x))
+            if (searchId.equals(AccountIdList.get(x)))
             {
                 return true;
             }
         }
         return false;
+    }
+
+    public void update(ChatGroup newChatGroup)
+    {
+        GroupId = newChatGroup.GroupId;
+        GroupName = newChatGroup.GroupName;
+        CreatorId = newChatGroup.CreatorId;
+        AccountIdList = newChatGroup.AccountIdList;
     }
 
     public void removeAccountById(String id)

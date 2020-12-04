@@ -25,7 +25,7 @@ public class PostList {
     {
         for (int x=0;x<Posts.size();x++)
         {
-            if (Posts.get(x).getPostId()==id)
+            if (Posts.get(x).getPostId().equals(id))
             {
                 return true;
             }
@@ -53,7 +53,7 @@ public class PostList {
     {
         for (int x=0;x<Posts.size();x++)
         {
-            if (Posts.get(x).getPostId()==id)
+            if (Posts.get(x).getPostId().equals(id))
             {
                 return Posts.get(x);
             }
@@ -75,7 +75,7 @@ public class PostList {
         var postList = new PostList();
         for (int x=0;x<Posts.size();x++)
         {
-            if (Posts.get(x).getPostId()==id)
+            if (Posts.get(x).getPostId().equals(id))
             {
                 postList.addPost(Posts.get(x));
             }
@@ -98,7 +98,7 @@ public class PostList {
     {
         for (int x=0;x<Posts.size();x++)
         {
-            if (Posts.get(x).getPostId()==id)
+            if (Posts.get(x).getPostId().equals(id))
             {
                 Posts.remove(x);
                 break;

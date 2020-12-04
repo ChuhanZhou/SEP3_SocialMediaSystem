@@ -33,7 +33,7 @@ public class ChatGroupList {
     {
         for (int x=0;x<GroupList.size();x++)
         {
-            if (GroupList.get(x).getGroupId()==id)
+            if (GroupList.get(x).getGroupId().equals(id))
             {
                 return true;
             }
@@ -60,7 +60,7 @@ public class ChatGroupList {
     {
         for (int x=0;x<GroupList.size();x++)
         {
-            if (GroupList.get(x).getGroupId()==id)
+            if (GroupList.get(x).getGroupId().equals(id))
             {
                 return GroupList.get(x);
             }
@@ -73,7 +73,7 @@ public class ChatGroupList {
         ChatGroupList chatGroupList = new ChatGroupList();
         for (int x=0;x<GroupList.size();x++)
         {
-            if (GroupList.get(x).getCreatorId()==id)
+            if (GroupList.get(x).getCreatorId().equals(id))
             {
                 chatGroupList.GroupList.add(GroupList.get(x));
             }
@@ -98,11 +98,9 @@ public class ChatGroupList {
     {
         for (int x=0;x<GroupList.size();x++)
         {
-            if (GroupList.get(x).getGroupId()==chatGroup.getGroupId())
+            if (GroupList.get(x).getGroupId().equals(chatGroup.getGroupId()))
             {
-                GroupList.get(x).setGroupName(chatGroup.getGroupName());
-                GroupList.get(x).setCreatorId(chatGroup.getCreatorId());
-                GroupList.get(x).setAccountIdList(chatGroup.getAccountIdList());
+                GroupList.get(x).update(chatGroup);
                 return null;
             }
         }
@@ -113,7 +111,7 @@ public class ChatGroupList {
     {
         for (int x=0;x<GroupList.size();x++)
         {
-            if (GroupList.get(x).getGroupId()==id)
+            if (GroupList.get(x).getGroupId().equals(id))
             {
                 GroupList.remove(x);
                 break;

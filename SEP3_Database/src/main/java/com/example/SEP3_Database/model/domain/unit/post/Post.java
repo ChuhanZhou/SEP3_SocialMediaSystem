@@ -118,7 +118,7 @@ public class Post {
     {
         for (int x=0;x<LikerIdList.size();x++)
         {
-            if (LikerIdList.get(x)==id)
+            if (LikerIdList.get(x).equals(id))
             {
                 return true;
             }
@@ -130,7 +130,7 @@ public class Post {
     {
         for (int x=0;x<DisableList.size();x++)
         {
-            if (DisableList.get(x)==id)
+            if (DisableList.get(x).equals(id))
             {
                 return true;
             }
@@ -160,7 +160,7 @@ public class Post {
 
     public String updateByPost(Post post)
     {
-        if (PostId==post.PostId&&SenderId==post.SenderId)
+        if (PostId.equals(post.PostId) && SenderId.equals(post.SenderId))
         {
             Title = post.Title;
             Body = post.Body;

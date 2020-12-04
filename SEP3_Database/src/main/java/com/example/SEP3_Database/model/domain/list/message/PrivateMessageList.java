@@ -42,7 +42,7 @@ public class PrivateMessageList {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
-            if (MessageList.get(x).SenderId==id)
+            if (MessageList.get(x).SenderId.equals(id))
             {
                 messageList.addMessage(MessageList.get(x));
             }
@@ -55,7 +55,7 @@ public class PrivateMessageList {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
-            if (MessageList.get(x).getReceiverId()==id)
+            if (MessageList.get(x).getReceiverId().equals(id))
             {
                 messageList.addMessage(MessageList.get(x));
             }
@@ -68,7 +68,7 @@ public class PrivateMessageList {
         var messageList = new PrivateMessageList();
         for (int x=0;x<MessageList.size();x++)
         {
-            if (MessageList.get(x).SenderId==id||MessageList.get(x).getReceiverId()==id)
+            if (MessageList.get(x).SenderId.equals(id) || MessageList.get(x).getReceiverId().equals(id))
             {
                 messageList.addMessage(MessageList.get(x));
             }
@@ -85,7 +85,7 @@ public class PrivateMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).SenderId!=senderId||MessageList.get(x).getReceiverId()!=receiverId)
+                    if (!MessageList.get(x).SenderId.equals(senderId) || !MessageList.get(x).getReceiverId().equals(receiverId))
                     {
                         privateMessageList.add(MessageList.get(x));
                     }
@@ -95,7 +95,7 @@ public class PrivateMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).SenderId!=senderId)
+                    if (!MessageList.get(x).SenderId.equals(senderId))
                     {
                         privateMessageList.add(MessageList.get(x));
                     }
@@ -108,7 +108,7 @@ public class PrivateMessageList {
             {
                 for (int x=0;x<MessageList.size();x++)
                 {
-                    if (MessageList.get(x).getReceiverId()!=receiverId)
+                    if (!MessageList.get(x).getReceiverId().equals(receiverId))
                     {
                         privateMessageList.add(MessageList.get(x));
                     }
