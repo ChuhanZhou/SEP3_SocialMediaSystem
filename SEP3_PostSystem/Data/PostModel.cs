@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SEP3_PostSystem.Database;
 using SEP3_PostSystem.Model.List.PostList;
 using SEP3_PostSystem.Model.List.UserList;
 using SEP3_PostSystem.Model.Unit.Post;
@@ -12,6 +13,7 @@ namespace SEP3_PostSystem.Data
         private static PostModel postModel;
         private PostList postList;
         private ICloudUserSystem cloudUserSystem;
+        private ICloudDatabase cloudDatabase;
 
         public static PostModel GetPostModel()
         {
@@ -27,6 +29,7 @@ namespace SEP3_PostSystem.Data
         {
             postList = new PostList();
             cloudUserSystem = new CloudUserSystem();
+            cloudDatabase = new CloudDatabase();
         }
         
         private static string GetRandomId()
@@ -50,7 +53,13 @@ namespace SEP3_PostSystem.Data
                     {
                         newId = GetRandomId();
                     }
-                    return postList.AddPost(new Post(newId, post));
+                    var newPost = new Post(newId, post);
+                    string result = postList.AddPost(newPost);
+                    if (result==null)
+                    {
+                        return await cloudDatabase.AddPost(newPost);
+                    }
+                    return result;
                 }
             }
             return "Wrong input.";
@@ -71,21 +80,26 @@ namespace SEP3_PostSystem.Data
             return searchList;
         }
 
-        public string UpdatePostLike(string postId, string userId)
+        public async Task<string> UpdatePostLike(string postId, string userId)
         {
             if (postList.HasPostId(postId))
             {
                 var post = postList.GetPostByPostId(postId);
                 if (post.IsLiker(userId))
                 {
-                    return post.RemoveLiker(postId);
+                    string result = post.RemoveLiker(postId);
+                    if (result==null)
+                    {
+                        return await cloudDatabase.UpdatePost(post);
+                    }
+                    return result;
                 }
                 return post.AddLiker(userId);
             }
             return "Can't find post.";
         }
 
-        public string CommentPost(string postId, Comment comment, string userId)
+        public async Task<string> CommentPost(string postId, Comment comment, string userId)
         {
             if (postList.HasPostId(postId))
             {
@@ -98,14 +112,14 @@ namespace SEP3_PostSystem.Data
                         commentId = GetRandomId();
                     }
                     post.CommentList.AddComment(new Comment(postId, comment));
-                    return null;
+                    return await cloudDatabase.UpdatePost(post);
                 }
                 return "Wrong sender.";
             }
             return "Can't find post.";
         }
 
-        public string RemoveComment(string postId, string commentId, string userId)
+        public async Task<string> RemoveComment(string postId, string commentId, string userId)
         {
             if (!postList.HasPostId(postId)) return "Can't find post.";
             var post = postList.GetPostByPostId(postId);
@@ -113,15 +127,20 @@ namespace SEP3_PostSystem.Data
             var comment = post.CommentList.GetCommentByCommentId(commentId);
             if (comment.SenderId != userId) return "Wrong user.";
             post.CommentList.RemoveCommentByCommentId(commentId);
-            return null;
+            return await cloudDatabase.UpdatePost(post);
         }
 
-        public string UpdatePostBySender(Post newPost, string userId)
+        public async Task<string> UpdatePostBySender(Post newPost, string userId)
         {
             if (!postList.HasPostId(newPost.PostId)) return "Can't find post.";
             var post = postList.GetPostByPostId(newPost.PostId);
             if (post.SenderId != userId) return "Wrong user.";
-            return post.UpdateByPost(newPost);
+            string result = post.UpdateByPost(newPost);
+            if (result==null)
+            {
+                return await cloudDatabase.UpdatePost(post);
+            }
+            return result;
         }
 
         public void RemovePost(string postId, string userId)
@@ -131,6 +150,7 @@ namespace SEP3_PostSystem.Data
                 if (postList.GetPostByPostId(postId).SenderId == userId)
                 {
                     postList.RemovePostByPostId(postId);
+                    cloudDatabase.RemovePost(postId);
                 }
             }
         }

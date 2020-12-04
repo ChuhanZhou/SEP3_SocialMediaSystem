@@ -5,13 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Database\**" />
       <Compile Remove="Model\List\ChatGroupList\**" />
-      <Content Remove="Database\**" />
+      <Compile Include="Database\CloudDatabase.cs" />
+      <Compile Include="Database\ICloudDatabase.cs" />
       <Content Remove="Model\List\ChatGroupList\**" />
-      <EmbeddedResource Remove="Database\**" />
       <EmbeddedResource Remove="Model\List\ChatGroupList\**" />
-      <None Remove="Database\**" />
       <None Remove="Model\List\ChatGroupList\**" />
     </ItemGroup>
 

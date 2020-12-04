@@ -48,11 +48,11 @@ namespace SEP3_PostSystem.Controllers
         }
 
         [HttpPut]
-        public ActionResult<string> UpdatePost([FromBody] Post newPost, [FromHeader] string userId)
+        public async Task<ActionResult<string>> UpdatePost([FromBody] Post newPost, [FromHeader] string userId)
         {
             try
             {
-                return postModel.UpdatePostBySender(newPost,userId);
+                return await postModel.UpdatePostBySender(newPost,userId);
             }
             catch (Exception e)
             {
@@ -78,11 +78,11 @@ namespace SEP3_PostSystem.Controllers
 
         [HttpPut]
         [Route("like")]
-        public ActionResult<string> UpdatePostLike([FromHeader] string postId, [FromQuery] string userId)
+        public async Task<ActionResult<string>> UpdatePostLike([FromHeader] string postId, [FromQuery] string userId)
         {
             try
             {
-                return postModel.UpdatePostLike(postId,userId);
+                return await postModel.UpdatePostLike(postId,userId);
             }
             catch (Exception e)
             {
@@ -93,11 +93,11 @@ namespace SEP3_PostSystem.Controllers
         
         [HttpPost]
         [Route("comment")]
-        public ActionResult<string> AddComment([FromHeader] string postId,[FromBody] Comment comment,[FromQuery] string userId)
+        public async Task<ActionResult<string>> AddComment([FromHeader] string postId,[FromBody] Comment comment,[FromQuery] string userId)
         {
             try
             {
-                return postModel.CommentPost(postId,comment,userId);
+                return await postModel.CommentPost(postId,comment,userId);
             }
             catch (Exception e)
             {
@@ -108,11 +108,11 @@ namespace SEP3_PostSystem.Controllers
         
         [HttpDelete]
         [Route("comment")]
-        public ActionResult<string> RemoveComment([FromHeader] string postId,[FromQuery] string commentId,[FromQuery] string userId)
+        public async Task<ActionResult<string>> RemoveComment([FromHeader] string postId,[FromQuery] string commentId,[FromQuery] string userId)
         {
             try
             {
-                return postModel.RemoveComment(postId,commentId,userId);
+                return await postModel.RemoveComment(postId,commentId,userId);
             }
             catch (Exception e)
             {

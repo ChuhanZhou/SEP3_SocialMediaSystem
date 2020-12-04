@@ -245,6 +245,10 @@
           <e p="IPostModel.cs" t="Include" />
           <e p="PostModel.cs" t="Include" />
         </e>
+        <e p="Database" t="Include">
+          <e p="CloudDatabase.cs" t="Include" />
+          <e p="ICloudDatabase.cs" t="Include" />
+        </e>
         <e p="Model" t="Include">
           <e p="List" t="Include">
             <e p="PostList" t="Include">
