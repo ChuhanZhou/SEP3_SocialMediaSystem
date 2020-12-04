@@ -18,13 +18,13 @@
                 {
                     if (member.Equals(ChatGroup.CreatorId))
                     {
-                        <div style="width: 60px;height: 65px" >
+                        <div style="width: 60px;height: 65px;text-align: center" >
                             <img src="user.PNG" width="30px" height="30px"><br/>
-                            @member <div>(Creator)</div></div>
+                            @member <span>(Creator)</span></div>
                     }
                     else
                     {
-                        <div style="width: 40px;height: 60px" >
+                        <div style="width: 40px;height: 60px;text-align: center" >
                             <img src="user.PNG" width="30px" height="30px"><br/>
                             @member</div>
                     }
@@ -35,10 +35,11 @@
         @if (show)
         {
             <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
-                Group name: <input style="width: 400px;font-size: 20px" @ChatGroup.GroupName/>
+                Group name: <input placeholder="" style="width: 300px;font-size: 20px" @bind="ChatGroup.GroupName"/>
+                <button class="btn btn-outline-dark" @onclick="(() => changName())"> SAVE </button>
             </div><br/>
             <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
-                Manage members: <button class="btn btn-outline-dark" @onclick="clickMembers">Members</button>
+                Manage members: <button class="btn btn-outline-dark" @onclick="clickMembers">Members<span class="oi oi-chevron-bottom"></span></button>
                 @if (showMembers)
                 {
                     <form>
@@ -60,7 +61,7 @@
               GroupID:  @ChatGroup.GroupId
           </div><br/>
         <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
-            <button class="oi oi-lock-locked" style="background-color: #80bdff; border: 2px solid black; border-radius: 8px;
+            <button class="oi oi-plus" style="background-color: #80bdff; border: 2px solid black; border-radius: 8px;
                     padding: 10px;width: 400px" @onclick="invite"> Invite more friends</button><br/>
         </div>
         
@@ -185,6 +186,12 @@
             show = false;
         }
         showMembers = false;
+    }
+
+    private void changName()
+    {
+        Model.Unit.Group.ChatGroup newChatGroup = ChatGroup;
+        ClientModel.UpdateGroupInformation(newChatGroup);
     }
     
 }

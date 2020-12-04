@@ -1,8 +1,124 @@
 ﻿@page "/Chat"
+@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.Message
+@using SEP3_Client.Model.Unit.Message
+@using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
-<h3>Chat</h3>
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <div style="text-align: left; width: 200px;float:left;" >
+            <table class="table">
+                <tbody>
+                @foreach (var friend in friends.GetFriendSettingList())
+                {
+                    <tr>
+                        <td width="100px">
+                            <button @onclick="() => chat(friend.Id)">
+                                <img src="user.PNG" width="40px" height="40px">
+                                @if (string.IsNullOrEmpty(getNote(friend.Id)))
+                                {
+                                    @getUserName(friend.Id)<span>(@getFriendStatus(friend.Id))</span>
+                                }
+                                else
+                                {
+                                    @getNote(friend.Id)<span>(@getFriendStatus(friend.Id)) </span>
+                                }
+                            </button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        @if (show)
+        {
+            <div style="width: 500px">
+                <h1>
+                    @if (!string.IsNullOrEmpty(getNote(ID)))
+                    {
+                        @getNote(ID)
+                    }
+                    else
+                    {
+                        @getUserName(ID)
+                    }
+                </h1>
+                <div style="float: left; width: 100%;height: auto;">
+                    @if (MessageList == null)
+                    {
+                        <p>
+                            <em>Loading</em>
+                        </p>
+                    }
+                    else
+                    {
+                        if (!MessageList.MessageList.Any())
+                        {
+                            <p>
+                                <em>Now you can chat with your friend...</em>
+                            </p>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <tbody>
+                                @foreach (var msg in MessageList.MessageList)
+                                {
+                                    <tr style="width: 70%">
+                                        <td style="width: 70%">
+                                            @if (msg.SenderId.Equals(Account.Id))
+                                            {
+                                                <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                                <div style="width: 70%;float: right">
+                                                    <div type="text" style="float: right;width: auto;border-radius:20px;
+                                        background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                        word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                                <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                                     background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                     word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </div>
+                <br/>
+                <div>
+                    <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message"/>
+                    <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()">Send</button>
+                </div>
+                <div style="color: red">
+                    @error
+                </div>
+            </div>
+        }
+        </div>
+</div>
 
 @code {
+    private FriendSettingList friends;
+    private bool show;
+    private Account Account;
+    private PrivateMessageList MessageList;
+    private string ID;
+    //private Friend friend;
+    private string message;
+    private string error;
 
     protected override async Task OnInitializedAsync()
     {
@@ -10,6 +126,41 @@
         {
             NavigationManager.NavigateTo("");
         }
+        friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        show = false;
     }
+    
+    private string getFriendStatus(string id)
+    {
+        return ClientModel.GetFriendById(id).UserStatus.Status;
+    }
+
+    private string getUserName(string id)
+    {
+        return ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private string getNote(string id)
+    {
+        return ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id).GetNote();
+    }
+
+    private void chat(string id)
+    {
+        this.ID = id;
+        MessageList = ClientModel.GetMessageById(ID);
+        show = true;
+    }
+    
+    private void send()
+    {
+        if (!string.IsNullOrEmpty(message))
+        {
+            error=ClientModel.SendPrivateMessage(new PrivateMessage(Account.Id, ID, message));
+            message = null;
+        }
+    }
+    
+    
 
 }

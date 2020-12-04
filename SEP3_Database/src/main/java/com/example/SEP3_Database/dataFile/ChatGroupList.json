@@ -7,6 +7,14 @@
       "AccountIdList": [
         "D733AF65"
       ]
+    },
+    {
+      "GroupId": "D243CB8E",
+      "GroupName": "bug",
+      "CreatorId": "D733AF65",
+      "AccountIdList": [
+        "D733AF65"
+      ]
     }
   ]
 }
