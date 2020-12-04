@@ -7,14 +7,14 @@ namespace SEP3_Client.Data
     {
         public static void UserSystemUpdate()
         {
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("----------------UserSystemUpdate----------------");
             FriendList.GetPage().Update();
             //FriendRequest.GetPage().Update();
         }
         
         public static void ChatSystemUpdate()
         {
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("----------------ChatSystemUpdate----------------");
             PrivateChat.GetPage().Update();
             //GroupChat.GetPage().Update();
             //GroupSetting.GetPage().Update();
