@@ -70,7 +70,7 @@ namespace SEP3_ChatSystem.Data
 
         public async Task<ChatGroupList> GetChatGroupByUserId(string userId)
         {
-            chatGroupList = await cloudDatabase.GetAllChatGroup();
+            chatGroupList.GroupList = (await cloudDatabase.GetAllChatGroup()).GroupList;
             return chatGroupList.GetGroupByUserId(userId).Copy();
         }
 

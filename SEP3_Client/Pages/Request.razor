@@ -64,7 +64,7 @@
         NavigationManager.NavigateTo("/FriendRequest");
     }
 
-    private async Task clickSend()
+    private void clickSend()
     {
         if (ClientModel.GetAccount().GetId() != accountID && ClientModel.GetFriendById(accountID) == null)
         {
@@ -73,7 +73,7 @@
             {
                 friendSetting.SetStatus(true);
             }
-            error=await ClientModel.AddNewFriend(friendSetting);
+            error=ClientModel.AddNewFriend(friendSetting);
             if (error==null)
             {
                 NavigationManager.NavigateTo("/FriendRequest");
