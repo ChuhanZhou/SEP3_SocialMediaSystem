@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SEP3_ChatSystem.Model.List.Group;
 using SEP3_ChatSystem.Model.Unit.Group;
@@ -67,13 +68,10 @@ namespace SEP3_ChatSystem.Model.List.Message
         {
             var messageList = new GroupMessageList();
             foreach (var message in MessageList)
-            {
-                if (ChatGroupList.GetAllGroupList().HasGroupId(message.GroupId))
+            { 
+                if (ChatGroupList.GetAllGroupList().GetGroupByGroupId(message.GroupId).HasId(id))
                 {
-                    if (ChatGroupList.GetAllGroupList().GetGroupByGroupId(message.GroupId).HasId(id))
-                    {
-                        messageList.AddMessage(message);
-                    }
+                    messageList.AddMessage(message);
                 }
             }
             return messageList;

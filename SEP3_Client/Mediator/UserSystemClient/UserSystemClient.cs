@@ -15,8 +15,6 @@ namespace SEP3_Client.Mediator.UserSystemClient
     public class UserSystemClient : IUserSystemClient
     {
         private IClientModelForUserSystem clientModel;
-        private static readonly int PORT = 2030;
-        private static readonly string HOST = "localhost";
         private int port;
         private string host;
 
@@ -26,14 +24,8 @@ namespace SEP3_Client.Mediator.UserSystemClient
         private bool sending;
         private bool isReceive;
         private string receiveMessage;
-        
-        public UserSystemClient() : this(PORT,HOST) {}
 
-        public UserSystemClient(int port) : this(port,HOST) {}
-
-        public UserSystemClient(string host) : this(PORT, host) {}
-
-        public UserSystemClient(int port,string host)
+        public UserSystemClient(int port = 2030,string host = "localhost")
         {
             this.port = port;
             this.host = host;

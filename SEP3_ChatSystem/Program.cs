@@ -10,7 +10,7 @@ namespace SEP3_ChatSystem
         public static void Main(string[] args)
         {
             ChatModelManager chatModelManager = new ChatModelManager();
-            ServerConnector server = new ServerConnector(chatModelManager);
+            ServerConnector server = new ServerConnector(chatModelManager,3010,"127.0.0.1");
             server.Start();
         }
     }

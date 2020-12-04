@@ -30,8 +30,8 @@ namespace SEP3_Client.Data
         public ClientModelManager()
         {
             FunctionTypes = new List<FunctionType>();
-            userSystemClient = new UserSystemClient();
-            chatSystemClient = new ChatSystemClient();
+            userSystemClient = new UserSystemClient(2030,"localhost");
+            chatSystemClient = new ChatSystemClient(3010,"localhost");
             chatGroupList = ChatGroupList.GetAllGroupList();
             offlinePrivateMessageList = new PrivateMessageList();
             offlineGroupMessageList = new GroupMessageList();

@@ -15,37 +15,25 @@ namespace SEP3_Client.Mediator.ChatSystemClient
     public class ChatSystemClient : IChatSystemClient
     {
         private IClientModelForChatSystem clientModel;
-        private static readonly int PORT = 3010;
-        private static readonly string HOST = "localhost";
         private int port;
         private string host;
 
         private TcpClient client;
         private NetworkStream stream;
         private bool login;
+        private bool logoff;
         private bool sending;
         private bool receiving;
         private bool isReceive;
-        private bool reconnect;
+        private bool reconnecting;
         private string receiveMessage;
-
-        public ChatSystemClient() : this(PORT, HOST)
-        {
-        }
-
-        public ChatSystemClient(int port) : this(port, HOST)
-        {
-        }
-
-        public ChatSystemClient(string host) : this(PORT, host)
-        {
-        }
-
-        public ChatSystemClient(int port, string host)
+        
+        public ChatSystemClient(int port = 3010, string host = "localhost")
         {
             this.port = port;
             this.host = host;
-            reconnect = true;
+            reconnecting = false;
+            logoff = false;
         }
 
         private void Send(string information)
@@ -120,7 +108,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 stream = client.GetStream();
                 this.clientModel.SystemOnLine(FunctionType.ChatSystem);
                 Console.WriteLine("ChatSystem online.");
-                reconnect = true;
                 Login();
                 return true;
             }
@@ -134,14 +121,8 @@ namespace SEP3_Client.Mediator.ChatSystemClient
 
         private void Disconnect()
         {
-            try
-            {
-                stream.Close();
-                client.Close();
-            }
-            catch
-            {
-            }
+            stream.Close();
+            client.Close();
             login = false;
             clientModel.SystemOffLine(FunctionType.ChatSystem);
             Console.WriteLine("ChatSystem offline.");
@@ -150,20 +131,31 @@ namespace SEP3_Client.Mediator.ChatSystemClient
 
         private void Reconnect()
         {
-            if (reconnect)
+            if (!reconnecting&&!logoff)
             {
-                Console.Write("Try to reconnect chat system in 10s.\n[");
-                for (int i = 0; i < 10; i++)
+                new Thread(() =>
                 {
-                    Thread.Sleep(1000);
-                    Console.Write("-");
-                }
-                Console.WriteLine("]\nReconnecting chat system...");
-                Connect(clientModel);
+                    while (true)
+                    {
+                        reconnecting = true;
+                        Console.Write("Try to reconnect chat system in 10s.\n[");
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Thread.Sleep(1000);
+                            Console.Write("-");
+                        }
+                        Console.WriteLine("]\nReconnecting chat system...");
+                        if (Connect(clientModel))
+                        {
+                            reconnecting = false;
+                            break;
+                        }
+                    }
+                }).Start();
             }
         }
         
-        public void Login()
+        private void Login()
         {
             if (clientModel.HasFunction(FunctionType.ChatSystem))
             {
@@ -181,7 +173,7 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    //Console.WriteLine(e);
                     Disconnect();
                     throw;
                 }
@@ -189,8 +181,8 @@ namespace SEP3_Client.Mediator.ChatSystemClient
         }
 
         public void Logoff()
-        {
-            reconnect = false;
+        { 
+            logoff = true;
             Disconnect();
         }
 

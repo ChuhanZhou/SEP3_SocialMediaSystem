@@ -67,12 +67,9 @@ namespace SEP3_Client.Model.List.Message
             var messageList = new GroupMessageList();
             foreach (var message in MessageList)
             {
-                if (ChatGroupList.GetAllGroupList().HasGroupId(message.GroupId))
+                if (ChatGroupList.GetAllGroupList().GetGroupByGroupId(message.GroupId).HasId(id))
                 {
-                    if (ChatGroupList.GetAllGroupList().GetGroupByGroupId(message.GroupId).HasId(id))
-                    {
-                        messageList.AddMessage(message);
-                    }
+                    messageList.AddMessage(message);
                 }
             }
             return messageList;
