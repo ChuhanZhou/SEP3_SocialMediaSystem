@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using SEP3_ChatSystem.Model.Unit.Time;
 using SEP3_PostSystem.Model.List.PostList;
 
 namespace SEP3_PostSystem.Model.Unit.Post
 {
     public class Post
     {
+        public MyTime Time { get; set; }
         public string PostId { get; set; }
         public string SenderId { get; set; }
         public string Title { get; set; }
@@ -30,6 +33,7 @@ namespace SEP3_PostSystem.Model.Unit.Post
             SenderId = post.SenderId;
             Title = post.Title;
             Body = post.Body;
+            Time = new MyTime(DateTime.Now);
             LikerIdList = new List<string>();
             CommentList = new CommentList();
             DisableList = new List<string>(post.DisableList);
@@ -41,6 +45,7 @@ namespace SEP3_PostSystem.Model.Unit.Post
             SenderId = post.SenderId;
             Title = post.Title;
             Body = post.Body;
+            Time = post.Time.Copy();
             LikerIdList = new List<string>(post.LikerIdList);
             CommentList = post.CommentList.Copy();
             DisableList = new List<string>(post.DisableList);

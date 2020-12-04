@@ -18,10 +18,24 @@ namespace SEP3_Client.Model.Unit.Time
             Hour = dateTime.Hour;
             Minute = dateTime.Minute;
         }
+
+        private MyTime(MyTime time)
+        {
+            Year = time.Year;
+            Month = time.Month;
+            Day = time.Day;
+            Hour = time.Hour;
+            Minute = time.Minute;
+        }
         
         public MyTime(){}
 
-        public string ToString()
+        public MyTime Copy()
+        {
+            return new MyTime(this);
+        }
+
+        public override string ToString()
         {
             return Day + "/" + Month + "/" + Year + "-" + Hour + ":" + Minute;
         }

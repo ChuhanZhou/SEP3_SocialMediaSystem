@@ -24,5 +24,9 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SEP3_ChatSystem\SEP3_ChatSystem.csproj" />
+    </ItemGroup>
+
 
 </Project>

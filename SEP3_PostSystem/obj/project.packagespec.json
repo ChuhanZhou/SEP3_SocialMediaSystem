@@ -14,7 +14,11 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "projectReferences": {}
+        "projectReferences": {
+          "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj": {
+            "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj"
+          }
+        }
       }
     },
     "warningProperties": {
