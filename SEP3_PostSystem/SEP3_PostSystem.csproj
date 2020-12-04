@@ -5,7 +5,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Database" />
+      <Compile Remove="Database\**" />
+      <Compile Remove="Model\List\ChatGroupList\**" />
+      <Content Remove="Database\**" />
+      <Content Remove="Model\List\ChatGroupList\**" />
+      <EmbeddedResource Remove="Database\**" />
+      <EmbeddedResource Remove="Model\List\ChatGroupList\**" />
+      <None Remove="Database\**" />
+      <None Remove="Model\List\ChatGroupList\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
     </ItemGroup>
 
 
