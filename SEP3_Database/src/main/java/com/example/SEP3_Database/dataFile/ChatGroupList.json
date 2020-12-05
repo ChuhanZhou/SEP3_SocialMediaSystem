@@ -1,29 +1,3 @@
 {
-  "GroupList": [
-    {
-      "GroupId": "77FEF8C4",
-      "GroupName": "BGM",
-      "CreatorId": "D733AF65",
-      "AccountIdList": [
-        "D733AF65",
-        "1DB319FC"
-      ]
-    },
-    {
-      "GroupId": "D243CB8E",
-      "GroupName": "bug",
-      "CreatorId": "D733AF65",
-      "AccountIdList": [
-        "D733AF65"
-      ]
-    },
-    {
-      "GroupId": "03808124",
-      "GroupName": "dd",
-      "CreatorId": "D733AF65",
-      "AccountIdList": [
-        "D733AF65"
-      ]
-    }
-  ]
+  "GroupList": []
 }
