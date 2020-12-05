@@ -216,6 +216,7 @@ namespace SEP3_PostSystem.Data
             if (databaseOnline)
             {
                 databaseOnline = false;
+                Console.WriteLine("Database System offline.");
             }
         }
     }
