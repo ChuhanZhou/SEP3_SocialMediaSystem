@@ -148,7 +148,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //jdbc.
+                jdbc.DeleteGroupById(groupId);
             }
             chatGroupList.removeGroupByGroupId(groupId);
             groupMessageList.removeMessageById(null,groupId);
@@ -210,7 +210,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //database code
+                jdbc.DeleteGroupMessageById(groupId);
             }
             groupMessageList.removeMessageById(null,groupId);
             DataFileContext.updateGroupMessageListData(groupMessageList);
