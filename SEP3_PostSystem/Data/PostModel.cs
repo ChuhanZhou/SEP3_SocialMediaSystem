@@ -32,6 +32,7 @@ namespace SEP3_PostSystem.Data
             postList = new PostList();
             cloudUserSystem = new CloudUserSystem();
             cloudDatabase = new CloudDatabase(this);
+            databaseOnline = true;
             new Thread(async ()=>postList = await cloudDatabase.GetAllPost()).Start();
         }
         
