@@ -205,7 +205,7 @@ public class Jdbc_User implements JDBC_interface {
         String hometown = account.getHometown();
         long phoneNumber = account.getPhoneNumber();
         String usernameA = account.getUserName();
-        String passwordA = account.getPasswordForDataBase();
+        String passwordA = account.getPassword();
         Birthday birthdayA = account.getBirthday();
         FriendSettingList fsl = account.getFriendSettingList();
         UserStatus uss = account.getUserStatus();

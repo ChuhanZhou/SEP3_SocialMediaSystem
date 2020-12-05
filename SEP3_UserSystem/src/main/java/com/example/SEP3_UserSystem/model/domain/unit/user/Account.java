@@ -11,11 +11,10 @@ public class Account extends BasicInformation {
         FriendSettingList = new FriendSettingList();
     }
 
-    private Account(String id, String userName, Birthday birthday, String password, FriendSettingList friendSettingList,UserStatus userStatus) {
-        this(id, userName, password);
-        setBirthday(birthday);
-        setUserStatus(userStatus);
-        FriendSettingList = friendSettingList;
+    private Account(Account account) {
+        super(account);
+        Password = account.Password;
+        FriendSettingList = account.FriendSettingList;
     }
 
     public boolean checkPassword(String password)
@@ -73,10 +72,12 @@ public class Account extends BasicInformation {
     }
 
     public Account copy() {
-        return new Account(getId(),getUserName(),getBirthday(),Password,FriendSettingList.copy(),getUserStatus().copy());
+        return new Account(this);
     }
 
     public Account toClient() {
-        return new Account(getId(),getUserName(),getBirthday(),"",FriendSettingList.copy(),getUserStatus().copy());
+        Account toClient = new Account(this);
+        toClient.Password = "";
+        return toClient;
     }
 }

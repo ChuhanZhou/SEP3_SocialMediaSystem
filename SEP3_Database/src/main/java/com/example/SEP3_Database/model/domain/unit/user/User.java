@@ -11,6 +11,12 @@ public abstract class User
         UserStatus = new UserStatus();
     }
 
+    public User(User user)
+    {
+        Id = user.Id;
+        UserStatus = user.UserStatus.copy();
+    }
+
     public String getId()
     {
         return Id;
