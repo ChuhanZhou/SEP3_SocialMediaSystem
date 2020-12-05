@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using SEP3_PostSystem.Database;
 using SEP3_PostSystem.Model.List.PostList;
@@ -45,25 +46,29 @@ namespace SEP3_PostSystem.Data
 
         public async Task<string> AddPost(Post post, string userId)
         {
-            if (post!=null&&await cloudUserSystem.HasId(userId))
+            if (databaseOnline)
             {
-                if (post.SenderId==userId)
+                if (post!=null&&await cloudUserSystem.HasId(userId))
                 {
-                    string newId = GetRandomId();
-                    while (postList.HasPostId(newId))
+                    if (post.SenderId==userId)
                     {
-                        newId = GetRandomId();
+                        string newId = GetRandomId();
+                        while (postList.HasPostId(newId))
+                        {
+                            newId = GetRandomId();
+                        }
+                        var newPost = new Post(newId, post);
+                        string result = postList.AddPost(newPost);
+                        if (result==null)
+                        {
+                            return await cloudDatabase.AddPost(newPost);
+                        }
+                        return result;
                     }
-                    var newPost = new Post(newId, post);
-                    string result = postList.AddPost(newPost);
-                    if (result==null)
-                    {
-                        return await cloudDatabase.AddPost(newPost);
-                    }
-                    return result;
                 }
+                return "Wrong input.";
             }
-            return "Wrong input.";
+            return "Database offline";
         }
 
         public async Task<PostList> GetPostToShowByUserId(string userId)
@@ -83,65 +88,81 @@ namespace SEP3_PostSystem.Data
 
         public async Task<string> UpdatePostLike(string postId, string userId)
         {
-            if (postList.HasPostId(postId))
+            if (databaseOnline)
             {
-                var post = postList.GetPostByPostId(postId);
-                if (post.IsLiker(userId))
+                if (postList.HasPostId(postId))
                 {
-                    string result = post.RemoveLiker(postId);
-                    if (result==null)
+                    var post = postList.GetPostByPostId(postId);
+                    if (post.IsLiker(userId))
                     {
-                        return await cloudDatabase.UpdatePost(post);
+                        string result = post.RemoveLiker(postId);
+                        if (result==null)
+                        {
+                            return await cloudDatabase.UpdatePost(post);
+                        }
+                        return result;
                     }
-                    return result;
+                    return post.AddLiker(userId);
                 }
-                return post.AddLiker(userId);
+                return "Can't find post.";
             }
-            return "Can't find post.";
+            return "Database offline";
         }
 
         public async Task<string> CommentPost(string postId, Comment comment, string userId)
         {
-            if (postList.HasPostId(postId))
+            if (databaseOnline)
             {
-                if (comment.SenderId == userId)
+                if (postList.HasPostId(postId))
                 {
-                    var post = postList.GetPostByPostId(postId);
-                    string commentId = GetRandomId();
-                    while (post.CommentList.HasCommentId(commentId))
+                    if (comment.SenderId == userId)
                     {
-                        commentId = GetRandomId();
+                        var post = postList.GetPostByPostId(postId);
+                        string commentId = GetRandomId();
+                        while (post.CommentList.HasCommentId(commentId))
+                        {
+                            commentId = GetRandomId();
+                        }
+                        post.CommentList.AddComment(new Comment(postId, comment));
+                        return await cloudDatabase.UpdatePost(post);
                     }
-                    post.CommentList.AddComment(new Comment(postId, comment));
-                    return await cloudDatabase.UpdatePost(post);
+                    return "Wrong sender.";
                 }
-                return "Wrong sender.";
+                return "Can't find post.";
             }
-            return "Can't find post.";
+            return "Database offline";
         }
 
         public async Task<string> RemoveComment(string postId, string commentId, string userId)
         {
-            if (!postList.HasPostId(postId)) return "Can't find post.";
-            var post = postList.GetPostByPostId(postId);
-            if (!post.CommentList.HasCommentId(commentId)) return "Can't find comment.";
-            var comment = post.CommentList.GetCommentByCommentId(commentId);
-            if (comment.SenderId != userId) return "Wrong user.";
-            post.CommentList.RemoveCommentByCommentId(commentId);
-            return await cloudDatabase.UpdatePost(post);
+            if (databaseOnline)
+            {
+                if (!postList.HasPostId(postId)) return "Can't find post.";
+                var post = postList.GetPostByPostId(postId);
+                if (!post.CommentList.HasCommentId(commentId)) return "Can't find comment.";
+                var comment = post.CommentList.GetCommentByCommentId(commentId);
+                if (comment.SenderId != userId) return "Wrong user.";
+                post.CommentList.RemoveCommentByCommentId(commentId);
+                return await cloudDatabase.UpdatePost(post);
+            }
+            return "Database offline";
         }
 
         public async Task<string> UpdatePostBySender(Post newPost, string userId)
         {
-            if (!postList.HasPostId(newPost.PostId)) return "Can't find post.";
-            var post = postList.GetPostByPostId(newPost.PostId);
-            if (post.SenderId != userId) return "Wrong user.";
-            string result = post.UpdateByPost(newPost);
-            if (result==null)
+            if (databaseOnline)
             {
-                return await cloudDatabase.UpdatePost(post);
+                if (!postList.HasPostId(newPost.PostId)) return "Can't find post.";
+                var post = postList.GetPostByPostId(newPost.PostId);
+                if (post.SenderId != userId) return "Wrong user.";
+                string result = post.UpdateByPost(newPost);
+                if (result==null)
+                {
+                    return await cloudDatabase.UpdatePost(post);
+                }
+                return result;
             }
-            return result;
+            return "Database offline";
         }
 
         public void RemovePost(string postId, string userId)
@@ -155,15 +176,31 @@ namespace SEP3_PostSystem.Data
                 }
             }
         }
+        
+        private void TryToConnectWithDatabaseSystem()
+        {
+            new Thread(async ()=>{
+                while (!databaseOnline)
+                {
+                    Console.Write("Try to reconnect with Database System in 5s.\n[");
+                    for (int x=10;x>0;x--)
+                    {
+                        Console.Write("-");
+                        Thread.Sleep(500);
+                    }
+                    Console.WriteLine("]\nTry reconnecting...");
+                    postList = await cloudDatabase.GetAllPost();
+                }
+            }).Start();
+        }
 
         public async Task DatabaseSystemOnline()
         {
             if (!databaseOnline)
             {
                 databaseOnline = true;
-                postList = await cloudDatabase.GetAllPost(); 
+                TryToConnectWithDatabaseSystem();
                 Console.WriteLine("Reconnect to Database System successfully.");
-                
             }
         }
 
