@@ -62,15 +62,12 @@
                                 <img src="user.PNG" width="40px" height="40px">
                                 @if (string.IsNullOrEmpty(getNote(friend.Id)))
                                 {
-                                    @getUserName(friend.Id)
+                                    @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
                                 }
                                 else
                                 {
-                                    @getNote(friend.Id)
+                                    @getNote(friend.Id)<span>@getFriendStatus(friend.Id)</span>
                                 }
-                            </td>
-                            <td>
-                                @getFriendStatus(friend.Id)
                             </td>
                             <td>
                                 <button class="oi oi-eye" style="color: cornflowerblue" @onclick="() => seeFriendProfile(friend)">
@@ -123,7 +120,7 @@
 
     private string getFriendStatus(string id)
     {
-        return ClientModel.GetFriendById(id).UserStatus.Status;
+        return ClientModel.GetFriendById(id).UserStatus.GetStatus();
     }
 
     private int NeedAgreeNum()

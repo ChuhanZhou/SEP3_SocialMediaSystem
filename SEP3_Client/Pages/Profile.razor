@@ -84,14 +84,21 @@
             month = account.Birthday.GetMonth();
              day = account.Birthday.GetDay();
         }
-        gender = 'M';
-        if (account.GetHomeTown()==null)
+        if (char.IsWhiteSpace(account.Gender))
+        {
+            gender = 'M';
+        }
+        else
+        {
+            gender = account.Gender;
+        }
+        if (string.IsNullOrEmpty(account.GetHomeTown()))
         {
             hometown = "No hometown to show";
         }
         else
         {
-            hometown = account.GetHomeTown();
+            hometown = account.Hometown;
         }
         if (account.GetPhoneNumber()==0)
         {
@@ -99,7 +106,7 @@
         }
         else
         {
-            telNo = account.GetPhoneNumber();
+            telNo = account.PhoneNumber;
         }
         
         

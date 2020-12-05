@@ -49,17 +49,17 @@
         </div>
         <div style="float: left;margin: 20px auto;">
             <span class="oi oi-star" style="float: left;width:300px;height: 30px">Gender:
-                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind=gender>
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="gender">
                     <option>M</option>
                     <option>F</option></select></span>
         </div><br/>
         <div style="float: left; margin: 20px auto;width: 300px;height: 30px">
             <span class="oi oi-home" style="float: left;width:300px;height: 30px">Hometown : </span>
-            <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown">
+            <input type="text" style="float: left;width:300px;height: 30px" @bind="hometown"/>
         </div><br/>
         <div  style="float: left; margin: 20px auto;width: 300px;height: 30px">
             <span class="oi oi-phone" style="float: left;width:300px;height: 30px">TelNo. :</span>
-            <input type="number" style="float: left;width:300px;height: 30px" @bind="telNo">
+            <input type="number" style="float: left;width:300px;height: 30px" @bind="telNo"/>
         </div><br/>
     </div>
     <div style="float: left;margin: 20px auto;width: 300px; height: 40px">
@@ -74,7 +74,7 @@
     private int month;
     private int day;
     private bool change;
-    //private static EditProfile editProfile;
+    private static EditProfile editProfile;
     private char gender;
     private string hometown;
     private long telNo;
@@ -98,8 +98,15 @@
             day = account.Birthday.GetDay();
         }
         change = false;
-        gender = 'M';
-        if (account.GetHomeTown()==null)
+        if (char.IsWhiteSpace(account.Gender))
+        {
+            gender = 'M';
+        }
+        else
+        {
+            gender = account.Gender;
+        }
+        if (string.IsNullOrEmpty(account.GetHomeTown()))
         {
             hometown = "No hometown to show";
         }
@@ -115,17 +122,17 @@
         {
             telNo = account.GetPhoneNumber();
         }
-        //editProfile = null;
+        editProfile = this;
     }
 
-    //public static EditProfile GetPage()
-    //{
-    //    if (editProfile==null)
-    //    {
-    //        editProfile = new EditProfile();
-    //    }
-    //    return editProfile;
-    //}
+    public static EditProfile GetPage()
+    {
+        if (editProfile==null)
+        {
+            editProfile = new EditProfile();
+        }
+        return editProfile;
+    }
 
     private List<int> num = new[]
     {

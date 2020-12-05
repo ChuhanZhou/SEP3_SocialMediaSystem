@@ -16,6 +16,7 @@ namespace SEP3_Client.Data
         {
             Console.WriteLine("----------------ChatSystemUpdate----------------");
             PrivateChat.GetPage().Update();
+            //Chat.GetPage().Update();
             //GroupChat.GetPage().Update();
             //GroupSetting.GetPage().Update();
         }
