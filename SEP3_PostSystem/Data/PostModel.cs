@@ -32,6 +32,7 @@ namespace SEP3_PostSystem.Data
             postList = new PostList();
             cloudUserSystem = new CloudUserSystem();
             cloudDatabase = new CloudDatabase(this);
+            new Thread(async ()=>postList = await cloudDatabase.GetAllPost()).Start();
         }
         
         private static string GetRandomId()
@@ -84,6 +85,11 @@ namespace SEP3_PostSystem.Data
                 }
             }
             return searchList;
+        }
+
+        public PostList GetAllPosts()
+        {
+            return postList.Copy();
         }
 
         public async Task<string> UpdatePostLike(string postId, string userId)
@@ -194,7 +200,7 @@ namespace SEP3_PostSystem.Data
             }).Start();
         }
 
-        public async Task DatabaseSystemOnline()
+        public void DatabaseSystemOnline()
         {
             if (!databaseOnline)
             {

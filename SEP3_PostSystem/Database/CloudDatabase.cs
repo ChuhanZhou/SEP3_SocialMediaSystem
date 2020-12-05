@@ -20,6 +20,7 @@ namespace SEP3_PostSystem.Database
             client = new HttpClient();
             this.postModel = postModel;
         }
+        
         public async Task<string> AddPost(Post post)
         {
             try
@@ -31,7 +32,7 @@ namespace SEP3_PostSystem.Database
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("API Part Receive: " + result);
                 Console.WriteLine("Post end");
-                await postModel.DatabaseSystemOnline();
+                postModel.DatabaseSystemOnline();
                 return null;
             }
             catch (Exception e)
@@ -49,7 +50,7 @@ namespace SEP3_PostSystem.Database
                 Console.WriteLine("Get Receive: " + message);
                 var postList = JsonSerializer.Deserialize<PostList>(message);
                 Console.WriteLine("Get end");
-                await postModel.DatabaseSystemOnline();
+                postModel.DatabaseSystemOnline();
                 return postList;
             }
             catch (Exception e)
@@ -70,7 +71,7 @@ namespace SEP3_PostSystem.Database
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("API Part Receive: " + result);
                 Console.WriteLine("Put end");
-                await postModel.DatabaseSystemOnline();
+                postModel.DatabaseSystemOnline();
                 return null;
             }
             catch (Exception e)
@@ -88,7 +89,7 @@ namespace SEP3_PostSystem.Database
                 await client.DeleteAsync(uri + "post?postId=" + postId);
                 Console.WriteLine("Delete: "+ uri + "post?postId=" + postId); 
                 Console.WriteLine("Delete end");
-                await postModel.DatabaseSystemOnline();
+                postModel.DatabaseSystemOnline();
                 return null;
             }
             catch (Exception e)

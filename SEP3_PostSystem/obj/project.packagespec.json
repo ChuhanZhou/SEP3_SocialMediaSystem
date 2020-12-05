@@ -14,11 +14,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "projectReferences": {
-          "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj": {
-            "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj"
-          }
-        }
+        "projectReferences": {}
       }
     },
     "warningProperties": {
@@ -29,22 +25,6 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
-      "dependencies": {
-        "Microsoft.EntityFrameworkCore": {
-          "target": "Package",
-          "version": "[5.0.0, )"
-        },
-        "Microsoft.EntityFrameworkCore.Design": {
-          "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-          "suppressParent": "All",
-          "target": "Package",
-          "version": "[5.0.0, )"
-        },
-        "Microsoft.EntityFrameworkCore.Sqlite": {
-          "target": "Package",
-          "version": "[5.0.0, )"
-        }
-      },
       "imports": [
         "net461",
         "net462",

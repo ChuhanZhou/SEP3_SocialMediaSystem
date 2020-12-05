@@ -4,7 +4,7 @@ namespace SEP3_PostSystem.Data
 {
     public interface IPostModelForDatabase
     {
-        Task DatabaseSystemOnline();
+        void DatabaseSystemOnline();
         void DatabaseSystemOffline();
     }
 }

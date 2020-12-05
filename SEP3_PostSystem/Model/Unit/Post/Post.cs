@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SEP3_ChatSystem.Model.Unit.Time;
+using SEP3_PostSystem.Model.Unit.Time;
 using SEP3_PostSystem.Model.List.PostList;
 
 namespace SEP3_PostSystem.Model.Unit.Post

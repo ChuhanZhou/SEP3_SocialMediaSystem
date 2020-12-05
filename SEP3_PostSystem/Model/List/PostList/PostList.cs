@@ -81,7 +81,8 @@ namespace SEP3_PostSystem.Model.List.PostList
 
         public void RemovePostByPostId(string id)
         {
-            foreach (var post in Posts.Where(post => post.PostId==id))
+            PostList copy = Copy();
+            foreach (var post in copy.Posts.Where(post => post.PostId==id))
             {
                 Posts.Remove(post);
             }

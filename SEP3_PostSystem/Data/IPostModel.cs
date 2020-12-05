@@ -8,6 +8,7 @@ namespace SEP3_PostSystem.Data
     {
         Task<string>  AddPost(Post post,string userId);
         Task<PostList> GetPostToShowByUserId(string userId);
+        PostList GetAllPosts();
         Task<string> UpdatePostLike(string postId,string userId);
         Task<string> CommentPost(string postId,Comment comment,string userId);
         Task<string> RemoveComment(string postId,string commentId,string userId);

@@ -4,27 +4,7 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Compile Remove="Model\List\ChatGroupList\**" />
-      <Compile Include="Database\CloudDatabase.cs" />
-      <Compile Include="Database\ICloudDatabase.cs" />
-      <Content Remove="Model\List\ChatGroupList\**" />
-      <EmbeddedResource Remove="Model\List\ChatGroupList\**" />
-      <None Remove="Model\List\ChatGroupList\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\SEP3_ChatSystem\SEP3_ChatSystem.csproj" />
-    </ItemGroup>
+    
 
 
 </Project>

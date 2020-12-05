@@ -67,7 +67,8 @@ namespace SEP3_Client.Model.List.PostList
 
         public void RemoveCommentByCommentId(string id)
         {
-            foreach (var comment in Comments.Where(comment => comment.CommentId==id))
+            CommentList copy = Copy();
+            foreach (var comment in copy.Comments.Where(comment => comment.CommentId==id))
             {
                 Comments.Remove(comment);
             }

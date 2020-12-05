@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SEP3_PostSystem.Data;
@@ -34,11 +35,15 @@ namespace SEP3_PostSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PostList>> GetPost([FromHeader] string userId)
+        public async Task<ActionResult<string>> GetPost([FromHeader] string userId)
         {
             try
             {
-                return await postModel.GetPostToShowByUserId(userId);
+                if (userId!=null)
+                {
+                    return Ok(JsonSerializer.Serialize(await postModel.GetPostToShowByUserId(userId), new JsonSerializerOptions {WriteIndented = true}));
+                }
+                return Ok(JsonSerializer.Serialize(postModel.GetAllPosts(), new JsonSerializerOptions {WriteIndented = true}));
             }
             catch (Exception e)
             {

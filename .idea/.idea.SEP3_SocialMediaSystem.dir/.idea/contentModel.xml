@@ -267,6 +267,9 @@
               <e p="Comment.cs" t="Include" />
               <e p="Post.cs" t="Include" />
             </e>
+            <e p="Time" t="Include">
+              <e p="MyTime.cs" t="Include" />
+            </e>
             <e p="User" t="Include">
               <e p="Account.cs" t="Include" />
               <e p="BasicInformation.cs" t="Include" />
