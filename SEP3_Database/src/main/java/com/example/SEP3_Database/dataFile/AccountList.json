@@ -190,11 +190,11 @@
       "UserName": "Test User 2",
       "Birthday": {
         "Month": 3,
-        "Day": 6
+        "Day": 11
       },
-      "Gender": "M",
-      "Hometown": "CDE",
-      "PhoneNumber": 112,
+      "Gender": "F",
+      "Hometown": "AAA",
+      "PhoneNumber": 111,
       "Id": "D733AF65",
       "UserStatus": {
         "Online": false

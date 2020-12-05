@@ -76,18 +76,19 @@ namespace SEP3_ChatSystem.Model.List.Message
 
         public void RemoveMessageById(string senderId, string receiverId)
         {
+            PrivateMessageList copy = Copy();
             if (!string.IsNullOrEmpty(senderId))
             {
                 if (!string.IsNullOrEmpty(receiverId))
                 {
-                    foreach (var message in MessageList.Where(message => message.SenderId==senderId&&message.ReceiverId==receiverId))
+                    foreach (var message in copy.MessageList.Where(message => message.SenderId==senderId&&message.ReceiverId==receiverId))
                     {
                         MessageList.Remove(message);
                     }
                 }
                 else
                 {
-                    foreach (var message in MessageList.Where(message => message.SenderId==senderId))
+                    foreach (var message in copy.MessageList.Where(message => message.SenderId==senderId))
                     {
                         MessageList.Remove(message);
                     }
@@ -97,7 +98,7 @@ namespace SEP3_ChatSystem.Model.List.Message
             {
                 if (!string.IsNullOrEmpty(receiverId))
                 {
-                    foreach (var message in MessageList.Where(message => message.ReceiverId==receiverId))
+                    foreach (var message in copy.MessageList.Where(message => message.ReceiverId==receiverId))
                     {
                         MessageList.Remove(message);
                     }

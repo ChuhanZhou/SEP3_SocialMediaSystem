@@ -120,6 +120,7 @@ namespace SEP3_ChatSystem.Model.List.Group
                 if (group.GroupId==id)
                 {
                     GroupList.Remove(group);
+                    break;
                 }
             }
         }
