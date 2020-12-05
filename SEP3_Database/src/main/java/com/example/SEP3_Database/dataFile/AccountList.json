@@ -177,6 +177,7 @@
             }
           },
           {
+            "Note": "5",
             "DisablePost": false,
             "Status": "AGREE",
             "Id": "1DB319FC",
@@ -188,12 +189,12 @@
       },
       "UserName": "Test User 2",
       "Birthday": {
-        "Month": 0,
-        "Day": 0
+        "Month": 3,
+        "Day": 6
       },
       "Gender": " ",
       "Hometown": "",
-      "PhoneNumber": -1,
+      "PhoneNumber": 0,
       "Id": "D733AF65",
       "UserStatus": {
         "Online": false
