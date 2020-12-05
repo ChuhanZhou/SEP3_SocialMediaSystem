@@ -41,7 +41,7 @@
               {
                   <table class="table">
                       <tbody>
-                      @foreach (var request in friendRequests.GetFriendSettingList())
+                      @foreach (var request in getFriendSettingList())
                       {
                           <tr>
                               <td>
@@ -92,9 +92,16 @@
             NavigationManager.NavigateTo("");
         }
         friendRequests = ClientModel.GetFriendSettingList();
-        friendRequests.GetFriendSettingList().Reverse();
+        //friendRequests.GetFriendSettingList().Reverse();
         click = false;
         friendRequest = this;
+    }
+
+    private List<FriendSetting> getFriendSettingList()
+    {
+        List<FriendSetting> friendSettingList = friendRequests.GetFriendSettingList();
+        friendSettingList.Reverse();
+        return friendSettingList;
     }
     
     public static FriendRequest GetPage()
@@ -142,7 +149,7 @@
     public void Update()
     {
         friendRequests = ClientModel.GetFriendSettingList();
-        friendRequests.GetFriendSettingList().Reverse();
+        //friendRequests.GetFriendSettingList().Reverse();
         click = false;
     }
     
