@@ -98,9 +98,7 @@
               show = false;
           }
         showMembers = false;
-        Delete();
         getGroupId();
-        invite();
         changName();
         page = this;
     }
@@ -116,7 +114,6 @@
 
     private string getGroupId()
     {
-        Console.WriteLine("fffffffff"+ChatGroup.GroupId);
         return ChatGroup.GroupId;
     }
 
@@ -134,8 +131,8 @@
 
     private void invite()
     {
-        Console.WriteLine("iiiiiiii"+getGroupId());
         Invitation.GroupId = getGroupId();
+        Console.WriteLine("ggggggggggg"+Invitation.GroupId);
         NavigationManager.NavigateTo("/Invitation");
     }
 
@@ -144,7 +141,6 @@
         if (ChatGroup.CreatorId.Equals(Account.Id))
         {
             string error = ClientModel.RemoveGroup(ChatGroup);
-            Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeee"+ error);
         }
         else
         {
@@ -201,9 +197,7 @@
                 show = false;
             }
             showMembers = false;
-            Delete();
             getGroupId();
-            invite();
             changName();
         }
         
