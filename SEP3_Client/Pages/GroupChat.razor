@@ -147,6 +147,7 @@
     private void clickCog()
     {
         GroupSetting.ChatGroup = ClientModel.GetGroupByGroupId(Group.GroupId);
+        Invitation.GroupId = Group.GroupId;
         NavigationManager.NavigateTo("/GroupSetting");
     }
 
@@ -155,8 +156,8 @@
         if (ClientModel!=null)
         {
              MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
-                    Account = ClientModel.GetAccount();
-                    offlineMessageList = ClientModel.GetOfflineMessageByGroupId(Group.GroupId);
+             Account = ClientModel.GetAccount();
+             offlineMessageList = ClientModel.GetOfflineMessageByGroupId(Group.GroupId);
         }
     }
 }

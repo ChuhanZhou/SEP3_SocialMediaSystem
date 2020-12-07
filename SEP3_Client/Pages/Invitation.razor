@@ -64,6 +64,7 @@
             NavigationManager.NavigateTo("");
         }
         friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        Console.WriteLine("eeeeeee"+GroupId);
         ChatGroup = ClientModel.GetGroupByGroupId(GroupId);
         Account = ClientModel.GetAccount();
 
