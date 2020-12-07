@@ -98,6 +98,10 @@
               show = false;
           }
         showMembers = false;
+        Delete();
+        getGroupId();
+        invite();
+        changName();
         page = this;
     }
 
@@ -112,6 +116,7 @@
 
     private string getGroupId()
     {
+        Console.WriteLine("fffffffff"+ChatGroup.GroupId);
         return ChatGroup.GroupId;
     }
 
@@ -129,6 +134,7 @@
 
     private void invite()
     {
+        Console.WriteLine("iiiiiiii"+getGroupId());
         Invitation.GroupId = getGroupId();
         NavigationManager.NavigateTo("/Invitation");
     }
@@ -195,6 +201,10 @@
                 show = false;
             }
             showMembers = false;
+            Delete();
+            getGroupId();
+            invite();
+            changName();
         }
         
     }

@@ -73,6 +73,7 @@
     private ChatGroupList GroupsToShow;
     private ChatGroupList AllGroups;
     private string groupName;
+    private static Group page;
     
 
     protected override async Task OnInitializedAsync()
@@ -83,6 +84,16 @@
         }
         AllGroups = ClientModel.GetGroupList();
         GroupsToShow = AllGroups;
+        page = this;
+    }
+
+    public static Group getPage()
+    {
+        if (page == null)
+        {
+            page = new Group();
+        }
+        return page;
     }
 
     private void search()
@@ -114,8 +125,18 @@
     private void Chat(ChatGroup group)
     {
         GroupChat.Group = group;
-        GroupSetting.ChatGroup = group;
+        //GroupSetting.ChatGroup = group;
         NavigationManager.NavigateTo("/GroupChat");
+    }
+
+    public void Update()
+    {
+        if (ClientModel !=null)
+        {
+            AllGroups = ClientModel.GetGroupList();
+            GroupsToShow = AllGroups;
+        }
+        
     }
     
 }

@@ -8,36 +8,34 @@
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
-    <div style="text-align: left; width: 300px;float:left;height: 100%;">
-        <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
-        <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
-    </div>
-    @if (showFriends)
+@if (showFriends)
     {
         <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
-                <table class="table">
-                    <tbody>
-                    @foreach (var friend in friends.GetFriendSettingList())
-                    {
-                        <tr>
-                            <td width="300px">
-                                <button @onclick="() => privateChat(friend.Id)" style="background-color: white;width: 250px;text-align: left">
-                                    <img src="user.PNG" width="40px" height="40px">
-                                    @if (string.IsNullOrEmpty(getNote(friend.Id)))
-                                    {
-                                        @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
-                                    }
-                                    else
-                                    {
-                                        @getNote(friend.Id)<span>@getFriendStatus(friend.Id) </span>
-                                    }
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
+            <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
+            <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
+            <table class="table">
+                <tbody>
+                @foreach (var friend in friends.GetFriendSettingList())
+                {
+                    <tr>
+                        <td width="300px">
+                            <button @onclick="() => privateChat(friend.Id)" style="background-color: white;width: 250px;text-align: left">
+                                <img src="user.PNG" width="40px" height="40px">
+                                @if (string.IsNullOrEmpty(getNote(friend.Id)))
+                                {
+                                    @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
+                                }
+                                else
+                                {
+                                    @getNote(friend.Id)<span>@getFriendStatus(friend.Id) </span>
+                                }
+                            </button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
             <div style="width: 30px;height: 100%;float: left"></div>
             <div style="text-align: center;
                  width: 900px;
@@ -143,6 +141,8 @@
     else
     {
         <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
+            <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
+             <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
             <table class="table">
                 <tbody>
                 @foreach (var group in groups.GroupList)
@@ -363,8 +363,14 @@
             Account = ClientModel.GetAccount();
             friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
             groups = ClientModel.GetGroupList();
-            showFriends = true;
-            ID = null;
+            privateChat(ID);
+            groupChat(ID);
+            getFriendStatus(ID);
+            getNote(ID);
+            getUserName(ID);
+            getGroupName(ID);
+            clickFriendBtn();
+            clickGroupBtn();
         }
     }
     

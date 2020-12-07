@@ -20,6 +20,7 @@ namespace SEP3_Client.Data
             new Thread(()=>Chat.GetPage().Update()).Start();
             new Thread(()=>GroupChat.GetPage().Update()).Start();
             new Thread(()=>GroupSetting.GetPage().Update()).Start();
+            new Thread(()=>Group.getPage().Update()).Start();
         }
         
         public static void PostSystemUpdate()
