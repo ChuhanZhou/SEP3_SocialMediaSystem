@@ -16,8 +16,7 @@ public class Post {
     private CommentList CommentList;
     private ArrayList<String> DisableList;
 
-    public Post(String senderId, String title, String body,ArrayList<String> disableList)
-    {
+    public Post(String senderId, String title, String body, ArrayList<String> disableList) {
         SenderId = senderId;
         Title = title;
         Body = body;
@@ -26,8 +25,7 @@ public class Post {
         DisableList = new ArrayList<String>(disableList);
     }
 
-    public Post(String postId, Post post)
-    {
+    public Post(String postId, Post post) {
         PostId = postId;
         SenderId = post.SenderId;
         Title = post.Title;
@@ -38,8 +36,7 @@ public class Post {
         DisableList = new ArrayList<>(post.DisableList);
     }
 
-    public Post(Post post)
-    {
+    public Post(Post post) {
         PostId = post.PostId;
         SenderId = post.SenderId;
         Title = post.Title;
@@ -114,54 +111,42 @@ public class Post {
         LikerIdList = likerIdList;
     }
 
-    public boolean isLiker(String id)
-    {
-        for (int x=0;x<LikerIdList.size();x++)
-        {
-            if (LikerIdList.get(x).equals(id))
-            {
+    public boolean isLiker(String id) {
+        for (int x = 0; x < LikerIdList.size(); x++) {
+            if (LikerIdList.get(x).equals(id)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isDisable(String id)
-    {
-        for (int x=0;x<DisableList.size();x++)
-        {
-            if (DisableList.get(x).equals(id))
-            {
+    public boolean isDisable(String id) {
+        for (int x = 0; x < DisableList.size(); x++) {
+            if (DisableList.get(x).equals(id)) {
                 return true;
             }
         }
         return false;
     }
 
-    public String addLiker(String id)
-    {
-        if (!isLiker(id))
-        {
+    public String addLiker(String id) {
+        if (!isLiker(id)) {
             LikerIdList.add(id);
             return null;
         }
         return "Not a new liker.";
     }
 
-    public String removeLiker(String id)
-    {
-        if (isLiker(id))
-        {
+    public String removeLiker(String id) {
+        if (isLiker(id)) {
             LikerIdList.remove(id);
             return null;
         }
         return "Not a liker.";
     }
 
-    public String updateByPost(Post post)
-    {
-        if (PostId.equals(post.PostId) && SenderId.equals(post.SenderId))
-        {
+    public String updateByPost(Post post) {
+        if (PostId.equals(post.PostId) && SenderId.equals(post.SenderId)) {
             Title = post.Title;
             Body = post.Body;
             DisableList = new ArrayList<>(post.DisableList);
@@ -169,8 +154,7 @@ public class Post {
         return "Wrong update.";
     }
 
-    public Post copy()
-    {
+    public Post copy() {
         return new Post(this);
     }
 }

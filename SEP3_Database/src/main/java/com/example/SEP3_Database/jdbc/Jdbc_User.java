@@ -162,7 +162,7 @@ public class Jdbc_User implements JDBC_interface {
                         "  `GroupId` VARCHAR(50) NOT NULL,\n" +
                         "  `GroupName` VARCHAR(45) NOT NULL,\n" +
                         "  `CreatorId` VARCHAR(45) NOT NULL,\n" +
-                        "  `AccountIdListJson` VARCHAR(1000) NOT NULL,\n" +
+                        "  `AccountIdListJson` VARCHAR(10000) NOT NULL,\n" +
                         "  PRIMARY KEY (`GroupId`),\n" +
                         "  UNIQUE INDEX `GroupId_UNIQUE` (`GroupId` ASC) VISIBLE);";
                 stmt.executeUpdate(executeSQL);
