@@ -1,129 +1,275 @@
 ﻿@page "/Chat"
 @using SEP3_Client.Model.List.UserList
 @using SEP3_Client.Data
+@using SEP3_Client.Model.List.Group
 @using SEP3_Client.Model.List.Message
 @using SEP3_Client.Model.Unit.Message
 @using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
-    <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto" >
-        <table class="table">
-            <tbody>
-            @foreach (var friend in friends.GetFriendSettingList())
-            {
-                <tr>
-                    <td width="300px">
-                        <button @onclick="() => chat(friend.Id)" style="background-color: white;width: 250px;text-align: left">
-                            <img src="user.PNG" width="40px" height="40px">
-                            @if (string.IsNullOrEmpty(getNote(friend.Id)))
-                            {
-                                @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
-                            }
-                            else
-                            {
-                                @getNote(friend.Id)<span>@getFriendStatus(friend.Id) </span>
-                            }
-                        </button>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
+    <div style="text-align: left; width: 300px;float:left;height: 100%;">
+        <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
+        <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
     </div>
-    <div style="width: 30px;height: 100%;float: left"></div>
-<div style="text-align: center;
-         width: 900px;
-         height: 600px;
-         margin: auto;
-         float: left;
-         ">
-        @if (ID == null)
-        {
-            <div style="width: 100%;height: 30px"> </div>
-            <div style="width: 800px">You can choose a friend to chat</div>
-        }
-        else{
-            <div style="height: 30px;width: 100%;float: left"></div>
-            <img src="user.PNG" style="float: left" width="65px" height="65px">
-                <h1 style="float: left">
-                    @if (!string.IsNullOrEmpty(getNote(ID)))
+    @if (showFriends)
+    {
+        <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
+                <table class="table">
+                    <tbody>
+                    @foreach (var friend in friends.GetFriendSettingList())
                     {
-                        @getNote(ID)
+                        <tr>
+                            <td width="300px">
+                                <button @onclick="() => privateChat(friend.Id)" style="background-color: white;width: 250px;text-align: left">
+                                    <img src="user.PNG" width="40px" height="40px">
+                                    @if (string.IsNullOrEmpty(getNote(friend.Id)))
+                                    {
+                                        @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
+                                    }
+                                    else
+                                    {
+                                        @getNote(friend.Id)<span>@getFriendStatus(friend.Id) </span>
+                                    }
+                                </button>
+                            </td>
+                        </tr>
                     }
-                    else
-                    {
-                        @getUserName(ID)
-                    }
-                </h1>
-                <div style="height: 600px;width:100%;overflow: auto;float: left">
-                    @if (MessageList == null)
-                    {
-                        <p>
-                            <em>Loading</em>
-                        </p>
-                    }
-                    else
-                    {
-                        if (!MessageList.MessageList.Any())
+                    </tbody>
+                </table>
+            </div>
+            <div style="width: 30px;height: 100%;float: left"></div>
+            <div style="text-align: center;
+                 width: 900px;
+                 height: 600px;
+                 margin: auto;
+                 float: left;
+                 ">
+                @if (ID == null)
+                {
+                    <div style="width: 100%;height: 30px"> </div>
+                    <div style="width: 800px">You can choose a friend to chat</div>
+                }
+                else
+                {
+                    <div style="height: 30px;width: 100%;float: left"></div>
+                    <img src="user.PNG" style="float: left" width="65px" height="65px">
+                    <h1 style="float: left">
+                        @if (!string.IsNullOrEmpty(getNote(ID)))
+                        {
+                            @getNote(ID)
+                        }
+                        else
+                        {
+                            @getUserName(ID)
+                        }
+                    </h1>
+                    <div style="height: 600px;width:100%;overflow: auto;float: left">
+                        @if (MessageList == null)
                         {
                             <p>
-                                <em>Now you can chat with your friend...</em>
+                                <em>Loading</em>
                             </p>
                         }
                         else
                         {
-                            <table class="table">
-                                <tbody>
-                                @foreach (var msg in MessageList.MessageList)
-                                {
-                                    <tr style="width: 70%">
-                                        <td style="width: 70%">
-                                            @if (msg.SenderId.Equals(Account.Id))
-                                            {
-                                                <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                                <div style="width: 70%;float: right">
-                                                    <div type="text" style="float: right;width: auto;border-radius:20px;
-                                        background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                                        word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
-                                                <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
-                                                     background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                                                     word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                            }
-                                        </td>
-                                    </tr>
-
-                                }
-                                </tbody>
-                            </table>
+                            if (!MessageList.MessageList.Any())
+                            {
+                                <p>
+                                    <em>Now you can chat with your friend...</em>
+                                </p>
+                            }
+                            else
+                            {
+                                <table class="table">
+                                    <tbody>
+                                    @foreach (var msg in MessageList.MessageList)
+                                    {
+                                        <tr style="width: 70%">
+                                            <td style="width: 70%">
+                                                @if (msg.SenderId.Equals(Account.Id))
+                                                {
+                                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                                    <div style="width: 70%;float: right">
+                                                        <div type="text" style="float: right;width: auto;border-radius:20px;
+                                                background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                                    <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                                             background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                             word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                                }
+                                            </td>
+                                        </tr>
+        
+                                    }
+                                    @foreach (var msg in OfflineMessageList.MessageList)
+                                      {
+                                          <tr style="width: 70%">
+                                              <td style="width: 70%">
+                                                  <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                                  <div style="width: 70%;float: right">
+                                                      <div style="height: 100%;float: right;">
+                                                          <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                                   background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                   word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                                      <div style="height: 100%;float: right">
+                                                          <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                                      </div>
+                                                  </div>
+                                              </td>
+                                          </tr>
+                                      }
+                                    </tbody>
+                                </table>
+                            }
                         }
-                    }
-                </div>
-                <br/>
-                <div style="float: left;width: 100%">
-                    <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message"/>
-                    <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()">Send</button>
-                </div>
-                <div style="color: red;float: left;width: 100%">
-                    @error
-                </div>
-        }
+                    </div>
+                    <br/>
+                    <div style="float: left;width: 100%">
+                        <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message"/>
+                        <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()">Send</button>
+                    </div>
+                    <div style="color: red;float: left;width: 100%">
+                        @error
+                    </div>
+                }
+            </div>
+    }
+    else
+    {
+        <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
+            <table class="table">
+                <tbody>
+                @foreach (var group in groups.GroupList)
+                {
+                    <tr>
+                        <td width="300px">
+                            <button @onclick="() => groupChat(group.GroupId)" style="background-color: white;width: 250px;text-align: left">
+                                <img src="people_multiple_76px_1116527_easyicon.net.png" width="40px" height="40px">
+                                @group.GroupName
+                            </button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         </div>
+        <div style="width: 30px;height: 100%;float: left"></div>
+            <div style="text-align: center;
+                 width: 900px;
+                 height: 600px;
+                 margin: auto;
+                 float: left;
+                 ">
+                @if (ID == null)
+                {
+                    <div style="width: 100%;height: 30px"> </div>
+                    <div style="width: 800px">You can choose a group to chat</div>
+                }
+                else
+                {
+                    <div style="height: 30px;width: 100%;float: left"></div>
+                    <img src="user.PNG" style="float: left" width="65px" height="65px">
+                    <h1 style="float: left">
+                        @getGroupName(ID)
+                    </h1>
+                    <div style="height: 600px;width:100%;overflow: auto;float: left">
+                        @if (GroupMessageList == null)
+                        {
+                            <p>
+                                <em>Loading</em>
+                            </p>
+                        }
+                        else
+                        {
+                            if (!GroupMessageList.MessageList.Any())
+                            {
+                                <p>
+                                    <em>Now you can chat in the group...</em>
+                                </p>
+                            }
+                            else
+                            {
+                                <table class="table">
+                                    <tbody>
+                                    @foreach (var msg in GroupMessageList.MessageList)
+                                    {
+                                        <tr style="width: 70%">
+                                            <td style="width: 70%">
+                                                @if (msg.SenderId.Equals(Account.Id))
+                                                  {
+                                                      <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                                      <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;border-radius:20px;
+                                          background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                          word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                                      </div>
+                                                  }
+                                                  else
+                                                  {
+                                                      <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                                      <div style="width: 70%;float: left;"><div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div> 
+                                                          <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                                       background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                       word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                                      </div>
+                                                  }
+                                            </td>
+                                        </tr>
+                                    }
+                                    @foreach (var msg in offlineGroupMessageList.MessageList)
+                                      {
+                                          <tr style="width: 70%">
+                                              <td style="width: 70%">
+                                                  <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                                  <div style="height: 100%;float: right;">
+                                                      <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                          background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                          word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                                      <div style="height: 100%;float: right">
+                                                          <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                                      </div>
+                                                      </div>
+                                              </td>
+                                          </tr>
+                                      }
+                                    </tbody>
+                                </table>
+                            }
+                        }
+                    </div>
+                    <br/>
+                    <div style="float: left;width: 100%">
+                        <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message"/>
+                        <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => sendGroupMsg()">Send</button>
+                    </div>
+                    <div style="color: red;float: left;width: 100%">
+                        @error
+                    </div>
+                }
+            </div>
+            
+     }
+
 </div>
 
 @code {
     private FriendSettingList friends;
     private Account Account;
     private PrivateMessageList MessageList;
+    private PrivateMessageList OfflineMessageList;
+    private GroupMessageList GroupMessageList;
+    private GroupMessageList offlineGroupMessageList;
+    private ChatGroupList groups;
     private string ID;
     private string message;
     private string error;
     private static Chat page;
+    private bool showFriends;
 
     protected override async Task OnInitializedAsync()
     {
@@ -133,6 +279,8 @@
         }
         Account = ClientModel.GetAccount();
         friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        groups = ClientModel.GetGroupList();
+        showFriends = true;
         ID = null;
         page = this;
     }
@@ -161,11 +309,23 @@
         return ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id).GetNote();
     }
 
-    private void chat(string id)
+    private string getGroupName(string id)
+    {
+        return ClientModel.GetGroupByGroupId(id).GroupName;
+    }
+
+    private void privateChat(string id)
     {
         ID = id;
-        Console.WriteLine("eeeeeeeeeeee"+ID);
         MessageList = ClientModel.GetMessageById(ID);
+        OfflineMessageList = ClientModel.GetOfflineMessageById(ID);
+    }
+
+    private void groupChat(string id)
+    {
+        ID = id;
+        GroupMessageList = ClientModel.GetMessageByGroupId(ID);
+        offlineGroupMessageList = ClientModel.GetOfflineMessageByGroupId(ID);
     }
     
     private void send()
@@ -177,11 +337,35 @@
         }
     }
 
+    private void sendGroupMsg()
+    {
+        if (!string.IsNullOrEmpty(message))
+        {
+            error=ClientModel.SendGroupMessage(new GroupMessage(Account.Id,ID,message));
+            message = null;
+        }
+    }
+
+    private void clickFriendBtn()
+    {
+        showFriends = true;
+    }
+
+    private void clickGroupBtn()
+    {
+        showFriends = false;
+    }
+
     public void Update()
     {
-        Account = ClientModel.GetAccount();
-        friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-        ID = null;
+        if (ClientModel!=null)
+        {
+            Account = ClientModel.GetAccount();
+            friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+            groups = ClientModel.GetGroupList();
+            showFriends = true;
+            ID = null;
+        }
     }
     
 }

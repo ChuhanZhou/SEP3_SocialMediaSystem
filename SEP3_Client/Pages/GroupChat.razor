@@ -66,6 +66,22 @@
                                 </td>
                             </tr>
                         }
+                        @foreach (var msg in offlineMessageList.MessageList)
+                        {
+                            <tr style="width: 70%">
+                                <td style="width: 70%">
+                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                    <div style="height: 100%;float: right;">
+                                        <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                            background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                            word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                        <div style="height: 100%;float: right">
+                                            <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                        </div>
+                                        </div>
+                                </td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 }
@@ -84,6 +100,7 @@
 @code {
     public static ChatGroup Group;
     private GroupMessageList MessageList;
+    private GroupMessageList offlineMessageList;
     private Account Account;
     private string message;
     private string error;
@@ -98,6 +115,7 @@
         }
         MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
         Account = ClientModel.GetAccount();
+        offlineMessageList = ClientModel.GetOfflineMessageByGroupId(Group.GroupId);
         groupChat = this;
     }
 
@@ -134,7 +152,11 @@
 
     public void Update()
     {
-        MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
-        Account = ClientModel.GetAccount();
+        if (ClientModel!=null)
+        {
+             MessageList = ClientModel.GetMessageByGroupId(Group.GroupId);
+                    Account = ClientModel.GetAccount();
+                    offlineMessageList = ClientModel.GetOfflineMessageByGroupId(Group.GroupId);
+        }
     }
 }

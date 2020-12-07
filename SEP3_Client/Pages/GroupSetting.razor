@@ -137,10 +137,8 @@
     {
         if (ChatGroup.CreatorId.Equals(Account.Id))
         {
-            Console.WriteLine("hhhhhhhhhhhhhhhhhhhhhhhhhhh");
-             string error = ClientModel.RemoveGroup(ChatGroup);
+            string error = ClientModel.RemoveGroup(ChatGroup);
             Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeee"+ error);
-            NavigationManager.NavigateTo("/Group");
         }
         else
         {
@@ -162,10 +160,12 @@
         if (hasMember(memberId))
         {
             ClientModel.RemoveGroupMember(ChatGroup, memberId);
+            changName();
         }
         else
         {
             ClientModel.AddGroupMember(ChatGroup, memberId);
+            changName();
         }
     }
 
@@ -183,16 +183,20 @@
 
     public void Update()
     {
-        Account = ClientModel.GetAccount();
-        if (ChatGroup.CreatorId.Equals(Account.Id))
+        if (ClientModel!=null)
         {
-            show = true;
+            Account = ClientModel.GetAccount();
+            if (ChatGroup.CreatorId.Equals(Account.Id))
+            {
+                show = true;
+            }
+            else
+            {
+                show = false;
+            }
+            showMembers = false;
         }
-        else
-        {
-            show = false;
-        }
-        showMembers = false;
+        
     }
 
     private void changName()

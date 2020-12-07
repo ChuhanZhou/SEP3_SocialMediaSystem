@@ -10,16 +10,16 @@ namespace SEP3_Client.Data
         {
             Console.WriteLine("----------------UserSystemUpdate----------------");
             new Thread(()=>FriendList.GetPage().Update()).Start();
-            //FriendRequest.GetPage().Update();
+            new Thread(()=>FriendRequest.GetPage().Update()).Start();
         }
         
         public static void ChatSystemUpdate()
         {
             Console.WriteLine("----------------ChatSystemUpdate----------------");
-            new Thread(()=>PrivateChat.GetPage().Update()).Start();
-            //Chat.GetPage().Update();
-            //GroupChat.GetPage().Update();
-            //GroupSetting.GetPage().Update();
+            new Thread(()=>PrivateChat.GetPage().Update()).Start(); 
+            new Thread(()=>Chat.GetPage().Update()).Start();
+            new Thread(()=>GroupChat.GetPage().Update()).Start();
+            new Thread(()=>GroupSetting.GetPage().Update()).Start();
         }
         
         public static void PostSystemUpdate()
