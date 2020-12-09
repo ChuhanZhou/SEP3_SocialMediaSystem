@@ -161,13 +161,12 @@
         if (hasMember(memberId))
         {
             ClientModel.RemoveGroupMember(ChatGroup, memberId);
-            changName();
         }
         else
         {
             ClientModel.AddGroupMember(ChatGroup, memberId);
-            changName();
         }
+        changName();
     }
 
     private bool hasMember(string memberId)
@@ -196,6 +195,7 @@
                 show = false;
             }
             showMembers = false;
+            
             getGroupId();
         }
         
