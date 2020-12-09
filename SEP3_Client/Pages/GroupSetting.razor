@@ -98,6 +98,10 @@
               show = false;
           }
         showMembers = false;
+        Delete();
+        getGroupId();
+        invite();
+        changName();
         page = this;
     }
 
@@ -112,6 +116,7 @@
 
     private string getGroupId()
     {
+        Console.WriteLine("fffffffff"+ChatGroup.GroupId);
         return ChatGroup.GroupId;
     }
 
@@ -129,6 +134,7 @@
 
     private void invite()
     {
+        Console.WriteLine("iiiiiiii"+getGroupId());
         Invitation.GroupId = getGroupId();
         NavigationManager.NavigateTo("/Invitation");
     }
@@ -137,10 +143,8 @@
     {
         if (ChatGroup.CreatorId.Equals(Account.Id))
         {
-            Console.WriteLine("hhhhhhhhhhhhhhhhhhhhhhhhhhh");
-             string error = ClientModel.RemoveGroup(ChatGroup);
+            string error = ClientModel.RemoveGroup(ChatGroup);
             Console.WriteLine("eeeeeeeeeeeeeeeeeeeeeeeee"+ error);
-            NavigationManager.NavigateTo("/Group");
         }
         else
         {
@@ -162,10 +166,12 @@
         if (hasMember(memberId))
         {
             ClientModel.RemoveGroupMember(ChatGroup, memberId);
+            changName();
         }
         else
         {
             ClientModel.AddGroupMember(ChatGroup, memberId);
+            changName();
         }
     }
 
@@ -183,16 +189,24 @@
 
     public void Update()
     {
-        Account = ClientModel.GetAccount();
-        if (ChatGroup.CreatorId.Equals(Account.Id))
+        if (ClientModel!=null)
         {
-            show = true;
+            Account = ClientModel.GetAccount();
+            if (ChatGroup.CreatorId.Equals(Account.Id))
+            {
+                show = true;
+            }
+            else
+            {
+                show = false;
+            }
+            showMembers = false;
+            Delete();
+            getGroupId();
+            invite();
+            changName();
         }
-        else
-        {
-            show = false;
-        }
-        showMembers = false;
+        
     }
 
     private void changName()

@@ -68,8 +68,23 @@
                                     }
                                 </td>
                             </tr>
-                            <tr id="chat1"></tr>
-
+                        }
+                        @foreach (var msg in OfflineMessageList.MessageList)
+                        {
+                            <tr style="width: 70%">
+                                <td style="width: 70%">
+                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                    <div style="width: 70%;float: right">
+                                        <div style="height: 100%;float: right;">
+                                            <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                     background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                     word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                        <div style="height: 100%;float: right">
+                                            <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                         }
                         </tbody>
                     </table>
@@ -92,6 +107,7 @@
     private static PrivateChat page;
     private PrivateMessageList MessageList;
     public static FriendSetting FriendSetting;
+    private PrivateMessageList OfflineMessageList;
     private Friend friend;
     private string message;
     private string error;
@@ -105,6 +121,7 @@
         Account = ClientModel.GetAccount();
         friend = ClientModel.GetFriendById(FriendSetting.Id);
         MessageList = ClientModel.GetMessageById(friend.Id);
+        OfflineMessageList = ClientModel.GetOfflineMessageById(friend.Id);
         error = "";
         message = "";
         page = this;
@@ -142,6 +159,7 @@
             MessageList = ClientModel.GetMessageById(friend.Id);
             error = "";
             message = "";
+            OfflineMessageList = ClientModel.GetOfflineMessageById(friend.Id);
         }
     }
 

@@ -82,7 +82,10 @@ public class CommentList {
             }
         }
     }
-
+    public int getSize()
+    {
+        return Comments.size();
+    }
     public CommentList copy()
     {
         return new CommentList(Comments);

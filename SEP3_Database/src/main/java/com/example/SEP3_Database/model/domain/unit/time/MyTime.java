@@ -1,5 +1,8 @@
 package com.example.SEP3_Database.model.domain.unit.time;
 
+import javafx.scene.shape.HLineTo;
+
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class MyTime {
@@ -75,5 +78,19 @@ public class MyTime {
     public MyTime copy()
     {
         return new MyTime(Year,Month,Day,Hour,Minute);
+    }
+
+    public void setThroughDateTime(Timestamp dateTime)
+    {
+        int Y = dateTime.getYear();
+        int M = dateTime.getMonth();
+        int D = dateTime.getDay();
+        int H = dateTime.getHours();
+        int Mi = dateTime.getMinutes();
+        Year = Y;
+        Month = M;
+        Day = D;
+        Hour = H;
+        Minute = Mi;
     }
 }

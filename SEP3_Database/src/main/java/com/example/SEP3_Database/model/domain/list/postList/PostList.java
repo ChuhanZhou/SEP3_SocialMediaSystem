@@ -105,7 +105,10 @@ public class PostList {
             }
         }
     }
-
+    public int getSize()
+    {
+        return Posts.size();
+    }
     public PostList copy()
     {
         return new PostList(Posts);

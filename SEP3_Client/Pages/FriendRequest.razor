@@ -148,9 +148,12 @@
 
     public void Update()
     {
-        friendRequests = ClientModel.GetFriendSettingList();
-        //friendRequests.GetFriendSettingList().Reverse();
-        click = false;
+        if (ClientModel!=null)
+        {
+            friendRequests = ClientModel.GetFriendSettingList();
+                    //friendRequests.GetFriendSettingList().Reverse();
+                    click = false;
+        }
     }
     
     

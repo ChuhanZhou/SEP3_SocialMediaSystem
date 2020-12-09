@@ -85,7 +85,7 @@
         {
             NavigationManager.NavigateTo("");
         }
-        Account account = ClientModel.GetAccount();
+        Account account = ClientModel.GetAccount().Copy();
         username = account.GetUserName();
         if (account.Birthday==null)
         {

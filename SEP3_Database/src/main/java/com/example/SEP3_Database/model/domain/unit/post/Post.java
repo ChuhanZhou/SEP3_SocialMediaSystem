@@ -2,6 +2,7 @@ package com.example.SEP3_Database.model.domain.unit.post;
 
 import com.example.SEP3_Database.model.domain.list.postList.CommentList;
 import com.example.SEP3_Database.model.domain.unit.time.MyTime;
+import org.joda.time.DateTime;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -156,5 +157,20 @@ public class Post {
 
     public Post copy() {
         return new Post(this);
+    }
+    public void setDateTime(DateTime dateTime)
+    {
+        int Y = dateTime.getYear();
+        int M = dateTime.getMonthOfYear();
+        int D = dateTime.getDayOfMonth();
+        int H = dateTime.getHourOfDay();
+        int Mi = dateTime.getMinuteOfHour();
+        System.out.println(Y+"/"+M+"/"+D+"/"+H+"/"+Mi);
+        Time = new MyTime(Y,M,D,H,Mi);
+        //Time.setDay(D);
+        //Time.setHour(H);
+        //Time.setMinute(Mi);
+        //Time.setMonth(M);
+        //Time.setYear(Y);
     }
 }
