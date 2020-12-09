@@ -15,10 +15,7 @@
     <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
         Back
     </button>
-    <EditForm Model="@ChatGroup" OnValidSubmit="@addMembers">
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
-            <button type="submit" style="float:right; text-align: left;height: 30px; background-color: #8fd19e">
+    <button type="submit" style="float:right; text-align: left;height: 30px; background-color: #8fd19e" @onclick="@(() => addMembers())">
                 Confirm
             </button>
             <div style="width: 100%">
@@ -45,8 +42,7 @@
             }
         </form>
     </div>
-    </EditForm>
-    
+
 </div>
 </div>
 
@@ -64,10 +60,8 @@
             NavigationManager.NavigateTo("");
         }
         friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-        Console.WriteLine("eeeeeee"+GroupId);
         ChatGroup = ClientModel.GetGroupByGroupId(GroupId);
         Account = ClientModel.GetAccount();
-
     }
 
     private string getUserName(string id)
@@ -111,11 +105,9 @@
 
     private void addMembers()
     {
-        //Model.Unit.Group.ChatGroup newChatGroup = ChatGroup;
+        //ChatGroup newChatGroup = ChatGroup;
         //ClientModel.UpdateGroupInformation(newChatGroup);
-        ChatGroup newChatGroup = ChatGroup;
-        ClientModel.UpdateGroupInformation(newChatGroup);
-        GroupSetting.ChatGroup = ChatGroup;
+        //GroupSetting.ChatGroup = newChatGroup;
         NavigationManager.NavigateTo("/GroupSetting");
     }
     

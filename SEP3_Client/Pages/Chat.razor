@@ -43,7 +43,7 @@
                  margin: auto;
                  float: left;
                  ">
-                @if (ID == null)
+                @if (string.IsNullOrEmpty(ID))
                 {
                     <div style="width: 100%;height: 30px"> </div>
                     <div style="width: 800px">You can choose a friend to chat</div>
@@ -166,7 +166,7 @@
                  margin: auto;
                  float: left;
                  ">
-                @if (ID == null)
+                @if (string.IsNullOrEmpty(ID))
                 {
                     <div style="width: 100%;height: 30px"> </div>
                     <div style="width: 800px">You can choose a group to chat</div>
@@ -281,7 +281,7 @@
         friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
         groups = ClientModel.GetGroupList();
         showFriends = true;
-        ID = null;
+        ID = "";
         page = this;
     }
 
@@ -363,14 +363,32 @@
             Account = ClientModel.GetAccount();
             friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
             groups = ClientModel.GetGroupList();
-            privateChat(ID);
-            groupChat(ID);
-            getFriendStatus(ID);
-            getNote(ID);
-            getUserName(ID);
-            getGroupName(ID);
-            clickFriendBtn();
-            clickGroupBtn();
+            showFriends = true;
+            if (showFriends)
+            {
+                if (!string.IsNullOrEmpty(ID))
+                {
+                    send();
+                }
+                privateChat(ID);
+                getFriendStatus(ID);
+                getNote(ID);
+                getUserName(ID);
+                clickFriendBtn();
+                clickGroupBtn();
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(ID))
+                {
+                    sendGroupMsg();
+                }
+                groupChat(ID);
+                getGroupName(ID);
+                clickFriendBtn();
+                clickGroupBtn();
+            }
+
         }
     }
     
