@@ -7,8 +7,14 @@ import java.util.Scanner;
 
 import com.example.SEP3_Database.model.domain.list.message.GroupMessageList;
 import com.example.SEP3_Database.model.domain.list.message.PrivateMessageList;
+import com.example.SEP3_Database.model.domain.list.postList.CommentList;
+import com.example.SEP3_Database.model.domain.list.postList.PostList;
 import com.example.SEP3_Database.model.domain.unit.message.PrivateMessage;
+import com.example.SEP3_Database.model.domain.unit.post.Comment;
+import com.example.SEP3_Database.model.domain.unit.post.Post;
 import com.example.SEP3_Database.model.domain.unit.time.MyTime;
+import javafx.geometry.Pos;
+import jnr.posix.Times;
 import org.joda.time.DateTime;
 import com.example.SEP3_Database.model.domain.list.groupList.ChatGroupList;
 import com.example.SEP3_Database.model.domain.list.userList.FriendSettingList;
@@ -74,6 +80,25 @@ public class Jdbc_User implements JDBC_interface {
     private MessageType pMessageType;
     private MyTime pTime;
     private PrivateMessageList privateMessageList = new PrivateMessageList();
+    private ArrayList<PrivateMessage> defultPmList = new ArrayList<>();
+    private ArrayList<GroupMessage> defultGmList = new ArrayList<>();
+    //T6-7
+    private Comment newComment;
+    private CommentList newCommentList = new CommentList();
+    private Post newPost;
+    private PostList newPostList = new PostList();
+    private String postId1;
+    private String senderIdForPost;
+    private String title;
+    private String bodyP;
+    private ArrayList<String> LikerIdList = new ArrayList<>();
+    private ArrayList<String> DisableList = new ArrayList<>();
+    private MyTime postTime = new MyTime(0, 0, 0, 0, 0);
+    private DateTime postDateTime;
+    private String commentId;
+    private String senderId;
+    private String commentBody;
+    private String cJson;
 
     //数据库连接方法
     public boolean init() {
@@ -119,6 +144,15 @@ public class Jdbc_User implements JDBC_interface {
                 executeSQL = "Drop Table privatemessagetable";
                 stmt.executeUpdate(executeSQL);
                 System.out.println("---T5 Successful");
+                executeSQL = "Drop Table commenttable";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("---T6 Successful");
+                executeSQL = "Drop table septableforarrays";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("---T7 Successful");
+                executeSQL = "Drop Table postTable";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("---T8 Successful");
                 System.out.println(">>>Whole DataBase delete successful<<<");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -167,25 +201,58 @@ public class Jdbc_User implements JDBC_interface {
                         "  UNIQUE INDEX `GroupId_UNIQUE` (`GroupId` ASC) VISIBLE);";
                 stmt.executeUpdate(executeSQL);
                 System.out.println("T3: ChatGroupTable");
-                executeSQL = "  CREATE TABLE `sep3_local`.`groupmessagetable` (\n" +
+                executeSQL = "   CREATE TABLE `sep3_local`.`groupmessagetable` (\n" +
+                        "  `SQLId` int NOT NULL,\n" +
                         "  `GroupId` VARCHAR(45) NOT NULL,\n" +
                         "  `MessageInfo` VARCHAR(45) NULL,\n" +
                         "  `MessageType` ENUM('PRIVATE', 'GROUP') NOT NULL,\n" +
                         "  `SenderId` VARCHAR(45) NOT NULL,\n" +
                         "  `Time` DATETIME NULL,\n" +
-                        "  PRIMARY KEY (`GroupId`),\n" +
-                        "  UNIQUE INDEX `GroupId_UNIQUE` (`GroupId` ASC) VISIBLE);";
+                        "  PRIMARY KEY (`SQLId`)\n" +
+                        "  );";
                 stmt.executeUpdate(executeSQL);
                 System.out.println("T4: GroupMessageTable");
                 executeSQL = " CREATE TABLE `sep3_local`.`privatemessagetable` (\n" +
+                        "  `SQLId` int NOT NULL,\n" +
                         "  `ReceiverId` VARCHAR(45) NOT NULL,\n" +
                         "  `SenderId` VARCHAR(45) NOT NULL,\n" +
                         "  `MessageInfo` VARCHAR(45) NULL,\n" +
                         "  `MessageType` ENUM('PRIVATE', 'GROUP') NOT NULL,\n" +
                         "  `Time` DATETIME NULL,\n" +
-                        "  PRIMARY KEY (`ReceiverId`));";
+                        "  PRIMARY KEY (`sqlid`));";
                 stmt.executeUpdate(executeSQL);
                 System.out.println("T5: PrivateMessageTable");
+                executeSQL = "CREATE TABLE `sep3_local`.`posttable` (\n" +
+                        "  `PostId` VARCHAR(100) NOT NULL,\n" +
+                        "  `SenderId` VARCHAR(45) NOT NULL,\n" +
+                        "  `Title` VARCHAR(45) NOT NULL,\n" +
+                        "  `Body` VARCHAR(45) NOT NULL,\n" +
+                        "  `Time` DATETIME NULL,\n" +
+                        "  PRIMARY KEY (`PostId`),\n" +
+                        "  UNIQUE INDEX `PostId_UNIQUE` (`PostId` ASC) VISIBLE);";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("T6: postTable");
+                executeSQL = "CREATE TABLE `sep3_local`.`commenttable` (\n" +
+                        "  `CommentId` VARCHAR(45)  ,\n" +
+                        "  `SenderId` VARCHAR(45) ,\n" +
+                        "  `CommentBody` VARCHAR(45) ,\n" +
+                        "  `CommentTable` VARCHAR(45) ,\n" +
+                        "  PRIMARY KEY (`CommentId`));\n";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("T7：CommentTable");
+                executeSQL = "CREATE TABLE `sep3_local`.`septableforarrays` (\n" +
+                        "  `id` INT NOT NULL,\n" +
+                        "  `LikerId` VARCHAR(45) ,\n" +
+                        "  `DisableId` VARCHAR(45) ,\n" +
+                        "  `ArrayType` VARCHAR(45) ,\n" +
+                        "  `CommentTable` VARCHAR(45) ,\n" +
+                        "  PRIMARY KEY (`id`),\n" +
+                        "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);";
+                stmt.executeUpdate(executeSQL);
+                System.out.println("T8: ArrayTable");
+                CreateFK();
+                System.out.println("FK done");
+                System.out.println(">>>Creation Done!<<<");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -636,24 +703,26 @@ public class Jdbc_User implements JDBC_interface {
     public void DeleteGroupById(String groupId) {
         try {
             executeSQL = "Delete From chatgrouptable Where groupId = \"" + groupId + "\"";
-            System.out.println(executeSQL+">>>");
+            System.out.println(executeSQL + ">>>");
             stmt.executeUpdate(executeSQL);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public ChatGroupList getChatGroupList() {
         return chatGroupList;
     }
 
     public void InsertIntoGroupMessageTable(GroupMessage groupMessage) {
         try {
+            defultGmList.add(groupMessage);
             String groupId = groupMessage.getGroupId();
             String messageInfo = groupMessage.getMessageInfo();
             MessageType messageType = groupMessage.getMessageType();
             String senderId = groupMessage.getSenderId();
             DateTime time = new DateTime(groupMessage.getTime().getYear(), groupMessage.getTime().getMonth(), groupMessage.getTime().getDay(), groupMessage.getTime().getHour(), groupMessage.getTime().getMinute());
-            executeSQL = "insert into groupmessagetable (GroupId,MessageInfo,MessageType,SenderId,Time) values (\"" + groupId + "\",\"" + messageInfo + "\",\"" + messageType + "\",\"" + senderId + "\",\"" + time + "\");";
+            executeSQL = "insert into groupmessagetable (GroupId,MessageInfo,MessageType,SenderId,Time,sqlid) values (\"" + groupId + "\",\"" + messageInfo + "\",\"" + messageType + "\",\"" + senderId + "\",\"" + time + "\",\"" + defultGmList.size() + "\");";
             stmt.executeUpdate(executeSQL);
             System.out.println("Insert Into GroupMessageTable is Done");
         } catch (Exception e) {
@@ -697,6 +766,8 @@ public class Jdbc_User implements JDBC_interface {
                 MessageInfo = rs.getString("MessageInfo");
                 String eu = rs.getString("MessageType");
                 messageType = Enum.valueOf(MessageType.class, eu);
+                Timestamp ts = rs.getTimestamp("Time");
+                time.setThroughDateTime(ts);
                 GroupMessage groupMessage = new GroupMessage(GMSenderId, GMGroupId, MessageInfo);
                 groupMessage.setTime(time);
                 groupMessage.setMessageType(messageType);
@@ -709,29 +780,29 @@ public class Jdbc_User implements JDBC_interface {
             e.printStackTrace();
         }
     }
-    public void DeleteGroupMessageById(String id)
-    {
+
+    public void DeleteGroupMessageById(String id) {
         try {
             executeSQL = "Delete From groupmessagetable where GroupId=\"" + id + "\"";
             stmt.executeUpdate(executeSQL);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public GroupMessageList getGroupMessageList() {
         return groupMessageList;
     }
 
     public void InsertIntoPrivateMessageTable(PrivateMessage privateMessage) {
         try {
+            defultPmList.add(privateMessage);
             String receiverId = privateMessage.getReceiverId();
             String messageInfo = privateMessage.getMessageInfo();
             MessageType messageType = privateMessage.getMessageType();
             String senderId = privateMessage.getSenderId();
             DateTime time = new DateTime(privateMessage.getTime().getYear(), privateMessage.getTime().getMonth(), privateMessage.getTime().getDay(), privateMessage.getTime().getHour(), privateMessage.getTime().getMinute());
-            executeSQL = "insert into privatemessagetable (ReceiverId,SenderId,MessageInfo,MessageType,Time) values (\"" + receiverId + "\",\"" + senderId + "\",\"" + messageInfo + "\",\"" + messageType + "\",\"" + time + "\");";
+            executeSQL = "insert into privatemessagetable (ReceiverId,SenderId,MessageInfo,MessageType,Time,sqlid) values (\"" + receiverId + "\",\"" + senderId + "\",\"" + messageInfo + "\",\"" + messageType + "\",\"" + time + "\",\"" + defultPmList.size() + "\");";
             stmt.executeUpdate(executeSQL);
             System.out.println("Insert Into PrivateMessageTable is Done");
         } catch (Exception e) {
@@ -774,6 +845,8 @@ public class Jdbc_User implements JDBC_interface {
                 ReceiverId = rs.getString("ReceiverId");
                 PMessageInfo = rs.getString("MessageInfo");
                 String eu = rs.getString("MessageType");
+                Timestamp ts = rs.getTimestamp("Time");
+                pTime.setThroughDateTime(ts);
                 pMessageType = Enum.valueOf(MessageType.class, eu);
                 PrivateMessage privateMessage = new PrivateMessage(SenderId, ReceiverId, PMessageInfo);
                 privateMessage.setTime(pTime);
@@ -787,6 +860,7 @@ public class Jdbc_User implements JDBC_interface {
             e.printStackTrace();
         }
     }
+
     public void DeletePrivateMessageById(String id) {
         try {
             executeSQL = "Delete From privatemessagetable where SenderId=\"" + id + "\"";
@@ -795,57 +869,267 @@ public class Jdbc_User implements JDBC_interface {
             e.printStackTrace();
         }
     }
+
     public PrivateMessageList getPrivateMessageList() {
         return privateMessageList;
     }
+
+    //postList______________________________________________________________________________________________________________
+    public void InsertPostList(Post post) {
+        DisAssemblePost(post);
+        int i = newCommentList.getSize();
+        InsertInnerPostTable(post);
+        InsertIntoArrayTable(LikerIdList, DisableList);
+        for (int a = 0; a < i; a++) {
+            InsertIntoCommentList(newCommentList.getCommentByIndex(a));
+            System.out.println("Insert In CL: " + a + ", Total Size: " + i);
+        }
+        // InsertIdinity(post);
+
+    }
+
+    //  public void InsertIdinity(Post post) {
+    //      try {
+    //          String commenttable = post.getPostId();
+    //          System.out.println(commenttable + "<<>>");
+    //          executeSQL = "insert into commenttable set commenttable = \"" + commenttable + "\";";
+    //          stmt.executeUpdate(executeSQL);
+    //          executeSQL = "insert into septableforarrays set commenttable =  \"" + commenttable + "\"";
+    //          stmt.executeUpdate(executeSQL);
+    //      } catch (SQLException e) {
+    //          e.printStackTrace();
+    //      }
+    //  }
+
+    public void DisAssemblePost(Post post) {
+        bodyP = post.getBody();
+        postId1 = post.getPostId();
+        postDateTime = new DateTime(post.getTime().getYear(), post.getTime().getMonth(), post.getTime().getDay(), post.getTime().getHour(), post.getTime().getMinute());
+        senderIdForPost = post.getSenderId();
+        DisableList = post.getDisableList();
+        LikerIdList = post.getLikerIdList();
+        title = post.getTitle();
+        newCommentList = post.getCommentList();
+        System.out.println("Post DisAssembled");
+    }
+
+    public void InsertIntoArrayTable(ArrayList<String> liker, ArrayList<String> disable) {
+        try {
+            int a = 1;
+            int b = liker.size();
+            int c = disable.size();
+            int d = 0;
+            if (b < c) {
+                d = c;
+                System.out.println("Loop size: " + d);
+            } else {
+                d = b;
+                System.out.println("Loop size: " + d);
+            }
+            for (int i = 0; i < d; i++) {
+                String x = liker.get(i);
+                String y = disable.get(i);
+                executeSQL = "insert into septableforarrays(id,LikerId,ArrayType,CommentTable) values (" + a + ",\"" + x + "\",\"LikerId\",\""+postId1+"\");";
+                System.out.println("Insert Like Loop: " + a);
+                stmt.executeUpdate(executeSQL);
+                a++;
+                executeSQL = "insert into septableforarrays(id,DisableId,ArrayType,CommentTable) values (" + a + ",\"" + y + "\",\"DisableId\",\""+postId1+"\");";
+                int p = a - 1;
+                System.out.println("Insert Disable Loop: " + p);
+                stmt.executeUpdate(executeSQL);
+                System.out.println("Loop: " + p + " Done");
+                a++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void InsertIntoCommentList(Comment comment) {
+        try {
+            executeSQL = "insert into commenttable(CommentId,SenderId,CommentBody,commenttable) values (\"" + comment.getCommentId() + "\",\"" + comment.getSenderId() + "\",\"" + comment.getCommentBody() + "\",\""+postId1+"\");";
+            stmt.executeUpdate(executeSQL);
+            System.out.println("Comment Insert Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void InsertInnerPostTable(Post post) {
+        try {
+            executeSQL = "insert into posttable(PostId,SenderId,Title,Body,Time)values(\"" + post.getPostId() + "\",\"" + post.getSenderId() + "\",\"" + post.getTitle() + "\",\"" + post.getBody() + "\",\"" + postDateTime + "\")";
+            stmt.executeUpdate(executeSQL);
+            System.out.println("Insert inner post done");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void AssembleArrays() {
+        try {
+            int a = 1;
+            int b = 1;
+            LikerIdList = new ArrayList<>();
+            DisableList = new ArrayList<>();
+            executeSQL = "Select*From septableforarrays where ArrayType = \"LikerId\"";
+            ResultSet rs = stmt.executeQuery(executeSQL);
+            while (rs.next()) {
+                String likerId = rs.getString("LikerId");
+                LikerIdList.add(likerId);
+                System.out.println("InnerLoopForLike: " + a);
+                a++;
+            }
+            System.out.println("Rs1 Completed");
+            executeSQL = "Select*From septableforarrays where ArrayType = \"DisableId\"";
+            ResultSet rs2 = stmt.executeQuery(executeSQL);
+            while (rs2.next()) {
+                String DisableId = rs2.getString("DisableId");
+                DisableList.add(DisableId);
+                System.out.println("InnerLoopForDisable: " + b);
+                b++;
+            }
+            System.out.println("Arrays Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void AssembleCommentList() {
+        try {
+            int i = 0;
+            newCommentList = new CommentList();
+            executeSQL = "Select * From commenttable";
+            ResultSet rs = stmt.executeQuery(executeSQL);
+            while (rs.next()) {
+                commentId = rs.getString("CommentId");
+                senderIdForPost = rs.getString("SenderId");
+                commentBody = rs.getString("CommentBody");
+                Comment comment = new Comment(senderIdForPost, commentBody);
+                comment.setCommentId(commentId);
+                newCommentList.addComment(comment);
+                System.out.println("Loop： " + i);
+                i++;
+            }
+            System.out.println("Assemble CommentList Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public PostList GetPost() {
+        try {
+            newPostList = new PostList();
+            executeSQL = "Select * From posttable";
+            ResultSet rs = stmt2.executeQuery(executeSQL);
+            while (rs.next()) {
+                postId1 = rs.getString("PostId");
+                senderIdForPost = rs.getString("SenderId");
+                title = rs.getString("Title");
+                bodyP = rs.getString("Body");
+                Timestamp ts = rs.getTimestamp("Time");
+                postTime.setThroughDateTime(ts);
+                AssembleArrays();
+                AssembleCommentList();
+                newPost = new Post(senderIdForPost, title, bodyP, DisableList);
+                newPost.setLikerIdList(LikerIdList);
+                newPost.setTime(postTime);
+                newPost.setCommentList(newCommentList);
+                newPost.setPostId(postId1);
+                newPostList.addPost(newPost);
+                System.out.println("Loop In AddingPost: " + newPostList.getSize());
+            }
+            return newPostList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void UpdatePost(Post post) {
+        try {
+            executeSQL = "update posttable set body = \"" + post.getBody() + "\";";
+            stmt.executeUpdate(executeSQL);
+            executeSQL = "update posttable set title = \"" + post.getTitle() + "\";";
+            stmt.executeUpdate(executeSQL);
+            executeSQL = "update posttable set senderid = \"" + post.getSenderId() + "\";";
+            stmt.executeUpdate(executeSQL);
+            DateTime time = new DateTime(post.getTime().getYear(), post.getTime().getMonth(), post.getTime().getDay(), post.getTime().getHour(), post.getTime().getMinute());
+            executeSQL = "update posttable set time = \"" + time + "\";";
+            stmt.executeUpdate(executeSQL);
+            int b = post.getLikerIdList().size();
+            int c = post.getDisableList().size();
+            int d = 0;
+            if (b < c) {
+                d = c;
+                //System.out.println("Loop size: " + d);
+            } else {
+                d = b;
+                //System.out.println("Loop size: " + d);
+            }
+            for (int i = 0; i < d; i++) {
+                executeSQL = "update septableforarrays set likerid = \"" + post.getLikerIdList().get(i) + "\" where  ArrayType = \"likerid\";";
+                stmt.executeUpdate(executeSQL);
+                executeSQL = "update septableforarrays set disableid = \"" + post.getDisableList().get(i) + "\" where  ArrayType = \"disableid\";";
+                stmt.executeUpdate(executeSQL);
+            }
+            for (int i = 0; i < post.getCommentList().getSize(); i++) {
+                executeSQL = "update commenttable set SenderId = \"" + post.getCommentList().getCommentByIndex(i).getSenderId() + "\"";
+                stmt.executeUpdate(executeSQL);
+                executeSQL = "update commenttable set CommentBody = \"" + post.getCommentList().getCommentByIndex(i).getCommentBody() + "\"";
+                stmt.executeUpdate(executeSQL);
+            }
+            System.out.println(">>>Update Post Done<<<");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePostById(String id) {
+        //int a = newPostList.getPostByPostId(id).getCommentList().getSize();
+        executeSQL = "Delete from posttable where postId = \"" + id + "\"";
+        try {
+            stmt.executeUpdate(executeSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // for (int i = 0; i < a; i++) {
+        //     //String a = newPostList.getPostByIndex(i).getCommentList().
+        // }
+        // executeSQL = "Delete from commenttable where senderid = \"" + idf + "\"";
+    }
+    public void CreateFK()
+    {
+        executeSQL = "ALTER TABLE `sep3_local`.`septableforarrays` \n" +
+                "ADD CONSTRAINT `postid`\n" +
+                "  FOREIGN KEY (`CommentTable`)\n" +
+                "  REFERENCES `sep3_local`.`posttable` (`PostId`)\n" +
+                "  ON DELETE CASCADE\n" +
+                "  ON UPDATE CASCADE;";
+        try {
+            stmt.executeUpdate(executeSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        executeSQL = "ALTER TABLE `sep3_local`.`commenttable` \n" +
+                "ADD INDEX `postidx_idx` (`CommentTable` ASC);";
+        try {
+            stmt.executeUpdate(executeSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        executeSQL = "ALTER TABLE `sep3_local`.`commenttable` \n" +
+                "ADD CONSTRAINT `postidx`\n" +
+                "  FOREIGN KEY (`CommentTable`)\n" +
+                "  REFERENCES `sep3_local`.`posttable` (`PostId`)\n" +
+                "  ON DELETE CASCADE\n" +
+                "  ON UPDATE CASCADE;";
+        try {
+            stmt.executeUpdate(executeSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
-
-//--hint
-// public void generateM(int BM)
-// {
-//     switch (BM)
-//     {
-//         case 1: mo = "JAN";
-//         case 2:  mo = "FEB";
-//         case 3:  mo = "MAR";
-//         case 4:  mo = "APR";
-//         case 5:  mo = "MAY";
-//         case 6:  mo = "JUN";
-//         case 7:  mo = "JUL";
-//         case 8:  mo = "AUG";
-//         case 9:  mo = "SEP";
-//         case 10:  mo = "OCT";
-//         case 11:  mo = "NOV";
-//         default:  mo = "DEC";
-//     }
-//
-// }
-// public void generateD(int BD)
-// {
-//     if (BD>3)
-//     {
-//         da = BD+"th";
-//     }
-//     if (BD==1)
-//     {
-//         da = BD+"st";
-//     }
-//     if (BD==2)
-//     {
-//         da = BD+"nd";
-//     }
-//     if (BD==3)
-//     {
-//         da = BD+"rd";
-//     }
-// }
-// public void assemble()
-// {
-//     Date.setDA(da);
-//     Date.setMO(mo);
-// }
-// public DateClassConvert getDate()
-// {
-//     return Date;
-// }
