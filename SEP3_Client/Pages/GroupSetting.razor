@@ -185,6 +185,7 @@
     {
         if (ClientModel!=null)
         {
+            ChatGroup = ClientModel.GetGroupByGroupId(getGroupId());
             Account = ClientModel.GetAccount();
             if (ChatGroup.CreatorId.Equals(Account.Id))
             {
@@ -195,10 +196,8 @@
                 show = false;
             }
             showMembers = false;
-            
             getGroupId();
         }
-        
     }
 
     private void changName()

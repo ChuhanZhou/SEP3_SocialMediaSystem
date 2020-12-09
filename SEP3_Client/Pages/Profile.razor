@@ -1,5 +1,7 @@
 ﻿@page "/Profile"
 @using SEP3_Client.Data
+@using SEP3_Client.Model.List.PostList
+@using SEP3_Client.Model.Unit.Post
 @using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
@@ -46,9 +48,86 @@
             <div style="height: 8px"></div>
             <div style="border: 2px solid black;
                          border-radius: 8px;width: 500px;padding: 10px;height: auto;text-align: center;margin: auto">
-                <div style="font-size: 25px;text-align: left">
-                    Posts
-                    <button class="btn btn-outline-dark" style="float: right; width:auto;border-radius: 20px" type="submit" >View</button>
+                <div style="font-size: 25px;text-align: center">
+                    <div style="float: left;text-align: left">Posts</div>
+                    <div>
+                         @if (postList == null)
+                         {
+                             <p>
+                                 <em>Loading</em>
+                             </p>
+                         }
+                         else
+                         {
+                             if (!postList.Posts.Any())
+                             {
+                                 <p>
+                                     <em>You never share posts...</em>
+                                 </p>
+                             }
+                             else
+                             {
+                                 @foreach (var post in postList.Posts)
+                                 {
+                                     <div style="border: 2px solid black;
+                                                                 border-radius: 8px;width: 800px;padding: 15px;height: auto;margin: auto;text-align: left">
+                                         @if (post.SenderId.Equals(account.Id))
+                                         {
+                                             <div style="width: 100%;font-size: 20px"><img src="user.PNG" width="40px" height="40px">@account.UserName
+                                                 <button class="oi oi-pencil" style="text-align: right;font-size: larger" @onclick="(() => EditShieldFriends(post))"></button>
+                                                 <button class="oi oi-delete" style="font-size: larger;text-align: right" @onclick="(() => deletePost(post.PostId))"></button>
+                                             </div>
+                                             <div style="width: 100%;">
+                                                 <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                           word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
+                                             </div>
+                                             <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe">
+                                                 <button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button>
+                                                 <button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button>
+                                             </div>
+                                             <div style="width: 100%;">
+                                                 @foreach (var comment in post.CommentList.Comments)
+                                                 {
+                                                     <tr style="width: 70%">
+                                                         @if (comment.SenderId.Equals(account.Id))
+                                                         {
+                                                             <button class="oi oi-x" style="text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId, comment.CommentId))"></button>
+                                                         }
+                                                         @if (isFriend(comment.SenderId) || comment.SenderId.Equals(account.Id))
+                                                         {
+                                                             <div style="height: 100%;"><img src="user.PNG" width="20px" height="20px">
+                                                             </div>
+                                                             <div style="width: 70%;">
+                                                                 <div style="text-align: left;color: #b9bbbe;float: left;width: 100%">
+                                                                     @if (comment.SenderId.Equals(account.Id))
+                                                                     {
+                                                                         @account.UserName
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                         @getNote(comment.SenderId)
+                                                                     }
+
+                                                                 </div>
+                                                                 <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                                               background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                               word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
+                                                             </div>
+                                                             <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                                         }
+                                                     </tr>
+                                                 }
+                                                 <div style="width: 100%;text-align: left"><img src="user.PNG" width="20px" height="20px">
+                                                     <input placeholder="Write a comment..." @bind="commentInfo"/>
+                                                     <button class="btn btn-outline-dark" @onclick="(() => sendComment(post.PostId))">Send</button></div>
+                                             </div>
+                                         }
+                                     </div>
+                                 }
+                             }
+                         }
+                                       
+                            </div>
                 </div>
             </div>
         </div>
@@ -64,6 +143,10 @@
     private char gender;
     private string hometown;
     private long telNo;
+    private PostList postList;
+    private Account account;
+    private string commentInfo;
+    private static Profile page;
 
     protected override async Task OnInitializedAsync()
     {
@@ -71,9 +154,10 @@
         {
             NavigationManager.NavigateTo("");
         }
-        Account account = ClientModel.GetAccount().Copy();
+        account = ClientModel.GetAccount().Copy();
         accountId = account.GetId();
         username = account.GetUserName();
+        postList = await ClientModel.GetPost();
         if (account.Birthday==null)
         {
             month = 0;
@@ -108,8 +192,17 @@
         {
             telNo = account.PhoneNumber;
         }
-        
-        
+        page = this;
+
+    }
+
+    public static Profile getPage()
+    {
+        if (page==null)
+        {
+            page = new Profile();
+        }
+        return page;
     }
     
     private void clickEDIT()
@@ -120,6 +213,114 @@
     private void Setting()
     {
         NavigationManager.NavigateTo("/Setting");
+    }
+    
+    private string getNote(string id)
+    {
+        string note=ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id).Note;
+        if (!string.IsNullOrEmpty(note))
+        {
+            return note;
+        }
+        else
+        {
+            return ClientModel.GetFriendById(id).UserName;
+        }
+    }
+
+    private bool isFriend(string id)
+    {
+        if (ClientModel.GetFriendById(id)!=null)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    private void clickLike(string id)
+    {
+        foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
+        {
+            if (likeId.Equals(account.Id))
+            {
+                postList.GetPostByPostId(id).LikerIdList.Remove(account.Id);
+            }
+            else
+            {
+                postList.GetPostByPostId(id).LikerIdList.Add(account.Id);
+            }
+        }
+        ClientModel.UpdatePostLike(id);
+    }
+
+    private void sendComment(string id)
+    {
+        if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
+        {
+            ClientModel.AddComment(id,new Comment(account.Id,commentInfo));
+            commentInfo = "";
+        }
+    }
+
+    private void deletePost(string id)
+    {
+        ClientModel.RemovePost(id);
+    }
+
+    private void deleteComment(string postId,string commentId)
+    {
+        ClientModel.RemoveComment(postId,commentId);
+    }
+    
+    private void EditShieldFriends(Post post)
+    {
+        EditShield.Post = post;
+        EditShield.disableList = post.DisableList;
+        EditShield.lastPage = "/Profile";
+        NavigationManager.NavigateTo("/EditShield");
+    }
+
+    public async Task Update()
+    {
+        account = ClientModel.GetAccount().Copy();
+        accountId = account.GetId();
+        username = account.GetUserName();
+        postList = await ClientModel.GetPost();
+        if (account.Birthday==null)
+        {
+            month = 0;
+            day = 0;
+        }
+        else
+        {
+            month = account.Birthday.GetMonth();
+            day = account.Birthday.GetDay();
+        }
+        if (char.IsWhiteSpace(account.Gender))
+        {
+            gender = 'M';
+        }
+        else
+        {
+            gender = account.Gender;
+        }
+        if (string.IsNullOrEmpty(account.GetHomeTown()))
+        {
+            hometown = "No hometown to show";
+        }
+        else
+        {
+            hometown = account.Hometown;
+        }
+        if (account.GetPhoneNumber()==0)
+        {
+            telNo = 0;
+        }
+        else
+        {
+            telNo = account.PhoneNumber;
+        }
+
     }
 
 }

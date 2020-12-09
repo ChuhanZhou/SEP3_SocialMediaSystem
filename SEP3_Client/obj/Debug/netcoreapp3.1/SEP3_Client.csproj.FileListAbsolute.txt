@@ -222,3 +222,7 @@ C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\ne
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\GroupSetting.razor.g.cs
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Invitation.razor.g.cs
 C:\Users\Think\IdeaProjects\SEP3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\PrivateChat.razor.g.cs
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\EditShield.razor.g.cs
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Shield.razor.g.cs
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\EditShield.razor.g.cs
+C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_Client\obj\Debug\netcoreapp3.1\Razor\Pages\Shield.razor.g.cs

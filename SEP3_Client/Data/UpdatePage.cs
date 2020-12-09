@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using SEP3_Client.Pages;
 
 namespace SEP3_Client.Data
@@ -11,6 +12,8 @@ namespace SEP3_Client.Data
             Console.WriteLine("----------------UserSystemUpdate----------------");
             new Thread(()=>FriendList.GetPage().Update()).Start();
             new Thread(()=>FriendRequest.GetPage().Update()).Start();
+            new Thread(()=>Profile.getPage().Update()).Start();
+            new Thread(()=>FriendProfile.getPage().Update()).Start();
         }
         
         public static void ChatSystemUpdate()
@@ -26,7 +29,9 @@ namespace SEP3_Client.Data
         public static void PostSystemUpdate()
         {
             Console.WriteLine("----------------PostSystemUpdate----------------");
-            
+            new Thread(()=>Moment.GetPage().Update()).Start();
+            new Thread(()=>Profile.getPage().Update()).Start();
+            new Thread(()=>FriendProfile.getPage().Update()).Start();
         }
     }
 }
