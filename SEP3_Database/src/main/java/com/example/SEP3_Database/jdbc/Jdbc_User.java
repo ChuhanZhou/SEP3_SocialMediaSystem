@@ -13,8 +13,6 @@ import com.example.SEP3_Database.model.domain.unit.message.PrivateMessage;
 import com.example.SEP3_Database.model.domain.unit.post.Comment;
 import com.example.SEP3_Database.model.domain.unit.post.Post;
 import com.example.SEP3_Database.model.domain.unit.time.MyTime;
-import javafx.geometry.Pos;
-import jnr.posix.Times;
 import org.joda.time.DateTime;
 import com.example.SEP3_Database.model.domain.list.groupList.ChatGroupList;
 import com.example.SEP3_Database.model.domain.list.userList.FriendSettingList;
