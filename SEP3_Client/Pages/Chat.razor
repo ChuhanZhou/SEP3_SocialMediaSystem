@@ -371,7 +371,6 @@
                     send();
                 }
                 privateChat(ID);
-                
                 getFriendStatus(ID);
                 getNote(ID);
                 getUserName(ID);
@@ -380,8 +379,11 @@
             }
             else
             {
+                if (!string.IsNullOrEmpty(ID))
+                {
+                    sendGroupMsg();
+                }
                 groupChat(ID);
-                sendGroupMsg();
                 getGroupName(ID);
                 clickFriendBtn();
                 clickGroupBtn();
