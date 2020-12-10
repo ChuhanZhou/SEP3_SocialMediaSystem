@@ -34,6 +34,7 @@ namespace SEP3_PostSystem.Model.List.PostList
                 if (!HasCommentId(comment.CommentId))
                 {
                     Comments.Add(comment);
+                    return null;
                 }
                 else
                 {

@@ -21,11 +21,15 @@ namespace SEP3_PostSystem.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<string>> AddPost([FromBody] Post newPost,[FromHeader] string userId)
+        public async Task<ActionResult<string>> AddPost([FromBody] Post newPost,[FromQuery] string userId)
         {
+            Console.WriteLine(userId);
             try
             {
-                return await postModel.AddPost(newPost, userId);
+                Console.WriteLine("Post receive from [" + userId + "]:" + JsonSerializer.Serialize(newPost));
+                var result = await postModel.AddPost(newPost, userId);
+                Console.WriteLine("Post send to [" + userId + "]:" + result);
+                return result;
             }
             catch (Exception e)
             {
@@ -35,7 +39,7 @@ namespace SEP3_PostSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<string>> GetPost([FromHeader] string userId)
+        public async Task<ActionResult<string>> GetPost([FromQuery] string userId)
         {
             try
             {
@@ -53,7 +57,7 @@ namespace SEP3_PostSystem.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<string>> UpdatePost([FromBody] Post newPost, [FromHeader] string userId)
+        public async Task<ActionResult<string>> UpdatePost([FromBody] Post newPost, [FromQuery] string userId)
         {
             try
             {
@@ -67,7 +71,7 @@ namespace SEP3_PostSystem.Controllers
         }
         
         [HttpDelete]
-        public ActionResult<string> RemovePost([FromHeader] string postId, [FromQuery] string userId)
+        public ActionResult<string> RemovePost([FromQuery] string postId, [FromQuery] string userId)
         {
             try
             {
@@ -83,7 +87,7 @@ namespace SEP3_PostSystem.Controllers
 
         [HttpPut]
         [Route("like")]
-        public async Task<ActionResult<string>> UpdatePostLike([FromHeader] string postId, [FromQuery] string userId)
+        public async Task<ActionResult<string>> UpdatePostLike([FromQuery] string postId, [FromQuery] string userId)
         {
             try
             {
@@ -98,7 +102,7 @@ namespace SEP3_PostSystem.Controllers
         
         [HttpPost]
         [Route("comment")]
-        public async Task<ActionResult<string>> AddComment([FromHeader] string postId,[FromBody] Comment comment,[FromQuery] string userId)
+        public async Task<ActionResult<string>> AddComment([FromQuery] string postId,[FromBody] Comment comment,[FromQuery] string userId)
         {
             try
             {
@@ -113,7 +117,7 @@ namespace SEP3_PostSystem.Controllers
         
         [HttpDelete]
         [Route("comment")]
-        public async Task<ActionResult<string>> RemoveComment([FromHeader] string postId,[FromQuery] string commentId,[FromQuery] string userId)
+        public async Task<ActionResult<string>> RemoveComment([FromQuery] string postId,[FromQuery] string commentId,[FromQuery] string userId)
         {
             try
             {

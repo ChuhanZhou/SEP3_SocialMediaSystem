@@ -34,6 +34,7 @@ namespace SEP3_Client.Model.List.PostList
                 if (!HasPostId(post.PostId))
                 {
                     Posts.Add(post);
+                    return null;
                 }
                 else
                 {

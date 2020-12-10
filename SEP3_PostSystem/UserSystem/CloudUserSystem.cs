@@ -20,7 +20,7 @@ namespace SEP3_PostSystem.UserSystem
         {
             try
             {
-                var message = await client.GetStringAsync(uri + "hasId?userId="+id);
+                var message = await client.GetStringAsync(uri + "hasUser?userId="+id);
                 Console.WriteLine("Get Receive: " + message);
                 Console.WriteLine("Get end");
                 return Convert.ToBoolean(message);

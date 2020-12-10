@@ -40,6 +40,7 @@ public class PostList {
             if (!hasPostId(post.getPostId()))
             {
                 Posts.add(post);
+                return null;
             }
             else
             {

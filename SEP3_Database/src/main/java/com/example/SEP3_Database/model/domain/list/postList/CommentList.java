@@ -40,6 +40,7 @@ public class CommentList {
             if (!hasCommentId(comment.getCommentId()))
             {
                 Comments.add(comment);
+                return null;
             }
             else
             {

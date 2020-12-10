@@ -13,7 +13,7 @@ namespace SEP3_Client.Mediator.CloudPostSystem
     public class CloudPostSystem : ICloudPostSystem
     {
         private HttpClient client;
-        private const string uri = "http://localhost:7000/api/";
+        private const string uri = "https://localhost:7001/api/";
         private IClientModelForPostSystem clientModel;
 
         public CloudPostSystem(ClientModelManager clientModel)
@@ -28,7 +28,7 @@ namespace SEP3_Client.Mediator.CloudPostSystem
             {
                 var newPostJson = JsonSerializer.Serialize(post);
                 HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
-                var message = await client.PostAsync(uri + "post/"+userId, httpContent);
+                var message = await client.PostAsync(uri + "post?userId="+userId, httpContent);
                 Console.WriteLine("Post send: " + newPostJson);
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("Post receive: " + result);
@@ -47,7 +47,7 @@ namespace SEP3_Client.Mediator.CloudPostSystem
         {
             try
             {
-                var message = await client.GetStringAsync(uri + "post/" + userId);
+                var message = await client.GetStringAsync(uri + "post?userId=" + userId);
                 Console.WriteLine("Get Receive: " + message);
                 var postList = JsonSerializer.Deserialize<PostList>(message);
                 Console.WriteLine("Get end");
@@ -65,8 +65,8 @@ namespace SEP3_Client.Mediator.CloudPostSystem
         {
             try
             {
-                var message = await client.PutAsync(uri + "post/like/" + postId + "?userId=" + userId, null);
-                Console.WriteLine("Put send: " + uri + "post/like/" + postId + "?userId=" + userId);
+                var message = await client.PutAsync(uri + "post/like?postId=" + postId + "&userId=" + userId, null);
+                Console.WriteLine("Put send: " + uri + "post/like?postId=" + postId + "&userId=" + userId);
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("Put receive: " + result);
                 Console.WriteLine("Put end");
@@ -86,7 +86,7 @@ namespace SEP3_Client.Mediator.CloudPostSystem
             {
                 var newCommentJson = JsonSerializer.Serialize(comment);
                 HttpContent httpContent = new StringContent(newCommentJson, Encoding.UTF8, "application/json");
-                var message = await client.PostAsync(uri + "post/comment/" + postId + "?userId=" + userId, httpContent);
+                var message = await client.PostAsync(uri + "post/comment?postId=" + postId + "&userId=" + userId, httpContent);
                 Console.WriteLine("Post send: " + newCommentJson);
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("Post receive: " + result);
@@ -105,8 +105,8 @@ namespace SEP3_Client.Mediator.CloudPostSystem
         {
             try
             {
-                var message = await client.DeleteAsync(uri + "post/comment/" + postId + "?commentId=" + commentId + "&userId=" + userId);
-                Console.WriteLine("Delete send: " + uri + "post/comment/" + postId + "?commentId=" + commentId + "&userId=" + userId);
+                var message = await client.DeleteAsync(uri + "post/comment?postId=" + postId + "&commentId=" + commentId + "&userId=" + userId);
+                Console.WriteLine("Delete send: " + uri + "post/comment?postId=" + postId + "&commentId=" + commentId + "&userId=" + userId);
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("Delete receive: " + result);
                 Console.WriteLine("Delete end");
@@ -126,7 +126,7 @@ namespace SEP3_Client.Mediator.CloudPostSystem
             {
                 var newPostJson = JsonSerializer.Serialize(newPost);
                 HttpContent httpContent = new StringContent(newPostJson, Encoding.UTF8, "application/json");
-                var message = await client.PutAsync(uri + "post/" + userId, httpContent);
+                var message = await client.PutAsync(uri + "post?userId=" + userId, httpContent);
                 Console.WriteLine("Put send: " + newPostJson);
                 var result = await message.Content.ReadAsStringAsync();
                 Console.WriteLine("Put receive: " + result);
@@ -145,8 +145,8 @@ namespace SEP3_Client.Mediator.CloudPostSystem
         {
             try
             {
-                await client.DeleteAsync(uri + "post/" + postId + "?userId=" + userId);
-                Console.WriteLine("Delete send: " + uri + "post/" + postId + "?userId=" + userId);
+                await client.DeleteAsync(uri + "post?postId=" + postId + "&userId=" + userId);
+                Console.WriteLine("Delete send: " + uri + "post?postId=" + postId + "&userId=" + userId);
                 Console.WriteLine("Delete end");
                 clientModel.SystemOnLine(FunctionType.PostSystem);
             }
