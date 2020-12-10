@@ -236,7 +236,7 @@ namespace SEP3_ChatSystem.Mediator
 
         public void NewMessage(Message message)
         {
-            switch (message.MessageType)
+            switch (message.Type)
             {
                 case MessageType.PRIVATE:
                     SendPrivateMessagePackage(new PrivateMessagePackage((PrivateMessage)message,"update"));

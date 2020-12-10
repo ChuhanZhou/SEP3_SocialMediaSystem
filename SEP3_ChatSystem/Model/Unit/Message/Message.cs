@@ -8,14 +8,14 @@ namespace SEP3_ChatSystem.Model.Unit.Message
     public abstract class Message
     {
         public string MessageInfo { get; set; }
-        public MessageType MessageType { get; set; }
+        public MessageType Type { get; set; }
         public string SenderId { get; set; }
         public MyTime Time { get; set; }
-        public Message(string senderId,string messageInfo,MessageType messageType)
+        public Message(string senderId,string messageInfo,MessageType type)
         {
             SenderId = senderId;
             MessageInfo = messageInfo;
-            MessageType = messageType;
+            Type = type;
             Time = new MyTime(DateTime.Now);
         }
         

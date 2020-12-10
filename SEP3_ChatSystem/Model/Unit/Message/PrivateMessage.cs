@@ -17,7 +17,7 @@
             return new PrivateMessage
             {
                 MessageInfo = MessageInfo,
-                MessageType = MessageType,
+                Type = Type,
                 SenderId = SenderId,
                 Time = Time,
                 ReceiverId = ReceiverId

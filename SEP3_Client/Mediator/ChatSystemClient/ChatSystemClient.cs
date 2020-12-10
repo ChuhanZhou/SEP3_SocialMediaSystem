@@ -361,7 +361,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                                         clientModel.AddGroupMessage(groupMessagePackage.SendList.GetMessageByIndex(0));
                                         break;
                                 }
-                                clientModel.UpdateGroupMessageList(groupMessagePackage.SendList);
                                 break;
                             case InformationType.CHAT_GROUP:
                                 var chatGroupPackage = JsonSerializer.Deserialize<ChatGroupPackage>(receive);
