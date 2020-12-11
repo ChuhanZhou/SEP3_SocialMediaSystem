@@ -155,6 +155,17 @@ public class Post {
         return "Wrong update.";
     }
 
+    public String update(Post post) {
+        if (PostId.equals(post.PostId) && SenderId.equals(post.SenderId)) {
+            Title = post.Title;
+            Body = post.Body;
+            LikerIdList = new ArrayList<>(post.LikerIdList);
+            CommentList = post.CommentList;
+            DisableList = new ArrayList<>(post.DisableList);
+        }
+        return "Wrong update.";
+    }
+
     public Post copy() {
         return new Post(this);
     }

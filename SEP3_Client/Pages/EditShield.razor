@@ -99,9 +99,9 @@
         NavigationManager.NavigateTo(lastPage);
     }
 
-    private void shieldFriends()
+    private async Task shieldFriends()
     {
-        ClientModel.UpdatePostBySender(Post);
+        await ClientModel.UpdatePostBySender(Post);
         NavigationManager.NavigateTo(lastPage);
     }
 

@@ -89,7 +89,7 @@ public class PostList {
         var target = getPostByPostId(post.getPostId());
         if (target!=null)
         {
-            target = new Post(post);
+            target.update(post);
             return null;
         }
         return "Not find post.";

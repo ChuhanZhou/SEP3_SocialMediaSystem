@@ -26,12 +26,15 @@ namespace SEP3_Client.Data
             new Thread(()=>Group.getPage().Update()).Start();
         }
         
-        public static void PostSystemUpdate()
+        public static async Task PostSystemUpdate()
         {
             Console.WriteLine("----------------PostSystemUpdate----------------");
-            new Thread(()=>Moment.GetPage().Update()).Start();
-            new Thread(()=>Profile.getPage().Update()).Start();
-            new Thread(()=>FriendProfile.getPage().Update()).Start();
+            await Moment.GetPage().Update();
+            await Profile.getPage().Update();
+            await FriendProfile.getPage().Update();
+            //new Thread(async ()=>await Moment.GetPage().Update()).Start();
+            //new Thread(async ()=>await Profile.getPage().Update()).Start();
+            //new Thread(async ()=>await FriendProfile.getPage().Update()).Start();
         }
     }
 }

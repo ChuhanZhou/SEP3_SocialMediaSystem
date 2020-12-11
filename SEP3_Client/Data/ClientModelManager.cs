@@ -234,7 +234,7 @@ namespace SEP3_Client.Data
         public async Task<string> AddPost(Post post)
         {
             var result = await postSystem.AddPost(post, account.Id);
-            UpdatePage.PostSystemUpdate();
+            await UpdatePage.PostSystemUpdate();
             return result;
         }
 
@@ -246,35 +246,35 @@ namespace SEP3_Client.Data
         public async Task<string> UpdatePostLike(string postId)
         {
             var result = await postSystem.UpdatePostLike(postId,account.Id);
-            UpdatePage.PostSystemUpdate();
+            await UpdatePage.PostSystemUpdate();
             return result;
         }
 
         public async Task<string> AddComment(string postId, Comment comment)
         {
             var result = await postSystem.AddComment(postId, comment, account.Id);
-            UpdatePage.PostSystemUpdate();
+            await UpdatePage.PostSystemUpdate();
             return result;
         }
 
         public async Task<string> RemoveComment(string postId, string commentId)
         {
             var result = await postSystem.RemoveComment(postId, commentId, account.Id);
-            UpdatePage.PostSystemUpdate();
+            await UpdatePage.PostSystemUpdate();
             return result;
         }
 
         public async Task<string> UpdatePostBySender(Post newPost)
         {
             var result = await postSystem.UpdatePostBySender(newPost, account.Id);
-            UpdatePage.PostSystemUpdate();
+            await UpdatePage.PostSystemUpdate();
             return result;
         }
 
-        public void RemovePost(string postId)
+        public async Task RemovePost(string postId)
         {
-            postSystem.RemovePost(postId, account.Id);
-            UpdatePage.PostSystemUpdate();
+            await postSystem.RemovePost(postId, account.Id);
+            await UpdatePage.PostSystemUpdate();
         }
 
         public void SystemOnLine(FunctionType functionType)

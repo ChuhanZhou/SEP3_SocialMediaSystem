@@ -82,10 +82,10 @@ namespace SEP3_Client.Model.List.PostList
 
         public void RemovePostByPostId(string id)
         {
-            PostList copy = Copy();
-            foreach (var post in copy.Posts.Where(post => post.PostId==id))
+            foreach (var post in Posts.Where(post => post.PostId==id))
             {
                 Posts.Remove(post);
+                break;
             }
         }
 

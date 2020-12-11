@@ -100,16 +100,20 @@ namespace SEP3_PostSystem.Data
                 if (postList.HasPostId(postId))
                 {
                     var post = postList.GetPostByPostId(postId);
+                    string result;
                     if (post.IsLiker(userId))
                     {
-                        string result = post.RemoveLiker(postId);
-                        if (result==null)
-                        {
-                            return await cloudDatabase.UpdatePost(post);
-                        }
-                        return result;
+                        result = post.RemoveLiker(userId);
                     }
-                    return post.AddLiker(userId);
+                    else
+                    {
+                        result = post.AddLiker(userId);
+                    }
+                    if (result==null)
+                    {
+                        return await cloudDatabase.UpdatePost(post);
+                    }
+                    return result;
                 }
                 return "Can't find post.";
             }

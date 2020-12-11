@@ -263,7 +263,7 @@
         return false;
     }
     
-    private void clickLike(string id)
+    private async Task clickLike(string id)
     {
         foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
         {
@@ -279,32 +279,32 @@
                 postList.GetPostByPostId(id).LikerIdList.Add(account.Id);
             }
         }
-        ClientModel.UpdatePostLike(id);
+        await ClientModel.UpdatePostLike(id);
     }
     
 
-    private void sendComment(string id)
+    private async Task sendComment(string id)
     {
         if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
         {
-            ClientModel.AddComment(id,new Comment(account.Id,commentInfo));
+            await ClientModel.AddComment(id,new Comment(account.Id,commentInfo));
             commentInfo = "";
         }
     }
 
-    private void deletePost(string id)
+    private async Task deletePost(string id)
     {
         if (!string.IsNullOrEmpty(id))
         {
-            ClientModel.RemovePost(id);
+            await ClientModel.RemovePost(id);
         }
     }
 
-    private void deleteComment(string postId,string commentId)
+    private async Task deleteComment(string postId,string commentId)
     {
         if (!string.IsNullOrEmpty(postId)&&!string.IsNullOrEmpty(commentId))
         {
-            ClientModel.RemoveComment(postId, commentId);
+            await ClientModel.RemoveComment(postId, commentId);
         }
     }
     

@@ -49,6 +49,6 @@ namespace SEP3_Client.Data
         Task<string> AddComment(string postId,Comment comment);
         Task<string> RemoveComment(string postId,string commentId);
         Task<string> UpdatePostBySender(Post newPost);
-        void RemovePost(string postId);
+        Task RemovePost(string postId);
     }
 }

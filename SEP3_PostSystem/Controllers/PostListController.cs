@@ -45,7 +45,7 @@ namespace SEP3_PostSystem.Controllers
             {
                 if (userId!=null)
                 {
-                    return Ok(JsonSerializer.Serialize(await postModel.GetPostToShowByUserId(userId), new JsonSerializerOptions {WriteIndented = true}));
+                    return Ok(JsonSerializer.Serialize(await postModel.GetPostToShowByUserId(userId)));
                 }
                 return Ok(JsonSerializer.Serialize(postModel.GetAllPosts(), new JsonSerializerOptions {WriteIndented = true}));
             }

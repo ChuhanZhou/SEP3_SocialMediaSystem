@@ -68,10 +68,10 @@ namespace SEP3_PostSystem.Model.List.PostList
 
         public void RemoveCommentByCommentId(string id)
         {
-            CommentList commentList = Copy();
-            foreach (var comment in commentList.Comments.Where(comment => comment.CommentId==id))
+            foreach (var comment in Comments.Where(comment => comment.CommentId==id))
             {
                 Comments.Remove(comment);
+                break;
             }
         }
 

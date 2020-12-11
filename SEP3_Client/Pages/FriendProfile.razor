@@ -214,7 +214,7 @@
         return false;
     }
     
-    private void clickLike(string id)
+    private async Task clickLike(string id)
     {
         foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
         {
@@ -227,31 +227,34 @@
                 postList.GetPostByPostId(id).LikerIdList.Add(Account.Id);
             }
         }
-        ClientModel.UpdatePostLike(id);
+        await ClientModel.UpdatePostLike(id);
     }
 
-    private void sendComment(string id)
+    private async Task sendComment(string id)
     {
         if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
         {
-            ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
+            await ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
             commentInfo = "";
         }
     }
 
-    private void deleteComment(string postId,string commentId)
+    private async Task deleteComment(string postId,string commentId)
     {
         if (!string.IsNullOrEmpty(postId)&&!string.IsNullOrEmpty(commentId))
         {
-            ClientModel.RemoveComment(postId, commentId);
+            await ClientModel.RemoveComment(postId, commentId);
         }
     }
 
     public async Task Update()
     {
-        friend = ClientModel.GetFriendById(friendSetting.GetId());
-        postList =await ClientModel.GetPost();
-        Account = ClientModel.GetAccount();
+        if (ClientModel!=null)
+        {
+            friend = ClientModel.GetFriendById(friendSetting.GetId());
+            postList =await ClientModel.GetPost();
+            Account = ClientModel.GetAccount();
+        }
     }
     
 }
