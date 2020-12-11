@@ -30,6 +30,7 @@ public class PostListController {
     @RequestMapping(method = RequestMethod.GET)
     public String getAllPost()
     {
+        System.out.println("Get:" + gson.toJson(databaseModel.getAllPost()));
         return gson.toJson(databaseModel.getAllPost());
     }
 

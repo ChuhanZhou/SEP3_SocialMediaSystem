@@ -134,8 +134,13 @@ namespace SEP3_PostSystem.Data
                         {
                             commentId = GetRandomId();
                         }
-                        post.CommentList.AddComment(new Comment(postId, comment));
-                        return await cloudDatabase.UpdatePost(post);
+                        var result = post.CommentList.AddComment(new Comment(commentId, comment));
+                        if (result == null)
+                        {
+                            return await cloudDatabase.UpdatePost(post);
+                        }
+
+                        return result;
                     }
                     return "Wrong sender.";
                 }

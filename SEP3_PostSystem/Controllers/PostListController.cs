@@ -26,9 +26,9 @@ namespace SEP3_PostSystem.Controllers
             Console.WriteLine(userId);
             try
             {
-                Console.WriteLine("Post receive from [" + userId + "]:" + JsonSerializer.Serialize(newPost));
+                Console.WriteLine("[post]Post receive from [" + userId + "]:" + JsonSerializer.Serialize(newPost));
                 var result = await postModel.AddPost(newPost, userId);
-                Console.WriteLine("Post send to [" + userId + "]:" + result);
+                Console.WriteLine("[post]Post send to [" + userId + "]:" + result);
                 return result;
             }
             catch (Exception e)
@@ -43,11 +43,16 @@ namespace SEP3_PostSystem.Controllers
         {
             try
             {
+                Console.WriteLine("[post]Get from [" + userId + "]");
+                string result;
                 if (userId!=null)
                 {
-                    return Ok(JsonSerializer.Serialize(await postModel.GetPostToShowByUserId(userId)));
+                    result = JsonSerializer.Serialize(await postModel.GetPostToShowByUserId(userId));
+                    Console.WriteLine("[post]Get send to [" + userId + "]:" + result);
+                    return Ok(result);
                 }
-                return Ok(JsonSerializer.Serialize(postModel.GetAllPosts(), new JsonSerializerOptions {WriteIndented = true}));
+                result = JsonSerializer.Serialize(postModel.GetAllPosts(), new JsonSerializerOptions {WriteIndented = true});
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -61,7 +66,10 @@ namespace SEP3_PostSystem.Controllers
         {
             try
             {
-                return await postModel.UpdatePostBySender(newPost,userId);
+                Console.WriteLine("[post]Put receive from [" + userId + "]:" + JsonSerializer.Serialize(newPost));
+                var result = await postModel.UpdatePostBySender(newPost,userId);
+                Console.WriteLine("[post]Put send to [" + userId + "]:" + result);
+                return result;
             }
             catch (Exception e)
             {
@@ -106,7 +114,10 @@ namespace SEP3_PostSystem.Controllers
         {
             try
             {
-                return await postModel.CommentPost(postId,comment,userId);
+                Console.WriteLine("[comment]Post receive from [" + userId + "]:" + JsonSerializer.Serialize(comment));
+                var result = await postModel.CommentPost(postId,comment,userId);
+                Console.WriteLine("[comment]Post send to [" + userId + "]:" + result);
+                return result;
             }
             catch (Exception e)
             {

@@ -55,6 +55,7 @@ namespace SEP3_PostSystem.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 postModel.DatabaseSystemOffline();
                 return new PostList();
             }
