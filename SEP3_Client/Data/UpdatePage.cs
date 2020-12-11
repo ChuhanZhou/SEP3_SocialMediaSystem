@@ -12,8 +12,10 @@ namespace SEP3_Client.Data
             Console.WriteLine("----------------UserSystemUpdate----------------");
             new Thread(()=>FriendList.GetPage().Update()).Start();
             new Thread(()=>FriendRequest.GetPage().Update()).Start();
-            new Thread(()=>Profile.getPage().Update()).Start();
-            new Thread(()=>FriendProfile.getPage().Update()).Start();
+            //await Profile.getPage().Update();
+            //await FriendProfile.getPage().Update();
+            new Thread(async ()=>await Profile.getPage().Update()).Start();
+            new Thread(async ()=>await FriendProfile.getPage().Update()).Start();
         }
         
         public static void ChatSystemUpdate()
