@@ -216,17 +216,17 @@
     
     private async Task clickLike(string id)
     {
-        foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
-        {
-            if (likeId.Equals(Account.Id))
-            {
-                postList.GetPostByPostId(id).LikerIdList.Remove(Account.Id);
-            }
-            else
-            {
-                postList.GetPostByPostId(id).LikerIdList.Add(Account.Id);
-            }
-        }
+        //foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
+        //{
+        //    if (likeId.Equals(Account.Id))
+        //    {
+        //        postList.GetPostByPostId(id).LikerIdList.Remove(Account.Id);
+        //    }
+        //    else
+        //    {
+        //        postList.GetPostByPostId(id).LikerIdList.Add(Account.Id);
+        //    }
+        //}
         await ClientModel.UpdatePostLike(id);
     }
 

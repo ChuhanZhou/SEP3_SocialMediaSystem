@@ -293,6 +293,7 @@
         if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
         {
             await ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
+            commentInfo = "";
         }
     }
 

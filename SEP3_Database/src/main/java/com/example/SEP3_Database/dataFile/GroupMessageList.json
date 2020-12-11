@@ -24,6 +24,19 @@
         "Hour": 23,
         "Minute": 13
       }
+    },
+    {
+      "GroupId": "27135E0E",
+      "MessageInfo": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "Type": "GROUP",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 11,
+        "Hour": 14,
+        "Minute": 37
+      }
     }
   ]
 }
