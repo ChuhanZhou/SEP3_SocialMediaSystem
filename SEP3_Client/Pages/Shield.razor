@@ -41,6 +41,7 @@
 @code {
     private List<string> disableList;
     private FriendSettingList friendList;
+    public static string postInfo;
 
     protected override async Task OnInitializedAsync()
     {
@@ -85,7 +86,8 @@
 
     private void back()
     {
-        Moment.setIsPublic("Shield"); 
+        Moment.setIsPublic("Shield");
+        Moment.postInfo = postInfo;
         NavigationManager.NavigateTo("/Moment");
     }
 
@@ -93,6 +95,7 @@
     {
         Moment.setIsPublic("Shield");
         Moment.shieldList = disableList;
+        Moment.postInfo = postInfo;
         NavigationManager.NavigateTo("/Moment");
     }
 
