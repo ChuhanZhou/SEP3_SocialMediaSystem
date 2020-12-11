@@ -42,16 +42,19 @@
                 {
                     @foreach (var msg in MessageList.MessageList)
                         {
-                            <tr style="width: 70%">
+                            <tr style="width: 70%;">
                                 <td style="width: 70%">
                                     @if (msg.SenderId.Equals(Account.Id))
                                     {
                                         <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                        <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;border-radius:20px;
+                                        <div style="width: 70%;float: right">
+                                            <div style="height: 100%;float: right;">
+                                            <div type="text" style="float: right;width: auto;border-radius:20px;
                             background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                             word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
                                         </div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                    <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                    </div>
                                     }
                                     else
                                     {

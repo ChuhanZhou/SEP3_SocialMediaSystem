@@ -1,3 +1,29 @@
 {
-  "MessageList": []
+  "MessageList": [
+    {
+      "GroupId": "27135E0E",
+      "MessageInfo": "hi",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 10,
+        "Hour": 0,
+        "Minute": 22
+      }
+    },
+    {
+      "GroupId": "27135E0E",
+      "MessageInfo": "as",
+      "Type": "GROUP",
+      "SenderId": "D733AF65",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 10,
+        "Hour": 23,
+        "Minute": 13
+      }
+    }
+  ]
 }

@@ -29,7 +29,8 @@
                 
             </div>
         </div>
-        <div  style="text-align: left;width: 100%;height: 15px"></div>
+        <div  style="text-align: center;width: 100%;height: 15px;"></div>
+        <div style="text-align: center;width: 100%;">
         @if (postList == null)
          {
              <p>
@@ -46,40 +47,40 @@
             }
             else
             {
-                @foreach (var post in postList.Posts)
+                @foreach (var post in getReversePostList().Posts)
                 {
-                    <tr>
-                        <td>
-                            <div style="border: 2px solid black;
-                                                          border-radius: 8px;width: 800px;padding: 15px;height: auto;margin: auto;text-align: left">
+                    <div style="border: 2px solid black;
+                                                          border-radius: 8px;width: 800px;padding: 15px;height: auto;margin: auto;text-align: center">
                                 @if (post.SenderId.Equals(Account.Id))
                                 {
-                                    <div style="width: 100%;font-size: 20px"><img src="user.PNG" width="40px" height="40px">@Account.UserName
-                                        <button class="oi oi-pencil" style="text-align: right;font-size: larger" @onclick="(() => EditShieldFriends(post))"></button>
-                                        <button class="oi oi-delete" style="font-size: larger;text-align: right" @onclick="(()=>deletePost(post.PostId))"></button>
+                                    <div style="width: 100%;font-size: 20px;text-align: left"><img src="user.PNG" width="40px" height="40px">@Account.UserName
+                                        <button class="oi oi-delete" style="font-size: larger;float: right;border: none;background-color: white"
+                                                @onclick="(()=>deletePost(post.PostId))"></button>
+                                         <button class="oi oi-pencil" style="float: right;font-size: larger;border: none;background-color: white"
+                                                                                                                  @onclick="(() => EditShieldFriends(post))"></button>
                                         </div>
                                     <div style="width: 100%;">
                                         <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                     word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
                                     </div>
-                                    <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe">
-                                        <button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button>
-                                        <button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button>
+                                    <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;">
+                                        <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                        <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button></div>
                                     </div>
                                     <div style="width: 100%;">
                                         @foreach (var comment in post.CommentList.Comments)
                                           {
-                                              <tr style="width: 70%">
-                                                  @if (comment.SenderId.Equals(Account.Id))
-                                                  {
-                                                      <button class="oi oi-x" style="text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
-                                                  }
+                                              <tr style="width: 70%;;text-align: left">
                                                   @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
                                                   {
-                                                      <div style="height: 100%;"><img src="user.PNG" width="20px" height="20px">
+                                                      <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
                                                       </div>
-                                                      <div style="width: 70%;">
-                                                          <div style="text-align: left;color: #b9bbbe;float: left;width: 100%">
+                                                      @if (comment.SenderId.Equals(Account.Id))
+                                                      {
+                                                          <button class="oi oi-x" style="float: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                                      }
+                                                      <div style="width: 70%;float: left">
+                                                          <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size: 15px">
                                                               @if (comment.SenderId.Equals(Account.Id))
                                                               {
                                                                   @Account.UserName
@@ -91,16 +92,15 @@
                                                               
                                                           </div>
                                                           <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
-                                                        background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                        background-color: #b9bbbe;text-align: left;font-size: 15px;padding: 5px;white-space:normal;
                                                         word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
-                                                      </div>
-                                                      <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                                          <div style="text-align: left;float: left;width: 100%;height: 10px"></div></div>
                                                   }
                                               </tr>
                                           }
-                                        <div style="width: 100%;text-align: left"><img src="user.PNG" width="20px" height="20px">
+                                        <div style="width: 100%;text-align: left;float: left;;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
                                             <input placeholder="Write a comment..." @bind="commentInfo"/>
-                                            <button class="btn btn-outline-dark" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
+                                            <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
                                     </div>
                                 }
                                 else
@@ -112,23 +112,24 @@
                                     word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
                                     </div>
                                     <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe">
-                                        <button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button>
-                                        <button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button>
+                                        <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                            <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button></div>
                                     </div>
                                     <div style="width: 100%;">
                                         @foreach (var comment in post.CommentList.Comments)
                                           {
-                                              <tr style="width: 70%">
-                                                  @if (comment.SenderId.Equals(Account.Id))
-                                                  {
-                                                      <button class="oi oi-x" style="text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
-                                                  }
+                                              <tr style="width: 70%;float: left">
+                                                  
                                                   @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
                                                   {
-                                                      <div style="height: 100%;"><img src="user.PNG" width="20px" height="20px">
+                                                      <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
                                                       </div>
-                                                      <div style="width: 70%;">
-                                                          <div style="text-align: left;color: #b9bbbe;float: left;width: 100%">
+                                                      @if (comment.SenderId.Equals(Account.Id))
+                                                       {
+                                                           <button class="oi oi-x" style=";float:right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                                       }
+                                                      <div style="width: 70%;float: left">
+                                                          <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size:15px ">
                                                               @if (comment.SenderId.Equals(Account.Id))
                                                               {
                                                                   @Account.UserName
@@ -140,25 +141,24 @@
                                                               
                                                           </div>
                                                           <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
-                                                        background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                        background-color: #b9bbbe;text-align: left;font-size: 15px;padding: 5px;white-space:normal;
                                                         word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
                                                       </div>
                                                       <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
                                                   }
                                               </tr>
                                           }
-                                        <div style="width: 100%;text-align: left"><img src="user.PNG" width="20px" height="20px">
+                                        <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
                                             <input placeholder="Write a comment..." @bind="commentInfo"/>
-                                            <button class="btn btn-outline-dark" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
+                                            <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
                                     </div>
                                 }
                             </div>
                             <div style="text-align: left;width: 100%;height: 15px"></div>
-                        </td>
-                    </tr>
-                }
+                        }
             }
         }
+        </div>
     </div>
 </div>
 
@@ -185,6 +185,10 @@
         {
             postInfo = "";
         }
+        if (string.IsNullOrEmpty(commentInfo))
+        {
+            commentInfo = "";
+        }
         if (string.IsNullOrEmpty(isPublic))
         {
             isPublic = "Public";
@@ -207,6 +211,13 @@
         {
            return ClientModel.GetFriendById(id).UserName;
         }
+    }
+
+    private PostList getReversePostList()
+    {
+        PostList reversePostList = postList;
+        reversePostList.Posts.Reverse();
+        return reversePostList;
     }
 
     private bool isFriend(string id)
@@ -252,9 +263,7 @@
         if (!string.IsNullOrEmpty(postInfo))
         {
             Post newPost = new Post(Account.Id, "", postInfo, shieldList);
-            Console.WriteLine("eeeeeeeeeeeee"+newPost.Body);
             ClientModel.AddPost(newPost);
-            Console.WriteLine("fffffffffffffffffffff"+newPost.PostId);
             postInfo = "";
             shieldList = new List<string>();
         }
@@ -282,18 +291,23 @@
         if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
         {
             ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
-            commentInfo = "";
         }
     }
 
     private void deletePost(string id)
     {
-        ClientModel.RemovePost(id);
+        if (!string.IsNullOrEmpty(id))
+        {
+            ClientModel.RemovePost(id);
+        }
     }
 
     private void deleteComment(string postId,string commentId)
     {
-        ClientModel.RemoveComment(postId,commentId);
+        if (!string.IsNullOrEmpty(postId)&&!string.IsNullOrEmpty(commentId))
+        {
+            ClientModel.RemoveComment(postId, commentId);
+        }
     }
 
     private void EditShieldFriends(Post post)
@@ -322,6 +336,10 @@
             if (shieldList==null)
             {
                 shieldList = new List<string>();
+            }
+            if (string.IsNullOrEmpty(commentInfo))
+            {
+                commentInfo = "";
             }
         }
     }
