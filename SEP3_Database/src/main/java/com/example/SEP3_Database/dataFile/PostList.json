@@ -1,22 +1,3 @@
 {
-  "Posts": [
-    {
-      "Time": {
-        "Year": 2020,
-        "Month": 12,
-        "Day": 10,
-        "Hour": 15,
-        "Minute": 23
-      },
-      "PostId": "E407FB8BD4EA8436",
-      "SenderId": "D733AF65",
-      "Title": "",
-      "Body": "11",
-      "LikerIdList": [],
-      "CommentList": {
-        "Comments": []
-      },
-      "DisableList": []
-    }
-  ]
+  "Posts": []
 }
