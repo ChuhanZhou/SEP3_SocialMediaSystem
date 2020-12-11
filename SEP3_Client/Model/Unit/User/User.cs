@@ -11,6 +11,12 @@
             UserStatus = new UserStatus();
         }
 
+        public User(User user)
+        {
+            Id = user.Id;
+            UserStatus = user.UserStatus.Copy();
+        }
+        
         public User()
         {
             

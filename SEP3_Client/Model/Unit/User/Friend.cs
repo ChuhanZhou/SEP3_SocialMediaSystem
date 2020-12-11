@@ -13,6 +13,8 @@ namespace SEP3_Client.Model.Unit.User
         {
             SetBirthday(birthday);
         }
+
+        private Friend(Friend friend) : base(friend) {}
         
         public Friend() {}
 
@@ -23,7 +25,7 @@ namespace SEP3_Client.Model.Unit.User
         
         public Friend Copy() 
         {
-            return new Friend(GetId(),GetUserName(),GetBirthday());
+            return new Friend(this);
         }
     }
 }

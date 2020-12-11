@@ -329,44 +329,47 @@
 
     public async Task Update()
     {
-        account = ClientModel.GetAccount().Copy();
-        accountId = account.GetId();
-        username = account.GetUserName();
-        postList = await ClientModel.GetPost();
-        wantComment = false;
-        if (account.Birthday==null)
+        if (ClientModel!=null)
         {
-            month = 0;
-            day = 0;
-        }
-        else
-        {
-            month = account.Birthday.GetMonth();
-            day = account.Birthday.GetDay();
-        }
-        if (char.IsWhiteSpace(account.Gender))
-        {
-            gender = 'M';
-        }
-        else
-        {
-            gender = account.Gender;
-        }
-        if (string.IsNullOrEmpty(account.GetHomeTown()))
-        {
-            hometown = "No hometown to show";
-        }
-        else
-        {
-            hometown = account.Hometown;
-        }
-        if (account.GetPhoneNumber()==0)
-        {
-            telNo = 0;
-        }
-        else
-        {
-            telNo = account.PhoneNumber;
+            account = ClientModel.GetAccount().Copy();
+            accountId = account.GetId();
+            username = account.GetUserName();
+            postList = await ClientModel.GetPost();
+            wantComment = false;
+            if (account.Birthday==null)
+            {
+                month = 0;
+                day = 0;
+            }
+            else
+            {
+                month = account.Birthday.GetMonth();
+                day = account.Birthday.GetDay();
+            }
+            if (char.IsWhiteSpace(account.Gender))
+            {
+                gender = 'M';
+            }
+            else
+            {
+                gender = account.Gender;
+            }
+            if (string.IsNullOrEmpty(account.GetHomeTown()))
+            {
+                hometown = "No hometown to show";
+            }
+            else
+            {
+                hometown = account.Hometown;
+            }
+            if (account.GetPhoneNumber()==0)
+            {
+                telNo = 0;
+            }
+            else
+            {
+                telNo = account.PhoneNumber;
+            }
         }
     }
 }

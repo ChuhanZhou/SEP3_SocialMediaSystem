@@ -29,6 +29,15 @@ namespace SEP3_Client.Model.Unit.User
             PhoneNumber = phoneNumber;
         }
 
+        public BasicInformation(BasicInformation basicInformation) : base(basicInformation)
+        {
+            UserName = basicInformation.UserName;
+            Birthday = basicInformation.Birthday;
+            Gender = basicInformation.Gender;
+            Hometown = basicInformation.Hometown;
+            PhoneNumber = basicInformation.PhoneNumber;
+        }
+
         public BasicInformation()
         {
             
