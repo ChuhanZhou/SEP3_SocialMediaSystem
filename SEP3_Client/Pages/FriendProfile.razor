@@ -81,7 +81,7 @@
                                          <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe">
                                              <div style=""></div>
                                              <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
-                                             <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white">Comment</button></div>
+                                             <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment())">Comment</button></div>
                                          </div>
                                          <div style="width: 100%;">
                                              @foreach (var comment in post.CommentList.Comments)
@@ -114,9 +114,12 @@
                                                      }
                                                  </tr>
                                              }
-                                             <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
+                                             @if (wantComment)
+                                             {
+                                                 <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
                                                  <input placeholder="Write a comment..." @bind="commentInfo"/>
                                                  <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))">Send</button></div>
+                                             }
                                          </div>
                                          </div>
                              }
@@ -136,6 +139,7 @@
     private Account Account;
     private string commentInfo;
     private static FriendProfile page;
+    private bool wantComment;
 
     protected override async Task OnInitializedAsync()
     {
@@ -146,6 +150,7 @@
         friend = ClientModel.GetFriendById(friendSetting.GetId());
         postList =await ClientModel.GetPost();
         Account = ClientModel.GetAccount();
+        wantComment = false;
         page = this;
     }
 
@@ -230,12 +235,18 @@
         await ClientModel.UpdatePostLike(id);
     }
 
+    private void wantToComment()
+    {
+        wantComment = true;
+    }
+
     private async Task sendComment(string id)
     {
         if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
         {
             await ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
             commentInfo = "";
+            wantComment = false;
         }
     }
 
