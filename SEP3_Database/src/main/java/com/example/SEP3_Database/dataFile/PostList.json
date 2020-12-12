@@ -13,6 +13,7 @@
       "Title": "",
       "Body": "2",
       "LikerIdList": [
+        "1DB319FC",
         "D733AF65"
       ],
       "CommentList": {
@@ -38,7 +39,9 @@
       "SenderId": "D733AF65",
       "Title": "",
       "Body": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-      "LikerIdList": [],
+      "LikerIdList": [
+        "D733AF65"
+      ],
       "CommentList": {
         "Comments": [
           {

@@ -153,6 +153,7 @@
             friendRequests = ClientModel.GetFriendSettingList();
                     //friendRequests.GetFriendSettingList().Reverse();
                     click = false;
+            InvokeAsync(StateHasChanged);
         }
     }
     

@@ -275,6 +275,7 @@
         {
             friend = ClientModel.GetFriendById(friendSetting.GetId());
             Account = ClientModel.GetAccount();
+            InvokeAsync(StateHasChanged);
         }
     }
 

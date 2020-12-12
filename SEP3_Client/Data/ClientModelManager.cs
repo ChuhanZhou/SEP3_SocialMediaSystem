@@ -155,7 +155,6 @@ namespace SEP3_Client.Data
             }
             return null;
         }
-
         public string AddNewGroup(string groupName)
         {
             return chatSystemClient.SendChatGroupPackage(new ChatGroup(groupName,account.Id), null, "Add");

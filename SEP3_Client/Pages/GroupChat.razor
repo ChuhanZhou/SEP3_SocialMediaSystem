@@ -167,7 +167,7 @@
                 Account = ClientModel.GetAccount();
                 offlineMessageList = ClientModel.GetOfflineMessageByGroupId(Group.GroupId);
             }
-             
+            InvokeAsync(StateHasChanged);
         }
     }
 }

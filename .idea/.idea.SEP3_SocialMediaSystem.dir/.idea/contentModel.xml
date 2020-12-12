@@ -236,9 +236,6 @@
           <e p="user.PNG" t="Include" />
         </e>
       </e>
-      <e p="SEP3_Client2" t="IncludeRecursive">
-        <e p="SEP3_Client2.csproj" t="IncludeRecursive" />
-      </e>
       <e p="SEP3_PostSystem" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />

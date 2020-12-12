@@ -135,6 +135,7 @@
         {
             AllGroups = ClientModel.GetGroupList();
             GroupsToShow = AllGroups;
+            InvokeAsync(StateHasChanged);
         }
         
     }

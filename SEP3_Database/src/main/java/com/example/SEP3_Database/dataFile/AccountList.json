@@ -88,12 +88,12 @@
       },
       "UserName": "1",
       "Birthday": {
-        "Month": 0,
-        "Day": 0
+        "Month": 10,
+        "Day": 1
       },
-      "Gender": " ",
-      "Hometown": "",
-      "PhoneNumber": -1,
+      "Gender": "F",
+      "Hometown": "No hometown to show",
+      "PhoneNumber": 111,
       "Id": "1DB319FC",
       "UserStatus": {
         "Online": false

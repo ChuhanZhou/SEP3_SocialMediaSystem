@@ -5,6 +5,7 @@
 @using SEP3_Client.Model.List.Message
 @using SEP3_Client.Model.Unit.Message
 @using SEP3_Client.Model.Unit.User
+@using System.Threading
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
@@ -364,41 +365,37 @@
         if (ClientModel!=null)
         {
             Account = ClientModel.GetAccount();
-            friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+            friends.FriendSettings = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE).FriendSettings;
             groups = ClientModel.GetGroupList();
             if (showFriends)
+            {
+                if (!string.IsNullOrEmpty(ID))
                 {
-                    if (!string.IsNullOrEmpty(ID))
-                    {
-                        friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-                        privateChat(ID);
-                        MessageList = ClientModel.GetMessageById(ID);
-                        OfflineMessageList = ClientModel.GetOfflineMessageById(ID);
-                    }
-                    else
-                    {
-                        ID = "";
-                        friends = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
-                    }
+                    privateChat(ID);
+                    MessageList = ClientModel.GetMessageById(ID);
+                    OfflineMessageList = ClientModel.GetOfflineMessageById(ID);
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(ID))
-                    {
-                        groups = ClientModel.GetGroupList();
-                        groupChat(ID);
-                        GroupMessageList = ClientModel.GetMessageByGroupId(ID);
-                        offlineGroupMessageList = ClientModel.GetOfflineMessageByGroupId(ID);
-                    }
-                    else
-                    {
-                        ID = "";
-                        groups = ClientModel.GetGroupList();
-                    }
+                    ID = "";
                 }
-            
-           
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(ID))
+                {
+                    groups = ClientModel.GetGroupList();
+                    groupChat(ID);
+                    GroupMessageList = ClientModel.GetMessageByGroupId(ID);
+                    offlineGroupMessageList = ClientModel.GetOfflineMessageByGroupId(ID);
+                }
+                else
+                {
+                    ID = "";
+                    groups = ClientModel.GetGroupList();
+                }
+            }
+            InvokeAsync(StateHasChanged);
         }
     }
-    
 }
