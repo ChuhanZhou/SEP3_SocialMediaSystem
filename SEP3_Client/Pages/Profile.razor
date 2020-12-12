@@ -328,15 +328,13 @@
         NavigationManager.NavigateTo("/EditShield");
     }
 
-    public async Task Update()
+    public void UpdateUser()
     {
         if (ClientModel!=null)
         {
             account = ClientModel.GetAccount().Copy();
             accountId = account.GetId();
             username = account.GetUserName();
-            postList = await ClientModel.GetPost();
-            wantComment = false;
             if (account.Birthday==null)
             {
                 month = 0;
@@ -373,4 +371,14 @@
             }
         }
     }
+
+    public async Task UpdatePost()
+    {
+        if (ClientModel!=null)
+        {
+            postList = await ClientModel.GetPost();
+            wantComment = false;
+        }
+    }
+
 }

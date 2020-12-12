@@ -14,8 +14,8 @@ namespace SEP3_Client.Data
             new Thread(()=>FriendRequest.GetPage().Update()).Start();
             //await Profile.getPage().Update();
             //await FriendProfile.getPage().Update();
-            new Thread(async ()=>await Profile.getPage().Update()).Start();
-            new Thread(async ()=>await FriendProfile.getPage().Update()).Start();
+            new Thread(()=>Profile.getPage().UpdateUser()).Start();
+            new Thread(()=>FriendProfile.getPage().UpdateUser()).Start();
         }
         
         public static void ChatSystemUpdate()
@@ -32,8 +32,8 @@ namespace SEP3_Client.Data
         {
             Console.WriteLine("----------------PostSystemUpdate----------------");
             await Moment.GetPage().Update();
-            await Profile.getPage().Update();
-            await FriendProfile.getPage().Update();
+            await Profile.getPage().UpdatePost();
+            await FriendProfile.getPage().UpdatePost();
             //new Thread(async ()=>await Moment.GetPage().Update()).Start();
             //new Thread(async ()=>await Profile.getPage().Update()).Start();
             //new Thread(async ()=>await FriendProfile.getPage().Update()).Start();

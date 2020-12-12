@@ -269,13 +269,20 @@
         }
     }
 
-    public async Task Update()
+    public void UpdateUser()
     {
         if (ClientModel!=null)
         {
             friend = ClientModel.GetFriendById(friendSetting.GetId());
-            postList =await ClientModel.GetPost();
             Account = ClientModel.GetAccount();
+        }
+    }
+
+    public async Task UpdatePost()
+    {
+        if (ClientModel!=null)
+        {
+            postList =await ClientModel.GetPost();
         }
     }
     
