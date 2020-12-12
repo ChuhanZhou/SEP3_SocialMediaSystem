@@ -80,16 +80,8 @@
                                            word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
                                              </div>
                                              <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;float: left;font-size: 15px">
-                                                 @if (isLike)
-                                                 {
-                                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
-
-                                                 }
-                                                 else
-                                                 {
-                                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
-                                                 }
-                                                 <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;float:left;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment())">Comment</button></div>
+                                                 <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                                 <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;float:left;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment(post.PostId))">Comment</button></div>
                                              </div>
                                              <div style="width: 100%;float: left">
                                                  @foreach (var comment in post.CommentList.Comments)
@@ -123,7 +115,7 @@
                                                          }
                                                      </tr>
                                                  }
-                                                 @if (wantComment)
+                                                 @if (wantComment&&post.PostId.Equals(a))
                                                  {
                                                     <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
                                                                                                          <input placeholder="Write a comment..." @bind="commentInfo"/>
@@ -156,8 +148,8 @@
     private Account account;
     private string commentInfo;
     private static Profile page;
-    private bool isLike;
     private bool wantComment;
+    private string a;
 
     protected override async Task OnInitializedAsync()
     {
@@ -169,7 +161,7 @@
         accountId = account.GetId();
         username = account.GetUserName();
         postList = await ClientModel.GetPost();
-        isLike = true;
+        a = "";
         wantComment = false;
         if (account.Birthday==null)
         {
@@ -287,9 +279,17 @@
         await ClientModel.UpdatePostLike(id);
     }
 
-    private void wantToComment()
+    private void wantToComment(string postId)
     {
-        wantComment = true;
+        a = postId;
+        if (wantComment == false)
+        {
+            wantComment = true;
+        }
+        else
+        {
+            wantComment = false;
+        }
     }
     
 
@@ -299,6 +299,7 @@
         {
             await ClientModel.AddComment(id,new Comment(account.Id,commentInfo));
             commentInfo = "";
+            a = "";
             wantComment = false;
         }
     }
