@@ -79,10 +79,17 @@
                                                  <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                            word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
                                              </div>
-                                             <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;float: left;font-size: 15px">
+                                         <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;float: left;font-size: 15px">
+                                             @if (post.LikerIdList.Contains(account.Id))
+                                             {
+                                                 <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                             }
+                                             else
+                                             {
                                                  <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
-                                                 <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;float:left;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment(post.PostId))">Comment</button></div>
-                                             </div>
+                                             }
+                                             <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;float:left;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment(post.PostId))">Comment</button></div>
+                                         </div>
                                              <div style="width: 100%;float: left">
                                                  @foreach (var comment in post.CommentList.Comments)
                                                  {
