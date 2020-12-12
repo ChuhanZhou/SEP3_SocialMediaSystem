@@ -37,6 +37,19 @@
         "Hour": 14,
         "Minute": 37
       }
+    },
+    {
+      "GroupId": "27135E0E",
+      "MessageInfo": "hi",
+      "Type": "GROUP",
+      "SenderId": "1DB319FC",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 12,
+        "Hour": 12,
+        "Minute": 18
+      }
     }
   ]
 }
