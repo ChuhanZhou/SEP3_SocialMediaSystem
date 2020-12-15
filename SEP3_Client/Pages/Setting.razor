@@ -111,6 +111,7 @@
         oldPassword = null;
         password = null;
         confirmPassword = null;
+        error = null;
     }
     
     private void Show()
@@ -119,6 +120,7 @@
         {
             saveSuccess = false;
             show = true;
+            initial();
         }
         else
         {
@@ -129,13 +131,27 @@
 
     private void Save()
     {
-        error = ClientModel.ChangePassword(oldPassword, password);
-        if (error==null)
+        if (string.IsNullOrEmpty(oldPassword))
         {
-            saveSuccess = true;
-            initial();
+            error = "Please write the old password";
         }
-        initial();
+        else if (string.IsNullOrEmpty(password))
+        {
+            error = "Please write the password";
+        }
+        else if (confirmPassword!=password)
+        {
+            error = "The confirm password is different from password";
+        }
+        if (!string.IsNullOrEmpty(oldPassword) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(confirmPassword) && confirmPassword == password)
+        {
+            error = ClientModel.ChangePassword(oldPassword, password);
+            if (string.IsNullOrEmpty(error))
+            {
+                saveSuccess = true;
+                initial();
+            }}
+        //initial();
     }
 
     private void Logout()
