@@ -39,6 +39,11 @@ public class DatabaseModelManager implements DatabaseModel{
             databaseOnline = true;
             jdbc.CreateDataBase();
             System.out.println("Connect to the Database.");
+            DataFileContext.updateAccountListData(getAllAccount());
+            DataFileContext.updateChatGroupListData(getAllChatGroup());
+            DataFileContext.updatePrivateMessageListData(getAllPrivateMessage());
+            DataFileContext.updateGroupMessageListData(getAllGroupMessage());
+            DataFileContext.updatePostListData(getAllPost());
         }
     }
 
