@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "VvNYW+2DIAtGhFdx7Yf8erGeHNSUr78JgrHsUFK+ug0x1Lhe4GX/nS5/0RMLe9jNjyURkKgWWUCmLKOSLfvIRg==",
+  "dgSpecHash": "ft8u94EN05Qk0KNUGKMEcOVGJvFma9FVYYuRI3nE+W+Zn8oM+zUsuKr8sg0UmQoYSzAOG23gQAIcnCZS0Kk3dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_ChatSystem\\SEP3_ChatSystem.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.app\\2.2.8\\microsoft.netcore.app.2.2.8.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.2.8\\microsoft.netcore.dotnetapphost.2.2.8.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.2.8\\microsoft.netcore.dotnethostpolicy.2.2.8.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.2.8\\microsoft.netcore.dotnethostresolver.2.2.8.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.platforms\\2.2.4\\microsoft.netcore.platforms.2.2.4.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.targets\\2.0.0\\microsoft.netcore.targets.2.0.0.nupkg.sha512",
+    "C:\\Users\\XHYX0\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

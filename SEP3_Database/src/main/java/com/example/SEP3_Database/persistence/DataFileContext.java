@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class DataFileContext {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static String address = "SEP3_SocialMediaSystem/SEP3_Database/src/main/java/com/example/SEP3_Database/dataFile/";
+    private static String address = "SEP3_Database/src/main/java/com/example/SEP3_Database/dataFile/";
 
     public static AccountList readAccountListData()
     {
