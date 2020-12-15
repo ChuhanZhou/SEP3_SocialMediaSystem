@@ -1,16 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sLzOTVOHrjfxWg47uuQZKgOfcBpcGEiaWRHfCpqO7npbKpjOFkFkcbyybOk1NHIcie/4jTKYEftXYV1EPOm8Yg==",
+  "dgSpecHash": "+UcqoXCrEjLiQjiSCtAp0IoJ/7leGx4NqLYjfYqrPQb0F+00hJFrjOrIGg3CiM+KolxOHWhG7Ru2sFk5z/p3lg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.app\\2.2.8\\microsoft.netcore.app.2.2.8.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.2.8\\microsoft.netcore.dotnetapphost.2.2.8.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.2.8\\microsoft.netcore.dotnethostpolicy.2.2.8.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.2.8\\microsoft.netcore.dotnethostresolver.2.2.8.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.platforms\\2.2.4\\microsoft.netcore.platforms.2.2.4.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\microsoft.netcore.targets\\2.0.0\\microsoft.netcore.targets.2.0.0.nupkg.sha512",
-    "C:\\Users\\XHYX0\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

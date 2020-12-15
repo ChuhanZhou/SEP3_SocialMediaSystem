@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj": {}
+    "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj": {
+    "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
+        "projectUniqueName": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
         "projectName": "SEP3_PostSystem",
-        "projectPath": "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
-        "packagesPath": "C:\\Users\\XHYX0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\XHYX0\\IdeaProjects\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\obj\\",
+        "projectPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\SEP3_PostSystem.csproj",
+        "packagesPath": "C:\\Users\\Think\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Think\\IdeaProjects\\SEP3\\SEP3_SocialMediaSystem\\SEP3_PostSystem\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet"
-        ],
         "configFilePaths": [
-          "C:\\Users\\XHYX0\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Think\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,12 +35,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "Microsoft.NETCore.App": {
-              "target": "Package",
-              "version": "[2.2.8, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -65,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -25,8 +25,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" />
-    </ItemGroup>
-
 </Project>
