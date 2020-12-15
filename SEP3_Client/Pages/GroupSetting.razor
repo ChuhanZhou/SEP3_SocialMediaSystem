@@ -204,7 +204,10 @@
     private void changName()
     {
         ChatGroup newChatGroup = ChatGroup;
-        ClientModel.UpdateGroupInformation(newChatGroup);
+        if (!string.IsNullOrEmpty(newChatGroup.GroupName))
+        {
+            ClientModel.UpdateGroupInformation(newChatGroup);
+        }
     }
     
 }

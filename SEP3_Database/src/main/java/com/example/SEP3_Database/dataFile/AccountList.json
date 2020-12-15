@@ -83,6 +83,15 @@
             "UserStatus": {
               "Online": false
             }
+          },
+          {
+            "Note": "DD",
+            "DisablePost": false,
+            "Status": "WAITAGREE",
+            "Id": "92C935A0",
+            "UserStatus": {
+              "Online": false
+            }
           }
         ]
       },
@@ -255,6 +264,14 @@
             "DisablePost": false,
             "Status": "AGREE",
             "Id": "99370728",
+            "UserStatus": {
+              "Online": false
+            }
+          },
+          {
+            "DisablePost": false,
+            "Status": "NEEDAGREE",
+            "Id": "1DB319FC",
             "UserStatus": {
               "Online": false
             }
