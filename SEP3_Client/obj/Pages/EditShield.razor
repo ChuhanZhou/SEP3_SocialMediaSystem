@@ -1,0 +1,116 @@
+﻿@page "/EditShield"
+@using SEP3_Client.Model.Unit.User
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Model.Unit.Post
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+<div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button>
+    <button style="float:right; text-align: left;height: 30px; background-color: #8fd19e" @onclick="shieldFriends">
+        Done
+    </button>
+     <div class="form-group">
+            <form>
+                @foreach (var friend in friendList.GetFriendSettingList())
+                {
+                    <input type="checkbox" checked="@hasPerson(friend.Id)" @onchange="@(() => ChooseMember(friend.Id))">
+                    <img src="user.PNG" width="40px" height="40px">
+                    @if (friend.GetNote() == null)
+                    {
+                        @getUserName(friend.GetId())
+                    }
+                    else
+                    {
+                        @friend.Note
+                    }
+                    <br/>
+                }
+            </form>
+        </div>
+</div>
+</div>
+
+@code {
+    public static string lastPage;
+    public static List<string> disableList;
+    public static Post Post;
+    private FriendSettingList friendList;
+    private static EditShield page;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+        page = this;
+    }
+
+    public static EditShield getPage()
+    {
+        if (page==null)
+        {
+            page = new EditShield();
+        }
+        return page;
+    }
+
+    private string getUserName(string id)
+    {
+        return ClientModel.GetFriendById(id).GetUserName();
+    }
+
+    private void ChooseMember(string friendId)
+    {
+        if (hasPerson(friendId))
+        {
+            disableList.Remove(friendId);
+
+        }
+        else
+        {
+            disableList.Add(friendId);
+        }
+    }
+
+    private bool hasPerson(string memberId)
+    {
+        foreach (var friendID in disableList)
+        {
+            if (friendID.Equals(memberId))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void back()
+    {
+        NavigationManager.NavigateTo(lastPage);
+    }
+
+    private async Task shieldFriends()
+    {
+        await ClientModel.UpdatePostBySender(Post);
+        NavigationManager.NavigateTo(lastPage);
+    }
+
+    public void Update()
+    {
+        friendList = ClientModel.GetFriendSettingList().GetFriendSettingListByStatus(FriendSettingStatus.AGREE);
+    }
+    
+    
+    
+
+}

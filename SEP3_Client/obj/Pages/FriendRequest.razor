@@ -1,0 +1,161 @@
+﻿@using SEP3_Client.Model.List.UserList
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
+@page "/FriendRequest"
+@inject IClientModel ClientModel
+@inject NavigationManager NavigationManager
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+           Back
+        </button>
+        <p>
+            <span class="oi oi-magnifying-glass"></span>
+            <input type="text" placeholder="Account" style="width:400px" @bind="requestID"/>
+            <button class="oi oi-magnifying-glass" style="background-color: #ed969e; height: 26px" 
+                    @onclick="sendRequest"></button>
+        </p>
+         <div style="color: red">
+             @error
+         </div>
+                
+         @if (friendRequests == null)
+          {
+              <p>
+                  <em>Loading</em>
+              </p>
+          }
+          else
+          {
+              if (!friendRequests.GetFriendSettingList().Any())
+              {
+                  <p>
+                      <em>No friend request in the list...</em>
+                  </p>
+              }
+              else
+              {
+                  <table class="table">
+                      <tbody>
+                      @foreach (var request in getFriendSettingList())
+                      {
+                          <tr>
+                              <td>
+                                  <img src="user.PNG" width="40px" height="40px">
+                                  @request.GetId()
+                              </td>
+                              <td>
+                                  @if (request.NeedAgree())
+                                  {
+                                      @if (click.Equals(false))
+                                      {
+                                          <button @onclick="@(() => changeStatusTo(request.Id, true))" style="background-color: #80bdff">Confirm</button>
+                                          <button @onclick="@(() => changeStatusTo(request.Id, false))" style="background-color: #80bdff">Refuse</button>
+                                      }
+                                      else
+                                      {
+                                          @request.Status
+                                      }
+                                  }
+                                  else
+                                  {
+                                      @request.Status
+                                  }
+
+                              </td>
+                          </tr>
+                      }
+                      </tbody>
+                  </table>
+              }
+         
+          }
+    </div>
+</div>
+
+@code {
+    public FriendSettingList friendRequests;
+    private static FriendRequest friendRequest;
+    public string requestID;
+    private string error;
+    private string status;
+    private bool click;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        friendRequests = ClientModel.GetFriendSettingList();
+        //friendRequests.GetFriendSettingList().Reverse();
+        click = false;
+        friendRequest = this;
+    }
+
+    private List<FriendSetting> getFriendSettingList()
+    {
+        List<FriendSetting> friendSettingList = friendRequests.GetFriendSettingList();
+        friendSettingList.Reverse();
+        return friendSettingList;
+    }
+    
+    public static FriendRequest GetPage()
+    {
+        if (friendRequest==null)
+        {
+            friendRequest = new FriendRequest();
+        }
+        return friendRequest;
+    }
+
+    private void sendRequest()
+    {
+        if ( ClientModel.SearchId(requestID))
+        {
+            Request.accountID = requestID;
+            Request.toAgree = false;
+            NavigationManager.NavigateTo("/Request");
+        }
+        error = "No user exists in the system...";
+    }
+
+    private void changeStatusTo(string id, bool tOrF)
+    {
+        click = true;
+        if (tOrF)
+        {
+            Request.accountID = id;
+            Request.toAgree = true;
+            NavigationManager.NavigateTo("/Request");
+        }
+        else
+        {
+            FriendSetting a = new FriendSetting(id);
+            a.SetStatus(tOrF);
+            ClientModel.AddNewFriend(a);
+        }
+    }
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendList");
+    }
+
+    public void Update()
+    {
+        if (ClientModel!=null)
+        {
+            friendRequests = ClientModel.GetFriendSettingList();
+                    //friendRequests.GetFriendSettingList().Reverse();
+                    click = false;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+    
+    
+}

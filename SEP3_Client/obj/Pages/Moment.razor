@@ -1,0 +1,392 @@
+﻿@page "/Moment"
+@using SEP3_Client.Model.List.PostList
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.Post
+@using SEP3_Client.Model.Unit.User
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@inject IClientModel ClientModel
+@inject NavigationManager NavigationManager
+<h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Moment</h1>
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 100%;
+         height: 100%;
+         margin: auto;
+         overflow: auto">
+        <div style="border: 2px solid black;
+                              border-radius: 8px;width: 800px;padding: 15px;height: auto;margin: auto;text-align: center">
+            <div style="font-size: 25px;text-align: left;width: 100%">
+                What's the news to share?
+            </div>
+            <div style="height: auto;width: 100%">
+                <textarea type="text" placeholder="Share your news" style="padding: 10px;white-space:normal;
+                    word-break:break-all;word-wrap:break-word;width: 100%;text-align: left;font-size: 20px;height: auto" @bind="postInfo"></textarea></div>
+            <div style="height: 8px;width: 100%"></div>
+            <div style="text-align: right;width: 100%">
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @onclick="ShieldBtn" @bind="isPublic">
+                    <option>Public</option>
+                    <option>Shield</option></select>
+                <button class="btn btn-outline-dark" style="width:auto;border-radius: 20px" type="submit" @onclick="postBtn">Post</button>
+                
+            </div>
+        </div>
+        <div  style="text-align: center;width: 100%;height: 15px;"></div>
+        <div style="text-align: center;width: 100%;">
+        @if (postList == null)
+         {
+             <p>
+                 <em>Loading</em>
+             </p>
+         }
+        else
+        {
+            if (!postList.Posts.Any())
+            {
+                <p>
+                    <em>No one shares posts...</em>
+                </p>
+            }
+            else
+            {
+                @foreach (var post in getReversePostList().Posts)
+                {
+                    <div style="border: 2px solid black;
+                                                          border-radius: 8px;width: 800px;padding: 15px;height: auto;margin: auto;text-align: center">
+                        @if (post.SenderId.Equals(Account.Id))
+                        {
+                            <div style="width: 100%;font-size: 20px;text-align: left"><img src="user.PNG" width="40px" height="40px">@Account.UserName
+                                <button class="oi oi-delete" style="font-size: larger;float: right;border: none;background-color: white"
+                                        @onclick="(()=>deletePost(post.PostId))"></button>
+                                <button class="oi oi-pencil" style="float: right;font-size: larger;border: none;background-color: white"
+                                        @onclick="(() => EditShieldFriends(post))"></button>
+                                </div>
+                            <div style="width: 100%;">
+                                <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                                   word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
+                            </div>
+                            <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;">
+                                 @if (post.LikerIdList.Contains(Account.Id))
+                                 {
+                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                 }
+                                 else
+                                 {
+                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(async () => await clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                 }
+                                    <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => wantTocomment(post.PostId))">Comment</button></div>
+                            </div>
+                            <div style="width: 100%;">
+                                @foreach (var comment in post.CommentList.Comments)
+                                {
+                                    <tr style="width: 70%;;text-align: left">
+                                        @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
+                                        {
+                                            <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
+                                            </div>
+                                            @if (comment.SenderId.Equals(Account.Id))
+                                            {
+                                                <button class="oi oi-x" style="float: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                            }
+                                            <div style="width: 70%;float: left">
+                                                <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size: 15px">
+                                                    @if (comment.SenderId.Equals(Account.Id))
+                                                    {
+                                                        @Account.UserName
+                                                    }
+                                                    else
+                                                    {
+                                                        @getNote(comment.SenderId)
+                                                    }
+                                                                                             
+                                                </div>
+                                                <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;background-color: #b9bbbe;text-align: left;font-size: 15px;padding: 5px;white-space:normal;
+                                                                                       word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
+                                                <div style="text-align: left;float: left;width: 100%;height: 10px">
+                                                </div>
+                                            </div>
+                                        }
+                                    </tr>
+                                }
+                                @if (wantComment&&post.PostId.Equals(a))
+                                {
+                                    <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
+                                    <input placeholder="Write a comment..." @bind="commentInfo"/>
+                                    <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="width: 100%;font-size: 20px;text-align: left"><img src="user.PNG" width="40px" height="40px">@getNote(post.SenderId)
+                            </div>
+                                <div style="width: 100%;">
+                                    <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
+                                </div>
+                            <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe">
+                                 @if (post.LikerIdList.Contains(Account.Id))
+                                 {
+                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                 }
+                                 else
+                                 {
+                                     <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(async () => await clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                 }
+                                 <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;text-align: center;border: none;background-color: white" @onclick="(() => wantTocomment(post.PostId))">Comment</button></div>
+                            </div>
+                                <div style="width: 100%;">
+                                    @foreach (var comment in post.CommentList.Comments)
+                                    {
+                                        <tr style="width: 70%;float: left">
+                                            @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
+                                            {
+                                                <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
+                                                </div>
+                                                @if (comment.SenderId.Equals(Account.Id))
+                                                {
+                                                    <button class="oi oi-x" style=";float:right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                                }
+                                                <div style="width: 70%;float: left">
+                                                    <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size:15px ">
+                                                        @if (comment.SenderId.Equals(Account.Id))
+                                                        {
+                                                            @Account.UserName
+                                                        }
+                                                        else
+                                                        {
+                                                            @getNote(comment.SenderId)
+                                                        }
+                                                        
+                                                    </div>
+                                                    <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                                    background-color: #b9bbbe;text-align: left;font-size: 15px;padding: 5px;white-space:normal;
+                                                    word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
+                                                </div>
+                                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                            }
+                                        </tr>
+                                    }
+                                    @if (wantComment&&post.PostId.Equals(a))
+                                    {
+                                        <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
+                                            <input placeholder="Write a comment..." @bind="commentInfo"/>
+                                            <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))" >Send</button></div>
+                                        
+                                    }</div>
+                        }
+                    </div>
+                    <div style="text-align: left;width: 100%;height: 20px"></div>
+                }
+            }
+        }
+        </div>
+    </div>
+</div>
+
+@code {
+    public static string postInfo;
+    private PostList postList;
+    private static Moment page;
+    private static string isPublic;
+    private static string LastIsPublic;
+    private Account Account;
+    private string commentInfo;
+    public static List<string> shieldList;
+    private bool wantComment;
+    private string a;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        postList = await ClientModel.GetPost();
+        Account = ClientModel.GetAccount();
+        wantComment = false;
+        a = "";
+        if (string.IsNullOrEmpty(postInfo))
+        {
+            postInfo = "";
+        }
+        if (string.IsNullOrEmpty(commentInfo))
+        {
+            commentInfo = "";
+        }
+        if (string.IsNullOrEmpty(isPublic))
+        {
+            isPublic = "Public";
+            LastIsPublic = "Public";
+        }
+        if (shieldList==null)
+        {
+            shieldList = new List<string>();
+        }
+        page = this;
+    }
+
+    private string getNote(string id)
+    {
+        string note=ClientModel.GetFriendSettingList().GetFriendSettingFromAgreeById(id).Note;
+        if (!string.IsNullOrEmpty(note))
+        {
+            return note;
+        }
+        else
+        {
+           return ClientModel.GetFriendById(id).UserName;
+        }
+    }
+
+    private PostList getReversePostList()
+    {
+        PostList reversePostList = postList.Copy();
+        reversePostList.Posts.Reverse();
+        return reversePostList;
+    }
+
+    private bool isFriend(string id)
+    {
+        if (ClientModel.GetFriendById(id)!=null)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public static void setIsPublic(string name)
+    {
+        isPublic= name;
+    }
+
+    public static Moment GetPage()
+    {
+        if (page == null)
+        {
+            page = new Moment();
+        }
+        return page;
+    }
+
+    private void ShieldBtn()
+    {
+        if (LastIsPublic!=isPublic)
+        {
+            if (isPublic.Equals("Shield"))
+            {
+                LastIsPublic = isPublic;
+                Shield.postInfo = postInfo;
+                NavigationManager.NavigateTo("/Shield");
+            }
+        }
+        LastIsPublic = isPublic;
+    }
+    
+    
+
+    private async Task postBtn()
+    {
+        if (!string.IsNullOrEmpty(postInfo))
+        {
+            Post newPost = new Post(Account.Id, "", postInfo, shieldList);
+            await ClientModel.AddPost(newPost);
+            postInfo = "";
+            shieldList = new List<string>();
+        }
+        
+    }
+
+    private async Task clickLike(string id)
+    {
+        //foreach (var likeId in postList.GetPostByPostId(id).LikerIdList)
+        //{
+        //    if (likeId.Equals(Account.Id))
+        //    {
+        //        postList.GetPostByPostId(id).LikerIdList.Remove(Account.Id);
+        //    }
+        //    else
+        //    {
+        //        postList.GetPostByPostId(id).LikerIdList.Add(Account.Id);
+        //    }
+        //}
+        await ClientModel.UpdatePostLike(id);
+    }
+    
+
+    private async Task sendComment(string id)
+    {
+        if (!string.IsNullOrEmpty(id)&&!string.IsNullOrEmpty(commentInfo))
+        {
+            await ClientModel.AddComment(id,new Comment(Account.Id,commentInfo));
+            commentInfo = "";
+            wantComment = false;
+            a = "";
+        }
+    }
+
+    private void wantTocomment(string postId)
+    {
+        a = postId;
+        if (wantComment == false)
+        {
+            wantComment = true;
+        }
+        else
+        {
+            wantComment = false;
+        }
+        
+    }
+
+    private async Task deletePost(string id)
+    {
+        if (!string.IsNullOrEmpty(id))
+        {
+            await ClientModel.RemovePost(id);
+        }
+    }
+
+    private async Task deleteComment(string postId,string commentId)
+    {
+        if (!string.IsNullOrEmpty(postId)&&!string.IsNullOrEmpty(commentId))
+        {
+            await ClientModel.RemoveComment(postId, commentId);
+        }
+    }
+
+    private void EditShieldFriends(Post post)
+    {
+        EditShield.Post = post;
+        EditShield.disableList = post.DisableList;
+        EditShield.lastPage = "/Moment";
+        NavigationManager.NavigateTo("/EditShield");
+    }
+
+    public async Task Update()
+    {
+        if (ClientModel!=null)
+        {
+            postList = await ClientModel.GetPost();
+            Account = ClientModel.GetAccount();
+            wantComment = false;
+            if (string.IsNullOrEmpty(postInfo))
+            {
+                postInfo = "";
+            }
+            if (string.IsNullOrEmpty(isPublic))
+            {
+                isPublic = "Public";
+                LastIsPublic = "Public";
+            }
+            if (shieldList==null)
+            {
+                shieldList = new List<string>();
+            }
+            if (string.IsNullOrEmpty(commentInfo))
+            {
+                commentInfo = "";
+            }
+        }
+    }
+}
