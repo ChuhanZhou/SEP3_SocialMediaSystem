@@ -42,3 +42,5 @@ C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\De
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.pdb
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.genruntimeconfig.cache
 C:\Users\魏佳\IdeaProjects\Java3\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.csproj.CopyComplete
+C:\Users\XHYX0\IdeaProjects\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.dll
+C:\Users\XHYX0\IdeaProjects\SEP3_SocialMediaSystem\SEP3_ChatSystem\obj\Debug\netcoreapp3.1\SEP3_ChatSystem.pdb
