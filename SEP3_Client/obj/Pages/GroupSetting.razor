@@ -1,0 +1,210 @@
+﻿@page "/GroupSetting"
+@using SEP3_Client.Model.Unit.Group
+@using SEP3_Client.Data
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="btn btn-outline-dark" style="float: right; width:auto;border-radius: 5px;background-color: #007bff;" type="submit" @onclick="Back">Back</button>
+        <h1 style="text-shadow: 2px 2px 3px #818182; color: #4e555b; text-align: left">@ChatGroup.GroupName</h1>
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+           
+                @foreach (var member in ChatGroup.AccountIdList)
+                {
+                    if (member.Equals(ChatGroup.CreatorId))
+                    {
+                        <div style="width: fit-content;height: 65px;text-align: center;float: left; padding: 10px" >
+                            <img src="user.PNG" width="30px" height="30px"><br/>
+                            @member <span>(Creator)</span></div>
+                    }
+                    else
+                    {
+                        <div style="width: fit-content;height: 65px;text-align: center;float: left; padding: 10px" >
+                            <img src="user.PNG" width="30px" height="30px"><br/>
+                            @member</div>
+                    }
+                }
+            
+        </div>
+        <div style="height: 30px;width: 100%;float: left"></div>
+        @if (show)
+        {
+            <div style=" text-align: left;width: 800px;height: auto;font-size: 20px;float: left">
+                Group name: <input placeholder="" style="width: 300px;font-size: 20px" @bind="ChatGroup.GroupName"/>
+                <button class="btn btn-outline-dark" @onclick="(() => changName())"> SAVE </button>
+            </div><br/>
+            <div style="height: 30px;width: 100%;float: left"></div>
+            <div style=" text-align: left;width: 800px;height: auto;font-size: 20px;float: left">
+                Manage members: <button class="btn btn-outline-dark" @onclick="clickMembers">Members<span class="oi oi-chevron-bottom"></span></button>
+                @if (showMembers)
+                {
+                    <form>
+                        @foreach (var member in ChatGroup.AccountIdList)
+                        {
+                            if (!member.Equals(Account.Id))
+                            {
+                                <input type="checkbox" checked="@hasMember(member)" @onchange="@(() => ChooseMember(member))">
+                                @member<br/>
+                            }
+                        }
+                        <button class="btn btn-outline-dark" @onclick="clickMembers">SAVE</button>
+                    </form>
+                }
+                
+            </div>
+        }
+        <div style="height: 30px;width: 100%;float: left"></div>
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px;float: left">
+              GroupID:  @ChatGroup.GroupId
+        </div><br/>
+        <div style="height: 30px;width: 100%;float: left"></div>
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+            <button class="oi oi-plus" style="background-color: #80bdff; border: 2px solid black; border-radius: 8px;
+                    padding: 10px;width: 400px" @onclick="invite"> Invite more friends</button><br/>
+        </div>
+        <div style="height: 30px;width: 100%;float: left"></div>
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+            <button class="oi oi-x" style="background-color: red ; border: 2px solid black; border-radius: 8px;
+                    padding: 10px;width: 400px" @onclick="Delete">Delete and Leave</button><br/>
+        </div>
+    </div>
+</div>
+
+@code {
+    public static ChatGroup ChatGroup;
+    private Account Account;
+    private bool show;
+    private bool showMembers;
+    private static GroupSetting page;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        Account = ClientModel.GetAccount();
+        if (ChatGroup.CreatorId.Equals(Account.Id))
+          {
+              show = true;
+          }
+          else
+          {
+              show = false;
+          }
+        showMembers = false;
+        getGroupId();
+        page = this;
+    }
+
+    public static GroupSetting GetPage()
+    {
+        if (page == null)
+        {
+            page = new GroupSetting();
+        }
+        return page;
+    }
+
+    private string getGroupId()
+    {
+        return ChatGroup.GroupId;
+    }
+
+    private void clickMembers()
+    {
+        if (showMembers==false)
+        {
+            showMembers = true;
+        }
+        else
+        {
+            showMembers = false;
+        }
+    }
+
+    private void invite()
+    {
+        Invitation.GroupId = getGroupId();
+        Console.WriteLine("ggggggggggg"+Invitation.GroupId);
+        NavigationManager.NavigateTo("/Invitation");
+    }
+
+    private void Delete()
+    {
+        if (ChatGroup.CreatorId.Equals(Account.Id))
+        {
+            string error = ClientModel.RemoveGroup(ChatGroup);
+        }
+        else
+        {
+            ClientModel.RemoveGroupMember(ChatGroup, Account.Id);
+            NavigationManager.NavigateTo("/Group");
+        }
+       
+    }
+
+    private void Back()
+    {
+        changName();
+        GroupChat.Group = ChatGroup;
+        NavigationManager.NavigateTo("/GroupChat");
+    }
+    
+    private void ChooseMember(string memberId)
+    {
+        if (hasMember(memberId))
+        {
+            ClientModel.RemoveGroupMember(ChatGroup, memberId);
+        }
+        else
+        {
+            ClientModel.AddGroupMember(ChatGroup, memberId);
+        }
+        changName();
+    }
+
+    private bool hasMember(string memberId)
+    {
+        foreach (var member in ClientModel.GetGroupByGroupId(ChatGroup.GroupId).AccountIdList)
+        {
+            if (member.Equals(memberId))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void Update()
+    {
+        if (ClientModel!=null)
+        {
+            ChatGroup = ClientModel.GetGroupByGroupId(getGroupId());
+            Account = ClientModel.GetAccount();
+            if (ChatGroup.CreatorId.Equals(Account.Id))
+            {
+                show = true;
+            }
+            else
+            {
+                show = false;
+            }
+            showMembers = false;
+            getGroupId();
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void changName()
+    {
+        ChatGroup newChatGroup = ChatGroup;
+        ClientModel.UpdateGroupInformation(newChatGroup);
+    }
+    
+}

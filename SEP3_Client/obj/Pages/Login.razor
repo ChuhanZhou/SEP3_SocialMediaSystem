@@ -1,0 +1,231 @@
+﻿@page "/"
+@using SEP3_Client.Data
+@using SEP3_Client.Model
+@inject IClientModel ClientModel
+@inject NavigationManager NavigationManager
+<hr>
+<br>
+    <div style="margin:auto;width: 80%;height: 50%">
+        <br>
+        <div style="        margin: auto;
+        background-color: #F5F5F5;
+        border-radius: 5px;
+        box-shadow: 8px 8px 3px #888888;
+    ">
+            <br>
+            <h1 style="        text-align: center;
+        color: #212121
+">@title</h1>
+            @if (title.Equals("Login"))
+            {
+               
+                <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                            <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
+                            font-size: xx-large;line-height:50px;text-align: center"></span>
+                            <input type="text" placeholder="account" style="float: left;width:250px;height: 50px" @bind-value="acccount"/>
+                 </div>
+                <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                    <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                    line-height:50px;text-align: center"></span>
+                    <input type="password" placeholder="password" style="float: left;width:250px;height: 50px" @bind-value="password"/>
+                </div>
+            }
+            @if (title.Equals("Register"))
+            {
+                @if (username==null)
+                {
+                    <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                        <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
+                font-size: xx-large;line-height:50px;text-align: center"></span>
+                        <input type="text" placeholder="username" style="float: left;width:250px;height: 50px" @bind-value="username"/>
+                    </div>
+                }
+                else
+                {
+                    <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                        <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
+                font-size: xx-large;line-height:50px;text-align: center"></span>
+                        <input type="text" placeholder="username" style="float: left;width:250px;height: 50px" @bind-value="username"/>
+                    </div>
+                }
+                
+                <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                    <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                line-height:50px;text-align: center"></span>
+                    <input type="password" placeholder="password" style="float: left;width:250px;height: 50px" @bind-value="password"/>
+                </div>
+                
+                @if (password==confirmPassword&&!string.IsNullOrEmpty(confirmPassword))
+                {
+                    <div style="        background: #B3E5FC;
+        margin: 40px auto;
+        width: 300px;
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 1px,1px,0.5px;
+        border: hidden
+">
+                        <span class="oi oi-circle-check" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+                        <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px" @bind="@confirmPassword"/>
+                    </div>
+                }
+                else
+                {
+                    <div style="background: red;margin: 40px auto;width: 300px;height: 50px;border-radius:5px;box-shadow:1px,1px,0.5px;border:hidden">
+                        <span class="oi oi-circle-x" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+                        <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px" @bind="@confirmPassword"/>
+                    </div>
+                }
+            }
+            <div style="margin: 0px auto;width: 300px;height: auto">
+                <p style="color: red">
+                    @error
+                </p>
+            </div>
+            @switch (title)
+            {
+                case "Login":
+        <div style="margin: 40px auto;width: 300px;height: auto">
+            <button class="btn btn-primary" style="        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background: #F44336;
+        color: white" @onclick="PerformLogin">Login</button>
+            <br>
+            <br>
+            <button class="btn btn-primary" style="        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background: #01579b;
+        color: white
+" @onclick="ChangeState"> @otherTitle</button>
+            <br>
+            <br>
+        </div>
+        <hr>
+                    break;
+                case "Register":
+        <div style="margin: 40px auto;width: 300px;height: auto">
+            <button class="btn btn-primary" style="        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background: #F44336;
+        color: white
+" @onclick="Register">Confirm</button>
+            <br>
+            <br>
+            <button class="btn btn-primary" style="        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background: #01579b;
+        color: white;
+" @onclick="ChangeState"> @otherTitle</button>
+            <br>
+            <br>
+        </div>
+        <br>
+                    break;
+            }
+        </div>
+    </div>
+
+
+@code {
+    private string acccount;
+    private string password;
+    private string confirmPassword;
+    private string error;
+    private string title;
+    private string otherTitle;
+    private string username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("/Profile");
+        }
+        title = "Login";
+        otherTitle = "Register";
+        confirmPassword = null;
+        error = null;
+        acccount = null;
+        password = null;
+    }
+
+
+    private void PerformLogin()
+    {
+        error = ClientModel.Login(acccount, password);
+        if (error == null)
+        {
+            MainLayout.Login();
+            NavigationManager.NavigateTo("/Chat");
+        }
+    }
+    
+    private void ChangeState()
+    {
+        if (title.Equals("Login"))
+        {
+            title = "Register";
+            otherTitle = "Login";
+        }
+        else if (title.Equals("Register"))
+        {
+            title = "Login";
+            otherTitle = "Register";
+        }
+        acccount = null;
+        password = null;
+        username = null;
+        confirmPassword = null;
+        error = null;
+    }
+
+    private void Register()
+    {
+        error = ClientModel.Register(username, password);
+        if (error == null)
+        {
+            MainLayout.Login();
+            NavigationManager.NavigateTo("/Chat");
+        }
+    }
+    
+}

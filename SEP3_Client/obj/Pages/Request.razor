@@ -1,0 +1,91 @@
+﻿@page "/Request"
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.PostList
+@using SEP3_Client.Model.Unit.Post
+@using SEP3_Client.Model.Unit.User
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+            Back
+        </button>
+        <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Friend Request</h1>
+        <div style="border: 2px solid black; border-radius: 8px;width: 500px;padding: 10px;height: auto;
+        text-align: center;margin: auto">
+            <div style="font-size: 30px;text-align: left">
+                <img src="user.PNG" width="50px" height="50px"> @accountID
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: left">
+                Alias: <input type="text" @bind="nickname"/>
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: left">
+                Hide my posts: 
+                <select class="form-control selectpicker" style="width: auto;display: inline-block" @bind="root">
+                    <option>False</option>
+                    <option>True</option></select>
+            </div>
+            <br/>
+            <div style="color: red">
+                @error
+            </div>
+            <br/>
+            <div style="font-size: 20px;text-align: right; height: 30px">
+                <button class="btn btn-outline-dark" style="float: right; width:auto;height: auto;border-radius: 15px; color: #007bff;" 
+                        type="submit" @onclick="clickSend">Send</button>
+            </div>
+            </div>
+    </div>
+</div>
+
+@code {
+    public static string accountID;
+    private string nickname;
+    private string root;
+    private string error;
+    public static bool toAgree;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        root = "False";
+        error = null;
+    }
+  
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendRequest");
+    }
+
+    private void clickSend()
+    {
+        if (ClientModel.GetAccount().GetId() != accountID && ClientModel.GetFriendById(accountID) == null)
+        {
+            FriendSetting friendSetting = new FriendSetting(accountID, nickname, Convert.ToBoolean(root));
+            if (toAgree)
+            {
+                friendSetting.SetStatus(true);
+            }
+            error=ClientModel.AddNewFriend(friendSetting);
+            if (error==null)
+            {
+                NavigationManager.NavigateTo("/FriendRequest");
+            }
+        }
+        else
+        {
+            error = "You already have this friend...";
+        }
+
+    }
+
+}

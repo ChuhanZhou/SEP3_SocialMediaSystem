@@ -1,0 +1,176 @@
+﻿@page "/PrivateChat"
+@using SEP3_Client.Model.Unit.User
+@using SEP3_Client.Data
+@using SEP3_Client.Model.List.Message
+@using SEP3_Client.Model.Unit.Message
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+
+
+<div style="text-align: center; width: 150px;height: 40px;float: left">
+    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+        Back
+    </button></div>
+<img src="user.PNG" style="float: left" width="65px" height="65px">
+<h1>
+    @if (!string.IsNullOrEmpty(FriendSetting.Note))
+    {
+        @FriendSetting.Note
+    }
+    else
+    {
+        @friend.UserName
+    }
+</h1>
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 900px;
+         height: 600px;
+         margin: auto;
+         ">
+        <div style="height: 600px;width:100%;overflow: auto;">
+            @if (MessageList == null)
+            {
+                <p>
+                    <em>Loading</em>
+                </p>
+            }
+            else
+            {
+                if (!MessageList.MessageList.Any())
+                {
+                    <p>
+                        <em>Now you can chat with your friend...</em>
+                    </p>
+                }
+                else
+                {
+                    @foreach (var msg in MessageList.MessageList)
+                        {
+                            <tr style="width: 70%">
+                                <td style="width: 70%">
+                                    @if (msg.SenderId.Equals(Account.Id))
+                                    {
+                                        <div style="height: 100%;float: right;"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                        <div style="width: 70%;float: right;">
+                                            <div style="height: 100%;float: right;">
+                                            <div type="text" style="float: right;width: auto;border-radius:20px;
+                            background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                            word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                        </div>
+                                        <div style="float: right;width: 100%;height: 10px"></div></div>
+                                    }
+                                    else
+                                    {
+                                        <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                        <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                         background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                         word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        @foreach (var msg in OfflineMessageList.MessageList)
+                        {
+                            <tr style="width: 70%">
+                                <td style="width: 70%">
+                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                    <div style="width: 70%;float: right">
+                                        <div style="height: 100%;float: right;">
+                                            <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                     background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                     word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                        <div style="height: 100%;float: right">
+                                            <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                </td>
+                            </tr>
+                        }
+                        }
+            }
+        </div>
+        <br/>
+        <div>
+            <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
+            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
+        </div>
+        <div style="color: red">
+            @error
+        </div>
+    </div>
+</div>
+
+@code {
+    private Account Account;
+    private static PrivateChat page;
+    private PrivateMessageList MessageList;
+    public static FriendSetting FriendSetting;
+    private PrivateMessageList OfflineMessageList;
+    private Friend friend;
+    private string message;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        Account = ClientModel.GetAccount();
+        friend = ClientModel.GetFriendById(FriendSetting.Id);
+        MessageList = ClientModel.GetMessageById(friend.Id);
+        OfflineMessageList = ClientModel.GetOfflineMessageById(friend.Id);
+        error = "";
+        message = "";
+        page = this;
+    }
+
+    public static PrivateChat GetPage()
+    {
+        if (page == null)
+        {
+            page = new PrivateChat();
+        }
+        return page;
+    }
+    
+    private void send()
+    {
+        if (!string.IsNullOrEmpty(message))
+        {
+            error=ClientModel.SendPrivateMessage(new PrivateMessage(Account.Id, friend.Id, message));
+            message = null;
+        }
+    }
+
+    private void back()
+    {
+        NavigationManager.NavigateTo("/FriendProfile");
+    }
+
+    public void Update()
+    {
+        if (ClientModel != null)
+        {
+            if (string.IsNullOrEmpty(FriendSetting.Id))
+            {
+                NavigationManager.NavigateTo("/FriendProfile");
+            }
+            else
+            {
+                Account = ClientModel.GetAccount();
+                friend = ClientModel.GetFriendById(FriendSetting.Id);
+                MessageList = ClientModel.GetMessageById(friend.Id);
+                error = "";
+                message = "";
+                OfflineMessageList = ClientModel.GetOfflineMessageById(friend.Id);
+            }
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+
+}

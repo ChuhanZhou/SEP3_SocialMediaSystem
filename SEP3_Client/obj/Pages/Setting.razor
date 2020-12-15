@@ -1,0 +1,152 @@
+﻿@page "/Setting"
+@using SEP3_Client.Data
+@inject NavigationManager NavigationManager
+@inject IClientModel ClientModel
+<div style="float: left; width: 100%;height: auto;">
+    <div style="text-align: center;
+         width: 800px;
+         height: 800px;
+         margin: auto;
+         ">
+        <button class="btn btn-outline-dark" style="float: right; width:auto;border-radius: 5px;background-color: #007bff;" type="submit" @onclick="Back">Back</button>
+        <h1 style="text-shadow: 2px 2px 3px #818182; color: #4e555b; text-align: left">Settings</h1>
+        
+        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+            <button class="oi oi-lock-locked" style="background-color: #80bdff; border: 2px solid black; border-radius: 8px;
+                    padding: 10px;width: 400px" @onclick="Show"> Security and Login</button><br/>
+        </div>
+        <div style="height: 30px"></div>
+        @if (show.Equals(true))
+        {
+            <div style="float:left; width: 800px;height: auto;">
+                <div class="oi oi-key" style="font-size: 20px">Change Password</div>
+                @if (saveSuccess.Equals(false))
+                                {
+                                    <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                                        <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                                                    line-height:50px;text-align: center"></span>
+                                        <input type="password" placeholder="Old password" style="float: left;width:250px;height: 50px" @bind-value="oldPassword"/>
+                                    </div>
+                                    <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                        <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                                    line-height:50px;text-align: center"></span>
+                                        <input type="password" placeholder="New password" style="float: left;width:250px;height: 50px" @bind-value="password"/>
+                                    </div>
+                                  
+                                    @if (password == confirmPassword && !string.IsNullOrEmpty(confirmPassword))
+                                    {
+                                        <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                            <span class="oi oi-circle-check" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+                                            <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px" @bind="@confirmPassword"/>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div style="background: red;margin: 40px auto;width: 300px;height: 50px">
+                                            <span class="oi oi-circle-x" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+                                            <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px" @bind="@confirmPassword"/>
+                                        </div>
+                                    }
+                                    <div style="margin: 0px auto;width: 300px;height: auto">
+                                        <p style="color: red">
+                                            @error
+                                        </p>
+                                    </div>
+                                    <div style="background: #1b6ec2;margin: 40px auto;width: 300px;height: 50px">
+                                        <button class="btn btn-primary" style="width: 100%;height: 100%;border-radius: 0px" @onclick="Save">Save</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                                        <span class="oi oi-circle-check" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                                                    line-height:50px;text-align: center"></span>
+                                        <input type="password" placeholder="Old password" style="float: left;width:250px;height: 50px;visibility: hidden" @bind-value="oldPassword"/>
+                                    </div>
+                                    <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                        <span class="oi oi-circle-check" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
+                                    line-height:50px;text-align: center"></span>
+                                        <input type="password" placeholder="New password" style="float: left;width:250px;height: 50px;visibility: hidden" @bind-value="password"/>
+                                    </div>
+                                  
+                                    
+                                        <div style="background: #86cfda;margin: 40px auto;width: 300px;height: 50px">
+                                            <span class="oi oi-circle-check" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+                                            <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px;visibility: hidden" @bind="@confirmPassword"/>
+                                        </div>
+                                    <div style="background: #1b6ec2;margin: 40px auto;width: 300px;height: 50px">
+                                        <button class="oi oi-circle-check" style="width: 100%;height: 100%;border-radius: 0px;background: #86cfda;" @onclick="Save">Save</button>
+                                    </div>
+                                }
+                                
+                            </div>
+                        }
+                        <div style=" text-align: left;width: 800px;height: auto;font-size: 20px">
+                            <div style="height: 10px"></div>
+                            <button class="oi oi-account-logout" style="background-color: red ; border: 2px solid black; border-radius: 8px;
+                                    padding: 10px;width: 400px" @onclick="Logout">Log Out</button><br/>
+                        </div>
+                    </div>
+                </div>
+@code {
+    private bool show;
+    private string oldPassword;
+    private string password;
+    private string confirmPassword;
+    private string error;
+    private bool saveSuccess;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!MainLayout.IsLogin())
+        {
+            NavigationManager.NavigateTo("");
+        }
+        show = false;
+        saveSuccess = false;
+    }
+    
+    private void initial()
+    {
+        oldPassword = null;
+        password = null;
+        confirmPassword = null;
+    }
+    
+    private void Show()
+    {
+        if (show.Equals(false))
+        {
+            saveSuccess = false;
+            show = true;
+        }
+        else
+        {
+            show = false;
+        }
+        
+    }
+
+    private void Save()
+    {
+        error = ClientModel.ChangePassword(oldPassword, password);
+        if (error==null)
+        {
+            saveSuccess = true;
+            initial();
+        }
+        initial();
+    }
+
+    private void Logout()
+    {
+        ClientModel.Logoff();
+        MainLayout.Logout();
+        NavigationManager.NavigateTo("");
+    }
+
+    private void Back()
+    {
+        NavigationManager.NavigateTo("/Profile");
+    }
+}

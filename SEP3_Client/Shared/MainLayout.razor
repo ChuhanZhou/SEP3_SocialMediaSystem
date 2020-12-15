@@ -9,29 +9,34 @@
 
 
 <div class="main">
+    @if (ER)
+    {
     <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-    </div>
+      <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+   </div>
+    }
 
     <div class="content px-4">
         @Body
     </div>
+    
 </div>
 
 @code
 {
     private static bool show = false;
-    
+    private static bool ER = false;
+
     public static void Login()
     {
         show = true;
     }
-    
+
     public static void Logout()
     {
         show = false;
     }
-    
+
     public static bool IsLogin()
     {
         return show;
