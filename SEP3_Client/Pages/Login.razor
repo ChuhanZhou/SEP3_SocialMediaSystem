@@ -19,12 +19,12 @@
             @if (title.Equals("Login"))
             {
                
-                <div style="        background: #B3E5FC;
+                <div style="background: #B3E5FC;
         margin: 40px auto;
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                             <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
@@ -36,7 +36,7 @@
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                     <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
@@ -53,7 +53,7 @@
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                         <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
@@ -68,7 +68,7 @@
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                         <span class="oi oi-person" style="float: left;width:50px;height: 50px;color: white;
@@ -82,7 +82,7 @@
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                     <span class="oi oi-lock-locked" style="float: left;width:50px;height: 50px;color: white;font-size: xx-large;
@@ -97,7 +97,7 @@
         width: 300px;
         height: 50px;
         border-radius: 5px;
-        box-shadow: 1px,1px,0.5px;
+        box-shadow: 1px 1px 0.5px;
         border: hidden
 ">
                         <span class="oi oi-circle-check" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
@@ -106,7 +106,7 @@
                 }
                 else
                 {
-                    <div style="background: red;margin: 40px auto;width: 300px;height: 50px;border-radius:5px;box-shadow:1px,1px,0.5px;border:hidden">
+                    <div style="background: red;margin: 40px auto;width: 300px;height: 50px;border-radius:5px;box-shadow:1px 1px 0.5px;border:hidden">
                         <span class="oi oi-circle-x" style="float: left;width: 50px;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
                         <input type="password" placeholder="Confirm Password" style="float: left;width:250px;height: 50px" @bind="@confirmPassword"/>
                     </div>
@@ -220,7 +220,23 @@
 
     private void Register()
     {
-        error = ClientModel.Register(username, password);
+        if (string.IsNullOrEmpty(username))
+        {
+            error = "Please write the username";
+        }
+        else if (string.IsNullOrEmpty(password))
+        {
+            error = "Please write the password";
+        }
+        else if (confirmPassword!=password)
+        {
+            error = "The confirm password is different from password";
+        }
+        if (!string.IsNullOrEmpty(username)&&!string.IsNullOrEmpty(password)&&!string.IsNullOrEmpty(confirmPassword)&&confirmPassword==password)
+        {
+            error = ClientModel.Register(username, password);
+        }
+        
         if (error == null)
         {
             MainLayout.Login();
