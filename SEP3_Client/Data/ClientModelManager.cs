@@ -33,11 +33,20 @@ namespace SEP3_Client.Data
         private ICloudPostSystem postSystem;
         public ClientModelManager()
         {
-            FunctionTypes = new List<FunctionType>();
+            Init();
             userSystemClient = new UserSystemClient(2030,"localhost");
             chatSystemClient = new ChatSystemClient(3010,"localhost");
             postSystem = new CloudPostSystem(this);
+        }
+
+        private void Init()
+        {
+            FunctionTypes = new List<FunctionType>();
+            account = new Account();
+            friendList = new FriendList();
             chatGroupList = ChatGroupList.GetAllGroupList();
+            privateMessageList = new PrivateMessageList();
+            groupMessageList = new GroupMessageList();
             offlinePrivateMessageList = new PrivateMessageList();
             offlineGroupMessageList = new GroupMessageList();
         }
@@ -81,6 +90,7 @@ namespace SEP3_Client.Data
             userSystemClient.SendAccountPackage(account, "logoff");
             userSystemClient.Disconnect();
             chatSystemClient.Logoff();
+            Init();
         }
 
         public string Register(string userName, string password)

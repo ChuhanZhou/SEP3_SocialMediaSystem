@@ -121,8 +121,8 @@ namespace SEP3_Client.Mediator.ChatSystemClient
 
         private void Disconnect()
         {
-            stream.Close();
-            client.Close();
+            stream?.Close();
+            client?.Close();
             login = false;
             clientModel.SystemOffLine(FunctionType.ChatSystem);
             Console.WriteLine("ChatSystem offline.");

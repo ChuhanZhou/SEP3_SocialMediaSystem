@@ -54,8 +54,8 @@ namespace SEP3_Client.Mediator.UserSystemClient
 
         public void Disconnect()
         {
-            stream.Close();
-            client.Close();
+            stream?.Close();
+            client?.Close();
             login = false;
             clientModel.SystemOffLine(FunctionType.UserSystem);
             Console.WriteLine("UserSystem offline.");
