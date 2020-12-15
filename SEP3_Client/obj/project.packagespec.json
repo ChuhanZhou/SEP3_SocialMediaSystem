@@ -25,6 +25,12 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
+      "dependencies": {
+        "Microsoft.VisualStudio.Web.BrowserLink": {
+          "target": "Package",
+          "version": "[2.2.0, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",
