@@ -224,7 +224,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //jdbc.;
+                jdbc.InsertPostList(newPost);
             }
             postList.addPost(newPost);
             DataFileContext.updatePostListData(postList);
@@ -235,7 +235,7 @@ public class DatabaseModelManager implements DatabaseModel{
     public PostList getAllPost() {
         if (databaseOnline)
         {
-            //return jdbc.;
+            return jdbc.GetPost();
         }
         return DataFileContext.readPostListData();
     }
@@ -247,7 +247,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //jdbc.;
+                jdbc.UpdatePost(newPost);
             }
             postList.updatePost(newPost);
             DataFileContext.updatePostListData(postList);
@@ -261,7 +261,7 @@ public class DatabaseModelManager implements DatabaseModel{
         {
             if (databaseOnline)
             {
-                //jdbc.;
+                jdbc.deletePostById(postId);
             }
             postList.removePostByPostId(postId);
             DataFileContext.updatePostListData(postList);
