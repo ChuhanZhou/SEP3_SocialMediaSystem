@@ -3,17 +3,18 @@
 @using SEP3_Client.Model.List.Message
 @using SEP3_Client.Data
 @using SEP3_Client.Model.Unit.Message
+
 @using SEP3_Client.Model.Unit.User
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 
 <div style="height: 30px"></div>
 <div style="text-align: center; width: 150px;height: 40px;float: left">
-    <button class="oi oi-chevron-left" style="float:left; text-align: left;height: 30px; background-color: #007bff" @onclick="back">
+    <button class="oi oi-chevron-left" style=" float: right; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: 20%" @onclick="back">
         Back
     </button></div>
 <div style="float: right; text-align: left;width: 320px;">
-    <button class="oi oi-cog" style="width: 40px;height: 40px;font-size: xx-large;line-height:50px;text-align: center;border: none;background-color: white" @onclick="clickCog"></button>
+    <button class="oi oi-cog" style=" float: right; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: 20%" @onclick="clickCog"></button>
 </div>
 <img src="people_multiple_76px_1116527_easyicon.net.png" style="float: left" width="65px" height="65px">
 <h1>@Group.GroupName</h1>

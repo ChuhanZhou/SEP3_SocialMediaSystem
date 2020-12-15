@@ -8,20 +8,42 @@
 @using System.Threading
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
-<div style="float: left; width: 100%;height: auto;">
+
+<div style="        float: left;
+        width: 100%;
+        height: auto;
+        background-color: #F5F5F5;
+        border-radius:5px;
+        box-shadow:10px,10px,5px;
+">
 @if (showFriends)
     {
-        <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
-            <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
-            <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
-            <table class="table">
+    <br>
+    <hr>
+        <div style="text-align: left; width: 80%;margin:auto;height: 100%;overflow: auto">
+            <button class="btn btn-outline-dark" style="        float: left;
+        background-color: #03A9F4;
+        color: #FFFFFF;
+        border-radius: 5px;
+        border: hidden;
+        width: 20%" @onclick="() => clickFriendBtn()">FRIEND</button>
+           <button class="btn btn-outline-dark;" style="        float: right;
+        background-color: #03A9F4;
+        color: #FFFFFF;
+        border-radius: 5px;
+        border:hidden;
+        width:20%
+" @onclick="() => clickGroupBtn()">GROUP</button>
+            <br>
+            <br>
+            <table class="table" style="margin:auto">
                 <tbody>
                 @foreach (var friend in friends.GetFriendSettingList())
                 {
                     <tr>
                         <td width="300px">
-                            <button @onclick="() => privateChat(friend.Id)" style="background-color: white;width: 250px;text-align: left">
-                                <img src="user.PNG" width="40px" height="40px">
+                            <button @onclick="() => privateChat(friend.Id)" style="background-color: white;width: 250px;text-align: left;float:left;border-radius:5px;border:hidden">
+                                <img src="user.PNG" width="40" height="40">
                                 @if (string.IsNullOrEmpty(getNote(friend.Id)))
                                 {
                                     @getUserName(friend.Id)<span>@getFriendStatus(friend.Id)</span>
@@ -37,21 +59,27 @@
                 </tbody>
             </table>
         </div>
-            <div style="width: 30px;height: 100%;float: left"></div>
-            <div style="text-align: center;
-                 width: 900px;
-                 height: 600px;
-                 margin: auto;
-                 float: left;
-                 ">
+            <div style="width: 30px;height: auto;margin:auto"></div>
+            <div style="        text-align: center;
+        width: 80%;
+        height: auto;
+        margin: auto;
+        border: hidden;
+        border-radius: 5px;
+    ">
                 @if (string.IsNullOrEmpty(ID))
                 {
+                <br>
+                <hr>
                     <div style="width: 100%;height: 30px"> </div>
-                    <div style="width: 800px">You can choose a friend to chat</div>
+                    <div style="width: 50%;margin:auto">You can choose a friend to chat</div>
+                    <br>
+                <br>
                 }
                 else
                 {
-                    <div style="height: 30px;width: 100%;float: left"></div>
+                    <div style="height: auto;width: 90%;margin:auto"></div>
+                    <br>
                     <img src="user.PNG" style="float: left" width="65px" height="65px">
                     <h1 style="float: left">
                         @if (!string.IsNullOrEmpty(getNote(ID)))
@@ -63,7 +91,7 @@
                             @getUserName(ID)
                         }
                     </h1>
-                    <div style="height: 600px;width:100%;overflow: auto;float: left">
+                    <div style="height: auto;width:95%;overflow: auto;margin:auto">
                         @if (MessageList == null)
                         {
                             <p>
@@ -141,7 +169,7 @@
     }
     else
     {
-        <div style="text-align: left; width: 300px;float:left;height: 100%;overflow: auto">
+        <div style="text-align: left; width: 90%;height: 100%;overflow: auto">
             <button class="btn btn-outline-dark" style="float: left" @onclick="() => clickFriendBtn()">FRIEND</button>
             <button class="btn btn-outline-dark" style="float: right" @onclick="() => clickGroupBtn()">GROUP</button>
             <table class="table">
@@ -179,8 +207,9 @@
                     <h1 style="float: left">
                         @getGroupName(ID)
                     </h1>
-                    <div style="height: 600px;width:100%;overflow: auto;float: left">
-                        @if (GroupMessageList == null)
+                    <center>
+                        <div style="height: auto;width:auto;margin:auto">
+                            @if (GroupMessageList == null)
                         {
                             <p>
                                 <em>Loading</em>
@@ -190,70 +219,78 @@
                         {
                             if (!GroupMessageList.MessageList.Any())
                             {
-                                <p>
-                                    <em>Now you can chat in the group...</em>
-                                </p>
+                            <p>
+                                <em>Now you can chat in the group...</em>
+                            </p>
                             }
                             else
                             {
-                                @foreach (var msg in GroupMessageList.MessageList)
+                            @foreach (var msg in GroupMessageList.MessageList)
                         {
-                            <tr style="width: 70%">
-                                <td style="width: 70%">
+                            <tr style="width: auto;margin:auto">
+                                <td style="width: 80%;margin:auto">
                                     @if (msg.SenderId.Equals(Account.Id))
                                     {
-                                        <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                        <div style="width: 70%;float: right">
-                                            <div style="height: 100%;float: right;">
+                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                    <div style="width: 70%;float: right">
+                                        <div style="height: 100%;float: right;">
                                             <div type="text" style="float: right;width: auto;border-radius:20px;
                                           background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                           word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                        </div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div></div>
+                                    </div>
+                                    <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                </div>
                                     }
                                     else
                                     {
-                                        <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
-                                        <div style="width: 70%;float: left;"><div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div> 
-                                            <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                <div style="width: 70%;float: left;">
+                                    <div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div>
+                                    <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
                                                        background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                                        word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                        </div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                                                </div>
+                                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
                                     }
                                 </td>
                             </tr>
                         }
-                        @foreach (var msg in offlineGroupMessageList.MessageList)
+                            @foreach (var msg in offlineGroupMessageList.MessageList)
                         {
-                            <tr style="width: 70%">
-                                <td style="width: 70%">
+                            <tr style="width: 70%;float:right">
+                                <td style="width: 70%;float:right">
                                     <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                    <div style="height: 100%;float: right;">
-                                        <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                    <div style="height: 100%">
+                                        <div style="width: 70%;float: right">
+                                            <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
                                           background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                                          word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
-                                        <div style="height: 100%;float: right">
-                                            <span class="oi oi-warning" style="font-size: x-large;"></span>
-                                        </div>
+                                          word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
                                     </div>
-                                    <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
-                                </td>
-                            </tr>
+                                    <div style="height: 100%;float: right">
+                                        <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                            </td>
+                        </tr>
                         }
                             }
                         }
-                    </div>
-                    <br/>
-                    <div style="float: left;width: 100%">
-                        <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message"/>
-                        <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => sendGroupMsg()">Send</button>
-                    </div>
-                    <div style="color: red;float: left;width: 100%">
-                        @error
-                    </div>
-                }
-            </div>
+                        </div>
+                        </center>
+                            <br />
+                            <div style="float: left;width: 100%">
+                                <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message" />
+                                <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => sendGroupMsg()">Send</button>
+                            </div>
+                            <div style="color: red;float: left;width: 100%">
+                                @error
+                            </div>
+                            <br>
+                            <hr>
+                            <hr>
+                            }
+</div>
             
      }
 
