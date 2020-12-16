@@ -78,15 +78,16 @@
                             <div style="width: 100%;">
                                 @foreach (var comment in post.CommentList.Comments)
                                 {
+                                    @if (comment.SenderId.Equals(Account.Id))
+                                    {
+                                        <button class="oi oi-x" style="float: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                    }
                                     <tr style="width: 70%;;text-align: left">
                                         @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
                                         {
                                             <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
                                             </div>
-                                            @if (comment.SenderId.Equals(Account.Id))
-                                            {
-                                                <button class="oi oi-x" style="float: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
-                                            }
+                                            
                                             <div style="width: 70%;float: left">
                                                 <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size: 15px">
                                                     @if (comment.SenderId.Equals(Account.Id))
@@ -137,15 +138,16 @@
                                 <div style="width: 100%;">
                                     @foreach (var comment in post.CommentList.Comments)
                                     {
+                                        @if (comment.SenderId.Equals(Account.Id))
+                                         {
+                                             <button class="oi oi-x" style=";float:right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
+                                         }
                                         <tr style="width: 70%;float: left">
                                             @if (isFriend(comment.SenderId) || comment.SenderId.Equals(Account.Id))
                                             {
                                                 <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
                                                 </div>
-                                                @if (comment.SenderId.Equals(Account.Id))
-                                                {
-                                                    <button class="oi oi-x" style=";float:right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId,comment.CommentId))"></button>
-                                                }
+                                                
                                                 <div style="width: 70%;float: left">
                                                     <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size:15px ">
                                                         @if (comment.SenderId.Equals(Account.Id))
