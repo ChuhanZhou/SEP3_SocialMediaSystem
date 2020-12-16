@@ -259,6 +259,19 @@
         "Hour": 1,
         "Minute": 58
       }
+    },
+    {
+      "ReceiverId": "D733AF65",
+      "MessageInfo": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+      "Type": "PRIVATE",
+      "SenderId": "1DB319FC",
+      "Time": {
+        "Year": 2020,
+        "Month": 12,
+        "Day": 16,
+        "Hour": 13,
+        "Minute": 35
+      }
     }
   ]
 }
