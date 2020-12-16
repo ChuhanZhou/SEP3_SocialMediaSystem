@@ -6,30 +6,25 @@
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 <div style="float: left; width: 100%;height: auto;">
-    <div style="text-align: center;
-         width: 100%;
-         height: 800px;
-         margin: auto;
-         ">
+    <div style="width: 100%; height: 800px;margin: auto;">
         <div >
+            
             <button class="oi oi-cog" style="float: right;width: auto;height: auto;display: inline-block;" @onclick="Setting">
             </button>
+            <h1 style="margin:0 auto;text-shadow: 2px 2px 5px #818182; color: #4e555b; text-align: center">Profile</h1>
         </div>
-        <h1 style="text-shadow: 2px 2px 5px #818182; color: #4e555b">Profile</h1>
+        
         <div style="background: #b9bbbe">
-            <span class="oi oi-person" style="float: inherit;width:100%;height: 50px;color: white;
-                                           font-size: xx-large;line-height:50px;text-align: center"></span><br/>
-            <label style="font-size: 25px">@username</label>
+            <span class="oi oi-person" style="float: inherit;width:100%;height: 50px;color: white;font-size: xx-large;line-height:50px;text-align: center"></span>
+            <label style="width:100%;font-size: 25px;text-align: center;margin: 0 auto">@username</label>
         </div>
-        <div style="height: 8px"></div>
         <div style="float: left; width: 100%;height: auto;">
-            <div style="border: 2px solid black;
-                      border-radius: 8px;width: 500px;padding: 10px;height: auto;text-align: center;margin: auto">
-                <div style="font-size: 25px;text-align: left">
+            <div style="border: 2px solid black;border-radius: 8px;width: 500px;padding: 10px;height: auto;margin: 8px auto">
+                <div style="font-size: 25px;height: 40px;line-height: 40px;text-align: left;">
                     Basic Information
-                    <button class="btn btn-outline-dark" style="float: right; width:auto;border-radius: 20px" type="submit" @onclick="clickEDIT">Edit</button>
+                    <button class="btn btn-outline-dark" style="float: right; width:auto;height:100%;border-radius: 20px" type="submit" @onclick="clickEDIT">Edit</button>
                 </div>
-                <div style="font-size: 20px;">
+                <div style="font-size: 20px;line-height: 30px">
                     <span class="oi oi-sun" style="float: left">Account : @accountId</span><br/>
                     @if (day == 0 || month == 0)
                     {
@@ -40,17 +35,14 @@
                         <div class="oi oi-calendar" style="float: left">Birth of date: @day / @month </div><br/>
                     }
                     <div class="oi oi-star" style="float: left;">Gender:  @gender </div><br/>
-                                        <div class="oi oi-home" style="float: left">Hometown : @hometown</div><br/>
+                    <div class="oi oi-home" style="float: left">Hometown : @hometown</div><br/>
                     <div class="oi oi-phone" style="float: left">TelNo. : @telNo</div><br/>
-                    
                 </div>
             </div>
-            <div style="height: 8px"></div>
-            <div style="border: 2px solid black;
-                         border-radius: 8px;width: 500px;padding: 10px;height: auto;text-align: center;margin: auto">
-                <div style="font-size: 25px;text-align: center;width: 100%;height: auto">
-                    <div style="float: left;text-align: left">Posts</div><br/>
-                    <div style="float: left">
+            <div style="border: 2px solid black;border-radius: 8px;width: 500px;height: auto;margin: 0 auto;overflow:auto;">
+                <div style="font-size: 25px;height: auto">
+                    <div style="float: left;line-height: 30px;margin: 0 10px">Posts</div>
+                    <div style="float: left;height: auto;width: 100%;">
                          @if (getReversePostList().Posts == null)
                          {
                              <p>
@@ -69,73 +61,78 @@
                              {
                                  @foreach (var post in getReversePostList().Posts)
                                  {
-                                     <div style="border: 2px solid black;
-                                                                 border-radius: 8px;width: 450px;padding: 15px;height: auto;margin: auto;text-align: left;float: left">
-                                         <div style="width: 100%;font-size: 20px"><img src="user.PNG" width="40px" height="40px">@account.UserName
-                                                 <button class="oi oi-delete" style="float: right;font-size: larger;text-align: right;border: none;background-color: white" @onclick="(() => deletePost(post.PostId))"></button>
-                                                 <button class="oi oi-pencil" style="float: right;text-align: right;font-size: larger;border: none;background-color: white" @onclick="(() => EditShieldFriends(post))"></button>
+                                     <div style="border: 2px solid black;border-radius: 8px;width: 450px;height: auto;margin: 0 auto;overflow:auto;">
+                                         <div style="float: left;height:40px;width: 100%;font-size: 20px;text-align: left">
+                                             <img src="user.PNG" style="float: left;width: 40px;height: 40px">@account.UserName
+                                             <button class="oi oi-delete" style="float: right;height:100%;font-size: larger;text-align: right;border: none;background-color: white" @onclick="(() => deletePost(post.PostId))"></button>
+                                             <button class="oi oi-pencil" style="float: right;height:100%;text-align: right;font-size: larger;border: none;background-color: white" @onclick="(() => EditShieldFriends(post))"></button>
+                                         </div>
+                                         <div style="float: left;width: 100%;height:auto;">
+                                             <div type="text" style="width:100%;font-size: 20px;padding: 10px;white-space:normal;word-break:break-all;word-wrap:break-word;height: auto;line-height: 40px">
+                                                 @post.Body
                                              </div>
-                                             <div style="width: 100%;">
-                                                 <div type="text" style="width:100%;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                                           word-break:break-all;word-wrap:break-word;height: auto">@post.Body</div>
-                                             </div>
-                                         <div style="width: 100%;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;float: left;font-size: 15px">
+                                         </div>
+                                         <div style="float: left;width: 100%;line-height:30px;border-top: 2px solid #b9bbbe;border-bottom: 2px solid #b9bbbe;font-size: 15px">
                                              @if (post.LikerIdList.Contains(account.Id))
                                              {
-                                                 <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                                 <div style="width: 50%;float:left;text-align: center">
+                                                     <button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white;color: #80bdff" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button>
+                                                 </div>
                                              }
                                              else
                                              {
-                                                 <div style="width: 50%;float:left;text-align: center"><button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button></div>
+                                                 <div style="width: 50%;float:left;text-align: center">
+                                                     <button class="oi oi-thumb-up" style="text-align: center;border: none;background-color: white" @onclick="(() => clickLike(post.PostId))">Like @post.LikerIdList.Count</button>
+                                                 </div>
                                              }
-                                             <div style="width: 50%;float:right;text-align: center"><button class="oi oi-comment-square" style="width: 50%;float:left;text-align: center;border: none;background-color: white" @onclick="(() => wantToComment(post.PostId))">Comment</button></div>
-                                         </div>
-                                             <div style="width: 100%;float: left">
-                                                 @foreach (var comment in post.CommentList.Comments)
-                                                 {
-                                                     
-                                                     <tr style="width: 70%;float: left">
-                                                         
-                                                         @if (isFriend(comment.SenderId) || comment.SenderId.Equals(account.Id))
-                                                         {
-                                                             <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
-                                                             </div>
-                                                             @if (comment.SenderId.Equals(account.Id))
-                                                             {
-                                                                 <button class="oi oi-x" style="float: right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId, comment.CommentId))"></button>
-                                                             }
-                                                             <div style="width: 70%;float: left">
-                                                                 <div style="text-align: left;color: #b9bbbe;float: left;width: 100%;font-size: 15px">
-                                                                     @if (comment.SenderId.Equals(account.Id))
-                                                                     {
-                                                                         @account.UserName
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         @getNote(comment.SenderId)
-                                                                     }
-                                                                 </div>
-                                                                 <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
-                                                               background-color: #b9bbbe;text-align: left;font-size: 15px;padding: 5px;white-space:normal;
-                                                               word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
-                                                                 <div style="text-align: left;float: left;width: 100%;height: 10px"></div></div>
-                                                         }
-                                                     </tr>
-                                                 }
-                                                 @if (wantComment&&post.PostId.Equals(a))
-                                                 {
-                                                    <div style="width: 100%;text-align: left;float: left;font-size: 15px"><img src="user.PNG" width="20px" height="20px">
-                                                                                                         <input placeholder="Write a comment..." @bind="commentInfo"/>
-                                                                                                         <button class="btn btn-outline-dark" style="font-size: 15px" @onclick="(() => sendComment(post.PostId))">Send</button></div>
-                                                 }
-                                                  </div>
+                                             <div style="width: 50%;float:right;text-align: center">
+                                                 <button class="oi oi-comment-square" style="text-align: center;border: none;background-color: white" @onclick="(() => wantToComment(post.PostId))">Comment</button>
                                              </div>
-                                     <div style="text-align: left;width: 100%;height: 15px;float: left"></div>
+                                         </div>
+                                         <div style="width: 100%;float: left;height:auto;">
+                                             @foreach (var comment in post.CommentList.Comments)
+                                             {
+                                                 <div style="width: 100%;float: left;">
+                                                     @if (isFriend(comment.SenderId) || comment.SenderId.Equals(account.Id))
+                                                     {
+                                                         <div style="height: 100%;float: left"><img src="user.PNG" width="30px" height="30px">
+                                                         </div>
+                                                         @if (comment.SenderId.Equals(account.Id))
+                                                         {
+                                                             <button class="oi oi-x" style="float: right;text-align: right;border: none;font-size: medium;background-color: white" @onclick="(() => deleteComment(post.PostId, comment.CommentId))"></button>
+                                                         }
+                                                         <div style="width: 70%;float: left">
+                                                             <div style="color: #b9bbbe;float: left;width: 100%;font-size: 15px">
+                                                                 @if (comment.SenderId.Equals(account.Id))
+                                                                 {
+                                                                     @account.UserName
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     @getNote(comment.SenderId)
+                                                                 }
+                                                             </div>
+                                                             <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;background-color: #b9bbbe;font-size: 15px;padding: 5px;white-space:normal;word-break:break-all;word-wrap:break-word;">@comment.CommentBody</div>
+                                                             <div style="float: left;width: 100%;height: 10px"></div>
+                                                         </div>
+                                                     }
+                                                 </div>
+                                             }
+                                             @if (wantComment && post.PostId.Equals(a))
+                                             {
+                                                 <div style="width: 100%;text-align: center;height: 30px;margin: 2px 0;float: left;font-size: 15px;">
+                                                     <img src="user.PNG" width="20px" height="20px">
+                                                     <input style="height: 90%;width: 70%" placeholder="Write a comment..." @bind="commentInfo"/>
+                                                     <button class="btn btn-outline-dark" style="font-size: 15px;line-height: 90%" @onclick="(() => sendComment(post.PostId))">Send</button>
+                                                 </div>
+                                             }
+                                         </div>
+                                     </div>
+                                     <div style="width: 100%;height: 15px;float: left"></div>
                                  }
                              }
                          }
-                                       
-                            </div>
+                    </div>
                 </div>
             </div>
         </div>
