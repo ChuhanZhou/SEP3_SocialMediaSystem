@@ -268,17 +268,17 @@
                         </div>
                     </div>
                             <br />
-                            <div style="float: left;width: 100%">
-                                <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message" />
-                                <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => sendGroupMsg()">Send</button>
-                            </div>
-                            <div style="color: red;float: left;width: 100%">
-                                @error
-                            </div>
-                            <br>
-                            <hr>
-                            <hr>
-                            }
+                 <div style="float: left;width: 100%">
+                     <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px" @bind="message" />
+                     <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => sendGroupMsg()">Send</button>
+                 </div>
+                 <div style="color: red;float: left;width: 100%">
+                     @error
+                 </div>
+                 <br>
+                 <hr>
+                 <hr>
+         }
 </div>
             
      }
