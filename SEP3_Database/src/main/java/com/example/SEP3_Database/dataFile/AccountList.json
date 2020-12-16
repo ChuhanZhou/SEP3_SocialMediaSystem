@@ -87,7 +87,7 @@
           {
             "Note": "DD",
             "DisablePost": false,
-            "Status": "WAITAGREE",
+            "Status": "AGREE",
             "Id": "92C935A0",
             "UserStatus": {
               "Online": false
@@ -109,6 +109,7 @@
       }
     },
     {
+      "Password": "2",
       "FriendSettingList": {
         "FriendSettings": [
           {
@@ -192,6 +193,23 @@
             "UserStatus": {
               "Online": false
             }
+          },
+          {
+            "Note": "friend2",
+            "DisablePost": false,
+            "Status": "DELETE",
+            "Id": "92C935A0",
+            "UserStatus": {
+              "Online": false
+            }
+          },
+          {
+            "DisablePost": false,
+            "Status": "AGREE",
+            "Id": "92C935A0",
+            "UserStatus": {
+              "Online": false
+            }
           }
         ]
       },
@@ -270,8 +288,24 @@
           },
           {
             "DisablePost": false,
-            "Status": "NEEDAGREE",
+            "Status": "AGREE",
             "Id": "1DB319FC",
+            "UserStatus": {
+              "Online": false
+            }
+          },
+          {
+            "DisablePost": false,
+            "Status": "DELETE",
+            "Id": "D733AF65",
+            "UserStatus": {
+              "Online": false
+            }
+          },
+          {
+            "DisablePost": false,
+            "Status": "AGREE",
+            "Id": "D733AF65",
             "UserStatus": {
               "Online": false
             }
