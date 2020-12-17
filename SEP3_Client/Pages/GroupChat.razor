@@ -8,23 +8,24 @@
 @inject NavigationManager NavigationManager
 @inject IClientModel ClientModel
 
-<div style="height: 30px"></div>
-<div style="text-align: center; width: 150px;height: 40px;float: left">
-    <button class="oi oi-chevron-left" style=" float: right; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: 20%" @onclick="back">
-        Back
-    </button></div>
-<div style="float: right; text-align: left;width: 320px;">
-    <button class="oi oi-cog" style=" float: right; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: 20%" @onclick="clickCog"></button>
+<div style="float: left;width: 100%;margin: 30px 0 0 0">
+    <div style="text-align: center; width: 10%;height: 50px;float: left">
+        <button class="oi oi-chevron-left" style=" float: left; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: auto;height: 30px;line-height: 30px" @onclick="back">
+            Back
+        </button>
+    </div>
+    <div style="float: left;width: 80%;">
+        <img src="people_multiple_76px_1116527_easyicon.net.png" style="float: left" width="65px" height="65px">
+        <h1 style="line-height: 65px">@Group.GroupName</h1>
+    </div>
+    <div style="float: left; text-align: left;width: 10%">
+        <button class="oi oi-cog" style=" float: right; background-color: #03A9F4; color: #FFFFFF; border-radius: 5px; border: hidden; width: auto;height: 30px;line-height: 30px" @onclick="clickCog"></button>
+    </div>
 </div>
-<img src="people_multiple_76px_1116527_easyicon.net.png" style="float: left" width="65px" height="65px">
-<h1>@Group.GroupName</h1>
+
 <div style="float: left; width: 100%;height: auto;">
-    <div style="text-align: center;
-         width: 900px;
-         height: 600px;
-         margin: auto;
-         ">
-        <div style="height: 600px;width:100%;overflow: auto;">
+    <div style="text-align: center;width: 80%;height: auto;margin: 0 auto;">
+        <div style="width:100%;overflow: auto;height: 500px">
             @if (MessageList == null)
             {
                 <p>
@@ -42,58 +43,56 @@
                 else
                 {
                     @foreach (var msg in MessageList.MessageList)
-                        {
-                            <div style="float: left;width: 95%">
-                                @if (msg.SenderId.Equals(Account.Id))
-                                {
-                                    <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                    <div style="width: 70%;float: right">
-                                        <div style="height: 100%;float: right;">
-                                            <div type="text" style="float: right;width: auto;border-radius:20px;
+                    {
+                        <div style="float: left;width: 95%">
+                            @if (msg.SenderId.Equals(Account.Id))
+                            {
+                                <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                <div style="width: 70%;float: right">
+                                    <div style="height: 100%;float: right;">
+                                        <div type="text" style="float: right;width: auto;border-radius:20px;
                             background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                             word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                        </div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
-                                    <div style="width: 70%;float: left;"><div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div> 
-                                        <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
-                                         background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                                         word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
                                     </div>
                                     <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
-                                }
-                            </div>
-                        }
-                        @foreach (var msg in offlineMessageList.MessageList)
-                        {
-                            <div style="float: left;width: 95%">
-                                <tr style="width: 70%">
-                                    <td style="width: 70%">
-                                        <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                        <div style="height: 100%;float: right;">
-                                            <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
-                            background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
-                            word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
-                                            <div style="height: 100%;float: right">
-                                                <span class="oi oi-warning" style="font-size: x-large;"></span>
-                                            </div>
-                                        </div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
-                                    </td>
-                                </tr>
                                 </div>
-                        }
+                            }
+                            else
+                            {
+                                <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                <div style="width: 70%;float: left;">
+                                    <div style="text-align: left;color: #b9bbbe;float: left;width: 100%">@msg.SenderId</div>
+                                    <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                         background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                         word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
+                                </div>
+                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                            }
+                        </div>
+                    }
+                    @foreach (var msg in offlineMessageList.MessageList)
+                    {
+                        <div style="float: left;width: 95%">
+                            <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                <div style="height: 100%;float: right;">
+                                    <div style="width: 70%;float: right"><div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                                                            background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
+                                                            word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
+                                    <div style="height: 100%;float: right">
+                                        <span class="oi oi-warning" style="font-size: x-large;"></span>
+                                    </div>
+                                </div>
+                            <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                        </div>
+                    }
                 }
             }
         </div>
-        <br/>
         <div>
-            <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
-            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
+            <input type="text" style="width:70%; height:40px;font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
+            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 40px" @onclick="() => send()">
+                Send
+            </button>
         </div>
         <div style="color: red">
             @error

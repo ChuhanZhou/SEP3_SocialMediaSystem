@@ -28,7 +28,7 @@
          height: 600px;
          margin: auto;
          ">
-        <div style="height: 600px;width:100%;overflow: auto;">
+        <div style="height: 550px;width:100%;overflow: auto;">
             @if (MessageList == null)
             {
                 <p>
@@ -50,49 +50,48 @@
                     {
                         <div style="float: left;width: 95%">
                             @if (msg.SenderId.Equals(Account.Id))
-                                    {
-                                        <div style="height: 100%;float: right;"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                        <div style="width: 70%;float: right;">
-                                            <div style="height: 100%;float: right;">
-                                            <div type="text" style="float: right;width: auto;border-radius:20px;
+                            {
+                                <div style="height: 100%;float: right;"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                                <div style="width: 70%;float: right;">
+                                    <div style="height: 100%;float: right;">
+                                        <div type="text" style="float: right;width: auto;border-radius:20px;
                             background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                             word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                        </div>
-                                        <div style="float: right;width: 100%;height: 10px"></div></div>
-                                    }
-                                    else
-                                    {
-                                        <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
-                                        <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
+                                    </div>
+                                    <div style="float: right;width: 100%;height: 10px"></div></div>
+                            }
+                            else
+                            {
+                                <div style="height: 100%;float: left"><img src="user.PNG" width="40px" height="40px" style="float: left"></div>
+                                <div type="text" style="float: left;width: auto;height: auto;border-radius:20px;
                                          background-color: #b9bbbe;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                          word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div>
-                                        <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
-                                    }
-                            </div>
+                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                            }
+                        </div>
                     }
-                        @foreach (var msg in OfflineMessageList.MessageList)
-                        {
-                            <div style="float: left;width: 95%">
-                                <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
-                                <div style="width: 70%;float: right">
-                                    <div style="height: 100%;float: right;">
-                                        <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
+                    @foreach (var msg in OfflineMessageList.MessageList)
+                    {
+                        <div style="float: left;width: 95%">
+                            <div style="height: 100%;float: right"><img src="user.PNG" width="40px" height="40px" style="float: right"></div>
+                            <div style="width: 70%;float: right">
+                                <div style="height: 100%;float: right;">
+                                    <div type="text" style="float: right;width: auto;max-width: 550px;border-radius:20px;
                                      background-color: #ed969e;text-align: left;font-size: 20px;padding: 10px;white-space:normal;
                                      word-break:break-all;word-wrap:break-word;">@msg.MessageInfo</div></div>
-                                    <div style="height: 100%;float: right">
-                                        <span class="oi oi-warning" style="font-size: x-large;"></span>
-                                    </div>
+                                <div style="height: 100%;float: right">
+                                    <span class="oi oi-warning" style="font-size: x-large;"></span>
                                 </div>
-                                <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
                             </div>
-                        }
-                        }
+                            <div style="text-align: left;float: left;width: 100%;height: 10px"></div>
+                        </div>
+                    }
+                }
             }
         </div>
-        <br/>
         <div>
-            <input type="text" style="width:400px; font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
-            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 50px" @onclick="() => send()" >Send</button>
+            <input type="text" style="width:70%; height:40px;font-size: 20px; padding: 10px;border-radius: 10px"  @bind="message"/>
+            <button class="btn btn-outline-dark" type="submit" style="background-color: #b8daff;height: 40px" @onclick="() => send()" >Send</button>
         </div>
         <div style="color: red">
             @error
