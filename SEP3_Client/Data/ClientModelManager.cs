@@ -289,16 +289,23 @@ namespace SEP3_Client.Data
         public void SystemOnLine(FunctionType functionType)
         {
             FunctionTypes.Add(functionType);
-            foreach (var message in offlinePrivateMessageList.MessageList)
+            new Thread(()=>
             {
-                chatSystemClient.SendPrivateMessagePackage(new PrivateMessage(message.SenderId,message.ReceiverId,message.MessageInfo));
-            }
-            offlinePrivateMessageList = new PrivateMessageList();
-            foreach (var message in offlineGroupMessageList.MessageList)
-            {
-                chatSystemClient.SendGroupMessagePackage(new GroupMessage(message.SenderId,message.GroupId,message.MessageInfo));
-            }
-            offlineGroupMessageList = new GroupMessageList();
+                if (functionType==FunctionType.ChatSystem)
+                {
+                    if (offlinePrivateMessageList.GetSize()>0)
+                    {
+                        chatSystemClient.SendPrivateMessagePackage(offlinePrivateMessageList);
+                        offlinePrivateMessageList = new PrivateMessageList();
+                    }
+                    if (offlineGroupMessageList.GetSize()>0)
+                    {
+                        chatSystemClient.SendGroupMessagePackage(offlineGroupMessageList);
+                        offlineGroupMessageList = new GroupMessageList();
+                    }
+                    UpdatePage.ChatSystemUpdate();
+                }
+            }).Start();
         }
 
         public void SystemOffLine(FunctionType functionType)

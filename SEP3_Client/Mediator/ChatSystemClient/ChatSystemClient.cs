@@ -106,7 +106,6 @@ namespace SEP3_Client.Mediator.ChatSystemClient
                 login = false;
                 client = new TcpClient(host, port);
                 stream = client.GetStream();
-                this.clientModel.SystemOnLine(FunctionType.ChatSystem);
                 Console.WriteLine("ChatSystem online.");
                 Login();
                 return true;
@@ -157,26 +156,24 @@ namespace SEP3_Client.Mediator.ChatSystemClient
         
         private void Login()
         {
-            if (clientModel.HasFunction(FunctionType.ChatSystem))
+            try
             {
-                try
-                {
-                    Send(clientModel.GetAccount().Id);
-                    ChatGroupPackage chatGroupPackage = JsonSerializer.Deserialize<ChatGroupPackage>(GetReceive());
-                    PrivateMessagePackage privateMessagePackage = JsonSerializer.Deserialize<PrivateMessagePackage>(GetReceive());
-                    GroupMessagePackage groupMessagePackage = JsonSerializer.Deserialize<GroupMessagePackage>(GetReceive());
-                    clientModel.UpdateChatGroupList(chatGroupPackage.SendList);
-                    clientModel.UpdatePrivateMessageList(privateMessagePackage.SendList);
-                    clientModel.UpdateGroupMessageList(groupMessagePackage.SendList);
-                    login = true;
-                    new Thread(Start).Start();
-                }
-                catch (Exception e)
-                {
-                    //Console.WriteLine(e);
-                    Disconnect();
-                    throw;
-                }
+                Send(clientModel.GetAccount().Id);
+                ChatGroupPackage chatGroupPackage = JsonSerializer.Deserialize<ChatGroupPackage>(GetReceive());
+                PrivateMessagePackage privateMessagePackage = JsonSerializer.Deserialize<PrivateMessagePackage>(GetReceive());
+                GroupMessagePackage groupMessagePackage = JsonSerializer.Deserialize<GroupMessagePackage>(GetReceive());
+                clientModel.UpdateChatGroupList(chatGroupPackage.SendList);
+                clientModel.UpdatePrivateMessageList(privateMessagePackage.SendList);
+                clientModel.UpdateGroupMessageList(groupMessagePackage.SendList);
+                login = true;
+                clientModel.SystemOnLine(FunctionType.ChatSystem);
+                new Thread(Start).Start();
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e);
+                Disconnect();
+                throw;
             }
         }
 
